@@ -14,7 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig { //เปิดหน้าไม่ขึ้นมานี่เลยจ้าาาาาาาาาาาาาาาา
 
 
     @Autowired
@@ -33,6 +33,8 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
+
                         .anyRequest().authenticated()
                 );
         return http.build();

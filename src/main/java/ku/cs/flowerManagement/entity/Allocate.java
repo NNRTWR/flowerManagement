@@ -3,6 +3,7 @@ package ku.cs.flowerManagement.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,8 +17,9 @@ public class Allocate {
     @GeneratedValue
     private UUID id;
 
-    private int FID; //รหัสดอกไม้
-    private String FName; //ชื่อดอกไม้
     private int amount; //จำนวนการตัดสต็อค
     private Date time; //วันที่
+
+    @ManyToOne
+    private OrderItem order; //จะรู้ว่าเป็นดอกอะไรด้วย
 }

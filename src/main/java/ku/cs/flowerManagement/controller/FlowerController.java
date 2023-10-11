@@ -22,12 +22,12 @@ public class FlowerController {
         return "flower";
     }
 
-    @GetMapping("/flower{id}")
-    public String showFlowerDetailPage(Model model, @PathVariable int id) {
-        model.addAttribute("flower", flowerService.getFlowerById(id));
-        model.addAttribute("method", "PUT");
-        return "flower-detail";
-    }
+//    @GetMapping("/flower{id}")
+//    public String showFlowerDetailPage(Model model, @PathVariable int id) {
+//        model.addAttribute("flower", flowerService.getFlowerById(id));
+//        model.addAttribute("method", "PUT");
+//        return "flower-detail";
+//    }
 
     @GetMapping("/flower/create")
     public String showFlowerDetailPageCreate(Model model) {
@@ -42,10 +42,10 @@ public class FlowerController {
         return "redirect:/flower";
     }
 
-    @PutMapping("/flower/{id}")
-    public String updateFlower(@ModelAttribute FlowerRequest flower, @PathVariable int id) {
-        flower.setFID(id);
-        flowerService.updateFlower(flower);
-        return "redirect:/flower";
-    }
+//    @PutMapping("/flower/{id}")
+//    public String updateFlower(@ModelAttribute FlowerRequest flower, @PathVariable int id) {
+//        flower.setFID(id);
+//        flowerService.updateFlower(flower);
+//        return "redirect:/flower";
+//    }
 }
