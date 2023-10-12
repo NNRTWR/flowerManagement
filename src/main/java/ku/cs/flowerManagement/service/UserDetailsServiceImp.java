@@ -1,7 +1,7 @@
 package ku.cs.flowerManagement.service;
 
-//import ku.cs.flowerManagement.entity.Member;
-//import ku.cs.flowerManagement.repository.MemberRepository;
+import ku.cs.flowerManagement.entity.Member;
+import ku.cs.flowerManagement.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +18,8 @@ import java.util.List;
 public class UserDetailsServiceImp implements UserDetailsService {
 
 
-//    @Autowired
-//    private MemberRepository userRepository;
+    @Autowired
+    private MemberRepository userRepository;
 
 
     @Override
@@ -27,21 +27,20 @@ public class UserDetailsServiceImp implements UserDetailsService {
             throws UsernameNotFoundException {
 
 
-//        Member user = userRepository.findByUsername(username);
-//
-//
-//        if (user == null) {
-//            throw new UsernameNotFoundException("Could not find user");
-//        }
-//
-//
-//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-//
-//
-//        return new org.springframework.security.core.userdetails.User(
-//                user.getUsername(), user.getPassword(), authorities);
-        return null;
+        Member user = userRepository.findByUsername(username);
+
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Could not find user");
+        }
+
+
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(), user.getPassword(), authorities);
     }
 }
 

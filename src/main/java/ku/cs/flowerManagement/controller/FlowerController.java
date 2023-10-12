@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Controller
 public class FlowerController {
 
@@ -23,29 +25,37 @@ public class FlowerController {
     }
 
     @GetMapping("/flower{id}")
-    public String showFlowerDetailPage(Model model, @PathVariable int id) {
-        model.addAttribute("flower", flowerService.getFlowerById(id));
+    public String showFlowerDetailPage(Model model, @PathVariable UUID id) {
+//        model.addAttribute("flower", flowerService.getFlowerById(id));
+        model.addAttribute("flower",flowerService.getOneFlower(id));
         model.addAttribute("method", "PUT");
         return "flower-detail";
     }
 
     @GetMapping("/flower/create")
     public String showFlowerDetailPageCreate(Model model) {
-        model.addAttribute("flower", new FlowerRequest());
-        model.addAttribute("method", "POST");
+        model.addAttribute("flowers",flowerService.getAllFlower());
+//        model.addAttribute("flower", new FlowerRequest());
+//        model.addAttribute("method", "POST");
         return "flower-detail";
     }
 
-    @PostMapping("/flower")
+//    @PostMapping("/flower")
+//    public String createFlower(@ModelAttribute FlowerRequest flower) {
+//        flowerService.addFlower(flower);
+//        return "redirect:/flower";
+//    }
+
+    @PostMapping("/flower/create")
     public String createFlower(@ModelAttribute FlowerRequest flower) {
         flowerService.addFlower(flower);
         return "redirect:/flower";
     }
 
-    @PutMapping("/flower/{id}")
-    public String updateFlower(@ModelAttribute FlowerRequest flower, @PathVariable int id) {
-        flower.setFID(id);
-        flowerService.updateFlower(flower);
-        return "redirect:/flower";
-    }
+//    @PutMapping("/flower/{id}")
+//    public String updateFlower(@ModelAttribute FlowerRequest flower, @PathVariable int id) {
+//        flower.setFID(id);
+//        flowerService.updateFlower(flower);
+//        return "redirect:/flower";
+//    }
 }

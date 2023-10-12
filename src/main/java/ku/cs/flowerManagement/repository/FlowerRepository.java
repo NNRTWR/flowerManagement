@@ -3,6 +3,9 @@ package ku.cs.flowerManagement.repository;
 import ku.cs.flowerManagement.entity.Flower;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FlowerRepository extends JpaRepository<Flower, Integer> {
+import java.util.UUID;
+
+public interface FlowerRepository extends JpaRepository<Flower, UUID> {
+    Flower findByFID(int FID); //หาด้วยรหัสดอกไม้
 
 }

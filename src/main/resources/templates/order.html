@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Order</title>
@@ -34,7 +34,7 @@
                         <!-- Sample rows for demonstration -->
                         <tr th:each="order : ${orders}">
                             <td th:text="${order.OID}"></td>
-                            <td th:text="${order.FName}"></td>
+                            <td th:text="${order.flower.FName}"></td>
                             <td th:text="${order.orderQuantity}"></td>
                             <td th:text="${order.plant_status}"></td>
                             <td th:text="${order.order_method}"></td>
