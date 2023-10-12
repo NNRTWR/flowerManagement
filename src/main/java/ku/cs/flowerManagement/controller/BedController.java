@@ -4,6 +4,7 @@ import ku.cs.flowerManagement.adapter.DateTimeComparator;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
 import ku.cs.flowerManagement.service.FlowerService;
+import ku.cs.flowerManagement.service.GardenerOrderService;
 import ku.cs.flowerManagement.service.OrderItemService;
 import ku.cs.flowerManagement.service.PlantOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     private PlantOrderService plantOrderService;
 
     @Autowired
-    private OrderItemService orderService;
+    private GardenerOrderService gardenerOrderService;
 
     @Autowired
     private DateTimeComparator dateTimeComparator;
@@ -39,7 +40,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         PlantOrder plantOrder = plantOrderService.getOnePlantOrder(PID); //ใช้ได้
         if (plantOrder == null) {
             model.addAttribute("flowers", flowerService.getAllFlower()); //ส่งข้อมูลดอกไม้ทั้งหมดไปให้
-            model.addAttribute("orderItems",orderService.getAllOrderStatus(dateTimeComparator)); //ส่ง order ที่ต้องปลูกทั้งหมดไปให้ (= ORDER)
+            model.addAttribute("orderItems",gardenerOrderService.getAllOrderStatus(dateTimeComparator)); //ส่ง order ที่ต้องปลูกทั้งหมดไปให้ (= ORDER)
             model.addAttribute("PID",PID);
             return "bed-plant";
         }

@@ -9,12 +9,12 @@
 
   <h1>ALL BED </h1>
 
-<!--  <div th:each="i : ${#numbers.sequence(1, 10)}">-->
-<!--    <form th:action="@{/beds/{PID}(PID=${i})}" method="post">-->
-<!--      <input type="hidden" name="PID" th:value="${i}" />-->
-<!--      <button type="submit" th:text="'Button ' + ${i}"> BED </button>-->
-<!--    </form>-->
-<!--  </div>-->
+  <div th:each="i : ${#numbers.sequence(1, 10)}">
+    <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
+      <input type="hidden" name="PID" th:value="${i}" />
+      <button type="submit" th:text="'Button ' + ${i}"> BED </button>
+    </form>
+  </div>
 
 </body>
 </html>

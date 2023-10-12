@@ -10,53 +10,94 @@
 </head>
 <body>
 
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <!--        side bar-->
-<!--        <div th:replace="~{fragments/sidebar :: sidebar}"></div>-->
-        <!--        Main content-->
-        <div class = "col">
-            <!--        search bar-->
-<!--            <div th:replace="~{fragments/searchbar :: searchbar}"></div>-->
-            <div class="row mt-4">
-                <div class="col-md-7">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>FID</th>
-                            <th>FName</th>
-                            <th>Price</th>
-                            <th>How to plant</th>
-                            <th>Take care</th>
-                            <th>Time</th>
-                            <th>Harvest</th>
-                            <th>Edit</th>
-                        </tr>
-                        </thead>
-                        <tbody id="orderTable">
-                        <!-- Sample rows for demonstration -->
-                        <tr th:each="flower : ${flowers}">
-                            <td th:text="${flower.getId()}"></td>
-                            <td th:text="${flower.getFID()}"></td>
-                            <td th:text="${flower.getFName()}"></td>
-                            <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.getPrice(), 1, 'COMMA', 2, 'POINT')}"> </td>
-                            <td th:text="${flower.getHow_to_plant()}"></td>
-                            <td th:text="${flower.getHow_to_take_care()}"></td>
-                            <td th:text="${flower.getTime()}"></td>
-                            <td th:text="${flower.getHow_to_harvest()}"></td>
-                            <td><a th:href="@{'/flower/' + ${flower.getFID()}}">Edit</a></td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div>
-                <a th:href="@{/flower/create}" class="btn btn-primary">Add Flower</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="container-fluid">-->
+<!--    <div class="row flex-nowrap">-->
+<!--        &lt;!&ndash;        side bar&ndash;&gt;-->
+<!--&lt;!&ndash;        <div th:replace="~{fragments/sidebar :: sidebar}"></div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        Main content&ndash;&gt;-->
+<!--        <div class = "col">-->
+<!--            &lt;!&ndash;        search bar&ndash;&gt;-->
+<!--&lt;!&ndash;            <div th:replace="~{fragments/searchbar :: searchbar}"></div>&ndash;&gt;-->
+<!--            <div class="row mt-4">-->
+<!--                <div class="col-md-7">-->
+<!--                    <table class="table">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>ID</th>-->
+<!--                            <th>FID</th>-->
+<!--                            <th>FName</th>-->
+<!--                            <th>Price</th>-->
+<!--                            <th>How to plant</th>-->
+<!--                            <th>Take care</th>-->
+<!--                            <th>Time</th>-->
+<!--                            <th>Harvest</th>-->
+<!--                            <th>Edit</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody id="orderTable">-->
+<!--                        &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
+<!--                        <tr th:each="flower : ${flowers}">-->
+<!--                            <td th:text="${flower.getId()}"></td>-->
+<!--                            <td th:text="${flower.getFID()}"></td>-->
+<!--                            <td th:text="${flower.getFName()}"></td>-->
+<!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.getPrice(), 1, 'COMMA', 2, 'POINT')}"> </td>-->
+<!--                            <td th:text="${flower.getHow_to_plant()}"></td>-->
+<!--                            <td th:text="${flower.getHow_to_take_care()}"></td>-->
+<!--                            <td th:text="${flower.getTime()}"></td>-->
+<!--                            <td th:text="${flower.getHow_to_harvest()}"></td>-->
+<!--                            <td><a th:href="@{'/flower/' + ${flower.getFID()}}">Edit</a></td>-->
+<!--                        </tr>-->
+<!--                        &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <a th:href="@{/flower/create}" class="btn btn-primary">Add Flower</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<table  class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+    <tr class="table-dark">
+        <th>ชื่อดอกไม้</th>
+        <th>วิธีปลูก</th>
+        <th>วิธีดูแล</th>
+        <th>ระยะเวลาของเมล็ด</th>
+        <th>ระยะเวลาของต้นอ่อน</th>
+        <th>ระยะเวลาของต้นกำลังโต</th>
+        <th>ระยะเวลาของต้นโตเต็มที่</th>
+        <th>ระยะเวลาของการเก็บเกี่ยว</th>
+        <th>รูปแบบการเก็บ</th>
+        <th>ราคา</th>
+        <th>จำนวนดอก</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="flower : ${flowers}">
+        <td th:text="${flower.FName}"></td>
+        <td th:text="${flower.how_to_plant}"></td>
+        <td th:text="${flower.how_to_take_care}"></td>
+        <td th:text="${flower.seedPeriod}"></td>
+        <td th:text="${flower.growingPeriod}"></td>
+        <td th:text="${flower.fullyGrownPeriod}"></td>
+        <td th:text="${flower.harvestPeriod}"></td>
+        <td th:text="${flower.how_to_harvest}"></td>
+        <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
+        <td th:text="${flower.quantity}"></td>
+
+        <!--            <td style="text-align: center"> ทำเป็นปุ่มดู ไม่ก็แก้ไข-->
+        <!--                <a class="btn btn-primary"-->
+        <!--                   th:href="@{/menus/{id}(id=${menu.id})}">View</a>-->
+        <!--            </td>-->
+
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

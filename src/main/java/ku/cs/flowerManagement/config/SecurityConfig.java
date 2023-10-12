@@ -29,13 +29,25 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
 
                         .anyRequest().authenticated()
+                )
+                .formLogin((form) -> form
+                        .loginPage("/login") //login ที่ path นี้นะ
+                        .defaultSuccessUrl("/", true) //ถ้า login สำเร็จจะไปที่ path นี้นะ
+                        .permitAll()
+                )
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID", "remember-me")
+                        .permitAll()
                 );
         return http.build();
     }

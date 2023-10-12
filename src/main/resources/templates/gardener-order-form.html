@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bed</title>
+  <link th:rel="stylesheet" th:href="@{static}">
+</head>
+<body>
+
+<h1>สั่ง order ไปให้ฝ่ายปลูก</h1>
+
+<form action="#" th:action="@{/gardener-orders/add}" method="POST">
+  <div>
+    <label for="inputFlowerID">Name</label>
+    <select class="form-control" id="inputFlowerID" name="flowerID">
+      <option th:each="flower : ${flowers}"
+              th:value="${flower.id}" th:text="${flower.FName}">
+      </option>
+    </select>
+  </div>
+  <div>
+    <label for="inputQuantity">Quantity</label>
+    <input id="inputQuantity" type="input" class="form-control"
+           name="quantity">
+  </div>
+  <button id=ๅ"submit-button" type="submit" class="btn btn-primary">Add Order</button>
+</form>
+
+</body>
+</html>

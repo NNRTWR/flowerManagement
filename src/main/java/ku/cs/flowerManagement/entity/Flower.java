@@ -15,7 +15,7 @@ public class Flower {
 //    private UUID id;
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private int FID; //รหัสของดอกไม้
+    private int FID; //รหัสของดอกไม้ //ใช้ method เพิ่มเลขเอา
 //    private String FName; //ชื่อดอกไม้
 //    private String how_to_plant; //วิธีการปลูก
 //    private String how_to_take_care; //วิธีการดูแล

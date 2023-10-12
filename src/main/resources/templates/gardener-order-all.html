@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bed</title>
+  <link th:rel="stylesheet" th:href="@{static}">
+</head>
+<body>
+
+<h1>ALL Gardener Order</h1>
+
+
+
+  <table>
+    <thead>
+    <tr>
+      <th>ชื่อดอกไม้</th>
+      <th>จำนวนดอกไม้ที่ต้องการ</th>
+      <!--        <th>จำนวนคงเหลือ</th>-->
+      <th>สถานะ</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="orderItem : ${orderItems}">
+      <td th:text="${orderItem.flower.FName}"></td>
+      <td th:text="${orderItem.quantity}"></td>
+      <!--        <td th:text="${orderItem.total}"></td> -->
+      <td th:text="${orderItem.status}"></td>
+
+      <td style="text-align: center">
+        <form th:action="@{/}" formmethod="GET">
+          <button type="submit">ปุ่มไรไม่รู้</button> <!-- กดเลือก order -->
+        </form>
+      </td>
+
+    </tr>
+    </tbody>
+
+  </table>
+
+
+
+</body>
+</html>

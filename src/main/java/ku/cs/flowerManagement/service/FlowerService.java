@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +19,8 @@ public class FlowerService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    private int numFlower = 0;
 
     // Get Flower
     public List<FlowerRequest> getFlowers() {
@@ -33,11 +36,19 @@ public class FlowerService {
 //        return  modelMapper.map(flowerRepository.findById(id).orElse(null), FlowerRequest.class);
 //    }
 
+    public Flower getOneFlower(UUID id){ //แสดง flower ที่เลือก
+        return flowerRepository.findById(id).get();
+    }
+
     // Create Flower
     public FlowerRequest addFlower(FlowerRequest flowerRequest) {
         Flower flower = modelMapper.map(flowerRequest, Flower.class);
+        numFlower++ ; //ปลูกสำเร็จก็จะมาเพิ่มจำนวนดอกไม้ในระบบ
+        flower.setFID(numFlower);
         return modelMapper.map(flowerRepository.save(flower), FlowerRequest.class);
     }
+
+
 
     // Update Flower
 //    public FlowerRequest updateFlower(FlowerRequest flowerRequest) {

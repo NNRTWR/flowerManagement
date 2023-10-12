@@ -26,7 +26,7 @@ public class PlantOrderService {
     private FlowerRepository flowerRepository;
 
     @Autowired
-    private OrderItemService orderItemService;
+    private GardenerOrderService gardenerOrderService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -99,17 +99,17 @@ public class PlantOrderService {
             return FlowerStatus.DEAD;
     }
 
-    public void createPlantOrder(PlantOrderRequest plantOrder, DateTimeComparator dateTimeComparator){
+    public void createPlantOrder(PlantOrderRequest plantOrder, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
         PlantOrder record = modelMapper.map(plantOrder, PlantOrder.class); //map จาก PlantOrderRequest เป็น PlantOrder
         Flower flower = flowerRepository.findById(plantOrder.getFlowerID()).get(); //หาดอกไม้ที่ปลูก
         record.setFlower(flower); //แปลงนี้ปลูกดอกนี้นะ
-        OrderItem orderItem = orderItemService.getOldestOrderStatus(dateTimeComparator);
+        OrderItem orderItem = gardenerOrderService.getOldestOrderStatus(dateTimeComparator);
         record.setOrder(orderItem); //ปลูกตาม order เก่าสุด
         record.setPID(currentPID); //ปลูกที่แปลงไหน
         record.setTimePlant(LocalDateTime.now()); //วันเวลาที่ปลูก
         System.out.println("ก่อน plantOrderRepository.save(record) ที่ createPlantOrder");
         plantOrderRepository.save(record);
         System.out.println("หลัง plantOrderRepository.save(record) ที่ createPlantOrder");
-        orderItemService.seIn_ProcessOrder(dateTimeComparator);
+        gardenerOrderService.setIn_ProcessOrder(dateTimeComparator);
     }
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
   <meta charset="UTF-8">
   <title>Flower Management Web Application</title>
@@ -13,12 +15,31 @@
   <h1 class="text-green-500 text-5xl">Flower Management</h1>
 
   <p><span th:text="${greeting}"></span></p>
-  <button class="btn">Button</button>
-  <ul>
-    <li>
-      <a class="btn" th:href="@{/beds}">Button View Bed</a>
-    </li>
-  </ul>
+
+  <div sec:authorize="isAuthenticated()">
+    <p>Khun <b><span sec:authentication="name"></span></b></p>
+    <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+
+    <a class="btn" th:href="@{/beds}">แปลงปลูกทั้งหมด</a>
+
+    <a class="btn" th:href="@{/flower}">All Flower</a>
+
+    <a class="btn" th:href="@{/flower/create}">Add Flower</a>
+
+    <a class="btn" th:href="@{/order}">All Order</a>
+
+<!--    <a class="btn" th:href="@{/order}">Add Order</a>-->
+
+    <a class="btn" th:href="@{/gardener-orders}">All gardener order</a>
+
+    <a class="btn" th:href="@{/gardener-orders/form}">add gardener order</a>
+
+  </div>
+
+  <div sec:authorize="isAnonymous()">
+    <a class="btn btn-primary" th:href="@{/login}">Login</a>
+    <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
+  </div>
 
 
 </div>
