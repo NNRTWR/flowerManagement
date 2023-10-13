@@ -29,11 +29,17 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/test/**")).permitAll()
+
+                        .requestMatchers(new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
+                        .requestMatchers(new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
+                        
+
+                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
 
                         .anyRequest().authenticated()
                 )
