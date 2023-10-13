@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container w-50 p-3">
+  <h1 class="display-6">Garden</h1>
+
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Garden Number</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="garden : ${gardens}">
+      <td th:text="${garden.gardenNO}"></td>
+      <td th:text="${garden.status}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/gardens-add" class="btn btn-primary">Add Garden</a>
+  <a class="btn btn-primary" th:href="@{/gardener-home}">Garden</a>
+</div>
+</body>
+</html>

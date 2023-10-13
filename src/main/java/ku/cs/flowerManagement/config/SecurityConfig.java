@@ -34,7 +34,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
-
+                       .requestMatchers(new AntPathRequestMatcher("/gardener-home")).permitAll().requestMatchers(new AntPathRequestMatcher("/garden-add")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container w-50 p-3">
+  <h1 class="display-5">Add Garden</h1>
+
+  <form action="#" th:action="@{/garden-add}" method="POST">
+    <div class="mb-3">
+      <label for="inputSize">Size</label>
+      <input id="inputSize" type="number" class="form-control" name="size">
+    </div>
+    <div class="mb-3">
+      <label for="inputStatus">Status</label>
+      <input id="inputStatus" type="text" class="form-control" name="status">
+    </div>
+    <div class="mb-3">
+      <label for="inputDate">Date (dd/MM/yy)</label>
+      <input id="inputDate" type="text" class="form-control" name="date" placeholder="dd/MM/yy">
+    </div>
+    <button id="submit-button" type="submit" class="btn btn-primary">Add Garden</button>
+  </form>
+</div>
+</body>
+</html>

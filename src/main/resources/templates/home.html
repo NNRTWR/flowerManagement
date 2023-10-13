@@ -20,6 +20,8 @@
   <h1 class="text-green-500 text-5xl">Flower Management</h1>
 
   <p><span th:text="${greeting}"></span></p>
+  <a class="btn btn-primary" th:href="@{/gardener-home}">Garden</a>
+  <a class="btn btn-primary" th:href="@{/garden/add}">Garden Add</a>
 
 <!--  <div sec:authorize="isAuthenticated()">-->
 <!--    <p>Khun <b><span sec:authentication="name"></span></b></p>-->

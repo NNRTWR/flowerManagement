@@ -44,11 +44,11 @@ public class OrderItemService {
         return orderFlowerRequests;
     }
 
-//    //ลองปรับ
-//    public List<OrderItem> getOrders() {
-//        List<OrderItem> orders = orderRepository.findAll();
-//        return orders;
-//    }
+    //ลองปรับ
+    public List<OrderItem> getAllOrders() {
+        List<OrderItem> orders = orderRepository.findAll();
+        return orders;
+    }
 
 
     // Get order By Id
