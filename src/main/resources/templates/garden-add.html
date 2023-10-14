@@ -21,6 +21,15 @@
       <label for="inputDate">Date (dd/MM/yy)</label>
       <input id="inputDate" type="text" class="form-control" name="date" placeholder="dd/MM/yy">
     </div>
+
+    <div>
+      <label for="inputFlowerID">Name</label>
+      <select class="form-control" id="inputFlowerID" name="flowerID">
+        <option th:each="flower : ${flowers}"
+                th:value="${flower.id}" th:text="${flower.FName}">
+        </option>
+      </select>
+    </div>
     <button id="submit-button" type="submit" class="btn btn-primary">Add Garden</button>
   </form>
 </div>

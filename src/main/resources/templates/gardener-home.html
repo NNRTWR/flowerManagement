@@ -20,6 +20,7 @@
     <tr th:each="garden : ${gardens}">
       <td th:text="${garden.gardenNO}"></td>
       <td th:text="${garden.status}"></td>
+      <td th:text="${garden.flower.name}"></td>
     </tr>
     </tbody>
   </table>

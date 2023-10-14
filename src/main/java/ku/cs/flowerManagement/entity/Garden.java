@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import ku.cs.flowerManagement.common.FlowerStatus;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 @Entity
 @Data
@@ -18,5 +18,6 @@ public class Garden {
     private Flower flower; //type of flower
     private int size; // size of this garden ex 1000 mean 1000 flower in this field
     private FlowerStatus status;// as it name
-    private Date plantDate; // the day we start plant flower to this field
+    private Date plantDate; /* the day we start plant flower to this field,use java.sql
+                               if u use util it will store time like hh:mm:ss which is useless*/
 }
