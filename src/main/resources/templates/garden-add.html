@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container w-50 p-3">
+  <h1 class="display-5">Add Garden</h1>
+
+  <form action="#" th:action="@{/gardener-home/add}" method="POST">
+    <div class="mb-3">
+      <label for="inputSize">Size</label>
+      <input id="inputSize" type="number" class="form-control" name="size">
+    </div>
+    <div class="mb-3">
+      <label for="status">Status:</label>
+      <select class="form-control" id="status" name="status">
+        <option th:each="status : ${T(ku.cs.flowerManagement.common.FlowerStatus).values()}"
+                th:value="${status}" th:text="${#strings.capitalize(status.toString().toLowerCase())}">
+        </option>
+      </select>
+    </div>
+    <div>
+        <label for="inputFlowerId">Name</label>
+        <select class="form-control" id="inputFlowerId" name="flowerId">
+          <option value="">Select a Flower</option>
+          <option th:each="flower : ${flowers}" th:value="${flower.id}" th:text="${flower.FName}"></option>
+        </select>
+    </div>
+    <button id="submit-button" type="submit" class="btn btn-primary">Add Garden</button>
+  </form>
+</div>
+</body>
+</html>
