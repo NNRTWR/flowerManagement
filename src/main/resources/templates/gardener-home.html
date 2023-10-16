@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -14,18 +14,21 @@
     <tr>
       <th>Garden Number</th>
       <th>Status</th>
+      <th>Flower Name</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="garden : ${gardens}">
       <td th:text="${garden.gardenNO}"></td>
       <td th:text="${garden.status}"></td>
-      <td th:text="${garden.flower.name}"></td>
+      <td>
+        <span th:if="${garden.flower != null}" th:text="${garden.flower.FName}"></span>
+        <span th:unless="${garden.flower != null}">N/A</span>
+      </td>
     </tr>
     </tbody>
   </table>
-  <a href="/gardens-add" class="btn btn-primary">Add Garden</a>
-  <a class="btn btn-primary" th:href="@{/gardener-home}">Garden</a>
+  <a class="btn btn-primary" th:href="@{/gardener-home/add}">Garden</a>
 </div>
 </body>
 </html>

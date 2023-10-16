@@ -22,7 +22,7 @@ public class GardenService {
     private FlowerRepository flowerRepository;
     public void addGarden(GardenRequest gardenRequest){
         Garden record = modelMapper.map(gardenRequest, Garden.class);
-        Flower flower = flowerRepository.findByFID(gardenRequest.getFID());
+        Flower flower = flowerRepository.findById(gardenRequest.getId()).get();
         record.setFlower(flower);
         gardenRepository.save(record);
     }
