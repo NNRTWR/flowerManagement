@@ -1,6 +1,7 @@
 package ku.cs.flowerManagement.controller;
 
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.Garden;
 import ku.cs.flowerManagement.model.GardenRequest;
 import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.GardenService;
@@ -8,10 +9,13 @@ import ku.cs.flowerManagement.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/gardener-home")
@@ -24,15 +28,16 @@ public class GardenerHomeController {
     private FlowerService flowerService;
     @GetMapping
     public String getAllGarden(Model model){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         model.addAttribute("gardens",gardenService.getAllGarden());
         model.addAttribute("orders",orderItemService.getAllOrders());
+        model.addAttribute("time",now);
+        model.addAttribute("Statistics",gardenService.getAllGardenWithFlower());
         return "gardener-home";
     }
     @GetMapping("/add")
     public String getAllFlower(Model model){
-        for (Flower flower: flowerService.getAllFlower()) {
-            System.out.println(flower.getFName());
-        }
         model.addAttribute("flowers",flowerService.getAllFlower());
         return "garden-add";
     }

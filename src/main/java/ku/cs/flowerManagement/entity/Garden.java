@@ -16,7 +16,6 @@ public class Garden {
     private int gardenNO; //show user which field is it
     @ManyToOne
     private Flower flower; //type of flower
-    private int size; // size of this garden ex 1000 mean 1000 flower in this field
     private FlowerStatus status;// as it name
     private Date plantDate; /* the day we start plant flower to this field,use java.sql
                                if u use util it will store time like hh:mm:ss which is useless*/
