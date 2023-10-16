@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/{role}/order")
 
 public class OrderController {
 
@@ -18,7 +19,7 @@ public class OrderController {
     @Autowired
     private FlowerService flowerService;
 
-    @GetMapping("/{role}/order")
+    @GetMapping //("/{role}/order")
     private String showOrderPage(@PathVariable String role, Model model, @RequestParam(name = "id", defaultValue = "0" ) int id) {
         model.addAttribute("order", new OrderItemRequest());
         model.addAttribute("orders" , orderService.getOrders());
@@ -30,24 +31,24 @@ public class OrderController {
             model.addAttribute("canceledOrder", new OrderItemRequest());
         }
         System.out.println(orderService.getOrders().toString());
-        return "order";
+        return "/seller/order";
     }
 
-    @PostMapping("/{role}/order")
+    @PostMapping //("/{role}/order")
     public String createOrder(@PathVariable String role, @ModelAttribute OrderItemRequest orderFlower, Model model) {
         System.out.println(orderFlower);
         orderFlower.setFlowerPrice(orderFlower.getFlowerPrice() * orderFlower.getOrderQuantity());
         orderService.createOrder(orderFlower);
-        return "redirect:/order";
+        return "redirect:/seller/order";
     }
 
-    @PutMapping("/order/{id}")
+    @PutMapping("/{id}")
     public String cancelOrder(@PathVariable int id, Model model){
         orderService.cancelOrderById(id);
         model.addAttribute("order", new OrderItemRequest());
         model.addAttribute("orders", orderService.getOrders());
         model.addAttribute("options", flowerService.getFlowers());
         model.addAttribute("canceledOrder",orderService.getOrderById(id));
-        return "order";
+        return "/seller/order";
     }
 }

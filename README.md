@@ -1,11 +1,10 @@
 ## How to run tailwind css
-firs time
+first time or have conflict
 ```sh
-npm ci
-npm i autoprefixer@latest
+npm run build
 ```
  ```sh
- npm run dev 
+npm run dev 
  
 ```
 **ต้องโหลด node.js ก่อนนะ ยังไม่ได้ทำใส่ docker**

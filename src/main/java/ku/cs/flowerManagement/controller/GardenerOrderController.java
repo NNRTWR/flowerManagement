@@ -30,15 +30,15 @@ public class GardenerOrderController {
 
     @GetMapping
     
-    public String getAllOrder(@PathVariable("role") String role, Model model){
+    public String getAllOrder(@PathVariable String role, Model model){
         model.addAttribute("orderItems", gardenerOrderService.getAllOrderItem(dateTimeComparator));
-        return "gardener-order-all";
+        return "/gardener/gardener-order-all";
     }
 
     @GetMapping("/form")
     public String getOrderForm(Model model){
         model.addAttribute("flowers", flowerService.getAllFlower());
-        return "gardener-order-form";
+        return "/gardener/gardener-order-form";
     }
 
     @PostMapping("/add")

@@ -31,8 +31,12 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/test/**")).permitAll()
 
-                        .requestMatchers(new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
-                        .requestMatchers(new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
+                        // .requestMatchers(
+                        //         new AntPathRequestMatcher("/GARDENER/orders/form")).hasRole("GARDENER")
                         
 
                         .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
