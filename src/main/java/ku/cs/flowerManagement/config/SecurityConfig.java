@@ -36,6 +36,23 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 //                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
                        .requestMatchers(new AntPathRequestMatcher("/gardener-home"))
                                 .permitAll().requestMatchers(new AntPathRequestMatcher("/garden-add")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/test/**")).permitAll()
+
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
+                        // .requestMatchers(
+                        //         new AntPathRequestMatcher("/GARDENER/orders/form")).hasRole("GARDENER")
+                        
+
+                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
+
+
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

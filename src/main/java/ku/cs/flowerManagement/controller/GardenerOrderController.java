@@ -7,15 +7,17 @@ import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.GardenerOrderService;
 import ku.cs.flowerManagement.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/gardener-orders")
+@RequestMapping("/{role}/orders")
 public class GardenerOrderController {
     @Autowired
     private GardenerOrderService gardenerOrderService;
@@ -27,15 +29,16 @@ public class GardenerOrderController {
     private DateTimeComparator dateTimeComparator;
 
     @GetMapping
-    public String getAllOrder(Model model){
+    
+    public String getAllOrder(@PathVariable String role, Model model){
         model.addAttribute("orderItems", gardenerOrderService.getAllOrderItem(dateTimeComparator));
-        return "gardener-order-all";
+        return "/gardener/gardener-order-all";
     }
 
     @GetMapping("/form")
     public String getOrderForm(Model model){
         model.addAttribute("flowers", flowerService.getAllFlower());
-        return "gardener-order-form";
+        return "/gardener/gardener-order-form";
     }
 
     @PostMapping("/add")
