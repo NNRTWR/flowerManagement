@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+    <!-- th:href="@{/css/output.css} -->
+    <script th:src="@{/js/mainLayout.js}"></script>
+</head>
+
+<body class="overflow-hidden flex flex-col h-screen bg-gray-100">
+    <div id="app" class="flex flex-col h-screen"></div>
+    <!-- Sidebar with a higher z-index -->
+    <div sec:authorize="isAuthenticated() and hasAuthority('SELLER')">
+        <div th:replace="~{fragments/sellerSidebar::sellerSidebar}" class="w-64 flex-shrink-0"></div>
+    </div>
+    <div sec:authorize="isAuthenticated() and hasAuthority('GARDENER')">
+        <div th:replace="~{fragments/gardenerSidebar::gardenerSidebar}" class="w-64 flex-shrink-0"></div>
+    </div>
+    
+    
+
+    <!-- Content Container -->
+    <main id="content-layout" class="min-h-screen transition-all transform duration-400 ease-in-out">
+        <div layout:fragment="content"></div>
+        <button class="btn-primary">OK</button>
+    </main>
+
+    </div>
+</body>
+
+</html>

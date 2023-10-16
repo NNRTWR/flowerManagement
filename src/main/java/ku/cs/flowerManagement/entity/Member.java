@@ -22,6 +22,6 @@ public class Member {
     private String username;
     private String password;
     private String name;
-    private String role; //admin, user
+    private String role; //seller,gardener owner user ?
 }
 

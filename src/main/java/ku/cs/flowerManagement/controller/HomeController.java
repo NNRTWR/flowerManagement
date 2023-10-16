@@ -14,6 +14,18 @@ public class HomeController {
         // ต้องคืนค่าเป็นชื่อไฟล์ html template โดยในเมธอดนี้ คืนค่าเป็น home.html
         return "home";
     }
+    @RequestMapping("/test/sidebar")
+    public String getSidebar(Model model) {
+        return "/fragments/sidebar";
+    }
+    @RequestMapping("/test/header")
+    public String getHeader(Model model) {
+        return "/fragments/header";
+    }
+    @RequestMapping("/test/main")
+    public String getMain(Model model) {
+        return "/layouts/main";
+    }
 }
 
 
