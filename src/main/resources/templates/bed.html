@@ -3,18 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Bed</title>
-  <link th:rel="stylesheet" th:href="@{static}">
+    <link th:rel="stylesheet" th:href="@{static}">
 </head>
 <body>
 
-  <h1>ALL BED </h1>
+<h1>ALL BED </h1>
 
-  <div th:each="i : ${#numbers.sequence(1, 10)}">
+<div th:each="i : ${#numbers.sequence(1, 10)}">
     <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
-      <input type="hidden" name="PID" th:value="${i}" />
-      <button type="submit" th:text="'Button ' + ${i}"> BED </button>
+        <input type="hidden" name="PID" th:value="${i}" />
+        <button type="submit" th:text="'Button ' + ${i}"> BED </button>
     </form>
-  </div>
+</div>
+
+
+
+
+  <h1>All Plant Order</h1>
+  <table  class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+      <tr class="table-dark">
+          <th>วันที่สั่ง order</th>
+          <th>ชื่อดอกไม้</th>
+          <th>จำนวนดอกไม้ที่ต้องการ</th>
+          <!--            <th>จำนวนคงเหลือ</th>-->
+          <th>สถานะ</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="plantOrder : ${plantOrders}">
+          <td th:text="${plantOrder.timePlant}"></td>
+          <td th:text="${plantOrder.flower.FName}"></td>
+          <td th:text="${plantOrder.quantity}"></td>
+          <!--            <td th:text="${orderItem.total}"></td>-->
+          <td th:text="${plantOrder.flowerStatus}"></td>
+      </tr>
+      </tbody>
+  </table>
+
+
+  <h1>All Gardener Order</h1>
+  <table  class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+      <tr class="table-dark">
+          <th>วันที่สั่ง order</th>
+          <th>ชื่อดอกไม้</th>
+          <th>จำนวนดอกไม้ที่ต้องการ</th>
+          <!--            <th>จำนวนคงเหลือ</th>-->
+          <th>สถานะ</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="order : ${orders}">
+          <td th:text="${order.date}"></td>
+          <td th:text="${order.flower.FName}"></td>
+          <td th:text="${order.quantity}"></td>
+          <!--            <td th:text="${orderItem.total}"></td>-->
+          <td th:text="${order.status}"></td>
+      </tr>
+      </tbody>
+  </table>
 
 </body>
 </html>

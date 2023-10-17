@@ -26,8 +26,11 @@ public class PlantOrder {
     private LocalDateTime timePlant; //วันที่ปลูก
 
     @OneToOne
-    private OrderItem order;
+    private GardenerOrder gardener_order;
 
     private FlowerStatus flowerStatus; //ปลูกไปได้ระยะไหนแล้ว
+
+    @OneToOne
+    private Stock stock; //คำสั่งปลูกอันนี้ คือ stock อันไหน (ถ้ามี = เก็บเกี่ยวแล้ว)
 
 }

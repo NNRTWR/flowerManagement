@@ -5,8 +5,6 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class PlantOrderRequest {
-    // กดเลือก id ดอกไม้
-    private UUID flowerID;
+public class gRequest {
     private UUID gardener_order_ID;
 }

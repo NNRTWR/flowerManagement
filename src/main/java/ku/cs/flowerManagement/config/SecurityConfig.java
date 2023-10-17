@@ -38,8 +38,8 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                                 .permitAll().requestMatchers(new AntPathRequestMatcher("/garden-add")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/test/**")).permitAll()
 
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
+//                        .requestMatchers(
+//                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
                         .requestMatchers(
                                 new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
                         // .requestMatchers(
