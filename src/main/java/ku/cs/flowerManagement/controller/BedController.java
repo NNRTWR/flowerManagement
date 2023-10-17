@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequestMapping("/beds")
 public class BedController { //ปลูกดอกไม้แต่ละแปลง
@@ -27,9 +30,19 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @Autowired
     private DateTimeComparator dateTimeComparator;
 
+    @Autowired
+    private OrderItemService orderItemService;
+
     @GetMapping
     private String getAllBed(Model model){ //หน้ารวมแปลง  แต่ละแปลงจะมีเลขที่แปลงของตัวเอง
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
         model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงที่ปลูกแล้วออกไป
+        model.addAttribute("orders",orderItemService.getAllOrders());
+        model.addAttribute("time",now);
+        model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());
         return "bed";
     }
 

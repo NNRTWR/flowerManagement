@@ -11,5 +11,5 @@ import java.util.UUID;
 @Transient
 public class Statistic {
     private Flower flower;
-    private List<Garden> garden;
+    private List<PlantOrder> plantOrder;
 }

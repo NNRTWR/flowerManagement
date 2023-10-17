@@ -19,6 +19,7 @@
       <a class="btn btn-primary" th:href="@{/login}">Login</a>
       <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
       <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+      <a class="btn btn-primary" th:href="@{/beds}">Logout</a>
       <div sec:authorize="isAuthenticated()">
         <p>Role <b><span sec:authentication="authorities"></span></b></p>
 
