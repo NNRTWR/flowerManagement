@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StockService {
+public class StockService { //สร้างมาใช้ทดสอบเฉยๆ จะแก้จะลบก็ได้เลย
     @Autowired
     private StockRepository stockRepository;
 

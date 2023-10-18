@@ -30,7 +30,7 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
 
     public List<GardenerOrder> getAllGardenerOrder(Comparator comparator){ //เอา order ที่ทั้งหมดออกมา
         List<GardenerOrder> orders = gardenerOrderRepository.findAll();
-//        Collections.sort(orders, comparator ); แก้ Comparator
+//        Collections.sort(orders, comparator ); //ยังไม่ได้แก้ Comparator
         return orders;
     }
 
@@ -42,10 +42,6 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
         return orders;
     }
 
-    //น่าจะไม่ได้ใช้แล้ว
-//    public OrderItem getOldestOrderStatus(Comparator comparator){ //เอา order แรกที่ยังไม่ได้ปลูกออกมา
-//        return getAllOrderStatus(comparator).get(0);
-//    }
 
     public void addOrder(GardenerOrderRequest gardenerOrder){ //สร้าง order ส่งไปให้ฝ่ายปลูก
 //        GardenerOrder record = modelMapper.map(gardenerOrder, GardenerOrder.class);

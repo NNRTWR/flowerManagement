@@ -4,10 +4,10 @@ import ku.cs.flowerManagement.adapter.DateTimeComparator;
 import ku.cs.flowerManagement.common.FlowerStatus;
 import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.GardenerOrder;
-import ku.cs.flowerManagement.entity.OrderItem;
 import ku.cs.flowerManagement.entity.PlantOrder;
-import ku.cs.flowerManagement.model.GardenerOrderRequest;
-import ku.cs.flowerManagement.model.PlantOrderRequest;
+
+import ku.cs.flowerManagement.entity.*;
+
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.GardenerOrderRepository;
 import ku.cs.flowerManagement.repository.PlantOrderRepository;
@@ -23,7 +23,8 @@ import java.util.UUID;
 
 
 @Service
-public class PlantOrderService {
+public class
+PlantOrderService {
     @Autowired
     private PlantOrderRepository plantOrderRepository;
 
@@ -163,10 +164,14 @@ public class PlantOrderService {
             return FlowerStatus.HARVEST;
         else
             return FlowerStatus.DEAD;
+
+        //เก็บเกี่ยวแล้วเป็น ฟูลลี่
+        //death
     }
 
 
 
+    //ไม่ได้ใช้ เป็น ปลูกของเก่าที่เอา Request มาทั้งก้อนแล้วค่อยมาแตกใน method นี้
 //    public boolean createPlantOrder(PlantOrderRequest plantOrder, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
 ////        PlantOrder record = modelMapper.map(plantOrder, PlantOrder.class); //map จาก PlantOrderRequest เป็น PlantOrder
 ////        GardenerOrder order = modelMapper.map(gardenerOrder,GardenerOrder.class);
@@ -194,10 +199,7 @@ public class PlantOrderService {
 
 
 
-    //ลอง
     public boolean createPlantOrder(UUID gardenerId, UUID flowerId, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
-//        PlantOrder record = modelMapper.map(plantOrder, PlantOrder.class); //map จาก PlantOrderRequest เป็น PlantOrder
-//        GardenerOrder order = modelMapper.map(gardenerOrder,GardenerOrder.class);
 
         System.out.println(gardenerId);
         System.out.println(flowerId);
@@ -232,4 +234,35 @@ public class PlantOrderService {
         else
             return false;
     }
+
+    //Donut
+    public List<PlantOrder> getAllPLantOrder() {
+        return plantOrderRepository.findAll();
+    }
+
+    public List<Statistic> getAllGardenWithFlower(){ //เหมือนมันน่าจะผิดนะ
+        List<Statistic> statistics = new ArrayList<>();
+        List<Flower> flowers = flowerRepository.findAll();
+        List<PlantOrder> plantOrders = plantOrderRepository.findAll();
+
+        for (Flower flower : flowers) {
+            Statistic statistic = new Statistic();
+            statistic.setFlower(flower);
+            statistics.add(statistic);
+        }
+
+        for (PlantOrder plantOrder : plantOrders) {
+            Flower gardenFlower = plantOrder.getFlower();
+            for (Statistic statistic : statistics) {
+                if (statistic.getFlower() == gardenFlower) {
+                    statistic.setPlantOrder(new ArrayList<>());
+                    statistic.getPlantOrder().add(plantOrder);
+                    break;
+                }
+            }
+        }
+        statistics.removeIf(statistic -> statistic.getPlantOrder() == null || statistic.getPlantOrder().isEmpty());
+        return statistics;
+    }
+    //เก็บเกี่ยวกับจัดการตาย
 }

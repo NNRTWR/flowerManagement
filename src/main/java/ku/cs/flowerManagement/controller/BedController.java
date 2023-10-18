@@ -12,8 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+//<<<<<<< HEAD
 import java.util.List;
 import java.util.UUID;
+//=======
+//import java.time.format.DateTimeFormatter;
+//>>>>>>> main
 
 @Controller
 @RequestMapping("/beds")
@@ -33,6 +37,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @Autowired
     private OrderItemService orderItemService;
 
+//<<<<<<< HEAD
     @Autowired
     private CommonService commonService;
 
@@ -47,7 +52,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         model.addAttribute("plantOrders", plantOrderService.getAllPlantOrderButNoStock()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
         model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
         model.addAttribute("time",now);
-//            model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());
+        model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());
         return "bed";
     }
 
@@ -80,26 +85,35 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     }
 
 
+
+    ////////////////////โปรดอ่าน////////////////////
+
+    // plantFlower เนื่องจากกว่าหาวิธีที่กดเลือก 2 รอบแล้วค่อยกด submit เพื่อส่งไม่ได้ ก็เลยลองทำแบบแยกหน้าเลือกทีละอัน เหมือน plantFlower
+    // ต่างกันที่ plantFlower 1-2 >>> plantFlower1 จะให้กดเลือก getGardener_order_ID ส่วน plantFlower2 จะให้กดเลือก FlowerID
+    // ตอนนี้ใช้ plantFlower 1-2 อยู่
+
     //ฝ่ายปลูกจะกดว่า ปลูกดอกอะไร และปลูกตาม order ไหน
-//    @PostMapping("/plant/{PID}")
-//    private String plantFlower(@ModelAttribute PlantOrderRequest plantOrder, Model model){
-//        if(plantOrderService.createPlantOrder(plantOrder, dateTimeComparator)){ //สร้างคำสั่งปลูกได้ = ปลูกละ
-//            LocalDateTime now = commonService.getCurrentTime();
-//
-//            model.addAttribute("plantOrders", plantOrderService.getAllPlantOrderButNoStock()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
-//            model.addAttribute("orders",orderItemService.getAllOrders());
-//            model.addAttribute("time",now);
-////            model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());
-//            return "redirect:/beds";
-//        }
-//        else //ดอกไม้ที่กดปลูก กับดอกไม้ใน order ไม่ตรงกัน = ปลูกไม่ได้ให้กลับไปที่หน้าเดิม
-//            return "bed-plant" ;
-//    }
+    @PostMapping("/plant/{PID}")
+    private String plantFlower(@ModelAttribute PlantOrderRequest plantOrder, Model model){
+        if(plantOrderService.createPlantOrder(plantOrder.getGardener_order_ID(), plantOrder.getFlowerID(), dateTimeComparator)){ //สร้างคำสั่งปลูกได้ = ปลูกละ
+            return "redirect:/beds/planted";
+        }
+        else{//ดอกไม้ที่กดปลูก กับดอกไม้ใน order ไม่ตรงกัน = ปลูกไม่ได้ให้กลับไปที่หน้ารวม
+            LocalDateTime now = commonService.getCurrentTime();
+
+            model.addAttribute("plantOrders", plantOrderService.getAllPlantOrderButNoStock()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
+            model.addAttribute("orders",orderItemService.getAllOrders());
+            model.addAttribute("time",now);
+            return "redirect:/beds" ;
+        }
+    }
+
+
 
     @PostMapping("/plant/1")
-    private String plantFlower1(@ModelAttribute gRequest pRequest, Model model){
+    private String plantFlower1(@ModelAttribute gRequest gRequest, Model model){
         model.addAttribute("flowers", flowerService.getAllFlower()); //ส่งข้อมูลดอกไม้ทั้งหมดไปให้
-        currentG = pRequest.getGardener_order_ID();
+        currentG = gRequest.getGardener_order_ID();
         return "bed-plant2";
     }
 
@@ -107,14 +121,17 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     private String plantFlower2(@ModelAttribute fRequest fRequest, Model model){
 
         if(plantOrderService.createPlantOrder(currentG, fRequest.getFlowerID(), dateTimeComparator)){ //สร้างคำสั่งปลูกได้ = ปลูกละ
+            return "redirect:/beds/planted";
+        }
+
+        else{//ดอกไม้ที่กดปลูก กับดอกไม้ใน order ไม่ตรงกัน = ปลูกไม่ได้ให้กลับไปที่หน้ารวม
             LocalDateTime now = commonService.getCurrentTime();
 
             model.addAttribute("plantOrders", plantOrderService.getAllPlantOrderButNoStock()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
             model.addAttribute("orders",orderItemService.getAllOrders());
             model.addAttribute("time",now);
+            return "redirect:/beds" ;
         }
-
-        return "redirect:/beds" ;
 
     }
 
