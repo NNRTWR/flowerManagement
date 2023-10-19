@@ -8,7 +8,9 @@ import ku.cs.flowerManagement.entity.PlantOrder;
 
 import ku.cs.flowerManagement.entity.*;
 
+import ku.cs.flowerManagement.model.GardenerOrderRequest;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
+import ku.cs.flowerManagement.model.gRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.GardenerOrderRepository;
 import ku.cs.flowerManagement.repository.PlantOrderRepository;
@@ -203,22 +205,13 @@ PlantOrderService {
 
 
 
-    public boolean createPlantOrder(UUID gardenerId, UUID flowerId, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
-
-        System.out.println(gardenerId);
-        System.out.println(flowerId);
+    public boolean createPlantOrder(gRequest request, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
         PlantOrder record = new PlantOrder();
-        GardenerOrder order = gardenerOrderRepository.findById(gardenerId).get();
-        Flower flower = flowerRepository.findById(flowerId).get(); //หาดอกไม้ที่ปลูก
-
-        if(!checkPlantOrder(order,flower)){ //check แล้วพบว่าดอกไม่ที่ปลูกกับ order ไม่ตรงกัน
-            return false;
-        }
-
+        GardenerOrder order = gardenerOrderRepository.findById(request.getGardener_order_ID()).get();
         record.setGardener_order(order); // รอบการปลูกนี้มาจาก plantOrder อันนี้
         record.setQuantity(order.getQuantity()); //ตอนนี้ปลูกดอกไม้ตาม order แบบเป๊ะๆอยู๋
-        record.setFlower(flower); //แปลงนี้ปลูกดอกนี้นะ
-        record.setHarvestable(flower.getHow_to_harvest());
+        record.setFlower(order.getFlower()); //แปลงนี้ปลูกดอกนี้นะ
+        record.setHarvestable(order.getFlower().getHow_to_harvest());
 
         record.setPID(currentPID); //ปลูกที่แปลงไหน
         record.setTimePlant(LocalDateTime.now()); //วันเวลาที่ปลูก

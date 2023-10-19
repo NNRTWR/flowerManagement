@@ -9,11 +9,10 @@
 
 <h1>ALL BED </h1>
 
-<div th:each="i : ${#numbers.sequence(1, 10)}">
-
-    <form th:action="${plantOrder.status == DEAD} ? @{/beds/{PID}(PID=${i + 1})} : @{/beds/{PID}(PID=${i + 1})/order}">
-        <input type="hidden" name="PID" th:value="${i}" />
-        <button type="submit" th:text="'Button ' + ${i}"> BED </button>
+<div th:each="i : ${plantOrders}">
+    <form th:action="${i.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">
+        <input type="hidden" name="PID" th:value="${i.PID}" />
+        <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>
     </form>
 </div>
 

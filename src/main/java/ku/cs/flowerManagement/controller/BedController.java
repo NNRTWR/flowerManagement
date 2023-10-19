@@ -44,7 +44,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     private String getAllBed(Model model){
         LocalDateTime now = commonService.getCurrentTime();
 
-        model.addAttribute("plantOrders", plantOrderService.getAllPlantOrderButNoStock()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
+        model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
         model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER) ,bottom table(order table)
         model.addAttribute("time",now);//show time
         model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());//overall table
@@ -53,30 +53,29 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
 
     //dead-harvest-detail
     @GetMapping("/{PID}")
-    public String detailOfPlantOrder(@PathVariable int id,Model model){
-        PlantOrder plantOrder = plantOrderService.findByPID(id);
+    public String detailOfPlantOrder(@PathVariable int PID,Model model){
+        PlantOrder plantOrder = plantOrderService.findByPID(PID);
         model.addAttribute("plantOrder", plantOrder);
         return "bed-view"; //ไปปลูก
     }
 
     @PostMapping("/{PID}")
     public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest,Model model){
-        plantOrderService.harvest(plantOrderRequest);
-        plantOrderService.plantWasDied(plantOrderRequest);
+        //plantOrderService.harvest(plantOrderRequest);
+        //plantOrderService.plantWasDied(plantOrderRequest);
         return "bed-view";
     }
     //planting zone
-    @GetMapping("/{PID}/order")
+    @GetMapping("/order/{PID}")
     public String showOrder(@PathVariable int PID,Model model){
-        model.addAttribute("flowers", flowerService.getAllFlower()); //ส่งข้อมูลดอกไม้ทั้งหมดไปให้
         model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
         model.addAttribute("PID",PID);
         return "bed-plant";
     }
     //chose order
-    @PostMapping("/{PID}/order")
-    public String choseOrder(@ModelAttribute PlantOrderRequest plantOrder,Model model){
-        plantOrderService.createPlantOrder(plantOrder.getGardener_order_ID(), plantOrder.getFlowerID(), dateTimeComparator);
+    @PostMapping("/order/{PID}")
+    public String choseOrder(@ModelAttribute gRequest plantOrder,Model model){
+        plantOrderService.createPlantOrder(plantOrder, dateTimeComparator);
         return "redirect:/beds/{PID}";
     }
 

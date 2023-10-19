@@ -30,9 +30,8 @@
             <td th:text="${order.status}"></td>
 
             <td style="text-align: center">
-                <input type="hidden" name="plant_order_ID" th:value="${order.id}" />
-                <form action="#" th:action="@{/beds/{PID}}">
-                    <button type="submit" th:value="${order.id}" name="gardener_order_ID">เลือก</button> <!-- กดเลือกดอกไม้ที่จะปลูก -->
+                <form action="#" th:action="@{/beds/{PID}(PID=${PID})}">
+                    <button type="submit" name="gardener_order_ID">เลือก</button>
                 </form>
             </td>
         </tr>

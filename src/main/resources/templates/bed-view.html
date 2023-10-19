@@ -27,18 +27,17 @@
 <!--        <th>ระยะเวลาของการเก็บเกี่ยว</th>-->
 <!--        <th>รูปแบบการเก็บ</th>-->
         <th>ราคา</th>
-        <th>จำนวนดอก</th>
         <th>สถานะของดอกไม้ในแปลง</th>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:each="order : ${plantOrder}">
-        <td th:text="${order.PID}"></td>
-        <td th:text="${order.timePlant}"></td>
-        <td th:text="${order.quantity}"></td>
-        <td th:text="${order.total}"></td>
-        <td th:text="${order.flower.FName}"></td>
+    <tr>
+        <td th:text="${plantOrder.PID}"></td>
+        <td th:text="${plantOrder.timePlant}"></td>
+        <td th:text="${plantOrder.quantity}"></td>
+        <td th:text="${plantOrder.total}"></td>
+        <td th:text="${plantOrder.flower.FName}"></td>
 <!--        <td th:text="${plantOrder.flower.how_to_plant}"></td>-->
 <!--        <td th:text="${plantOrder.flower.how_to_take_care}"></td>-->
 <!--        <td th:text="${plantOrder.flower.seedPeriod}"></td>-->
@@ -47,8 +46,7 @@
 <!--        <td th:text="${plantOrder.flower.harvestPeriod}"></td>-->
 <!--        <td th:text="$plantOrder.flower.how_to_harvest}"></td>-->
         <td style="text-align: right" th:text="${#numbers.formatDecimal(order.flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
-        <td th:text="${order.flower.quantity}"></td>
-        <td th:text="${order.flowerStatus}"></td>
+        <td th:text="${plantOrder.flowerStatus}"></td>
     </tr>
     </tbody>
 </table>
