@@ -51,7 +51,7 @@ PlantOrderService {
     public List<PlantOrder> getAllPlantOrderByPID(int PID){
         System.out.println("แปลงที่ " + PID); // เลือกแปลงไหนนะ
         currentPID = PID;
-        List<PlantOrder> listPlantOrder = plantOrderRepository.findByPID(PID); //หาว่าเลขที่่แปลงนี้มีปลูกดอกไม้ยัง
+        List<PlantOrder> listPlantOrder = plantOrderRepository.findAllByPID(PID); //หาว่าเลขที่่แปลงนี้มีปลูกดอกไม้ยัง
         if (listPlantOrder.isEmpty())
             return null;
         else {
@@ -65,7 +65,7 @@ PlantOrderService {
     public List<PlantOrder> getAllPlantOrderButNoStockByPID(int PID){
         currentPID = PID;
         System.out.println("แปลงที่ " + PID); // เลือกแปลงไหนนะ
-        List<PlantOrder> listPlantOrder = plantOrderRepository.findByPID(PID); //หาว่าเลขที่่แปลงนี้ปลูกดอกไม้ยัง
+        List<PlantOrder> listPlantOrder = plantOrderRepository.findAllByPID(PID); //หาว่าเลขที่่แปลงนี้ปลูกดอกไม้ยัง
         System.out.println("ก่อน System.out.println(listPlantOrder)");
         for (PlantOrder o:listPlantOrder) {
             System.out.println(o.getId());
@@ -272,12 +272,14 @@ PlantOrderService {
     //เก็บเกี่ยวกับจัดการตาย
     //dead plant management
     public void plantWasDied(PlantOrderRequest plantOrderRequest){
-        PlantOrder record = modelMapper.map(plantOrderRequest, PlantOrder.class);
-        PlantOrder plantOrder = plantOrderRepository.findById(plantOrderRequest.getFlowerID()).get();
-        //alive-dead
-        plantOrder.setTotal(plantOrder.getTotal()-plantOrderRequest.getDeadPlant());
-        record.setTotal(plantOrder.getTotal());
-        plantOrderRepository.save(record);
+        if(plantOrderRequest.getDeadPlant()>0) {
+            PlantOrder record = modelMapper.map(plantOrderRequest, PlantOrder.class);
+            PlantOrder plantOrder = plantOrderRepository.findById(plantOrderRequest.getFlowerID()).get();
+            //alive-dead
+            plantOrder.setTotal(plantOrder.getTotal() - plantOrderRequest.getDeadPlant());
+            record.setTotal(plantOrder.getTotal());
+            plantOrderRepository.save(record);
+        }
     }
         //harvest
     public void harvest(PlantOrderRequest plantOrderRequest){
@@ -299,5 +301,8 @@ PlantOrderService {
         stockRepository.save(stock);
     }
 
+    public PlantOrder findByPID(int uuid){
+        return plantOrderRepository.findByPID(uuid);
+    }
 
 }

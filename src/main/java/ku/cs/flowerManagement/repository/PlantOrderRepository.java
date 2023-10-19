@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface PlantOrderRepository extends JpaRepository<PlantOrder, UUID> {
-    List<PlantOrder> findByPID(int PID); //หาจากเลขที่แปลง
-
+    List<PlantOrder> findAllByPID(int PID); //หาจากเลขที่แปลง
+    PlantOrder findByPID(int PID);
 
 }

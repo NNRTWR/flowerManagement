@@ -44,6 +44,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     public UUID currentG;
 
 
+    //model.addAttribute USE IN ***********************GETMAPPING******************* not in postMapping
     //หน้ารวมแปลง  แต่ละแปลงจะมีเลขที่แปลงของตัวเอง
     @GetMapping
     private String getAllBed(Model model){
@@ -56,6 +57,34 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         return "bed";
     }
 
+
+    @GetMapping("/{PID}")
+    public String detailOfPlantOrder(@PathVariable int id,Model model){
+        PlantOrder plantOrder = plantOrderService.findByPID(id);
+        model.addAttribute("plantOrder", plantOrder);
+        return "bed-plant"; //ไปปลูก
+    }
+
+    @PostMapping("/{PID}")
+    public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest,Model model){
+        plantOrderService.harvest(plantOrderRequest);
+        plantOrderService.plantWasDied(plantOrderRequest);
+        return "bed-view";
+    }
+
+    @GetMapping("/{PID}/plant")
+    public String planting(@PathVariable int PID,Model model){
+        model.addAttribute("flowers", flowerService.getAllFlower()); //ส่งข้อมูลดอกไม้ทั้งหมดไปให้
+        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
+        model.addAttribute("PID",PID);
+        return "bed-plant";
+    }
+    @PostMapping("/{PID}/plant")
+    public String planted(@ModelAttribute gRequest gRequest,Model model){
+        model.addAttribute("flowers", flowerService.getAllFlower()); //ส่งข้อมูลดอกไม้ทั้งหมดไปให้
+        currentG = gRequest.getGardener_order_ID();
+        return "bed-plant2";
+    }
 
     //รับเลขที่แปลงเข้ามา แล้วเช็คว่าจะไปหน้าปลูก หรือ หน้าดูข้อมูลการปลูกในแปลงนั้น
     @PostMapping("/{PID}")

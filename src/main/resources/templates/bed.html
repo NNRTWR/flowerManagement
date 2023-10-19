@@ -10,7 +10,7 @@
 <h1>ALL BED </h1>
 
 <div th:each="i : ${#numbers.sequence(1, 10)}">
-    <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
+    <form th:action="${plantOrder.stock == null} ? @{/beds/{PID}(PID=${i + 1})} : @{/beds/{PID}(PID=${i + 1})/plant}" method="post">
         <input type="hidden" name="PID" th:value="${i}" />
         <button type="submit" th:text="'Button ' + ${i}"> BED </button>
     </form>
