@@ -285,9 +285,18 @@ PlantOrderService {
     public void harvest(PlantOrderRequest plantOrderRequest){
         PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
         //managing stock
-        Stock stock = record.getStock();
+        Stock stock;
+        if(record.getStock()==null){
+            stock = new Stock();
+        } else {
+            stock = record.getStock();
+        }
+        LocalDateTime localDateTime = LocalDateTime.now();
+        stock.setTime(localDateTime);
         stock.setQuantity(record.getQuantity());
         stock.setTotal(record.getTotal());
+        stock.setPlantOrder(record);
+        record.setStock(stock);
         //still harvestable
         if(record.getHarvestable()>1){
             record.setFlowerStatus(FlowerStatus.FULLY_GROWN);

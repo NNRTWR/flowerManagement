@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,9 +20,8 @@ public class Stock {
     private UUID id;
 
     private int SID; //รหัส Stock
-    private Flower flower;
     private int total; //คงเหลือ
-    private Date time; //วันที่
+    private LocalDateTime time; //วันที่
     private int quantity; //จำนวนดอกไม้
 
     @OneToOne
