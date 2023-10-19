@@ -34,8 +34,6 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
 
     @Autowired
     private OrderItemService orderItemService;
-
-//<<<<<<< HEAD
     @Autowired
     private CommonService commonService;
 
@@ -58,7 +56,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     public String detailOfPlantOrder(@PathVariable int id,Model model){
         PlantOrder plantOrder = plantOrderService.findByPID(id);
         model.addAttribute("plantOrder", plantOrder);
-        return "bed-plant"; //ไปปลูก
+        return "bed-view"; //ไปปลูก
     }
 
     @PostMapping("/{PID}")
