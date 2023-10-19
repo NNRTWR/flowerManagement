@@ -19,7 +19,7 @@ public class Stock {
     private UUID id;
 
     private int SID; //รหัส Stock
-    private int FLID; //รหัสดอกไม้และ Lot
+    private Flower flower;
     private int total; //คงเหลือ
     private Date time; //วันที่
     private int quantity; //จำนวนดอกไม้

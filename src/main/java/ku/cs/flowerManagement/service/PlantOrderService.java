@@ -8,9 +8,11 @@ import ku.cs.flowerManagement.entity.PlantOrder;
 
 import ku.cs.flowerManagement.entity.*;
 
+import ku.cs.flowerManagement.model.PlantOrderRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.GardenerOrderRepository;
 import ku.cs.flowerManagement.repository.PlantOrderRepository;
+import ku.cs.flowerManagement.repository.StockRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,8 @@ PlantOrderService {
 
     @Autowired
     private GardenerOrderRepository gardenerOrderRepository;
+    @Autowired
+    private StockRepository stockRepository;
 
     public int currentPID;
 
@@ -213,8 +217,9 @@ PlantOrderService {
 
         record.setGardener_order(order); // รอบการปลูกนี้มาจาก plantOrder อันนี้
         record.setQuantity(order.getQuantity()); //ตอนนี้ปลูกดอกไม้ตาม order แบบเป๊ะๆอยู๋
-
         record.setFlower(flower); //แปลงนี้ปลูกดอกนี้นะ
+        record.setHarvestable(flower.getHow_to_harvest());
+
         record.setPID(currentPID); //ปลูกที่แปลงไหน
         record.setTimePlant(LocalDateTime.now()); //วันเวลาที่ปลูก
 //        System.out.println("ก่อน plantOrderRepository.save(record) ที่ createPlantOrder");
@@ -265,4 +270,34 @@ PlantOrderService {
         return statistics;
     }
     //เก็บเกี่ยวกับจัดการตาย
+    //dead plant management
+    public void plantWasDied(PlantOrderRequest plantOrderRequest){
+        PlantOrder record = modelMapper.map(plantOrderRequest, PlantOrder.class);
+        PlantOrder plantOrder = plantOrderRepository.findById(plantOrderRequest.getFlowerID()).get();
+        //alive-dead
+        plantOrder.setTotal(plantOrder.getTotal()-plantOrderRequest.getDeadPlant());
+        record.setTotal(plantOrder.getTotal());
+        plantOrderRepository.save(record);
+    }
+        //harvest
+    public void harvest(PlantOrderRequest plantOrderRequest){
+        PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
+        //managing stock
+        Stock stock = record.getStock();
+        stock.setQuantity(record.getQuantity());
+        stock.setTotal(record.getTotal());
+        //still harvestable
+        if(record.getHarvestable()>1){
+            record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
+        }
+        else {//died set stock to zero show as empty field
+        record.setFlowerStatus(FlowerStatus.DEAD);
+        record.setStock(null);
+        }
+
+        plantOrderRepository.save(record);
+        stockRepository.save(stock);
+    }
+
+
 }

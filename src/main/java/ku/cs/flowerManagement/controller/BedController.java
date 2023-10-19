@@ -50,9 +50,9 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         LocalDateTime now = commonService.getCurrentTime();
 
         model.addAttribute("plantOrders", plantOrderService.getAllPlantOrderButNoStock()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
-        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
-        model.addAttribute("time",now);
-        model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());
+        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER) ,bottom table(order table)
+        model.addAttribute("time",now);//show time
+        model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());//overall table
         return "bed";
     }
 
