@@ -30,8 +30,9 @@
             <td th:text="${order.status}"></td>
 
             <td style="text-align: center">
-                <form action="#" th:action="@{/beds/{PID}(PID=${PID})}">
-                    <button type="submit" name="gardener_order_ID">เลือก</button>
+                <form action="#" th:action="@{/beds/order/{PID}(PID=${PID})}" method="POST">
+<!--                <form action="#" th:action="@{/beds/{PID}(PID=${PID})}">-->
+                    <button type="submit" th:value="${order.id}" name="gardener_order_ID">เลือก</button>
                 </form>
             </td>
         </tr>

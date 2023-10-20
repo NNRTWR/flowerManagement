@@ -43,9 +43,12 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @GetMapping
     private String getAllBed(Model model){
         LocalDateTime now = commonService.getCurrentTime();
-
-        model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงที่กำลังปลูกออกไป
-        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER) ,bottom table(order table)
+        model.addAttribute("orders",gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
+        model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงทุกรอบการปลูกไปให้
+        for (PlantOrder plantOrder:plantOrderService.getAllPlantOrder()) {
+            System.out.println(plantOrder.getId()+"  " +plantOrder.getTimePlant() + "  " + plantOrder.getFlowerStatus());
+        }
+//        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER) ,bottom table(order table)
         model.addAttribute("time",now);//show time
         model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());//overall table
         return "bed";
@@ -54,9 +57,12 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     //dead-harvest-detail
     @GetMapping("/{PID}")
     public String detailOfPlantOrder(@PathVariable int PID,Model model){
-        PlantOrder plantOrder = plantOrderService.findByPID(PID);
-        model.addAttribute("plantOrder", plantOrder);
-        return "bed-view"; //ไปปลูก
+        System.out.println("detailOfPlantOrder แปลงที่: "+ PID);
+        List<PlantOrder> plantOrders = plantOrderService.getAllPlantOrderButNoStockByPID(PID);
+        model.addAttribute("plantOrders", plantOrders);
+        //        PlantOrder plantOrder = plantOrderService.findByPID(PID);
+//        model.addAttribute("plantOrder", plantOrder);
+        return "bed-view"; //ไปปลูก //ไปดูข้อมูลรึเปล่า
     }
 
     @PostMapping("/{PID}")

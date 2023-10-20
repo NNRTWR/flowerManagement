@@ -3,6 +3,7 @@ package ku.cs.flowerManagement.service;
 import ku.cs.flowerManagement.common.OrderStatus;
 import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.OrderItem;
+import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.GardenerOrderRequest;
 import ku.cs.flowerManagement.model.OrderItemRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
@@ -52,10 +53,11 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
         gardenerOrderRepository.save(record);
     }
 
-    public void setIn_ProcessOrder(GardenerOrder gardenerOrder){ // set status ของ order เป็น in_process = order นี้ปลูกแล้วนะ
+    public void setIn_ProcessOrder(GardenerOrder gardenerOrder, PlantOrder plantOrder){ // set status ของ order เป็น in_process = order นี้ปลูกแล้วนะ
 //        System.out.println("ก่อน getOldestOrderStatus ที่ setStatusOrder");
 //        OrderItem orderItem = getOldestOrderStatus(comparator);
         gardenerOrder.setStatus(OrderStatus.IN_PROCESS);
+//        gardenerOrder.setPlantOrder(plantOrder);
 //        System.out.println(orderItem.getStatus());
         gardenerOrderRepository.save(gardenerOrder);
 //        System.out.println("หลัง getOldestOrderStatus ที่ setStatusOrder");

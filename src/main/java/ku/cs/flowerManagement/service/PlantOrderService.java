@@ -218,7 +218,7 @@ PlantOrderService {
 //        System.out.println("ก่อน plantOrderRepository.save(record) ที่ createPlantOrder");
         plantOrderRepository.save(record);
 //        System.out.println("หลัง plantOrderRepository.save(record) ที่ createPlantOrder");
-        gardenerOrderService.setIn_ProcessOrder(order);
+        gardenerOrderService.setIn_ProcessOrder(order,record);
         return true;
     }
 

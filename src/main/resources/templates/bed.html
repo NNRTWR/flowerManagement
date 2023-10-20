@@ -9,8 +9,19 @@
 
 <h1>ALL BED </h1>
 
+<!--<div th:each="num : ${#numbers.sequence(1, 10)}">-->
+<!--<div th:each="i : ${plantOrders}">-->
+<!--    <form th:action="${num == i.PID && i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${num})} : @{/beds/order/{PID}(PID=${num})}">-->
+<!--        <input type="hidden" name="PID" th:value="${num}" />-->
+<!--        <button type="submit" th:text="'Button ' + ${num}"> BED </button>-->
+<!--&lt;!&ndash;        <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>&ndash;&gt;-->
+<!--    </form>-->
+<!--</div>-->
+<!--</div>-->
+
+
 <div th:each="i : ${plantOrders}">
-    <form th:action="${i.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">
+    <form th:action="${i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">
         <input type="hidden" name="PID" th:value="${i.PID}" />
         <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>
     </form>
@@ -42,6 +53,7 @@
     </tr>
     </thead>
     <tbody>
+
     <tr th:each="plantOrder : ${plantOrders}">
         <td th:text="${plantOrder.PID}"></td>
         <td th:text="${plantOrder.flowerStatus}"></td>
