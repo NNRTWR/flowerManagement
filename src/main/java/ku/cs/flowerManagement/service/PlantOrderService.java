@@ -1,6 +1,7 @@
 package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
+import ku.cs.flowerManagement.adapter.PlantComparator;
 import ku.cs.flowerManagement.common.FlowerStatus;
 import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.GardenerOrder;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -116,6 +118,7 @@ PlantOrderService {
             return null;
         }
         else {
+            listPlantOrder.sort(new PlantComparator());
             setFlowerOrderStatus(listPlantOrder);
         }
         return listPlantOrder;
