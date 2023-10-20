@@ -45,6 +45,6 @@ public class GardenerOrderController {
     public String addOrder(@ModelAttribute OrderItemRequest orderItem, Model model){
         gardenerOrderService.addOrder(orderItem);
         model.addAttribute("orderItems", gardenerOrderService.getAllOrderItem(dateTimeComparator));
-        return "redirect:/gardener-orders";
+        return "redirect:/gardener/orders";
     }
 }

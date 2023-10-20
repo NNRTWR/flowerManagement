@@ -16,7 +16,7 @@ public class HomeController {
     }
     @RequestMapping("/test/sidebar")
     public String getSidebar(Model model) {
-        return "/fragments/sidebar";
+        return "/fragments/gardenerSidebar";
     }
     @RequestMapping("/test/header")
     public String getHeader(Model model) {

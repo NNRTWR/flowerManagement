@@ -5,29 +5,20 @@
     <meta charset="UTF-8">
     <title>Flower Management Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/output.css}">
-    <!-- th:href="@{/css/output.css} -->
     <script th:src="@{/js/mainLayout.js}"></script>
 </head>
 
-<body class="overflow-hidden flex flex-col h-screen bg-gray-100">
-    <div id="app" class="flex flex-col h-screen"></div>
-    <!-- Sidebar with a higher z-index -->
-    <div sec:authorize="isAuthenticated() and hasAuthority('SELLER')">
-        <div th:replace="~{fragments/sellerSidebar::sellerSidebar}" class="w-64 flex-shrink-0"></div>
+<body class="flex flex-col h-full overflow-y-auto bg-gray-100">
+    <div sec:authorize="isAuthenticated() and hasAuthority('SELLER')" class="w-64 flex-shrink-0">
+        <div th:replace="~{fragments/sellerSidebar::sellerSidebar}"></div>
     </div>
-    <div sec:authorize="isAuthenticated() and hasAuthority('GARDENER')">
-        <div th:replace="~{fragments/gardenerSidebar::gardenerSidebar}" class="w-64 flex-shrink-0"></div>
+    <div sec:authorize="isAuthenticated() and hasAuthority('GARDENER')" class="w-64 flex-shrink-0">
+        <div th:replace="~{fragments/gardenerSidebar::gardenerSidebar}"></div>
     </div>
-    
-    
-
-    <!-- Content Container -->
-    <main id="content-layout" class="min-h-screen transition-all transform duration-400 ease-in-out">
+    <main id="content-layout" class="antialiased flex-1 flex-col flex-shrink-0 min-h-screen p-20">
         <div layout:fragment="content"></div>
-        <button class="btn-primary">OK</button>
     </main>
-
-    </div>
 </body>
 
 </html>
+
