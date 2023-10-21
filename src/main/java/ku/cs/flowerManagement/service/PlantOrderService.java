@@ -281,27 +281,18 @@ PlantOrderService {
     public void harvest(PlantOrderRequest plantOrderRequest){
         PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
         //managing stock
-        Stock stock;
-        if(record.getStock()==null){
-            stock = new Stock();
-        } else {
-            stock = record.getStock();
-        }
+        Stock stock = new Stock();
         LocalDateTime localDateTime = LocalDateTime.now();
         stock.setTime(localDateTime);
-        stock.setQuantity(record.getQuantity());
+        stock.setQuantity(record.getTotal()); // total because some flower may die, we only count what we can harvest
         stock.setTotal(record.getTotal());
         stock.setPlantOrder(record);
         record.setStock(stock);
-        //still harvestable
-        if(record.getHarvestable()>1){
+        //harvestable
+        record.setHarvestable(record.getHarvestable()-1);
+        if(record.getHarvestable()>0){
             record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
-        }
-        else {//died set stock to zero show as empty field
-        record.setFlowerStatus(FlowerStatus.DEAD);
-        record.setStock(null);
-        }
-
+        } else {record.setFlowerStatus(FlowerStatus.DEAD);}
         plantOrderRepository.save(record);
         stockRepository.save(stock);
     }
