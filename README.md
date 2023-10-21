@@ -1,11 +1,13 @@
 ## How to run tailwind css
-first time or have conflict
+
+โหลด node.js https://nodejs.org/en  version 18.18.2
+รันครั้งแรกหรือpullงาน
 ```sh
 npm run build
 ```
+หลังจากนี้รันอันนี้ได้เลย
  ```sh
 npm run dev 
- 
 ```
 **ต้องโหลด node.js ก่อนนะ ยังไม่ได้ทำใส่ docker**
 สามารถรันปกติได้ ไม่จำเป็นต้องรันอันนี้ถ้าจะเทสค่า
@@ -18,5 +20,4 @@ npm run dev
 
 
 ## User (ถ้าไม่ได้ใช้ h2)
-- gardenerTest pass:1234
-- sellerTest pass:1234
+
