@@ -284,7 +284,7 @@ PlantOrderService {
         Stock stock = new Stock();
         LocalDateTime localDateTime = LocalDateTime.now();
         stock.setTime(localDateTime);
-        stock.setQuantity(record.getQuantity());
+        stock.setQuantity(record.getTotal()); // total because some flower may die, we only count what we can harvest
         stock.setTotal(record.getTotal());
         stock.setPlantOrder(record);
         record.setStock(stock);
