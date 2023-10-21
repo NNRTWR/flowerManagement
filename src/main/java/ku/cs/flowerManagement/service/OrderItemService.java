@@ -44,11 +44,11 @@ public class OrderItemService {
         return orderFlowerRequests;
     }
 
-//    //ลองปรับ
-//    public List<OrderItem> getOrders() {
-//        List<OrderItem> orders = orderRepository.findAll();
-//        return orders;
-//    }
+    //ลองปรับ
+    public List<OrderItem> getAllOrders() {
+        List<OrderItem> orders = orderRepository.findAll();
+        return orders;
+    }
 
 
     // Get order By Id
@@ -64,14 +64,6 @@ public class OrderItemService {
         return orderFlowerRequest;
     }
 
-//    //ลองปรับ
-//    public OrderItem getOrderById(int id) {
-//        OrderItem orderFlower = orderRepository.findById(id).orElse(null);
-//        if (orderFlower == null) {
-//            throw new EntityNotFoundException();
-//        }
-//        return orderFlower;
-//    }
 
     // Create Order
     public void createOrder(OrderItemRequest orderFlowerRequest) {
