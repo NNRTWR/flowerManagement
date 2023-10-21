@@ -5,11 +5,14 @@ import ku.cs.flowerManagement.model.FlowerRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 @Service
 public class FlowerService {
@@ -30,6 +33,12 @@ public class FlowerService {
     public List<Flower> getAllFlower(){ //แสดง flower ทั้งหมด
         return flowerRepository.findAll();
     }
+
+    public Page<Flower> getFlowers(int page, int size) {   //สำหรับ pagination
+        Pageable pageable = PageRequest.of(page, size);
+        return flowerRepository.findAll(pageable);
+    }
+
 
     // Get Flower By Id
 //    public FlowerRequest getFlowerById(int id) {

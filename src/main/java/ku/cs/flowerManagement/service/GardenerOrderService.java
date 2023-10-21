@@ -52,7 +52,7 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
         record.setStatus(OrderStatus.PENDING);
         gardenerOrderRepository.save(record);
     }
-
+    
     public void setIn_ProcessOrder(GardenerOrder gardenerOrder, PlantOrder plantOrder){ // set status ของ order เป็น in_process = order นี้ปลูกแล้วนะ
 //        System.out.println("ก่อน getOldestOrderStatus ที่ setStatusOrder");
 //        OrderItem orderItem = getOldestOrderStatus(comparator);
