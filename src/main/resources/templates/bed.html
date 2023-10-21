@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Bed</title>
-    <link th:rel="stylesheet" th:href="@{static}">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+    <!-- <link th:rel="stylesheet" th:href=""> -->
+    <!-- <script th:src="@{/js/bootstrap.min.js}"></script> -->
 </head>
 <body>
-
+<div layout:fragment="content">
 <h1>ALL BED </h1>
 
 <!--<div th:each="num : ${#numbers.sequence(1, 10)}">-->
@@ -20,7 +23,7 @@
 <!--</div>-->
 
 
-<div th:each="i : ${plantOrders}">
+<!-- <div th:each="i : ${plantOrders}">
     <form th:action="${i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">
         <input type="hidden" name="PID" th:value="${i.PID}" />
         <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>
@@ -85,9 +88,10 @@
           <td th:text="${order.status}"></td>
       </tr>
       </tbody>
-  </table>
+  </table> -->
 
 <!--=======-->
 <!--&gt;>>>>>> main-->
+</div>
 </body>
 </html>
