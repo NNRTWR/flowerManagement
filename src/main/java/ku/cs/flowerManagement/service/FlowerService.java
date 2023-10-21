@@ -39,7 +39,6 @@ public class FlowerService {
     public Flower getOneFlower(UUID id){ //แสดง flower ที่เลือก
         return flowerRepository.findById(id).get();
     }
-
     // Create Flower
     public FlowerRequest addFlower(FlowerRequest flowerRequest) {
         Flower flower = modelMapper.map(flowerRequest, Flower.class);
@@ -48,6 +47,11 @@ public class FlowerService {
         return modelMapper.map(flowerRepository.save(flower), FlowerRequest.class);
     }
 
+    public int getTotalFlowerCount() {
+        List<Flower> flowers = flowerRepository.findAll();
+        return flowers.size();
+    }
+    
 
 
     // Update Flower
@@ -66,4 +70,7 @@ public class FlowerService {
 ////        System.out.println(flower1.getFID());
 //        return modelMapper.map(flower1, FlowerRequest.class);
 //    }
+
+
+
 }

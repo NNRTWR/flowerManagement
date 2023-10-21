@@ -1,103 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Flower</title>
-    <link th:rel="stylesheet" th:href="@{static}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-    <link th:rel="stylesheet" th:href="@{static}">
-    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+
 </head>
 <body>
+<div layout:fragment ="content">
+    <h1 class="text-2xl text-center">ข้อมูลดอกไม้ในระบบ</h1>
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center">
+            <h1 class="text-2xl">จำนวนดอกไม้ทั้งหมด</h1>
+            <span class="text-2xl ml-10" th:text="${totalFlowers}"></span>
+        </div>
+        
+        <div class="flex space-x-2 items-center">
+            
+            <a class="btn btn-primary" th:href="@{/flower/create}">เพิ่มข้อมูลดอกไม้</a>
+        </div>
+    </div>
+    
+    
+    <table class="table-fixedbg-white divide-y divide-gray-300 
+    overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-lg break-words bg-white" id="flower-table">
+        <thead class="bg-gray-900">
+            <tr class="text-white text-center">
+                <th class="font-semibold text-lg uppercase px-6 py-10"> รหัสดอกไม้</th>
+                <th class="font-semibold text-lg uppercase px-6 py-7">ชื่อดอกไม้</th>
+                <th class="font-semibold text-lg uppercase px-6 py-7 whitespace-normal">จำนวนเก็บเกี่ยว
+                </th>
+                <th class="font-semibold text-lg uppercase px-6 py-7">ระยะเวลาการปลูก</th>
+                <th class="font-semibold text-lg uppercase px-6 py-7">ราคา</th>
+                <th class="font-semibold text-lg uppercase px-6 py-7 "></th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
+            <tr th:each="flower : ${flowers}" class="whitespace-normal">
+                <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
+                <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
+                <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
+                <td class="px-6 py-4 truncate whitespace-normal"></td>
+                <td class="px-6 py-4 text-center truncate whitespace-normal">
+                    <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600 
+                font-semibold rounded-full text-xl p-3"></span>
+                </td>
+                <td class="px-6 py-4 text-center font-extrabold" th:href="@{/flower/{id}(id=${flower.FID})}"> 
+                    <a class="btn  bg-sky-400 text-xl text-gray-100">Detail</a> 
+                </td>
+        
+            </tr>
+            
+        </tbody>
+        
+    </table>
+    
+    
 
-<!--<div class="container-fluid">-->
-<!--    <div class="row flex-nowrap">-->
-<!--        &lt;!&ndash;        side bar&ndash;&gt;-->
-<!--&lt;!&ndash;        <div th:replace="~{fragments/sidebar :: sidebar}"></div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        Main content&ndash;&gt;-->
-<!--        <div class = "col">-->
-<!--            &lt;!&ndash;        search bar&ndash;&gt;-->
-<!--&lt;!&ndash;            <div th:replace="~{fragments/searchbar :: searchbar}"></div>&ndash;&gt;-->
-<!--            <div class="row mt-4">-->
-<!--                <div class="col-md-7">-->
-<!--                    <table class="table">-->
-<!--                        <thead>-->
-<!--                        <tr>-->
-<!--                            <th>ID</th>-->
-<!--                            <th>FID</th>-->
-<!--                            <th>FName</th>-->
-<!--                            <th>Price</th>-->
-<!--                            <th>How to plant</th>-->
-<!--                            <th>Take care</th>-->
-<!--                            <th>Time</th>-->
-<!--                            <th>Harvest</th>-->
-<!--                            <th>Edit</th>-->
-<!--                        </tr>-->
-<!--                        </thead>-->
-<!--                        <tbody id="orderTable">-->
-<!--                        &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
-<!--                        <tr th:each="flower : ${flowers}">-->
-<!--                            <td th:text="${flower.getId()}"></td>-->
-<!--                            <td th:text="${flower.getFID()}"></td>-->
-<!--                            <td th:text="${flower.getFName()}"></td>-->
-<!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.getPrice(), 1, 'COMMA', 2, 'POINT')}"> </td>-->
-<!--                            <td th:text="${flower.getHow_to_plant()}"></td>-->
-<!--                            <td th:text="${flower.getHow_to_take_care()}"></td>-->
-<!--                            <td th:text="${flower.getTime()}"></td>-->
-<!--                            <td th:text="${flower.getHow_to_harvest()}"></td>-->
-<!--                            <td><a th:href="@{'/flower/' + ${flower.getFID()}}">Edit</a></td>-->
-<!--                        </tr>-->
-<!--                        &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
-<!--                        </tbody>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <a th:href="@{/flower/create}" class="btn btn-primary">Add Flower</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 
-<table  class="table table-bordered table-striped table-hover">
-    <thead class="thead-dark">
-    <tr class="table-dark">
-        <th>ชื่อดอกไม้</th>
-        <th>วิธีปลูก</th>
-        <th>วิธีดูแล</th>
-        <th>ระยะเวลาของเมล็ด</th>
-        <th>ระยะเวลาของต้นอ่อน</th>
-        <th>ระยะเวลาของต้นกำลังโต</th>
-        <th>ระยะเวลาของต้นโตเต็มที่</th>
-        <th>ระยะเวลาของการเก็บเกี่ยว</th>
-        <th>รูปแบบการเก็บ</th>
-        <th>ราคา</th>
-        <th>จำนวนดอก</th>
-    </tr>
-    </thead>
 
-    <tbody>
-    <tr th:each="flower : ${flowers}">
-        <td th:text="${flower.FName}"></td>
-        <td th:text="${flower.how_to_plant}"></td>
-        <td th:text="${flower.how_to_take_care}"></td>
-        <td th:text="${flower.seedPeriod}"></td>
-        <td th:text="${flower.growingPeriod}"></td>
-        <td th:text="${flower.fullyGrownPeriod}"></td>
-        <td th:text="${flower.harvestPeriod}"></td>
-        <td th:text="${flower.how_to_harvest}"></td>
-        <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
-        <td th:text="${flower.quantity}"></td>
+        
 
-        <!--            <td style="text-align: center"> ทำเป็นปุ่มดู ไม่ก็แก้ไข-->
-        <!--                <a class="btn btn-primary"-->
-        <!--                   th:href="@{/menus/{id}(id=${menu.id})}">View</a>-->
-        <!--            </td>-->
-
-    </tr>
-    </tbody>
-</table>
-
+</div>
 </body>
 </html>

@@ -20,9 +20,11 @@ public class FlowerController {
         model.addAttribute("flower", new FlowerRequest());
         model.addAttribute("flowers", flowerService.getFlowers());
         // ใช้ FlowerService getAllFlowers
-//        model.addAttribute("options", flowerService.getFlowers());
+        int totalFlowers = flowerService.getTotalFlowerCount(); 
+        model.addAttribute("totalFlowers", totalFlowers); 
         return "flower";
     }
+
 
     @GetMapping("/flower{id}")
     public String showFlowerDetailPage(Model model, @PathVariable UUID id) {

@@ -22,7 +22,7 @@
                     </svg>
                 </label>
                 <span class="flex-1">
-                    <a class="btn btn-ghost normal-case text-xl">Mham's FLower</a>
+                    <a class="btn btn-ghost normal-case text-xl" th:href="@{/}">Mham's FLower</a>
                 </span>
                 <div class="ml-auto">
                     <button class="btn btn-square btn-ghost">
@@ -46,6 +46,7 @@
                 <div class="container py-10 mx-auto mt-36">
                     <!-- Sidebar content here -->
                     <li><a>gardener bar จ้า</a></li>
+                    <li><a th:href="@{/flower}">flower</a></li>
                     
                     <li><a class="btn bg-blue-300" th:href="@{/logout}">Log out</a></li>
                 </div>
