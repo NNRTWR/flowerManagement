@@ -8,169 +8,140 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <!--        side bar-->
-<!--        <div th:replace="~{fragments/sidebar :: sidebar}"></div>-->
-        <!--        Main content-->
-        <div class = "col">
-            <!--        search bar-->
-<!--            <div th:replace="~{fragments/searchbar :: searchbar}"></div>-->
-            <div class="row mt-4">
-                <div class="col-md-7">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Order No</th>
-                            <th>Flower Type</th>
-                            <th>Amount</th>
-                            <th>Plant Status</th>
-                            <th>Order Method</th>
-                        </tr>
-                        </thead>
-                        <tbody id="orderTable">
-                        <!-- Sample rows for demonstration -->
-                        <tr th:each="order : ${orders}">
-                            <td th:text="${order.OID}"></td>
-                            <td th:text="${order.flower.FName}"></td>
-                            <td th:text="${order.orderQuantity}"></td>
-                            <td th:text="${order.plant_status}"></td>
-                            <td th:text="${order.order_method}"></td>
-                            <!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">-->
-                            <!--                            </td>-->
-                        </tr>
-                        <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Order Form (Right) -->
-                <div class="col-md-5">
-                    <div class="order-form">
-                        <h6> รับ Order </h6>
-                        <form  th:action="@{/seller/order}" method="POST" th:object="${order}">
-                            <div class="mb-3">
-                                <label for="inputType">เลือกชนิดดอกใม้</label>
-                                <!--                                <input id="inputType" type="text" class="form-control"-->
-                                <!--                                       name="FID">-->
-                                <select class="form-control" id="inputType" name="FID" th:field="*{FID}" required>
-                                    <option value="0">select option</option>
-                                    <option th:each="option : ${options}" th:value="${option.getFID()}" th:text="${option.getFName()}"></option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="inputAmount">จำนวนดอกไม้</label>
-                                <input id="inputAmount" type="number" class="form-control"
-                                       name="amount" th:field="*{orderQuantity}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputOrderMethod">วิธีการสั่งซื้อ</label>
-                                <!--                                <input id="inputType" type="text" class="form-control"-->
-                                <!--                                       name="FID">-->
-                                <select class="form-control" id="inputOrderMethod" name="order_method" th:field="*{order_method}" required>
-                                    <option value="0">select option</option>
-                                    <option value="RETAIL" >ปลีก</option>
-                                    <option value="ORDER" >ออร์เดอร์</option>
-                                </select>
-                            </div>
-                            <button id="submit-button" class="main-button" type="submit" >ยืนยัน</button>
-                        </form>
-=======
 <div layout:fragment ="content">
-    <h1 class="text-2xl text-center">ข้อมูลดอกไม้ในระบบ</h1>
-    <table class='whitespace-normal rounded-lg bg-white divide-y divide-gray-300 overflow-y-auto mx-auto w-full md:w-5/6 lg:w-2/3'>
-        <thead class="bg-gray-900">
-            <tr class="text-white text-left">
-                <th colspan="8" class="border-b-2 border-white py-2">สี่เหลี่ยมผืนผ้าด้านบน</th>
-                <th class="font-semibold text-sm uppercase px-6 py-4"></th>
-            </tr>
-            <tr class="text-white text-left">
-                <th class="font-semibold text-sm uppercase px-6 py-4 text-center"> หมายเลขออเดอร์</th>
-                <th class="font-semibold text-sm uppercase px-6 py-4 text-center">ชนิดดอกไม้</th>
-                <th class="font-semibold text-sm uppercase px-6 py-4 text-center">จำนวนดอกไม้</th>
-                <th class="font-semibold text-sm uppercase px-6 py-4 text-center">ประเภทการสั่ง</th>
-                <th class="font-semibold text-sm uppercase px-6 py-4 text-center">สถานะออเดอร์</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-            <tr>
-                <td class="px-6 py-4">
-                    <div class="flex items-center space-x-3">
-                        <div>
-                            <p> P00075 </p>
-                        </div>
->>>>>>> 682f6a04681be03718ba14f67e02887c783d605f
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                    <p class=""> C0005 </p>
-                </td>
-                <td class="px-6 py-4">3,000,000.25</td>
-                <td class="px-6 py-4 text-center"> 
-                  <span class="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full"> ปลีก/span> 
-                </td>
-                <td class="px-6 py-4 text-center"> 
-                  <span class="text-white text-sm w-1/3 pb-1 bg-red-600 font-semibold px-2 rounded-full"> UNFinish</span> 
-                </td>
-            </tr>
-        </tbody>
-        <div class="divider divider-horizontal hidden"></div>
-      </table>
-      <div class="col-md-5">
-        <div class="order-form">
-            <h6> รับ Order </h6>
-            <form  th:action="@{/SELLER/order}" method="POST" th:object="${order}">
-                <div class="mb-3">
-                    <label for="inputType">เลือกชนิดดอกใม้</label>
-                    <!--                                <input id="inputType" type="text" class="form-control"-->
-                    <!--                                       name="FID">-->
-                    <select class="form-control" id="inputType" name="FID" th:field="*{FID}" required>
-                        <option value="0">select option</option>
-                        <option th:each="option : ${options}" th:value="${option.getFID()}" th:text="${option.getFName()}"></option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="inputAmount">จำนวนดอกไม้</label>
-                    <input id="inputAmount" type="number" class="form-control"
-                           name="amount" th:field="*{orderQuantity}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="inputOrderMethod">วิธีการสั่งซื้อ</label>
-                    <!--                                <input id="inputType" type="text" class="form-control"-->
-                    <!--                                       name="FID">-->
-                    <select class="form-control" id="inputOrderMethod" name="order_method" th:field="*{order_method}" required>
-                        <option value="0">select option</option>
-                        <option value="RETAIL" >ปลีก</option>
-                        <option value="ORDER" >ออร์เดอร์</option>
-                    </select>
-                </div>
-                <button id="submit-button" class="main-button" type="submit" >ยืนยัน</button>
-            </form>
+    <h1 class="text-3xl text-center font-bold">ออเดอร์</h1>
+    <div class="flex items-center justify-between mb-4 mt-6">
+        <div class="flex items-center">
+            <h1 class="text-2xl">จำนวนออเดอร์ทั้งหมด</h1>
+            <!-- <span class="text-2xl ml-10" th:text="${totalFlowers}"></span>  ดูใน flowerเอาได้ว่าทำยังไง-->
+            <span class="text-2xl ml-10">รายการ</span>
         </div>
-
-        <div class="order-form">
-            <h6> ยกเลิก Order </h6>
-            <form id="orderForm" th:action="@{/SELLER/order}" th:method="PUT">
-                <div class="mb-3">
-                    <label for="inputOID">เลือกหมายเลข Order</label>
-                    <input id="inputOID" type="number" class="form-control" name="OID"/>
+        <div class="flex space-x-2 items-center">
+            <button class="btn btn-success text-xl" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
+            <dialog id="my_modal_1" class="modal fixed right-0">
+              <div class="modal-box ml-60 h-3/4 w-4/5 mt-6">
+                <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                focus:ring-gray-200 focus:outline-none">
+                    <h3>เพิ่มออเดอร์</h3>
                 </div>
-                <div class="mb-3" th:if="${canceledOrder.getOID()}">
-                    <p>สรุปรายการ</p>
-                    <div>
-                        <p>หมายเลข order: <span th:text="${canceledOrder.getOID()}"></span></p>
-                        <p>ชนิดดอกใม้ : <span th:text="${canceledOrder.getFName()}"></span></p>
-                        <p>จำนวนดอกใม้ <span th:text="${canceledOrder.getOrderQuantity()}"></span> ดอก </p>
+                <form  th:action="@{/SELLER/order}" method="POST" th:object="${order}">
+                    <div class="mb-3 mt-6 mx-6 text-lg">
+                        <label for="inputType" class="my-5">เลือกชนิดดอกใม้</label>
+                        <!--                                <input id="inputType" type="text" class="form-control"-->
+                        <!--                                       name="FID">-->
+                        <select class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7" id="inputType" name="FID" th:field="*{FID}" required>
+                            <option value="0">กรุณาเลือกชนิดดอกไม้</option>
+                            <option th:each="option : ${options}" th:value="${option.getFID()}" th:text="${option.getFName()}"></option>
+                        </select>
                     </div>
+    
+                    <div class="mb-3 mt-6 mx-6 text-lg">
+                        <label for="inputAmount">จำนวนดอกไม้</label>
+                        <input id="inputAmount" type="number" class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7"
+                            name="amount" th:field="*{orderQuantity}" required>
+                    </div>
+                    <div class="mb-3 mt-6 mx-6 text-lg">
+                        <label for="inputOrderMethod">วิธีการสั่งซื้อ</label>
+                        <!--                                <input id="inputType" type="text" class="form-control"-->
+                        <!--                                       name="FID">-->
+                        <select class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7" id="inputOrderMethod" name="order_method" th:field="*{order_method}" required>
+                            <option value="0">กรุณาเลือกวิธีการสั่งซื้อ</option>
+                            <option value="RETAIL" >ปลีก</option>
+                            <option value="ORDER" >ออร์เดอร์</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-center mt-10">
+                        <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                        <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                    </div>
+                </form>
+            </dialog>  
+
+            <!-- ยกเลิกออเดอร์-->
+            <button class="btn btn-error text-xl" onclick="my_modal_2.showModal()">ยกเลิกออเดอร์</button>
+            <dialog id="my_modal_2" class="modal fixed right-0">
+              <div class="modal-box ml-60 h-3/4 w-4/5 mt-6">
+                <div class="flex justify-between items-center bg-red-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                focus:ring-gray-200 focus:outline-none">
+                    <h3>ยกเลิกออเดอร์</h3>
                 </div>
-                <button id="submit-update-button" class="main-button" type="submit" >ยืนยัน</button>
-            </form>
+                <form id="orderForm" th:action="@{/SELLER/order}" th:method="PUT">
+                    <div class="mb-3 mt-6 mx-6 text-lg">
+                        <label for="inputOID">เลือกหมายเลข Order</label>
+                        <input id="inputOID" type="number" class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7" name="OID"/>
+                    </div>
+                    <div class="mb-3 mt-6 mx-6 text-lg" th:if="${canceledOrder.getOID()}">
+                        <p>สรุปรายการ</p>
+                        <div>
+                            <p>หมายเลข order: <span th:text="${canceledOrder.getOID()}"></span></p>
+                            <p>ชนิดดอกใม้ : <span th:text="${canceledOrder.getFName()}"></span></p>
+                            <p>จำนวนดอกใม้ <span th:text="${canceledOrder.getOrderQuantity()}"></span> ดอก </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                        <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_2.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                    </div>
+                </form>
+            </dialog>  
         </div>
     </div>
 
+
+
+
+    <table class="table-fixedbg-white divide-y divide-gray-300 
+    overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 
+    lg:w-2/3 text-lg break-words bg-white" id="flower-table">
+    <thead class="bg-gray-900">
+        <tr class="text-white text-center">
+            <th class="font-semibold text-base uppercase px-6 py-10">วันที่ (ถ้าไม่เอาเอาออก)</th>
+            <th class="font-semibold text-base uppercase px-6 py-10">หมายเลขออเดอร์</th>
+            <th class="font-semibold text-base uppercase px-6 py-7">ชนิดดอกไม้</th>
+            <th class="font-semibold text-base uppercase px-6 py-7 whitespace-normal">จำนวนดอกไม้</th>
+            <th class="font-semibold text-base uppercase px-6 py-7">สถานะออเดอร์</th>
+            <th class="font-semibold text-base uppercase px-6 py-7 "></th>  <!--ไม่ใช้เอาออกได้-->
+        </tr>
+    </thead>
+        <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
+            <tr th:each="order : ${orders}">
+                <td class="px-6 py-4 truncate whitespace-normal" th:text="${order.OID}"></td>
+                <td class="px-6 py-4 truncate whitespace-normal" th:text="${order.flower.FName}"></td>
+                <td class="px-6 py-4 truncate whitespace-normal" th:text="${order.orderQuantity}"></td>
+                <td class="px-6 py-4 truncate whitespace-normal" th:text="${order.plant_status}"></td>
+                <td class="px-6 py-4 truncate whitespace-normal" th:text="${order.order_method}"></td>
+                <td class="px-6 py-4 truncate whitespace-normal" style="text-align: right" 
+                th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}"></td>
+            </tr>
+            
+        </tbody>     
+    </table> 
+    
+    <div class="join mt-12 fixed bottom-12">
+        <ul class="pagination flex space-x-2 items-center">
+            <!-- Previous button -->
+            <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
+                <a th:if="${currentPage > 0}" th:href="@{'/SELLER/order?page=' + ${currentPage - 1}}" class="btn">Previous</a>
+                <span th:unless="${currentPage > 0}" class="btn disabled">Previous</span>
+            </li>
+    
+            <!-- Numbered buttons and ellipsis -->
+            <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageNumber} ? 'active' : ''" class="join-item">
+                <a th:if="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}"
+                   th:href="@{'/SELLER/order?page=' + ${pageNumber}}"
+                   th:text="${pageNumber + 1}" class="btn"></a>
+                <span th:unless="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}" class="btn disabled">..</span>
+            </li>
+    
+            <!-- Next button -->
+            <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
+                <a th:if="${currentPage < totalPages - 1}" th:href="@{'/SELLER/order?page=' + ${currentPage + 1}}" class="btn">Next</a>
+                <span th:unless="${currentPage < totalPages - 1}" class="btn disabled">Next</span>
+            </li>
+        </ul>
+    </div>
+    
+    
     
     
 </div>

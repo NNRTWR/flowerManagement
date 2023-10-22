@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/main/resources/templates/*.{html,js}","./src/main/resources/templates/*/*.{html,js}","./src/main/resources/static/*/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        body:['Kanit', 'sans-serif']
+      }
+    },
   },
   // daisyui: {
   //   themes: [

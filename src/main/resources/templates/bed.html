@@ -1,119 +1,3 @@
-<<<<<<< HEAD
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8">
-  <title>Flower Management Web Application</title>
-  <link th:rel="stylesheet" th:href="@{/css/output.css}">
-</head>
-<body>
-<div layout:fragment="content">
-
-  <h1 class="text-5xl">แปลงดอกไม้</h1>
-  
-  <div class="flex w-full mt-6">
-    <!-- <div class="grid h-96 flex-grow card bg-gray-100 rounded-box place-items-center w-2/4  shadow-xl mr-10 ">
-      <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
-        <input type="hidden" name="PID" th:value="${i}" />
-        <button type="submit" th:text="'Button ' + ${i}"> BED </button>
-      </form>
-    </div> -->
-    <div class="divider divider-horizontal hidden"></div>
-
-    <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-y-auto'>
-      <thead class="bg-gray-900">
-          <tr class="text-white text-left">
-              <th class="font-semibold text-sm uppercase px-6 py-4"> เลขที่แปลง</th>
-              <th class="font-semibold text-sm uppercase px-6 py-4"> ชนิดดอกไม้ </th>
-              <th class="font-semibold text-sm uppercase px-6 py-4 text-center"> ช่วงวัย </th>
-              <th class="font-semibold text-sm uppercase px-6 py-4"> </th>
-          </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-          <tr>
-              <td class="px-6 py-4">
-                  <div class="flex items-center space-x-3">
-                      <div class="inline-flex w-10 h-10"> <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='https://i.imgur.com/siKnZP2.jpg' /> </div>
-                      <div>
-                          <p> Mira Rodeo </p>
-                          <p class="text-gray-500 text-sm font-semibold tracking-wide"> mirarodeo23@mail.com </p>
-                      </div>
-                  </div>
-              </td>
-              <td class="px-6 py-4">
-                  <p class=""> Software Developer </p>
-                  <p class="text-gray-500 text-sm font-semibold tracking-wide"> Development </p>
-              </td>
-              <td class="px-6 py-4 text-center"> <span class="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full"> Active </span> </td>
-
-              <td class="px-6 py-4 text-center"> <a href="#" class="text-purple-800 hover:underline">Edit</a> </td>
-          </tr>
-      </tbody>
-      <div class="divider divider-horizontal hidden"></div>
-  </table>
-    <!-- <div class="grid h-96 flex-grow card  bg-gray-100 rounded-box place-items-center w-1/4  shadow-xl">
-      <div class="min-h-screen py-5">
-        <div class='overflow-x-auto w-full'>
-            
-        </div>
-    </div> -->
-
-
-    <!-- <div class="grid h-96 flex-grow card bg-gray-100 rounded-box place-items-center w-2/4  shadow-xl mr-10 ">
-      <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
-        <input type="hidden" name="PID" th:value="${i}" />
-        <button type="submit" th:text="'Button ' + ${i}"> BED </button>
-      </form>
-    </div> -->
-      
-
-    <!-- <div class="grid h-96 flex-grow card bg-gray-100 rounded-box place-items-center w-2/4  shadow-xl mr-10 ">
-      <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
-        <input type="hidden" name="PID" th:value="${i}" />
-        <button type="submit" th:text="'Button ' + ${i}"> BED </button>
-      </form>
-    </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ดอกไม้ที่ปลูกในสวนตอนนี้
-      
-    </div>
-  </div>
-      
-
-  <div th:each="i : ${#numbers.sequence(1, 10)}">
-    <!-- <form th:action="@{/beds/{PID}(PID=${i})}" method="post">
-      <input type="hidden" name="PID" th:value="${i}" />
-      <button type="submit" th:text="'Button ' + ${i}"> BED </button>
-    </form> -->
-  </div>
-  <table>
-      <thead>
-      <tr>
-          <th>Flower Name</th>
-          <th>Number of Gardens</th>
-=======
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
@@ -128,18 +12,18 @@
 <div layout:fragment="content">
 <h1>ALL BED </h1>
 
-<!--<div th:each="num : ${#numbers.sequence(1, 10)}">-->
-<!--<div th:each="i : ${plantOrders}">-->
-<!--    <form th:action="${num == i.PID && i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${num})} : @{/beds/order/{PID}(PID=${num})}">-->
-<!--        <input type="hidden" name="PID" th:value="${num}" />-->
-<!--        <button type="submit" th:text="'Button ' + ${num}"> BED </button>-->
-<!--&lt;!&ndash;        <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>&ndash;&gt;-->
-<!--    </form>-->
-<!--</div>-->
-<!--</div>-->
+<div th:each="num : ${#numbers.sequence(1, 10)}">
+<div th:each="i : ${plantOrders}">
+   <form th:action="${num == i.PID && i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${num})} : @{/beds/order/{PID}(PID=${num})}">
+       <input type="hidden" name="PID" th:value="${num}" />
+       <button type="submit" th:text="'Button ' + ${num}"> BED </button>
+&lt;!&ndash;        <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>&ndash;&gt;
+   </form>
+</div>
+</div>
 
 
-<!-- <div th:each="i : ${plantOrders}">
+<div th:each="i : ${plantOrders}">
     <form th:action="${i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">
         <input type="hidden" name="PID" th:value="${i.PID}" />
         <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>
@@ -193,7 +77,6 @@
           <th>ชื่อดอกไม้</th>
           <th>จำนวนดอกไม้ที่ต้องการ</th>
           <th>สถานะ</th>
->>>>>>> 682f6a04681be03718ba14f67e02887c783d605f
       </tr>
       </thead>
 
@@ -205,49 +88,10 @@
           <td th:text="${order.status}"></td>
       </tr>
       </tbody>
-<<<<<<< HEAD
-  </table>
-  <table class="table table-bordered table-striped table-hover">
-      <thead>
-      <tr>
-          <th>Garden Number</th>
-          <th>Status</th>
-          <th>Flower Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="plantOrder : ${plantOrders}">
-          <td th:text="${plantOrder.PID}"></td>
-          <td th:text="${plantOrder.flowerStatus}"></td>
-          <td>
-              <span th:if="${plantOrder.flower != null}" th:text="${plantOrder.flower.FName}"></span>
-              <span th:unless="${plantOrder.flower != null}">N/A</span>
-          </td>
-          <td th:text="${plantOrder.flowerStatus}"></td>
-      </tr>
-      </tbody>
-  </table>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-
-  <h1>d</h1>
-  <h1>d</h1>
-  <h1>d</h1>
-
-=======
-  </table> -->
+  </table> 
 
 <!--=======-->
 <!--&gt;>>>>>> main-->
->>>>>>> 682f6a04681be03718ba14f67e02887c783d605f
 </div>
 </body>
 </html>

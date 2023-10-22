@@ -9,11 +9,12 @@
 </head>
 <body>
 <div layout:fragment ="content">
-    <h1 class="text-2xl text-center">ข้อมูลดอกไม้ในระบบ</h1>
-    <div class="flex items-center justify-between mb-4">
+    <h1 class="text-3xl text-center font-bold">ข้อมูลดอกไม้ในระบบ</h1>
+    <div class="flex items-center justify-between mb-4 mt-6">
         <div class="flex items-center">
             <h1 class="text-2xl">จำนวนดอกไม้ทั้งหมด</h1>
             <span class="text-2xl ml-10" th:text="${totalFlowers}"></span>
+            <span class="text-2xl ml-10">ชนิด</span>
         </div>
         
         <div class="flex space-x-2 items-center">

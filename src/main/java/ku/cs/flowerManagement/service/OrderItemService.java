@@ -10,6 +10,9 @@ import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,11 +46,14 @@ public class OrderItemService {
 //        }
         return orderFlowerRequests;
     }
-
     //ลองปรับ
     public List<OrderItem> getAllOrders() {
         List<OrderItem> orders = orderRepository.findAll();
         return orders;
+    }
+    public Page<OrderItem> getOrders(int page, int size) {   //สำหรับ pagination
+        Pageable pageable = PageRequest.of(page, size);
+        return orderRepository.findAll(pageable);
     }
 
 
