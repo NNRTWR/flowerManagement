@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+
+</head>
+<body>
+<div layout:fragment ="content">
+    <h1 class="text-3xl text-center font-bold">ยอดขาย</h1>
+    <div class="flex items-center justify-between mb-4 mt-6">
+        <div class="flex items-center">
+        </div>
+    </div>
+    <table class="table-fixedbg-white divide-y divide-gray-300 
+    overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-lg break-words bg-white " id="flower-table">
+        <thead class="bg-gray-900">
+            <tr class="text-white text-center">
+                <th class="font-semibold text-lg uppercase px-6 py-6">ชนิดดอกไม้</th>
+                <th class="font-semibold text-lg uppercase px-6 py-6">จำนวนดอกไม้ที่ขายได้ (ดอก)</th>
+                <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">ยอดเงินที่ได้ (บาท)</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
+            <!-- อันนี้ตย. หน้าดอกไม้-->
+            <!-- <tr th:each="flower : ${flowers}" class="whitespace-normal">
+                <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
+                <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
+                <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
+                <td class="px-6 py-4 truncate whitespace-normal"></td>
+                <td class="px-6 py-4 text-center truncate whitespace-normal">
+                    <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600 
+                font-semibold rounded-full text-xl p-3"></span>
+                </td>
+                <td class="px-6 py-4 text-center font-extrabold" th:href="@{/flower/{id}(id=${flower.FID})}"> 
+                    <a class="btn  bg-sky-400 text-xl text-gray-100">Detail</a> 
+                </td>
+        
+            </tr> -->
+            <tr class="whitespace-normal">
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                
+            </tr>
+            <tr class="whitespace-normal">
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+               
+            </tr>
+            <tr class="whitespace-normal">
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+               
+            </tr>
+            <tr class="whitespace-normal">
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+               
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <div class="bg-green-300 p-4 mt-14 px-5 py-4 rounded-lg text-right text-xl">
+        <span class="mr-5">ยอดเงินรวม</span>
+        <span class="">1234</span>
+        <span class="ml-2">บาท</span>
+    </div>
+    <!-- หน้าเลื่อนถ้าทำทันจะทำ ไม่ทันไม่ทำ -->
+    <!-- <div class="join mt-12 fixed bottom-12 ">
+        <ul class="pagination flex space-x-2 items-center">
+            
+            <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
+                <a th:if="${currentPage > 0}" th:href="@{'/flower?page=' + ${currentPage - 1} }" class="btn">Previous</a>
+                <span th:unless="${currentPage > 0}" class="btn disabled ">Previous</span>
+            </li>
+    
+            
+            <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageNumber} ? 'active' : ''" class="join-item">
+                <a th:if="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}"
+                   th:href="@{'/flower?page=' + ${pageNumber}}"
+                   th:text="${pageNumber + 1}" class="btn"></a>
+                <span th:unless="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}" class="btn disabled">..</span>
+            </li>
+    
+            
+            <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
+                <a th:if="${currentPage < totalPages - 1}" th:href="@{'/flower?page=' + ${currentPage + 1} }" class="btn">Next</a>
+                <span th:unless="${currentPage < totalPages - 1}" class="btn disabled">Next</span>
+            </li>
+        </ul>
+    </div> -->
+    
+</div>
+</body>
+</html>
