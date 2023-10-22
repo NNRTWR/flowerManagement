@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Flower Management Web Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/output.css}">
+  <!--     <script th:src="@{/js/bootstrap.min.js}"></script>-->
+</head>
+
+<body>
+
+
+<h1 class="display-6">All Flower</h1>
+
+<table  class="table table-bordered table-striped table-hover">
+  <thead class="thead-dark">
+  <tr class="table-dark">
+    <th>ชื่อดอกไม้</th>
+    <th>วิธีปลูก</th>
+    <th>วิธีดูแล</th>
+    <th>ระยะเวลาของเมล็ด</th>
+    <th>ระยะเวลาของต้นอ่อน</th>
+    <th>ระยะเวลาของต้นกำลังโต</th>
+    <th>ระยะเวลาของต้นโตเต็มที่</th>
+    <th>ระยะเวลาของการเก็บเกี่ยว</th>
+    <th>รูปแบบการเก็บ</th>
+    <th>ราคา</th>
+    <th>จำนวนดอก</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr th:each="flower : ${flowers}">
+    <td th:text="${flower.FName}"></td>
+    <td th:text="${flower.how_to_plant}"></td>
+    <td th:text="${flower.how_to_take_care}"></td>
+    <td th:text="${flower.seedPeriod}"></td>
+    <td th:text="${flower.growingPeriod}"></td>
+    <td th:text="${flower.fullyGrownPeriod}"></td>
+    <td th:text="${flower.harvestPeriod}"></td>
+    <td th:text="${flower.how_to_harvest}"></td>
+    <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
+    <td th:text="${flower.quantity}"></td>
+
+    <td style="text-align: center">
+      <input type="hidden" name="flowerID" th:value="${flower.id}" />
+      <form th:action="@{/beds/{PID}}">
+        <button type="submit" th:value="${flower.id}" name="flowerID">เลือก</button> <!-- กดเลือกดอกไม้ที่จะปลูก -->
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

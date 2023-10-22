@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+    <!-- <link th:rel="stylesheet" th:href=""> -->
+    <!-- <script th:src="@{/js/bootstrap.min.js}"></script> -->
+</head>
+<body>
+    <h1>All Stock</h1>
+<table  class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+    <tr class="table-dark">
+        <th>id</th>
+        <th>ดอกไม้</th>
+        <th>จำนวนดอกไม้ที่ stock</th>
+        <th>Plant order Id</th>
+        <th>Plant order จากแปลงปลูกไหน</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="stock : ${stocks}">
+        <td th:text="${stock.id}"></td>
+        <td th:text="${stock.plantOrder.flower.FName}"></td>
+        <td th:text="${stock.quantity}"></td>
+        <td th:text="${stock.plantOrder.id}"></td>
+        <td th:text="${stock.plantOrder.PID}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<h1>All Plant Order</h1>
+<table  class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+    <tr class="table-dark">
+        <th>วันที่สั่ง order</th>
+        <th>ชื่อดอกไม้</th>
+        <th>จำนวนดอกไม้ที่ต้องการ</th>
+        <!--            <th>จำนวนคงเหลือ</th>-->
+        <th>สถานะ</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="plantOrder : ${plantOrders}">
+        <td th:text="${plantOrder.timePlant}"></td>
+        <td th:text="${plantOrder.flower.FName}"></td>
+        <td th:text="${plantOrder.quantity}"></td>
+        <!--            <td th:text="${orderItem.total}"></td>-->
+        <td th:text="${plantOrder.flowerStatus}"></td>
+
+        <td style="text-align: center">
+            <form action="#" th:action="@{/stocks/create}" method="POST">
+                <button type="submit" th:value="${plantOrder.id}" name="plant_order_id">เลือก</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+</div>
+</body>
+</html>

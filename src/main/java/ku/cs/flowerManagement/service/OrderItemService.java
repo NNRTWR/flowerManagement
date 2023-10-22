@@ -64,14 +64,6 @@ public class OrderItemService {
         return orderFlowerRequest;
     }
 
-//    //ลองปรับ
-//    public OrderItem getOrderById(int id) {
-//        OrderItem orderFlower = orderRepository.findById(id).orElse(null);
-//        if (orderFlower == null) {
-//            throw new EntityNotFoundException();
-//        }
-//        return orderFlower;
-//    }
 
     // Create Order
     public void createOrder(OrderItemRequest orderFlowerRequest) {

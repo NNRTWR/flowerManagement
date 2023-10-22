@@ -2,7 +2,9 @@ package ku.cs.flowerManagement.controller;
 
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
+import ku.cs.flowerManagement.model.GardenerOrderRequest;
 import ku.cs.flowerManagement.model.OrderItemRequest;
+import ku.cs.flowerManagement.service.CommonService;
 import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.GardenerOrderService;
 import ku.cs.flowerManagement.service.OrderItemService;
@@ -28,10 +30,11 @@ public class GardenerOrderController {
     @Autowired
     private DateTimeComparator dateTimeComparator;
 
+
     @GetMapping
     
     public String getAllOrder(@PathVariable String role, Model model){
-        model.addAttribute("orderItems", gardenerOrderService.getAllOrderItem(dateTimeComparator));
+        model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         return "/gardener/gardener-order-all";
     }
 
@@ -42,9 +45,16 @@ public class GardenerOrderController {
     }
 
     @PostMapping("/add")
+<<<<<<< HEAD
     public String addOrder(@ModelAttribute OrderItemRequest orderItem, Model model){
         gardenerOrderService.addOrder(orderItem);
         model.addAttribute("orderItems", gardenerOrderService.getAllOrderItem(dateTimeComparator));
         return "redirect:/gardener/orders";
+=======
+    public String addOrder(@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
+        gardenerOrderService.addOrder(gardenerOrder);
+        model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
+        return "redirect:/{role}/orders";
+>>>>>>> 682f6a04681be03718ba14f67e02887c783d605f
     }
 }
