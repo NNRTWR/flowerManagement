@@ -10,11 +10,11 @@
 </head>
 <body>
     <!-- sidebar หลังกดปิด -->
-    <div class="drawer" th:fragment="gardenerSidebar">
+    <div class="drawer relative" th:fragment="gardenerSidebar">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" checked />
-        <div class="drawer-content z-10 fixed h-screen">
+        <div id="nav" class="drawer-content fixed h-screen">
             <!-- Content here -->
-            <div class="drawer-content navbar bg-green-500 flex items-center fixed">
+            <div class="drawer-content navbar bg-green-500 flex items-center fixed p-3">
                 <!-- Header content here -->
                 <label for="my-drawer" class="btn btn-ghost drawer-button pl-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
@@ -35,18 +35,13 @@
             </div>
         </div>
         <!-- content ใน sidebar -->
-        <div class="drawer-side z-10">
+        <div id="side" class="drawer-side mt-16">
             <label for="my-drawer" aria-label="open sidebar"></label>
             <!-- Sidebar content here -->
             <ul class="menu menu-lg flex flex-col p-4 w-64 min-h-full bg-zinc-800 text-base-content text-gray-100">
-                <div class="flex items-center mb-4">
-                    <label for="my-drawer" class="btn btn-ghost drawer-button pl-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </label>
+                <!-- <div class="flex items-center mb-4">
                     <a class="btn btn-ghost normal-case text-xl ml-2">daisyUI</a>
-                </div>
+                </div> -->
     
                 <div class="container py-10 mx-auto mt-36">
                     <!-- Sidebar content here -->

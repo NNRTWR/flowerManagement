@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
 <head>
     <meta charset="UTF-8">
     <title>Flower Management Web Application</title>
@@ -8,14 +7,14 @@
     <script th:src="@{/js/mainLayout.js}"></script>
 </head>
 
-<body class="flex flex-col h-full overflow-y-auto bg-gray-100">
+<body class="flex flex-col h-screen overflow-y-auto bg-gray-100">
     <div sec:authorize="isAuthenticated() and hasAuthority('SELLER')" class="w-64 flex-shrink-0">
         <div th:replace="~{fragments/sellerSidebar::sellerSidebar}"></div>
     </div>
     <div sec:authorize="isAuthenticated() and hasAuthority('GARDENER')" class="w-64 flex-shrink-0">
         <div th:replace="~{fragments/gardenerSidebar::gardenerSidebar}"></div>
     </div>
-    <main id="content-layout" class="antialiased flex-1 flex-col flex-shrink-0 min-h-screen p-20">
+    <main id="content-layout" class="antialiased flex-1 flex-col flex-shrink-0 h-screen p-20 m-16 bg-red-500">
         <div layout:fragment="content"></div>
     </main>
 </body>
