@@ -45,16 +45,9 @@ public class GardenerOrderController {
     }
 
     @PostMapping("/add")
-<<<<<<< HEAD
-    public String addOrder(@ModelAttribute OrderItemRequest orderItem, Model model){
-        gardenerOrderService.addOrder(orderItem);
-        model.addAttribute("orderItems", gardenerOrderService.getAllOrderItem(dateTimeComparator));
-        return "redirect:/gardener/orders";
-=======
     public String addOrder(@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
         gardenerOrderService.addOrder(gardenerOrder);
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         return "redirect:/{role}/orders";
->>>>>>> 682f6a04681be03718ba14f67e02887c783d605f
     }
 }
