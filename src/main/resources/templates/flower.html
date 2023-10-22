@@ -18,8 +18,85 @@
         </div>
         
         <div class="flex space-x-2 items-center">
-            
-            <a class="btn btn-primary" th:href="@{/flower/create}">เพิ่มข้อมูลดอกไม้</a>
+            <button class="btn btn-success text-xl" onclick="my_modal_3.showModal()">เพิ่มข้อมูลดอกไม้</button>
+            <dialog id="my_modal_3" class="modal fixed right-0">
+                <div class="modal-box ml-60 h-3/4 w-4/5 mt-6">
+                  <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                  focus:ring-gray-200 focus:outline-none">
+                      <h3>เพิ่มออเดอร์</h3>
+                  </div>
+                  <form th:action="@{/flower}" method="POST">
+                    <div class="mb-3">
+                        <label for="inputName">Name</label>
+                        <input id="inputName" type="input" class="form-control"
+                               name="FName">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputHow_to_plant">How to plant</label>
+                        <input id="inputHow_to_plant" type="input" class="form-control"
+                               name="how_to_plant">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputHow_to_take_care">How to take care</label>
+                        <input id="inputHow_to_take_care" type="input" class="form-control"
+                               name="how_to_take_care">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputseedPeriod">seed Period</label>
+                        <input id="inputseedPeriod" type="input" class="form-control"
+                               name="seedPeriod">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputsproutPeriod">sproutPeriod</label>
+                        <input id="inputsproutPeriod" type="input" class="form-control"
+                               name="sproutPeriod">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputgrowingPeriod">growingPeriod</label>
+                        <input id="inputgrowingPeriod" type="input" class="form-control"
+                               name="growingPeriod">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputfullyGrownPeriod">fullyGrownPeriod</label>
+                        <input id="inputfullyGrownPeriod" type="input" class="form-control"
+                               name="fullyGrownPeriod">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputharvestPeriod">harvestPeriod</label>
+                        <input id="inputharvestPeriod" type="input" class="form-control"
+                               name="harvestPeriod">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputHow_to_harvest">How to harvest</label>
+                        <input id="inputHow_to_harvest" type="input" class="form-control"
+                               name="how_to_harvest">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputPrice">Price</label>
+                        <input id="inputPrice" type="input" class="form-control"
+                               name="price">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="inputQuantity">Quantity</label>
+                        <input id="inputQuantity" type="input" class="form-control"
+                               name="quantity">
+                    </div>
+                      <div class="flex justify-center mt-10">
+                          <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                          <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_3.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                      </div>
+                  </form>
+              </dialog>  
         </div>
     </div>
     <table class="table-fixedbg-white divide-y divide-gray-300 
@@ -77,7 +154,6 @@
             </li>
         </ul>
     </div>
-    
     
 </div>
 </body>

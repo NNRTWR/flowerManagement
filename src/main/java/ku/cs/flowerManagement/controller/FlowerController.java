@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
+@RequestMapping("/flower")
 @Controller
 public class FlowerController {
 
     @Autowired
     private FlowerService flowerService;
 
-    @GetMapping("/flower")
+    @GetMapping //("/flower")
     // public String showFlowerPage(Model model) {
     //     model.addAttribute("flower", new FlowerRequest());
     //     model.addAttribute("flowers", flowerService.getFlowers());
@@ -51,13 +52,13 @@ public class FlowerController {
         return "flower-detail";
     }
 
-    @GetMapping("/flower/create")
-    public String showFlowerDetailPageCreate(Model model) {
-        model.addAttribute("flowers",flowerService.getAllFlower());
-//        model.addAttribute("flower", new FlowerRequest());
-//        model.addAttribute("method", "POST");
-        return "flower-detail";
-    }
+//     @GetMapping("/flower/create")
+//     public String showFlowerDetailPageCreate(Model model) {
+//         model.addAttribute("flowers",flowerService.getAllFlower());
+// //        model.addAttribute("flower", new FlowerRequest());
+// //        model.addAttribute("method", "POST");
+//         return "flower-detail";
+//     }
 
 //    @PostMapping("/flower")
 //    public String createFlower(@ModelAttribute FlowerRequest flower) {
@@ -65,7 +66,7 @@ public class FlowerController {
 //        return "redirect:/flower";
 //    }
 
-    @PostMapping("/flower/create")
+    @PostMapping //("/flower/create")
     public String createFlower(@ModelAttribute FlowerRequest flower) {
         flowerService.addFlower(flower);
         return "redirect:/flower";
