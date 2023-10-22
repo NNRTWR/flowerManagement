@@ -67,9 +67,9 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
 
     @PostMapping("/{PID}")
     public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest,Model model){
-        plantOrderService.plantWasDied(plantOrderRequest);
-        plantOrderService.harvest(plantOrderRequest);
-        return "redirect:/beds";
+        //plantOrderService.harvest(plantOrderRequest);
+        //plantOrderService.plantWasDied(plantOrderRequest);
+        return "bed-view";
     }
     //planting zone
     @GetMapping("/order/{PID}")
