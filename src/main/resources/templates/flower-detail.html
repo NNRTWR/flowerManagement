@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Flower Detail</title>
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+    <!-- <link th:rel="stylesheet" th:href=""> -->
+    <!-- <script th:src="@{/js/bootstrap.min.js}"></script> -->
 </head>
 <body>
+<div layout:fragment="content">
 <h1>เพิ่มดอกไม้</h1>
 <!--<form th:if="${flower.flower.getId()}" th:action="@{'/flower/' + ${flower.getId()}}" th:method="PUT" th:object="${flower}" >-->
 <!--    <form th:if="${flower.flower.getId()}" th:action="@{'/flower/' + ${flower.getId()}}" th:method="PUT" th:object="${flower}" >-->

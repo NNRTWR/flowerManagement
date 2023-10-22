@@ -1,45 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Bed</title>
-  <link th:rel="stylesheet" th:href="@{static}">
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+
 </head>
 <body>
-
-<h1>ALL Gardener Order</h1>
-
-
-
-  <table>
-    <thead>
-    <tr>
-      <th>ชื่อดอกไม้</th>
-      <th>จำนวนดอกไม้ที่ต้องการ</th>
-      <!--        <th>จำนวนคงเหลือ</th>-->
-      <th>สถานะ</th>
-    </tr>
+<div layout:fragment ="content">
+  <h1 class="text-3xl text-center font-bold">All garden order</h1>
+  <div class="flex items-center justify-between mb-4 mt-6">
+        <div class="flex items-center">
+            <h1 class="text-2xl">จำนวนออเดอร์ทั้งหมด</h1>
+            <!-- <span class="text-2xl ml-10" th:text="${totalFlowers}"></span>  ดูใน flowerเอาได้ว่าทำยังไง-->
+            <span class="text-2xl ml-10">รายการ</span>
+        </div>
+        
+          <div class="flex space-x-2 items-center">
+            <button class="btn btn-success text-xl" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
+            <dialog id="my_modal_1" class="modal fixed right-0">
+              <div class="modal-box ml-60 h-3/4 w-4/5 mt-6">
+                <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                focus:ring-gray-200 focus:outline-none">
+                    <h3>เพิ่มออเดอร์</h3>
+                </div>
+                <form th:action="@{/gardener/orders}" method="POST">
+                  <div>
+                    <label for="inputFlowerID">Name</label>
+                    <select class="form-control" id="inputFlowerID" name="flowerID">
+                      <option th:each="flower : ${flowers}"
+                              th:value="${flower.id}" th:text="${flower.FName}">
+                      </option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="inputQuantity">Quantity</label>
+                    <input id="inputQuantity" type="input" class="form-control"
+                           name="quantity">
+                  </div>
+                  <div class="flex justify-center mt-10">
+                    <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                    <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                  </div>
+                </form> 
+            </dialog>  
+        </div>
+  </div>      
+  <table class="table-fixedbg-white divide-y divide-gray-300 
+    overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 
+    lg:w-2/3 text-lg break-words bg-white" id="flower-table">
+    <thead class="bg-gray-900">
+        <tr class="text-white text-center">
+            <th class="font-semibold text-lg uppercase px-6 py-6">ชื่อดอกไม้</th>    
+            <th class="font-semibold text-lg uppercase px-6 py-6">จำนวนดอกไม้ที่ต้องการ</th>
+            <th class="font-semibold text-lg uppercase px-6 py-6">สถานะ</th>
+            <th class="font-semibold text-lg uppercase px-6 py-6"></th>
+        </tr>
     </thead>
-
-    <tbody>
-    <tr th:each="orderItem : ${orderItems}">
-      <td th:text="${orderItem.flower.FName}"></td>
-      <td th:text="${orderItem.quantity}"></td>
-      <!--        <td th:text="${orderItem.total}"></td> -->
-      <td th:text="${orderItem.status}"></td>
-
-      <td style="text-align: center">
-        <form th:action="@{/}" formmethod="GET">
-          <button type="submit">ปุ่มไรไม่รู้</button> <!-- กดเลือก order -->
-        </form>
-      </td>
-
-    </tr>
-    </tbody>
-
-  </table>
-
+        <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
+          <tr th:each="orderItem : ${orderItems}">
+            <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
+            <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
+            <!--        <td th:text="${orderItem.total}"></td> -->
+            <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.status}"></td>
+      
+            <td style="text-align: center">
+              <form th:action="@{/}" formmethod="GET">
+                <button type="submit">ปุ่มไรไม่รู้</button> <!-- กดเลือก order -->
+              </form>
+            </td>
+          </tr>
+            
+           
+        </tbody>     
+    </table> 
 
 
+
+
+
+</div>
 </body>
 </html>

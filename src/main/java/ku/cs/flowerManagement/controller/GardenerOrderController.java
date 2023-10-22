@@ -35,19 +35,20 @@ public class GardenerOrderController {
     
     public String getAllOrder(@PathVariable String role, Model model){
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
+        model.addAttribute("flowers", flowerService.getAllFlower()); // ย้ายมา
         return "/gardener/gardener-order-all";
     }
 
-    @GetMapping("/form")
-    public String getOrderForm(Model model){
-        model.addAttribute("flowers", flowerService.getAllFlower());
-        return "/gardener/gardener-order-form";
-    }
+    // @GetMapping("/form")
+    // public String getOrderForm(Model model){
+    //     model.addAttribute("flowers", flowerService.getAllFlower());
+    //     return "redirect:/gardener/orders/";
+    // }
 
-    @PostMapping("/add")
+    @PostMapping //("/add")
     public String addOrder(@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
         gardenerOrderService.addOrder(gardenerOrder);
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
-        return "redirect:/{role}/orders";
+        return "redirect:/gardener/orders";
     }
 }
