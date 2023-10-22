@@ -3366,9 +3366,9 @@ details.collapse summary::-webkit-details-marker{
   padding-bottom: 1rem;
 }
 
-.py-7{
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
+.py-6{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .py-8{
@@ -3409,11 +3409,6 @@ details.collapse summary::-webkit-details-marker{
 .text-5xl{
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-base{
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 
 .text-lg{

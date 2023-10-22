@@ -95,12 +95,12 @@
     lg:w-2/3 text-lg break-words bg-white" id="flower-table">
     <thead class="bg-gray-900">
         <tr class="text-white text-center">
-            <th class="font-semibold text-base uppercase px-6 py-10">วันที่ (ถ้าไม่เอาเอาออก)</th>
-            <th class="font-semibold text-base uppercase px-6 py-10">หมายเลขออเดอร์</th>
-            <th class="font-semibold text-base uppercase px-6 py-7">ชนิดดอกไม้</th>
-            <th class="font-semibold text-base uppercase px-6 py-7 whitespace-normal">จำนวนดอกไม้</th>
-            <th class="font-semibold text-base uppercase px-6 py-7">สถานะออเดอร์</th>
-            <th class="font-semibold text-base uppercase px-6 py-7 "></th>  <!--ไม่ใช้เอาออกได้-->
+            <th class="font-semibold text-lg uppercase px-6 py-8">วันที่ (ถ้าไม่เอาเอาออก)</th>    
+            <th class="font-semibold text-lg uppercase px-6 py-8">หมายเลขออเดอร์</th>
+            <th class="font-semibold text-lg uppercase px-6 py-8">ชนิดดอกไม้</th>
+            <th class="font-semibold text-lg uppercase px-6 py-8">จำนวนดอกไม้</th>
+            <th class="font-semibold text-lg uppercase px-6 py-8">สถานะออเดอร์</th>
+            <th class="font-semibold text-lg uppercase px-6 py-8"></th>  <!--ไม่ใช้เอาออกได้-->
         </tr>
     </thead>
         <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
@@ -113,7 +113,13 @@
                 <td class="px-6 py-4 truncate whitespace-normal" style="text-align: right" 
                 th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}"></td>
             </tr>
-            
+            <tr class="whitespace-normal">
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
+                <td class="px-6 py-6 truncate whitespace-normal">ทานตะวัน คิคิคิคิ</td>
+                <td class="px-6 py-6 truncate whitespace-normal">ทานตะวัน คิคิคิคิ</td>
+            </tr>
+           
         </tbody>     
     </table> 
     
