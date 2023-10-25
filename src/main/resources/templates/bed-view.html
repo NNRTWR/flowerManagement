@@ -49,6 +49,12 @@
 <!--        <td th:text="$plantOrder.flower.how_to_harvest}"></td>-->
         <td style="text-align: right" th:text="${#numbers.formatDecimal(plantOrder.flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
         <td th:text="${plantOrder.flowerStatus}"></td>
+
+
+<!--        ลองทำมาใช้เฉยๆ-->
+<!--        <form action="#" th:action="@{/beds/{PID}(PID=${PID})}" method="POST">-->
+<!--            <button type="submit" th:value="${plantOrder.id}" name="plantID">เก็บเกี่ยว</button>-->
+<!--        </form>-->
     </tr>
     </tbody>
 </table>

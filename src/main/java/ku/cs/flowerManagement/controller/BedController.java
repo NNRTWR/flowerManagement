@@ -1,11 +1,8 @@
 package ku.cs.flowerManagement.controller;
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
-import ku.cs.flowerManagement.entity.Flower;
-import ku.cs.flowerManagement.entity.OrderItem;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
-import ku.cs.flowerManagement.model.fRequest;
 import ku.cs.flowerManagement.model.gRequest;
 import ku.cs.flowerManagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -45,10 +43,9 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         LocalDateTime now = commonService.getCurrentTime();
         model.addAttribute("orders",gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงทุกรอบการปลูกไปให้
-        // for (PlantOrder plantOrder:plantOrderService.getAllPlantOrder()) {
-        //     System.out.println(plantOrder.getId()+"  " +plantOrder.getTimePlant() + "  " + plantOrder.getFlowerStatus());
-        // }
-//        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER) ,bottom table(order table)
+
+        Map<Integer, PlantOrder> listPID = plantOrderService.getAllPIDWithPlantOrder();
+        model.addAttribute("listPID", listPID);
         model.addAttribute("time",now);//show time
         model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());//overall table
         return "bed";
@@ -57,25 +54,24 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     //dead-harvest-detail
     @GetMapping("/{PID}")
     public String detailOfPlantOrder(@PathVariable int PID,Model model){
-        System.out.println("detailOfPlantOrder แปลงที่: "+ PID);
-        List<PlantOrder> plantOrders = plantOrderService.getAllPlantOrderButNoStockByPID(PID);
+        List<PlantOrder> plantOrders = plantOrderService.getAllPlantOrderButNoHarvestedByPID(PID);
         model.addAttribute("plantOrders", plantOrders);
-        //        PlantOrder plantOrder = plantOrderService.findByPID(PID);
-//        model.addAttribute("plantOrder", plantOrder);
-        return "bed-view"; //ไปปลูก //ไปดูข้อมูลรึเปล่า
+        return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 
     @PostMapping("/{PID}")
     public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest,Model model){
-        //plantOrderService.harvest(plantOrderRequest);
-        //plantOrderService.plantWasDied(plantOrderRequest);
-        return "bed-view";
+        plantOrderService.harvest(plantOrderRequest);
+        plantOrderService.plantWasDied(plantOrderRequest);
+        return "redirect:/beds/{PID}";
     }
+
     //planting zone
     @GetMapping("/order/{PID}")
     public String showOrder(@PathVariable int PID,Model model){
         model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
         model.addAttribute("PID",PID);
+        plantOrderService.currentPID = PID;
         return "bed-plant";
     }
     //chose order

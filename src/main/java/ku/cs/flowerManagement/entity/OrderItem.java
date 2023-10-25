@@ -32,6 +32,7 @@ public class OrderItem {
 
     @CreationTimestamp
     private LocalDateTime date;
+
     @OneToMany(mappedBy = "order") // JPA join ให้
     private List<Allocate> listAllocate;
 

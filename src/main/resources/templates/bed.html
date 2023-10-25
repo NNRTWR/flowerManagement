@@ -21,101 +21,193 @@
                     <div class="flex my-4 max-w-full">
                         <span class=" mx-3">
                             <img src="/image/6-harvestPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3" name="PID" th:value="${listPID.get(1).PID}" th:action="${listPID.get(1).flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(1) == null || listPID.get(1).getTotal == 0 } ? @{/beds/order/{PID}(PID=${1})} :  @{/beds/{PID}(PID=${1})}">
+<!--                                <input type="hidden" name="PID" th:value="${1}" />-->
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง1
+                                </button>
+                            </form>
+
                         </span>
                         <span class=" mx-3">
                             <img src="/image/2-seedPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(2) == null || listPID.get(2).getTotal == 0 } ? @{/beds/order/{PID}(PID=${2})} :  @{/beds/{PID}(PID=${2})}">
+<!--                                <input type="hidden" name="PID" th:value="${2}" />-->
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง2
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/3-sproutPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(3) == null || listPID.get(3).getTotal == 0 } ? @{/beds/order/{PID}(PID=${3})} :  @{/beds/{PID}(PID=${3})}">
+<!--                                <input type="hidden" name="PID" th:value="${3}" />-->
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง3
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/4-growingPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(4) == null || listPID.get(4).getTotal == 0 } ? @{/beds/order/{PID}(PID=${4})} :  @{/beds/{PID}(PID=${4})}">
+                                <input type="hidden" name="PID" th:value="${4}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง4
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/5-fullyGrownPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+
+                            <form th:action="${listPID.get(5) == null || listPID.get(5).getTotal == 0 } ? @{/beds/order/{PID}(PID=${5})} :  @{/beds/{PID}(PID=${5})}">
+                                <input type="hidden" name="PID" th:value="${5}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง5
+                                </button>
+                            </form>
                         </span>
                     </div>
                     <div class="flex my-4 max-w-full">
                         <span class=" mx-3">
                             <img src="/image/1-pot.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(6) == null || listPID.get(6).getTotal == 0 } ? @{/beds/order/{PID}(PID=${6})} :  @{/beds/{PID}(PID=${6})}">
+                                <input type="hidden" name="PID" th:value="${6}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง6
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/2-seedPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(7) == null || listPID.get(7).getTotal == 0 } ? @{/beds/order/{PID}(PID=${7})} :  @{/beds/{PID}(PID=${7})}">
+                                <input type="hidden" name="PID" th:value="${7}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง7
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/3-sproutPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(8) == null || listPID.get(8).getTotal == 0 } ? @{/beds/order/{PID}(PID=${8})} :  @{/beds/{PID}(PID=${8})}">
+                                <input type="hidden" name="PID" th:value="${8}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง8
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/4-growingPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(9) == null || listPID.get(9).getTotal == 0 } ? @{/beds/order/{PID}(PID=${9})} :  @{/beds/{PID}(PID=${9})}">
+                                <input type="hidden" name="PID" th:value="${9}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง9
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/5-fullyGrownPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(10) == null || listPID.get(10).getTotal == 0 } ? @{/beds/order/{PID}(PID=${10})} :  @{/beds/{PID}(PID=${10})}">
+                                <input type="hidden" name="PID" th:value="${10}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง10
+                                </button>
+                            </form>
                         </span>
                     </div>
                     <div class="flex my-4 max-w-full">
                         <span class=" mx-3">
                             <img src="/image/6-harvestPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(11) == null || listPID.get(11).getTotal == 0 } ? @{/beds/order/{PID}(PID=${11})} :  @{/beds/{PID}(PID=${11})}">
+                                <input type="hidden" name="PID" th:value="${10}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง11
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/2-seedPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(12) == null || listPID.get(12).getTotal == 0 } ? @{/beds/order/{PID}(PID=${12})} :  @{/beds/{PID}(PID=${12})}">
+                                <input type="hidden" name="PID" th:value="${12}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง12
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/3-sproutPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(13) == null || listPID.get(13).getTotal == 0 } ? @{/beds/order/{PID}(PID=${13})} :  @{/beds/{PID}(PID=${13})}">
+                                <input type="hidden" name="PID" th:value="${13}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง13
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/1-pot.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(14) == null || listPID.get(14).getTotal == 0 } ? @{/beds/order/{PID}(PID=${14})} :  @{/beds/{PID}(PID=${14})}">
+                                <input type="hidden" name="PID" th:value="${14}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง14
+                                </button>
+                            </form>
                         </span>
                         <span class=" mx-3">
                             <img src="/image/5-fullyGrownPeriod.svg" class="w-28 h-28 object-cover" alt="Pot Image">
-                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
-                                แปลง1
-                            </div>
+<!--                            <div class="bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">-->
+<!--                                แปลง1-->
+<!--                            </div>-->
+                            <form th:action="${listPID.get(15) == null || listPID.get(15).getTotal == 0 } ? @{/beds/order/{PID}(PID=${15})} :  @{/beds/{PID}(PID=${15})}">
+                                <input type="hidden" name="PID" th:value="${15}" />
+                                <button type="submit" class="btn bg-sky-400 text-white font-bold rounded-lg text-center text-xl py-2 mt-3">
+                                    แปลง15
+                                </button>
+                            </form>
                         </span>
                     </div>
-                    
-                    
+
+
                 <!-- ตารางดอกไม้ -->
                 </div>
                 <div class="divider divider-horizontal mx-8"></div>
@@ -212,30 +304,6 @@
 
 
 
-
-
-
-
-
-
-<div th:each="num : ${#numbers.sequence(1, 10)}">
-    <div th:each="i : ${plantOrders}">
-        <form th:action="${num == i.PID && i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${num})} : @{/beds/order/{PID}(PID=${num})}">
-            <input type="hidden" name="PID" th:value="${num}" />
-                <button type="submit" th:text="'Button ' + ${num}"> BED </button>&lt;!&ndash;        
-                <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>&ndash;&gt;
-        </form>
-    </div>
-</div>
-
-
-<div th:each="i : ${plantOrders}">
-    <form th:action="${i.flowerStatus != T(ku.cs.flowerManagement.common.FlowerStatus).DEAD} ? @{/beds/{PID}(PID=${i.PID})} : @{/beds/order/{PID}(PID=${i.PID})}">
-        <input type="hidden" name="PID" th:value="${i.PID}" />
-        <button type="submit" th:text="'Button ' + ${i.PID}"> BED </button>
-    </form>
-</div>
-
 <!-- 
 <table>
     <thead>
@@ -277,6 +345,7 @@
 
   
 <!--=======-->
+</div>
 </div>
 </body>
 </html>

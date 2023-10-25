@@ -1,10 +1,7 @@
 package ku.cs.flowerManagement.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -24,6 +21,6 @@ public class Stock {
     private LocalDateTime time; //วันที่
     private int quantity; //จำนวนดอกไม้
 
-    @OneToOne
+    @ManyToOne
     private PlantOrder plantOrder;
 }

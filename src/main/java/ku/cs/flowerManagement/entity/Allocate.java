@@ -21,5 +21,5 @@ public class Allocate {
     private Date time; //วันที่
 
     @ManyToOne
-    private OrderItem order; //จะรู้ว่าเป็นดอกอะไรด้วย
+    private OrderItem order;
 }

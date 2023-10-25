@@ -5,6 +5,7 @@ import ku.cs.flowerManagement.common.FlowerStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -30,8 +31,9 @@ public class PlantOrder {
 
     private FlowerStatus flowerStatus; //ปลูกไปได้ระยะไหนแล้ว
 
-    @OneToOne
-    private Stock stock; //คำสั่งปลูกอันนี้ คือ stock อันไหน (ถ้ามี = เก็บเกี่ยวแล้ว)
+    @OneToMany(mappedBy = "plantOrder")
+    private List<Stock> listStock; //คำสั่งปลูกอันนี้ ถูกเก็บเป็น stock อันไหนบ้าง
+
     private int harvestable; //can harvest n times n-1 everytime
 
 }
