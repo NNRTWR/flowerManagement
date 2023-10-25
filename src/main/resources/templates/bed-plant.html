@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Flower Management Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/output.css}">
-<!--     <script th:src="@{/js/bootstrap.min.js}"></script>-->
+    <!-- <link th:rel="stylesheet" th:href=""> -->
 </head>
 <body>
+    <div layout:fragment="content">
     <h1 th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
     <h1>All Gardener Order</h1>
     <table  class="table table-bordered table-striped table-hover">
@@ -40,7 +41,7 @@
     </table>
 
 
-
+</div>
 </body>
 </html>
 
