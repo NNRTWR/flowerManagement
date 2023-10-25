@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/{role}/order")
+@RequestMapping("/seller/order")
 
 public class OrderController {
 
@@ -38,7 +38,11 @@ public class OrderController {
     //     return "/seller/order";
     // }
 
-    private String showOrderPage(@PathVariable String role, 
+    // private String showOrderPage(@PathVariable String role, 
+    //                              @RequestParam(defaultValue = "0") int page, 
+    //                              @RequestParam(name = "id", defaultValue = "0") int id, 
+    //                              Model model)
+    private String showOrderPage( 
                                  @RequestParam(defaultValue = "0") int page, 
                                  @RequestParam(name = "id", defaultValue = "0") int id, 
                                  Model model) {
@@ -65,7 +69,8 @@ public class OrderController {
     }
 
     @PostMapping //("/{role}/order")
-    public String createOrder(@PathVariable String role, @ModelAttribute OrderItemRequest orderFlower, Model model) {
+    //  public String createOrder(@PathVariable String role, @ModelAttribute OrderItemRequest orderFlower, Model model)
+    public String createOrder(@ModelAttribute OrderItemRequest orderFlower, Model model) {
         System.out.println(orderFlower);
         orderFlower.setFlowerPrice(orderFlower.getFlowerPrice() * orderFlower.getOrderQuantity());
         orderService.createOrder(orderFlower);

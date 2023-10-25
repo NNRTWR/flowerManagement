@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/{role}/orders")
+@RequestMapping("/gardener/orders")
 public class GardenerOrderController {
     @Autowired
     private GardenerOrderService gardenerOrderService;
@@ -32,8 +32,9 @@ public class GardenerOrderController {
 
 
     @GetMapping
+    // public String getAllOrder(@PathVariable String role, Model model)
     
-    public String getAllOrder(@PathVariable String role, Model model){
+    public String getAllOrder( Model model){
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         model.addAttribute("flowers", flowerService.getAllFlower()); // ย้ายมา
         return "/gardener/gardener-order-all";
@@ -49,6 +50,6 @@ public class GardenerOrderController {
     public String addOrder(@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
         gardenerOrderService.addOrder(gardenerOrder);
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
-        return "redirect:/{role}/orders";
+        return "redirect:/garden/orders";
     }
 }
