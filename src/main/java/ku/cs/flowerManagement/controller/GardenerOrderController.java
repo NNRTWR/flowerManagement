@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/gardener/orders")
+@RequestMapping("/garden/orders")
 public class GardenerOrderController {
     @Autowired
     private GardenerOrderService gardenerOrderService;

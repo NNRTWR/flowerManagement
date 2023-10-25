@@ -117,7 +117,7 @@
                 <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
                 <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
                 <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
-                <td class="px-6 py-4 truncate whitespace-normal"></td>
+                <td th:text="${flower.seedPeriod + flower.sproutPeriod + flower.growingPeriod + flower.fullyGrownPeriod + flower.harvestPeriod}"class="px-6 py-4 truncate whitespace-normal"></td>
                 <td class="px-6 py-4 text-center truncate whitespace-normal">
                     <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600 
                 font-semibold rounded-full text-xl p-3"></span>

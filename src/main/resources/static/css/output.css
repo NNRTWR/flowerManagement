@@ -3341,6 +3341,11 @@ details.collapse summary::-webkit-details-marker{
   height: 83.333333%;
 }
 
+.h-fit{
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-full{
   height: 100%;
 }
