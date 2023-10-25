@@ -1,11 +1,13 @@
 package ku.cs.flowerManagement.controller;
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
+import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
 import ku.cs.flowerManagement.model.gRequest;
 import ku.cs.flowerManagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +41,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
 
 
     @GetMapping
-    private String getAllBed(Model model){
+    private String getAllBed(Model model,@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "8") int size){
         LocalDateTime now = commonService.getCurrentTime();
         model.addAttribute("orders",gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงทุกรอบการปลูกไปให้
@@ -48,6 +50,8 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         model.addAttribute("listPID", listPID);
         model.addAttribute("time",now);//show time
         model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());//overall table
+        List<PlantOrder> plantOrdersPage = plantOrderService.getAllPlantOrderPage(page, size);
+        model.addAttribute("plantOrdersPage", plantOrdersPage);
         return "bed";
     }
 
@@ -67,10 +71,23 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     }
 
     //planting zone
+    // @GetMapping("/order/{PID}")
+    // public String showOrder(@PathVariable int PID,Model model){
+    //     model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
+    //     model.addAttribute("PID",PID);
+    //     plantOrderService.currentPID = PID;
+    //     return "bed-plant";
+    // }
+    // อันนี้แบบpagination
     @GetMapping("/order/{PID}")
-    public String showOrder(@PathVariable int PID,Model model){
-        model.addAttribute("orders",gardenerOrderService.getAllPendingGardenerOrder(dateTimeComparator)); //ส่ง order ทั้งหมดไปให้ (= ORDER)
-        model.addAttribute("PID",PID);
+    public String showOrder(@PathVariable int PID, @RequestParam(defaultValue = "0") int page, Model model) {
+        int pageSize = 3; // Number of items per page
+        Page<GardenerOrder> gardenerOrdersPage = gardenerOrderService.getAllGardenerOrderPage(page, pageSize);
+        List<GardenerOrder> gardenerOrders = gardenerOrdersPage.getContent();
+        model.addAttribute("orders", gardenerOrders);
+        model.addAttribute("PID", PID);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", gardenerOrdersPage.getTotalPages());
         plantOrderService.currentPID = PID;
         return "bed-plant";
     }

@@ -9,47 +9,46 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <h1 class="text-3xl text-center font-bold mb-5">สวนดอกไม้</h1>
-        
-        <div class="grid grid-cols-2 grid-rows-1 gap-12 rounded-xl">
-            <div class="bg-lime-50 rounded-xl ">
-                
-            </div>
-            <div class="items-center">
-                <span class="join">
-                    <button id="sub-button" class="btn btn-info text-lg join-item"  onclick="showSubTable()">ดูข้อมูลเพิ่มเติม</button>
-                    <button id="overview-button" class="btn btn-warning text-lg join-item active" onclick="showOverviewTable()">ดูดอกไม้ที่สามารถปลูกได้</button>
-                </span>
-                <div class="w-full flex justify-center mt-2">
-                    <div class="max-h-80 overflow w-full">
-                    <!-- ภาพรวม -->
-                    <table id="overview-table" class="table-fixedbg-white divide-y divide-gray-300 
-    overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4">
-                    <thead class="bg-gray-900">
-                        <tr class="text-white text-center">
-                            <th class="font-semibold text-base uppercase px-6 py-4">เลขแปลงดอกไม้</th>
-                            <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
-                            <th class="font-semibold text-base uppercase px-6 py-4">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-base">
-                        <tr th:each="plantOrder : ${plantOrders}" class="whitespace-normal">
-                            <td th:text="${plantOrder.PID}" class="px-6 py-4 truncate whitespace-normal"></td>
-                            <td>
-                                <span th:if="${plantOrder.flower != null}" th:text="${plantOrder.flower.FName}"></span>
-                                <span th:unless="${plantOrder.flower != null}">N/A</span>
-                            </td>
-                            <td th:text="${plantOrder.flowerStatus}" class="px-6 py-4 truncate whitespace-normal"></td>
-                            
-                        </tr>
-                    </tbody>
-                    </table>
+        <h1 class="text-3xl text-center font-bold mb-5" th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
+        <span class="flex justify-end">
+            <a th:href="@{/garden/orders}"class="btn btn-success text-lg mr-10" >เก็บเกี่ยว</a>
+            <button class="btn btn-error text-lg" onclick="my_modal_1.showModal()">แจ้งดอกไม้ตาย</button>
+            <dialog id="my_modal_1" class="modal fixed right-0">
+                <div class="modal-box ml-60 h-1/2  mt-6">
+                  <div class="flex justify-between items-center bg-red-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                  focus:ring-gray-200 focus:outline-none">
+                      <h3>แจ้งดอกไม้ตาย</h3>
+                  </div>
+                  <!-- <form  th:action="@{/SELLER/order}" method="POST" th:object="${order}"> -->
+                    <div class="mb-3 mt-6 mx-6 text-lg">
+                        <label for="inputAmount">กรอกจำนวนดอกไม้ที่ตาย</label>
+                        <input id="inputAmount" type="number" class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7 border-2 "
+                            name="amount"  required>
+                    </div>
+                          <!--                                       name="FID">-->
+                      <div class="mb-3 mt-6 mx-6 mt-16">
+                          <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                          <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                      </div>
+                  <!-- </form> -->
+              </dialog>  
+        </span>
+        <div class="flex rounded-xl">
+            <div class="rounded-xl items-center">
+                <div>
+                    <img src="/image/5-fullyGrownPeriod.svg" class="w-4/5 h-4/5 object-scale-down" alt="Pot Image">
+                </div>
+            </div>     
+        <div class="container bg-sky-300 mt-5 rounded-xl">
+            <h1>ชนิดดอกไม้</h1>
+                    
     
                     <!-- ย่อย -->
                   
-    
+                </div>
             </div>
         </div>
+    </div>
 <h1 class="display-6">Bed ที่ปลูกแล้ว</h1>
 
 <table  class="table table-bordered table-striped table-hover" >
@@ -92,14 +91,13 @@
         <td style="text-align: right" th:text="${#numbers.formatDecimal(plantOrder.flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
         <td th:text="${plantOrder.flowerStatus}"></td>
 
-
-<!--        ลองทำมาใช้เฉยๆ-->
-<!--        <form action="#" th:action="@{/beds/{PID}(PID=${PID})}" method="POST">-->
-<!--            <button type="submit" th:value="${plantOrder.id}" name="plantID">เก็บเกี่ยว</button>-->
-<!--        </form>-->
+       <!-- ลองทำมาใช้เฉยๆ
+       <form action="#" th:action="@{/beds/{PID}(PID=${PID})}" method="POST">
+           <button type="submit" th:value="${plantOrder.id}" name="plantID">เก็บเกี่ยว</button>
+       </form>
     </tr>
     </tbody>
-</table>
+</table> -->
 </div>
 </body>
 </html>

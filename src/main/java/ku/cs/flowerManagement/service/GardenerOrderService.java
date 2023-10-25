@@ -1,6 +1,7 @@
 package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.common.OrderStatus;
+import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.OrderItem;
 import ku.cs.flowerManagement.entity.PlantOrder;
@@ -10,6 +11,9 @@ import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.GardenerOrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -34,7 +38,10 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
 //        Collections.sort(orders, comparator ); //ยังไม่ได้แก้ Comparator
         return orders;
     }
-
+     public Page<GardenerOrder> getAllGardenerOrderPage(int page, int size) {   //สำหรับ pagination
+        Pageable pageable = PageRequest.of(page, size);
+        return gardenerOrderRepository.findByStatus(OrderStatus.PENDING,pageable);
+    }
 
     //ตอนนี้ยังใช้ order เดียวกับตอนบันทึกอยู่ //แก้อยู่
     public List<GardenerOrder> getAllPendingGardenerOrder(Comparator comparator){ //เอา order ที่ต้องปลูกทั้งหมดออกมา

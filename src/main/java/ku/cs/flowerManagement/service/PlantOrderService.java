@@ -3,10 +3,6 @@ package ku.cs.flowerManagement.service;
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
 import ku.cs.flowerManagement.adapter.PlantComparator;
 import ku.cs.flowerManagement.common.FlowerStatus;
-import ku.cs.flowerManagement.entity.Flower;
-import ku.cs.flowerManagement.entity.GardenerOrder;
-import ku.cs.flowerManagement.entity.PlantOrder;
-
 import ku.cs.flowerManagement.entity.*;
 
 import ku.cs.flowerManagement.model.GardenerOrderRequest;
@@ -18,8 +14,12 @@ import ku.cs.flowerManagement.repository.PlantOrderRepository;
 import ku.cs.flowerManagement.repository.StockRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -60,7 +60,11 @@ PlantOrderService {
             return listPlantOrder;
         }
     }
-
+    public List<PlantOrder> getAllPlantOrderPage(int pageNumber, int pageSize) {   //ทำ pagination
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<PlantOrder> plantOrderPage = plantOrderRepository.findAll(pageable);
+        return plantOrderPage.getContent();
+    }
 
     //เอาข้อมูลการปลูกทั้งหมดที่ยังไม่เก็บเกี่ยวในแปลงที่เลือก
     public List<PlantOrder> getAllPlantOrderButNoHarvestedByPID(int PID){

@@ -42,10 +42,7 @@ public class OrderController {
     //                              @RequestParam(defaultValue = "0") int page, 
     //                              @RequestParam(name = "id", defaultValue = "0") int id, 
     //                              Model model)
-    private String showOrderPage( 
-                                 @RequestParam(defaultValue = "0") int page, 
-                                 @RequestParam(name = "id", defaultValue = "0") int id, 
-                                 Model model) {
+    private String showOrderPage( @RequestParam(defaultValue = "0") int page, @RequestParam(name = "id", defaultValue = "0") int id, Model model) {
         // สำหรับคลิ๊กหน้า
         int pageSize = 4;
         Page<OrderItem> orderPage = orderService.getOrders(page, pageSize);

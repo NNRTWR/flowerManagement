@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo(0, 0);
     content.style.width = 'calc(100% - 256px)';
     content.style.marginLeft = '256px';
-    //drawerToggle.style.zIndex = '20'
+    //drawerToggle.style.zIndex = '20' ไม่เอา
     content.style.zIndex = '10';
     nav.style.zIndex = '20'
     side.style.zIndex = '10'
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     drawerToggle.addEventListener('change', function() {
         if (drawerToggle.checked) {
             //sidebar เปิด
-            content.style.width = 'calc(100% - 256px)'; // 64px เป็นขนาดของ sidebar
+            content.style.width = 'calc(100% - 256px)'; // 64px เป็นขนาดของ sidebar 
             content.style.marginLeft = '256px';
         } else {
             // Sidebar ปิด

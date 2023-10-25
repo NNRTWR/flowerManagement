@@ -206,9 +206,8 @@
             </span>
             <div class="w-full flex justify-center mt-2">
                 <div class="max-h-80 overflow w-full">
-                <!-- ภาพรวม -->
                 <table id="overview-table" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4">
+overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg">
                 <thead class="bg-gray-900">
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">เลขแปลงดอกไม้</th>
@@ -224,14 +223,13 @@ overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-wo
                             <span th:unless="${plantOrder.flower != null}">N/A</span>
                         </td>
                         <td th:text="${plantOrder.flowerStatus}" class="px-6 py-4 truncate whitespace-normal"></td>
-                        
                     </tr>
+                    
                 </tbody>
                 </table>
-
-                <!-- ย่อย -->
+                
                 <table id="sub-table" style="display: none;" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4">
+overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg">
                 <thead class="bg-gray-900">
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
@@ -245,6 +243,7 @@ overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-wo
                     </tr>
                 </tbody>
                 </table>
+                
 
         </div>
     </div>

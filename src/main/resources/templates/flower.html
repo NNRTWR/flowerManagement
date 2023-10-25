@@ -133,21 +133,16 @@
     </table>
     <div class="join mt-12 fixed bottom-12 ">
         <ul class="pagination flex space-x-2 items-center">
-            <!-- Previous button -->
             <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
                 <a th:if="${currentPage > 0}" th:href="@{'/flower?page=' + ${currentPage - 1} }" class="btn">Previous</a>
                 <span th:unless="${currentPage > 0}" class="btn disabled ">Previous</span>
             </li>
-    
-            <!-- Numbered buttons and ellipsis -->
             <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageNumber} ? 'active' : ''" class="join-item">
                 <a th:if="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}"
                    th:href="@{'/flower?page=' + ${pageNumber}}"
                    th:text="${pageNumber + 1}" class="btn"></a>
                 <span th:unless="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}" class="btn disabled">..</span>
             </li>
-    
-            <!-- Next button -->
             <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
                 <a th:if="${currentPage < totalPages - 1}" th:href="@{'/flower?page=' + ${currentPage + 1} }" class="btn">Next</a>
                 <span th:unless="${currentPage < totalPages - 1}" class="btn disabled">Next</span>

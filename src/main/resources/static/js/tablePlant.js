@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Script loaded successfully");  // ตรวจสอบว่าไฟล์ JavaScript ถูกโหลดได้หรือไม่
+    console.log("Script loaded successfully");  
 
     var overviewButton = document.getElementById("overview-button");
     var subButton = document.getElementById("sub-button");
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var subTable = document.getElementById("sub-table");
 
     overviewButton.addEventListener("click", function () {
-        console.log("Overview button clicked");  // เพิ่มบรรทัดนี้เพื่อตรวจสอบว่าฟังก์ชันถูกเรียกหรือไม่
+        console.log("Overview button clicked");  
         overviewButton.classList.add("active");
         subButton.classList.remove("active");
         overviewTable.style.display = "table";
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     subButton.addEventListener("click", function () {
-        console.log("Sub button clicked");  // เพิ่มบรรทัดนี้เพื่อตรวจสอบว่าฟังก์ชันถูกเรียกหรือไม่
+        console.log("Sub button clicked");  
         subButton.classList.add("active");
         overviewButton.classList.remove("active");
         overviewTable.style.display = "none";

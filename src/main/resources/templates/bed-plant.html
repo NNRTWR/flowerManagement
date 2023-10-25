@@ -9,6 +9,73 @@
 </head>
 <body>
     <div layout:fragment="content">
+        <h1 class="text-3xl text-center font-bold mb-5" th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
+
+        <div class="flex rounded-xl mt-8">
+            <div class="rounded-xl items-center">
+                <div>
+                    <img src="/image/1-pot.svg" class="w-4/5 h-4/5 object-scale-down" alt="Pot Image">
+                </div>
+            </div>     
+        <div class="container bg-sky-300 mt-5 rounded-xl">
+            <div class="max-h-80 overflow w-full mt-8">
+                
+                <table id="overview-table" class="table-fixedbg-white divide-y divide-gray-300 
+overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-white mb-4 rounded-lg">
+                <thead class="bg-gray-900">
+                    <tr class="text-white text-center text-lg">
+                        <th class="font-semibold text-base uppercase px-6 py-4">วันที่สั่ง</th>
+                        <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
+                        <th class="font-semibold text-base uppercase px-6 py-4">จำนวน</th>
+                        <th class="font-semibold text-base uppercase px-6 py-4">สถานะ</th>
+                        <th class="font-semibold text-base uppercase px-6 py-4"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-base">
+                    <tr th:each="order : ${orders}" class="whitespace-normal">
+                        <td th:text="${order.date}" class="px-6 py-4 truncate whitespace-normal"></td>
+                        <td th:text="${order.flower.FName}" class="px-6 py-4 truncate whitespace-normal"></td>
+                        <td th:text="${order.quantity}" class="px-6 py-4 truncate whitespace-normal"></td>
+                        <td th:text="${order.status}" class="px-6 py-4 truncate whitespace-normal"></td>
+                        <td class="px-6 py-4 truncate whitespace-normal">
+                            <form th:action="@{'/beds/order/' + ${PID}}" method="POST">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <input type="hidden" th:name="gardener_order_ID" th:value="${order.id}" />
+                                <button type="submit" class="btn btn-success font-bold text-xl">ปลูก</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="pagination mt-12 flex justify-center">
+                <ul class="pagination flex space-x-2 items-center">
+                    <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
+                        <a th:if="${currentPage > 0}" th:href="@{/beds/order/{PID}(PID=${PID}, page=${currentPage - 1})}" class="btn btn-neutral">Previous</a>
+                        <span th:unless="${currentPage > 0}" class="btn disabled btn-neutral">Previous</span>
+                    </li>
+                    <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageNumber} ? 'active' : ''" class="join-item">
+                        <a th:if="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}"
+                           th:href="@{/beds/order/{PID}(PID=${PID}, page=${pageNumber})}"
+                           th:text="${pageNumber + 1}" class="btn btn-neutral"></a>
+                        <span th:unless="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}" class="btn disabled btn-neutral">..</span>
+                    </li>
+                    <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
+                        <a th:if="${currentPage < totalPages - 1}" th:href="@{/beds/order/{PID}(PID=${PID}, page=${currentPage + 1})}" class="btn btn btn-neutral">Next</a>
+                        <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-neutral">Next</span>
+                    </li>
+                </ul>
+            </div>
+            
+                    
+    
+                    <!-- ย่อย -->
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h1 th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
     <h1>All Gardener Order</h1>
     <table  class="table table-bordered table-striped table-hover">
@@ -41,7 +108,7 @@
     </table>
 
 
-</div>
+
 </body>
 </html>
 
