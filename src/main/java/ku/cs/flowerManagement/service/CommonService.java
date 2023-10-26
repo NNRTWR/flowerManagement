@@ -13,4 +13,9 @@ public class CommonService {
         LocalDateTime now = LocalDateTime.now();
         return now;
     }
+
+    public String getPatternTime(LocalDateTime time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return time.format(formatter);
+    }
 }

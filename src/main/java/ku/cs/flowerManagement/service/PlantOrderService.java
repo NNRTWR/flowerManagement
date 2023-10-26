@@ -288,9 +288,11 @@ PlantOrderService {
 
         for (PlantOrder plantOrder : plantOrders) {
             Flower gardenFlower = plantOrder.getFlower();
-            for (Statistic statistic : statistics) {
-                if (statistic.getFlower() == gardenFlower) {
-                    statistic.setPlantOrder(new ArrayList<>());
+            for (Statistic statistic : statistics) { //ไม่เอา plantOrder ที่ตายหมดทั้งแปลงแล้ว กับ ไม่เอาที่เก็บครบทุกรอบแล้ว
+                if (statistic.getFlower() == gardenFlower && plantOrder.getFlowerStatus() != FlowerStatus.DEAD && plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED) {
+                    if(statistic.getPlantOrder() == null){
+                        statistic.setPlantOrder(new ArrayList<>());
+                    }
                     statistic.getPlantOrder().add(plantOrder);
                     break;
                 }

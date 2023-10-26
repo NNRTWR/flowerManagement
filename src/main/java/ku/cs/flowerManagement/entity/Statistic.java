@@ -10,4 +10,5 @@ import java.util.List;
 public class Statistic {
     private Flower flower;
     private List<PlantOrder> plantOrder;
+
 }

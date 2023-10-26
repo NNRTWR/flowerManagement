@@ -62,16 +62,10 @@
     </thead>
         <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
           <tr th:each="orderItem : ${orderItems}">
-            <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
-            <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
-            <!--        <td th:text="${orderItem.total}"></td> -->
-            <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.status}"></td>
-      
-            <td style="text-align: center">
-              <form th:action="@{/}" formmethod="GET">
-                <button type="submit">ปุ่มไรไม่รู้</button> <!-- กดเลือก order -->
-              </form>
-            </td>
+              <td class="px-6 py-6 truncate whitespace-normal" th:text="${commonService.getPatternTime(orderItem.date)}"></td>
+              <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
+              <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
+              <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.status}"></td>
           </tr>
             
            

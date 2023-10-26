@@ -29,6 +29,8 @@ public class GardenerOrderController {
 
     @Autowired
     private DateTimeComparator dateTimeComparator;
+    @Autowired
+    private CommonService commonService;
 
 
     @GetMapping
@@ -37,6 +39,7 @@ public class GardenerOrderController {
     public String getAllOrder( Model model){
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         model.addAttribute("flowers", flowerService.getAllFlower()); // ย้ายมา
+        model.addAttribute("commonService",commonService);
         return "/gardener/gardener-order-all";
     }
 
