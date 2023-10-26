@@ -64,10 +64,17 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     }
 
     @PostMapping("/{PID}")
-    public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest,Model model){
-        plantOrderService.harvest(plantOrderRequest);
-        plantOrderService.plantWasDied(plantOrderRequest);
-        return "redirect:/beds/{PID}";
+    public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest, @RequestParam(name = "deadButton", required = false) String deadButton, @RequestParam(name = "harvestButton", required = false) String harvestButton,Model model){
+        if (deadButton != null) {
+            // The "แจ้งดอกไม้ตาย" button was clicked
+            plantOrderService.plantWasDied(plantOrderRequest);
+        } else if (harvestButton != null) {
+            // The "เก็บเกี่ยว" button was clicked
+            System.out.println("clicked harvest");
+            plantOrderService.harvest(plantOrderRequest);
+        }
+        //return bed-view ต่อจะแตกเพราะ PID ใน URL มันจะมี "?" อยู่ท้ายแล้วก็แก้ไม่เป็นด้วย
+        return "redirect:/beds";
     }
 
     //planting zone

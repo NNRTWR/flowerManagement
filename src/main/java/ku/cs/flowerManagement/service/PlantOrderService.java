@@ -3,9 +3,9 @@ package ku.cs.flowerManagement.service;
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
 import ku.cs.flowerManagement.adapter.PlantComparator;
 import ku.cs.flowerManagement.common.FlowerStatus;
+import ku.cs.flowerManagement.common.OrderStatus;
 import ku.cs.flowerManagement.entity.*;
 
-import ku.cs.flowerManagement.model.GardenerOrderRequest;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
 import ku.cs.flowerManagement.model.gRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -307,11 +305,14 @@ PlantOrderService {
     //dead plant management
     public void plantWasDied(PlantOrderRequest plantOrderRequest){
         if(plantOrderRequest.getDeadPlant()>0) {
-            PlantOrder record = modelMapper.map(plantOrderRequest, PlantOrder.class);
-            PlantOrder plantOrder = plantOrderRepository.findById(plantOrderRequest.getFlowerID()).get();
+            PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
             //alive-dead
-            plantOrder.setTotal(plantOrder.getTotal() - plantOrderRequest.getDeadPlant());
-            record.setTotal(plantOrder.getTotal());
+            record.setTotal(record.getTotal() - plantOrderRequest.getDeadPlant());
+            if(record.getTotal()<=0){
+                record.setFlowerStatus(FlowerStatus.DEAD);
+                //record.getGardener_order().setStatus(OrderStatus.FAIL);
+            }
+            System.out.println("did");
             plantOrderRepository.save(record);
         }
     }
@@ -350,17 +351,17 @@ PlantOrderService {
 
     public void harvest(PlantOrderRequest plantOrderRequest){
 //        PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
-        System.out.println(plantOrderRequest.getPlantID());
-        PlantOrder record = plantOrderRepository.findById(plantOrderRequest.getPlantID()).get();
+        System.out.println(plantOrderRequest.getPID());
+        PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
 
         //managing stock
         Stock stock = new Stock();
         LocalDateTime localDateTime = LocalDateTime.now();
         stock.setTime(localDateTime);
-        stock.setQuantity(record.getQuantity());
+        stock.setQuantity(record.getTotal()); //ไม่นับอันที่ตายแล้วนับเฉพาะอันที่เก็บมา
         stock.setTotal(record.getTotal());
         stock.setPlantOrder(record);
-
+        System.out.println("hey");
         stockRepository.save(stock);
 
         //still harvestable
@@ -387,8 +388,5 @@ PlantOrderService {
 //        }
     }
 
-    public PlantOrder findByPID(int uuid){
-        return plantOrderRepository.findByPID(uuid);
-    }
 
 }

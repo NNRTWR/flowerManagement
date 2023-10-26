@@ -11,7 +11,10 @@
     <div layout:fragment="content">
         <h1 class="text-3xl text-center font-bold mb-5" th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
         <span class="flex justify-end">
-            <a th:href="@{/garden/orders}"class="btn btn-success text-lg mr-10" >เก็บเกี่ยว</a>
+            <form  th:action="@{/beds/{PID}}" method="POST" th:object="${order}">
+                <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
+            <button class="btn btn-success text-lg mr-10" type="submit" name="harvestButton">เก็บเกี่ยว</button>
+            </form>
             <button class="btn btn-error text-lg" onclick="my_modal_1.showModal()">แจ้งดอกไม้ตาย</button>
             <dialog id="my_modal_1" class="modal fixed right-0">
                 <div class="modal-box ml-60 h-1/2  mt-6">
@@ -19,18 +22,19 @@
                   focus:ring-gray-200 focus:outline-none">
                       <h3>แจ้งดอกไม้ตาย</h3>
                   </div>
-                  <!-- <form  th:action="@{/SELLER/order}" method="POST" th:object="${order}"> -->
+                  <form  th:action="@{/beds/{PID}}" method="POST" th:object="${order}">
+                      <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
                     <div class="mb-3 mt-6 mx-6 text-lg">
                         <label for="inputAmount">กรอกจำนวนดอกไม้ที่ตาย</label>
                         <input id="inputAmount" type="number" class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7 border-2 "
-                            name="amount"  required>
+                            name="deadPlant"  required>
                     </div>
                           <!--                                       name="FID">-->
                       <div class="mb-3 mt-6 mx-6 mt-16">
-                          <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                          <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" name="deadButton">ยืนยัน</button>
                           <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
                       </div>
-                  <!-- </form> -->
+                  </form>
                 </div>
               </dialog>  
         </span>
@@ -101,6 +105,8 @@
     </tr>
     </tbody>
 </div>
+
+
 </table>
 </body>
 </html>

@@ -239,12 +239,18 @@ overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-wo
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
                         <th class="font-semibold text-base uppercase px-6 py-4">จำนวนแปลงที่ปลูก</th>
+                        <th class="font-semibold text-base uppercase px-6 py-4">แปลงที่ปลูก</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-base">
                     <tr th:each="statistic : ${Statistics}" class="whitespace-normal">
                         <td th:text="${statistic.flower.FName}" class="px-6 py-4 truncate whitespace-normal">Flower Name</td>
                         <td th:text="${#lists.size(statistic.plantOrder)}" class="px-6 py-4 truncate whitespace-normal">Number of Gardens</td>
+                        <td class="multi-data-cell">
+                            <span th:each="plantOrder : ${statistic.plantOrder}">
+                            <span th:text="${plantOrder.PID}"></span><br>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
                 </table>
