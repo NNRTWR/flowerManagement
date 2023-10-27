@@ -292,8 +292,8 @@ PlantOrderService {
             Flower gardenFlower = plantOrder.getFlower();
             for (Statistic statistic : statistics) { //ไม่เอา plantOrder ที่ตายหมดทั้งแปลงแล้ว กับ ไม่เอาที่เก็บครบทุกรอบแล้ว
 
-//                && plantOrder.getFlowerStatus() != FlowerStatus.DEAD
-                if (statistic.getFlower() == gardenFlower && plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED) {
+
+                if (statistic.getFlower() == gardenFlower && plantOrder.getFlowerStatus() != FlowerStatus.DEAD && plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED) {
                     if(statistic.getPlantOrder() == null){
                         statistic.setPlantOrder(new ArrayList<>());
                     }
