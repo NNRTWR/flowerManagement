@@ -65,34 +65,36 @@ PlantOrderService {
     }
 
     //เอาข้อมูลการปลูกทั้งหมดที่ยังไม่เก็บเกี่ยวในแปลงที่เลือก
-    public List<PlantOrder> getAllPlantOrderButNoHarvestedByPID(int PID){
+    public PlantOrder getPlantOrderButNoHarvestedByPID(int PID){
         currentPID = PID;
         System.out.println("แปลงที่ " + PID); // เลือกแปลงไหนนะ
         List<PlantOrder> listPlantOrder = plantOrderRepository.findAllByPID(PID); //หาว่าเลขที่่แปลงนี้ปลูกดอกไม้ยัง
-        System.out.println("ก่อน System.out.println(listPlantOrder)");
-        for (PlantOrder o:listPlantOrder) {
-            System.out.println(o.getId());
-        }
+        PlantOrder plantOrder;
 
         //แปลงนี้เคยมีการปลูกมาก่อนรึเปล่า
         if(listPlantOrder == null){ //ถ้าแปลงนี้ไม่เคยมีการปลูกมาก่อน
             System.out.println("แปลงนี้ไม่เคยมีการปลูกมาก่อน");
         }
         else {
-            listPlantOrder = findPlantNoHarvested(listPlantOrder); //หาว่ามีรอบการปลูกที่ยังไม่เก็บเกี่ยวมั้ย
             System.out.println("แปลงนี้เคยมีการปลูกมาก่อน");
+            plantOrder = findPlantNoHarvested(listPlantOrder); //หาว่ามีรอบการปลูกที่ยังไม่เก็บเกี่ยวมั้ย
+            if(plantOrder == null)
+                return null;
+            else
+                return plantOrder;
         }
-
-        //มี stock รึเปล่า ถ้าไม่มี = แปลงว่าง
-        if (listPlantOrder.isEmpty()){ //ไม่เคยมีการปลูกที่แปลงนีมาก่อน หรือ รอบการปลูกพวกนั้นเก็บเกี่ยวหมดแล้ว = แปลงนี้ปลูกได้
-            System.out.println("รอบการปลูกพวกนั้นเก็บเกี่ยวหมดแล้ว");
-            return null;
-        }
-        else {
-            System.out.println("รอบการปลูกพวกนั้นยังไม่ได้เก็บเกี่ยว");
-            setFlowerOrderStatus(listPlantOrder); //ไปเรียก set สถานะของดอกไม้ในแปลงก่อน
-            return listPlantOrder;
-        }
+        return null;
+//
+//        //มี stock รึเปล่า ถ้าไม่มี = แปลงว่าง
+//        if (listPlantOrder.isEmpty()){ //ไม่เคยมีการปลูกที่แปลงนีมาก่อน หรือ รอบการปลูกพวกนั้นเก็บเกี่ยวหมดแล้ว = แปลงนี้ปลูกได้
+//            System.out.println("รอบการปลูกพวกนั้นเก็บเกี่ยวหมดแล้ว");
+//            return null;
+//        }
+//        else {
+//            System.out.println("รอบการปลูกพวกนั้นยังไม่ได้เก็บเกี่ยว");
+//            setFlowerOrderStatus(listPlantOrder); //ไปเรียก set สถานะของดอกไม้ในแปลงก่อน
+//            return plantOrder;
+//        }
     }
 
 
@@ -110,14 +112,27 @@ PlantOrderService {
     }
 
 
-    public List<PlantOrder> findPlantNoHarvested(List<PlantOrder> plantOrder){
-        List<PlantOrder> listPlantOrder = new ArrayList<>();
+    public PlantOrder findPlantNoHarvested(List<PlantOrder> plantOrders){
+//        List<PlantOrder> listPlantOrder = new ArrayList<>();
 
         int i=0;
-        for (PlantOrder order : plantOrder){
-            if(order.getFlowerStatus() != FlowerStatus.HARVESTED){ //รอบการปลูกนี้ยังไม่เก็บเกี่ยว
-                System.out.println("แปลงที่: " + order.getPID() + "รอบการปลูก: " + order.getTimePlant() + " ยังไม่เก็บเกี่ยว");
-                listPlantOrder.add(order);
+        for (PlantOrder plantOrder : plantOrders){
+            if(plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED){ //รอบการปลูกนี้ยังไม่เก็บเกี่ยว
+                System.out.println("แปลงที่: " + plantOrder.getPID() + "รอบการปลูก: " + plantOrder.getTimePlant() + " ยังไม่เก็บเกี่ยว");
+                return plantOrder;
+            }
+            i++;
+        }
+        return null;
+    }
+
+    public List<PlantOrder> findAllPlantNoHarvested(List<PlantOrder> plantOrders){
+        List<PlantOrder> listPlantOrder = new ArrayList<>();
+        int i=0;
+        for (PlantOrder plantOrder : plantOrders){
+            if(plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED && plantOrder.getTotal() != -1){ //รอบการปลูกนี้ยังไม่เก็บเกี่ยว
+                System.out.println("แปลงที่: " + plantOrder.getPID() + "รอบการปลูก: " + plantOrder.getTimePlant() + " ยังไม่เก็บเกี่ยว");
+                listPlantOrder.add(plantOrder);
             }
             i++;
         }
@@ -127,17 +142,17 @@ PlantOrderService {
     //เอาคำสั่งปลูกทั้งหมดทุกแปลงที่ยังไม่เก็บเกี่ยว
     public List<PlantOrder> getAllPlantOrderButNoHarvested(){
 
-        List<PlantOrder> plantOrder = plantOrderRepository.findAll();
-        List<PlantOrder> listPlantOrderNoDead = findPlantNoHarvested(plantOrder);
+        List<PlantOrder> plantOrders = plantOrderRepository.findAll();
+        List<PlantOrder> plantOrder = findAllPlantNoHarvested(plantOrders);
 
 
-        if (listPlantOrderNoDead == null) {
+        if (plantOrder == null) {
             return null;
         }
         else {
-            setFlowerOrderStatus(listPlantOrderNoDead);
+            setFlowerOrderStatus(plantOrder);
         }
-        return listPlantOrderNoDead;
+        return plantOrder;
     }
 
 
@@ -257,17 +272,6 @@ PlantOrderService {
     }
 
 
-    // check ก่อนว่า ดอกไม้ที่กดปลูก กับดอกไม้ใน order ตรงกันมั้ย
-    public boolean checkPlantOrder(GardenerOrder gardenerOrder, Flower flower){
-        if(gardenerOrder.getFlower() == flower){
-            System.out.println(flower.getFName());
-            return true;
-        }
-        else
-            return false;
-    }
-
-
     //Donut
     public List<PlantOrder> getAllPLantOrder() {
         return plantOrderRepository.findAll();
@@ -287,7 +291,9 @@ PlantOrderService {
         for (PlantOrder plantOrder : plantOrders) {
             Flower gardenFlower = plantOrder.getFlower();
             for (Statistic statistic : statistics) { //ไม่เอา plantOrder ที่ตายหมดทั้งแปลงแล้ว กับ ไม่เอาที่เก็บครบทุกรอบแล้ว
-                if (statistic.getFlower() == gardenFlower && plantOrder.getFlowerStatus() != FlowerStatus.DEAD && plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED) {
+
+//                && plantOrder.getFlowerStatus() != FlowerStatus.DEAD
+                if (statistic.getFlower() == gardenFlower && plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED) {
                     if(statistic.getPlantOrder() == null){
                         statistic.setPlantOrder(new ArrayList<>());
                     }
@@ -305,7 +311,15 @@ PlantOrderService {
     //dead plant management
     public void plantWasDied(PlantOrderRequest plantOrderRequest){
         if(plantOrderRequest.getDeadPlant()>0) {
-            PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
+//            PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
+            PlantOrder record = getPlantOrderButNoHarvestedByPID(plantOrderRequest.getPID());
+            if(record == null){
+                System.out.println("แปลงที่ " + plantOrderRequest.getPID() + " เป็น null");
+            }
+            else{
+                System.out.println("แปลงที่ " + plantOrderRequest.getPID() + record.getFlowerStatus());
+            }
+
             //alive-dead
             record.setTotal(record.getTotal() - plantOrderRequest.getDeadPlant());
             if(record.getTotal()<=0){
@@ -350,9 +364,7 @@ PlantOrderService {
 //    }
 
     public void harvest(PlantOrderRequest plantOrderRequest){
-//        PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
-        System.out.println(plantOrderRequest.getPID());
-        PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
+        PlantOrder record = getPlantOrderButNoHarvestedByPID(plantOrderRequest.getPID());
 
         //managing stock
         Stock stock = new Stock();
@@ -369,7 +381,8 @@ PlantOrderService {
             record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
         }
         else if(record.getHarvestable() == 1){//died set stock to zero show as empty field (ถ้าเป็นการเก็บเกี่ยวรอบสุดท้าย)
-            record.setFlowerStatus(FlowerStatus.HARVESTED); //เปลี่ยนจาก DEAD เป็น HARVESTED
+            record.setFlowerStatus(FlowerStatus.HARVESTED);
+            record.getGardener_order().setStatus(OrderStatus.COMPLETED);
         }
 
         record.setHarvestable(record.getHarvestable() - 1);
@@ -383,9 +396,6 @@ PlantOrderService {
 
         plantOrderRepository.save(record);
 
-//        for (Stock o: record.getListStock()) {
-//            System.out.println("stock ของรอบการปลูกนี้ " + o.getTime());
-//        }
     }
 
 

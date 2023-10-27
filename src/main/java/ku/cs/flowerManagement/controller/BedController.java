@@ -47,9 +47,11 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         model.addAttribute("plantOrders", plantOrderService.getAllPlantOrder()); //ส่งข้อมูลแปลงทุกรอบการปลูกไปให้
 
         Map<Integer, PlantOrder> listPID = plantOrderService.getAllPIDWithPlantOrder();
-        model.addAttribute("listPID", listPID);
+        model.addAttribute("listPID", listPID);  //ใช้อันนี้แสดงแปลง
+
         model.addAttribute("time",now);//show time
         model.addAttribute("Statistics",plantOrderService.getAllGardenWithFlower());//overall table
+
         List<PlantOrder> plantOrdersPage = plantOrderService.getAllPlantOrderPage(page, size);
         model.addAttribute("plantOrdersPage", plantOrdersPage);
         return "bed";
@@ -58,8 +60,10 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     //dead-harvest-detail
     @GetMapping("/{PID}")
     public String detailOfPlantOrder(@PathVariable int PID,Model model){
-        List<PlantOrder> plantOrders = plantOrderService.getAllPlantOrderButNoHarvestedByPID(PID);
-        model.addAttribute("plantOrders", plantOrders);
+//        List<PlantOrder> plantOrders = plantOrderService.getAllPlantOrderButNoHarvestedByPID(PID);
+        PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
+        System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
+        model.addAttribute("plantOrders", plantOrder);
         return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 

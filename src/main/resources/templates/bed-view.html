@@ -45,7 +45,6 @@
             </div>     
         <div class="container bg-sky-300 mt-5 rounded-xl">
             <h1>ชนิดดอกไม้</h1>
-                    
     
                     <!-- ย่อย -->
                   
@@ -78,7 +77,7 @@
 
     <tbody>
 
-    <tr th:each="plantOrder : ${plantOrders}">
+    <tr>
         <td th:text="${plantOrder.PID}"></td>
         <td th:text="${plantOrder.timePlant}"></td>
         <td th:text="${plantOrder.quantity}"></td>
