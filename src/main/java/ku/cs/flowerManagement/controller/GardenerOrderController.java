@@ -40,7 +40,7 @@ public class GardenerOrderController {
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
         model.addAttribute("flowers", flowerService.getAllFlower()); // ย้ายมา
         model.addAttribute("commonService",commonService);
-        return "/gardener/gardener-order-all";
+        return "gardener-order-all";
     }
 
     // @GetMapping("/form")

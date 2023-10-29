@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: flowerManager
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/flowerManager
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      SPRING_H2_CONSOLE_ENABLED: "true"
+      SPRING_MVC_STATIC_PATH_PATTERN: /**
+      SPRING_MVC_HIDDENMETHOD_FILTER_ENABLED: "true"

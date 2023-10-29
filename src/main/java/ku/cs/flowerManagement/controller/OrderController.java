@@ -62,7 +62,7 @@ public class OrderController {
         }
 
         System.out.println(orderService.getOrders().toString());
-        return "/seller/order";
+        return "order";
     }
 
     @PostMapping //("/{role}/order")
@@ -81,6 +81,6 @@ public class OrderController {
         model.addAttribute("orders", orderService.getOrders());
         model.addAttribute("options", flowerService.getFlowers());
         model.addAttribute("canceledOrder",orderService.getOrderById(id));
-        return "/seller/order";
+        return "order";
     }
 }
