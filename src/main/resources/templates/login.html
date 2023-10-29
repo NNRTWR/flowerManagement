@@ -1,15 +1,17 @@
 <!--Patcharin Khangwicha 6410406797-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Flower Application</title>
-  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<!--  <script th:src="@{/js/bootstrap.min.js}"></script>-->
+  <title>Flower Management Web Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/output.css}">
+  <!-- <link th:rel="stylesheet" th:href=""> -->
+  <!-- <script th:src="@{/js/bootstrap.min.js}"></script> -->
 </head>
+
 <body>
-
-
+<div layout:fragment="content" class="flex flex-col items-center h-full justify-center">
 <div class="container w-50 p-3">
   <a class="btn btn-primary" th:href="@{/signup}">Garden</a>
   <h1 class="display-5">Login</h1>
@@ -34,6 +36,6 @@
     <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
   </form>
 </div>
-
+</div>
 </body>
 </html>

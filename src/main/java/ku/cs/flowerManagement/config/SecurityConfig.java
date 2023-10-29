@@ -39,7 +39,9 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 //                        .requestMatchers(
 //                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
                         .requestMatchers(
-                                new AntPathRequestMatcher("/gardener/**")).permitAll()
+                                new AntPathRequestMatcher("/seller/**")).permitAll()
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/garden/**")).permitAll()
                                 // .hasAuthority("GARDENER")
                         // .requestMatchers(
                         //         new AntPathRequestMatcher("/GARDENER/orders/form")).hasRole("GARDENER")
