@@ -14,9 +14,6 @@ public class Stock {
 
     @Id
     @GeneratedValue
-    private UUID id;
-
-    @GeneratedValue
     private int SID; //รหัส Stock
     private int total; //คงเหลือ
     private LocalDateTime time; //วันที่
