@@ -1,4 +1,4 @@
-## How to run tailwind css
+## How to run tailwind css (ถ้าไม่ใช้ ให้รันปกติ)
 
 โหลด node.js https://nodejs.org/en  version 18.18.2
 รันครั้งแรกหรือpullงาน
