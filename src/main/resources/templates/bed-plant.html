@@ -32,7 +32,7 @@ overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-wh
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-base">
-                    <tr th:each="order : ${orders}" class="whitespace-normal">
+                    <tr th:each="order : ${orders}" th:if="${order.status == 'PENDING'}" class="whitespace-normal">
                         <td th:text="${order.date}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td th:text="${order.flower.FName}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td th:text="${order.quantity}" class="px-6 py-4 truncate whitespace-normal"></td>
@@ -41,7 +41,8 @@ overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-wh
                             <form th:action="@{'/beds/order/' + ${PID}}" method="POST">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 <input type="hidden" th:name="gardener_order_ID" th:value="${order.id}" />
-                                <button type="submit" class="btn btn-success font-bold text-xl">ปลูก</button>
+                                <button type="submit" class="btn btn-success font-bold text-xl" >ปลูก</button>
+                                <!-- <button type="submit" class="btn btn-success font-bold text-xl" th:if="${order.status == 'PENDING'}"th:disabled="${order.status ne 'PENDING'}">ปลูก</button> -->
                             </form>
                         </td>
                     </tr>
