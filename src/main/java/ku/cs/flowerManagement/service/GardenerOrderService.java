@@ -38,9 +38,9 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
 //        Collections.sort(orders, comparator ); //ยังไม่ได้แก้ Comparator
         return orders;
     }
-     public Page<GardenerOrder> getAllGardenerOrderPage(int page, int size) {   //สำหรับ pagination
+    public Page<GardenerOrder> getAllGardenerOrderPage(int page, int size) {   //สำหรับ pagination
         Pageable pageable = PageRequest.of(page, size);
-        return gardenerOrderRepository.findByStatus(OrderStatus.PENDING,pageable);
+        return gardenerOrderRepository.findAll(pageable);
     }
 
     //ตอนนี้ยังใช้ order เดียวกับตอนบันทึกอยู่ //แก้อยู่

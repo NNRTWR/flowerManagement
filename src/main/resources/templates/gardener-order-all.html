@@ -9,16 +9,16 @@
 </head>
 <body>
 <div layout:fragment ="content">
-  <h1 class="text-3xl text-center font-bold">All garden order</h1>
+  <h1 class="text-2xl text-center font-bold">All garden order</h1>
   <div class="flex items-center justify-between mb-4 mt-6">
         <div class="flex items-center">
-            <h1 class="text-2xl">จำนวนออเดอร์ทั้งหมด</h1>
+            <h1 class="text-xl ml-10">จำนวนออเดอร์ทั้งหมด</h1>
             <!-- <span class="text-2xl ml-10" th:text="${totalFlowers}"></span>  ดูใน flowerเอาได้ว่าทำยังไง-->
-            <span class="text-2xl ml-10">รายการ</span>
+            <span class="text-xl ml-10">รายการ</span>
         </div>
         
           <div class="flex space-x-2 items-center">
-            <button class="btn btn-success text-xl" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
+            <button class="btn btn-success text-lg mr-8" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
             <dialog id="my_modal_1" class="modal fixed right-0">
               <div class="modal-box ml-60 h-3/4 w-4/5 mt-6">
                 <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
@@ -47,31 +47,66 @@
               </div>
             </dialog>
         </div>
-  </div>      
-  <table class="table-fixedbg-white divide-y divide-gray-300 
-    overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 
-    lg:w-2/3 text-lg break-words bg-white" id="flower-table">
-    <thead class="bg-gray-900">
-        <tr class="text-white text-center">
-          <th class="font-semibold text-lg uppercase px-6 py-6">วันที่สั่ง</th>    
-            <th class="font-semibold text-lg uppercase px-6 py-6">ชื่อดอกไม้</th>    
-            <th class="font-semibold text-lg uppercase px-6 py-6">จำนวนดอกไม้ที่ต้องการ</th>
-            <th class="font-semibold text-lg uppercase px-6 py-6">สถานะ</th>
-            <th class="font-semibold text-lg uppercase px-6 py-6"></th>
-        </tr>
-    </thead>
-        <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
-          <tr th:each="orderItem : ${orderItems}">
-              <td class="px-6 py-6 truncate whitespace-normal" th:text="${commonService.getPatternTime(orderItem.date)}"></td>
-              <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
-              <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
-              <td class="px-6 py-6 truncate whitespace-normal" th:text="${orderItem.status}"></td>
-          </tr>
-            
-           
-        </tbody>     
-    </table> 
-
+  </div>     
+    <div class="max-w-[85rem] sm:px-6 lg:px-8 lg:py-4 mx-auto">
+      <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+          <div class="p-1.5 min-w-full inline-block align-middle">
+            <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">
+                <table class="table-fixed divide-y divide-gray-300 
+                overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-xl break-words bg-white" id="flower-table">
+                    <thead class="bg-gray-900">
+                        <tr class="text-white text-center">
+                            <th class="font-semibold text-lg uppercase px-6 py-4">
+                                <div class="flex items-center justify-center">
+                                <span>วันที่สั่ง</span>
+                                <span class="ml-3">
+                                    <svg class="w-4 h-4" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.55921 0.287451C7.86808 -0.0958171 8.40096 -0.0958167 8.70982 0.287451L12.9295 5.52367C13.3857 6.08979 13.031 7 12.3542 7H3.91488C3.23806 7 2.88336 6.08979 3.33957 5.52367L7.55921 0.287451Z" fill="currentColor"/>
+                                        <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
+                                    </svg>
+                                </span>
+                                <div>
+                            </th>
+                            <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้
+                            </th>
+                            <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนดอกไม้ที่ต้องการ</th>
+                            <th class="font-semibold text-lg uppercase px-6 py-4">สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
+                      <tr th:each="orderItem : ${orderItems}">
+                        <td class="px-6 py-4 truncate whitespace-normal" th:text="${commonService.getPatternTime(orderItem.date)}"></td>
+                        <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
+                        <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
+                        <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.status}"></td>
+                      </tr>
+                    </tbody>
+                </table>    
+                
+            <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 shadow-lg">
+              <div>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <span class="font-semibold text-gray-800 dark:text-gray-200"></span>   <!--ไม่น่าจะทำ-->
+                </p>
+              </div>
+              <div class="join">
+                  <ul class="pagination flex space-x-2 items-center">
+                      <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
+                          <a th:if="${currentPage > 0}" th:href="@{'/garden/orders?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
+                          <span th:unless="${currentPage > 0}" class="btn disabled btn-secondary">Previous</span>
+                      </li>
+                      <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
+                          <a th:if="${currentPage < totalPages - 1}" th:href="@{'/garden/orders?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
+                          <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-secondary">Next</span>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
