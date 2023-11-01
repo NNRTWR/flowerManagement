@@ -63,12 +63,8 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @GetMapping("/{PID}")
     public String detailOfPlantOrder(@PathVariable int PID,Model model){
         PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
-<<<<<<< HEAD
         System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
         model.addAttribute("plantOrder", plantOrder);
-=======
-        model.addAttribute("plantOrders", plantOrder);
->>>>>>> a2dd9a7b074dd081a3e725b2f1c1f51ce7ff90cc
         return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 
