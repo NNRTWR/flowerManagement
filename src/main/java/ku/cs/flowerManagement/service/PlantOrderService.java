@@ -321,11 +321,17 @@ PlantOrderService {
             }
 
             //alive-dead
-            record.setTotal(record.getTotal() - plantOrderRequest.getDeadPlant());
-            if(record.getTotal()<=0){
+
+            ////////ตรงนี้ copy ไปแก้
+            int remain = record.getTotal() - plantOrderRequest.getDeadPlant();
+            if(remain > 0)
+                record.setTotal(record.getTotal() - plantOrderRequest.getDeadPlant());
+            else if(remain < 0) {
+                record.setTotal(0); //จะใช้เวลากด reset แปลง จะให้มันเป็น -1 >>> ใช้เป็นเงื่อนไขเวลากดไปที่แปลง ถ้าเป็น -1 จะไปปลูก แต่ถ้าไม่ใช้จะแสดงข้อมูลมันอยู่
                 record.setFlowerStatus(FlowerStatus.DEAD);
-                //record.getGardener_order().setStatus(OrderStatus.FAIL);
+                record.getGardener_order().setStatus(OrderStatus.FAIL);
             }
+
             System.out.println("did");
             plantOrderRepository.save(record);
         }
