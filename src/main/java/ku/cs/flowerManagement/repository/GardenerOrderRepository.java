@@ -16,6 +16,6 @@ import java.util.UUID;
 public interface GardenerOrderRepository extends JpaRepository<GardenerOrder, UUID> {
     List<GardenerOrder> findByStatus(OrderStatus status); //หา order ด้วย status
     Page<GardenerOrder> findByStatus(OrderStatus status, Pageable pageable);
-
+    List<GardenerOrder> findAllByStatus(OrderStatus orderStatus);
     //หาด้วย flower
 }

@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.Flow;
 
 
 @Service
@@ -258,7 +259,12 @@ PlantOrderService {
 
     public void createPlantOrder(gRequest request, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
         GardenerOrder order = gardenerOrderRepository.findById(request.getGardener_order_ID()).get();
-        PlantOrder record = new PlantOrder();
+        PlantOrder record;
+        if(plantOrderRepository.findByPID(request.getPID())==null){
+            record = new PlantOrder();
+        } else {
+            record = plantOrderRepository.findByPID(request.getPID());
+        }
         record.setGardener_order(order); // รอบการปลูกนี้มาจาก plantOrder อันนี้
         record.setQuantity(order.getQuantity()); //ตอนนี้ปลูกดอกไม้ตาม order แบบเป๊ะๆอยู๋
         record.setFlower(order.getFlower()); //แปลงนี้ปลูกดอกนี้นะ
@@ -371,37 +377,35 @@ PlantOrderService {
 
     public void harvest(PlantOrderRequest plantOrderRequest){
         PlantOrder record = getPlantOrderButNoHarvestedByPID(plantOrderRequest.getPID());
+        if(record.getFlowerStatus() == FlowerStatus.FULLY_GROWN) {
+            //managing stock
+            Stock stock = new Stock();
+            LocalDateTime localDateTime = LocalDateTime.now();
+            stock.setTime(localDateTime);
+            stock.setQuantity(record.getTotal()); //ไม่นับอันที่ตายแล้วนับเฉพาะอันที่เก็บมา
+            stock.setTotal(record.getTotal());
+            stock.setPlantOrder(record);
+            System.out.println("hey");
+            stockRepository.save(stock);
 
-        //managing stock
-        Stock stock = new Stock();
-        LocalDateTime localDateTime = LocalDateTime.now();
-        stock.setTime(localDateTime);
-        stock.setQuantity(record.getTotal()); //ไม่นับอันที่ตายแล้วนับเฉพาะอันที่เก็บมา
-        stock.setTotal(record.getTotal());
-        stock.setPlantOrder(record);
-        System.out.println("hey");
-        stockRepository.save(stock);
+            //still harvestable
+            if (record.getHarvestable() > 1) {
+                record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
+            } else if (record.getHarvestable() == 1) {//died set stock to zero show as empty field (ถ้าเป็นการเก็บเกี่ยวรอบสุดท้าย)
+                record.setFlowerStatus(FlowerStatus.HARVESTED);
+                record.getGardener_order().setStatus(OrderStatus.COMPLETED);
+            }
 
-        //still harvestable
-        if(record.getHarvestable()>1){
-            record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
+            record.setHarvestable(record.getHarvestable() - 1);
+
+            if (record.getListStock() == null) { //ยังไม่เคยเก็บเกี่ยวเลย
+                record.setListStock(new ArrayList<>());
+            } else {
+                record.getListStock().add(stock);
+            }
+
+            plantOrderRepository.save(record);
         }
-        else if(record.getHarvestable() == 1){//died set stock to zero show as empty field (ถ้าเป็นการเก็บเกี่ยวรอบสุดท้าย)
-            record.setFlowerStatus(FlowerStatus.HARVESTED);
-            record.getGardener_order().setStatus(OrderStatus.COMPLETED);
-        }
-
-        record.setHarvestable(record.getHarvestable() - 1);
-
-        if(record.getListStock() == null){ //ยังไม่เคยเก็บเกี่ยวเลย
-            record.setListStock(new ArrayList<>());
-        }
-        else{
-            record.getListStock().add(stock);
-        }
-
-        plantOrderRepository.save(record);
-
     }
 
 
