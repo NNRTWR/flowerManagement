@@ -1,12 +1,9 @@
 package ku.cs.flowerManagement.controller;
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
-<<<<<<< HEAD
-import ku.cs.flowerManagement.entity.Flower;
-=======
 import ku.cs.flowerManagement.adapter.GardenOrderTimeComparator;
->>>>>>> eb863830ee0fd5e7a92b36f18f337ec7e7b124a7
 import ku.cs.flowerManagement.entity.GardenerOrder;
+import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
 import ku.cs.flowerManagement.model.gRequest;
@@ -65,12 +62,9 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     //dead-harvest-detail
     @GetMapping("/{PID}")
     public String detailOfPlantOrder(@PathVariable int PID,Model model){
-//        List<PlantOrder> plantOrders = plantOrderService.getAllPlantOrderButNoHarvestedByPID(PID);
         PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
         System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
-        model.addAttribute("plantOrders", plantOrder);
-        Flower flower = plantOrder.getFlower();
-        model.addAttribute("flower", flower);
+        model.addAttribute("plantOrder", plantOrder);
         return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 
