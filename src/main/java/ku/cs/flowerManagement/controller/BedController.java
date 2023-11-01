@@ -109,6 +109,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         model.addAttribute("PID", PID);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", gardenerOrdersPage.getTotalPages());
+        model.addAttribute("commonService", commonService);
         plantOrderService.currentPID = PID;
         return "bed-plant";
     }
