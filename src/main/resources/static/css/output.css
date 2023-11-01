@@ -3490,16 +3490,12 @@ details.collapse summary::-webkit-details-marker{
   height: 50%;
 }
 
-.h-2{
-  height: 0.5rem;
-}
-
-.h-2\.5{
-  height: 0.625rem;
-}
-
 .h-3\/4{
   height: 75%;
+}
+
+.h-4{
+  height: 1rem;
 }
 
 .h-4\/5{
@@ -3526,10 +3522,6 @@ details.collapse summary::-webkit-details-marker{
   height: 100vh;
 }
 
-.h-4{
-  height: 1rem;
-}
-
 .max-h-80{
   max-height: 20rem;
 }
@@ -3546,12 +3538,8 @@ details.collapse summary::-webkit-details-marker{
   width: 91.666667%;
 }
 
-.w-2{
-  width: 0.5rem;
-}
-
-.w-2\.5{
-  width: 0.625rem;
+.w-4{
+  width: 1rem;
 }
 
 .w-4\/5{
@@ -3572,10 +3560,6 @@ details.collapse summary::-webkit-details-marker{
 
 .w-full{
   width: 100%;
-}
-
-.w-4{
-  width: 1rem;
 }
 
 .min-w-full{
@@ -4039,11 +4023,6 @@ details.collapse summary::-webkit-details-marker{
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-.focus\:border-blue-500:focus{
-  --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
 .focus\:outline-none:focus{

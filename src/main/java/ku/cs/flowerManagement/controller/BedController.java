@@ -1,6 +1,7 @@
 package ku.cs.flowerManagement.controller;
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
+import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
@@ -64,6 +65,8 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
         System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
         model.addAttribute("plantOrders", plantOrder);
+        Flower flower = plantOrder.getFlower();
+        model.addAttribute("flower", flower);
         return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 
