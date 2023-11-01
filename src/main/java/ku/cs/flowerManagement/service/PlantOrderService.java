@@ -377,7 +377,7 @@ PlantOrderService {
 
     public void harvest(PlantOrderRequest plantOrderRequest){
         PlantOrder record = getPlantOrderButNoHarvestedByPID(plantOrderRequest.getPID());
-        if(record.getFlowerStatus() == FlowerStatus.FULLY_GROWN) {
+        if(record.getFlowerStatus() == FlowerStatus.HARVESTED) {
             //managing stock
             Stock stock = new Stock();
             LocalDateTime localDateTime = LocalDateTime.now();
