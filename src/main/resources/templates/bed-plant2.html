@@ -44,6 +44,7 @@
     <td style="text-align: center">
       <input type="hidden" name="flowerID" th:value="${flower.id}" />
       <form th:action="@{/beds/{PID}}">
+        <input type="hidden" name="PID" th:value="${PID}" />
         <button type="submit" th:value="${flower.id}" name="flowerID">เลือก</button> <!-- กดเลือกดอกไม้ที่จะปลูก -->
       </form>
     </td>

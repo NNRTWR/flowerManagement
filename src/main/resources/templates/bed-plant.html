@@ -101,7 +101,7 @@ overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-wh
 
             <td style="text-align: center">
                 <form action="#" th:action="@{/beds/order/{PID}(PID=${PID})}" method="POST">
-                    <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก --> อันนี้คอมเม้นไว้ละ
+                    <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
 <!--                <form action="#" th:action="@{/beds/{PID}(PID=${PID})}">-->
                     <button type="submit" th:value="${order.id}" name="gardener_order_ID">เลือก</button>
                 </form>
