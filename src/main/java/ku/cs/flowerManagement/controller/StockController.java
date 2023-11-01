@@ -1,18 +1,20 @@
 package ku.cs.flowerManagement.controller;
 
-import ku.cs.flowerManagement.entity.Stock;
-import ku.cs.flowerManagement.model.FlowerRequest;
+import ku.cs.flowerManagement.model.OrderFlowerRequest;
 import ku.cs.flowerManagement.model.StockRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.service.FlowerService;
-import ku.cs.flowerManagement.service.InvoiceService;
 import ku.cs.flowerManagement.service.OrderService;
 import ku.cs.flowerManagement.service.StockService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 @Controller
 public class StockController {
 
@@ -21,9 +23,6 @@ public class StockController {
 
     @Autowired
     private FlowerService flowerService;
-
-    @Autowired
-    private InvoiceService invoiceService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -40,12 +39,19 @@ public class StockController {
 //    @RequestMapping
 
     @GetMapping("/stock")
-    public String showFlowerPage(Model model) {
+    public String showStockPage(Model model) {
         model.addAttribute("stock", new StockRequest());
         model.addAttribute("stocks", stockService.getStockList());
         // ใช้ FlowerService getAllFlowers
-//        model.addAttribute("options", flowerService.getFlowers());
+        model.addAttribute("options", flowerService.getFlowers());
         return "stock";
+    }
+
+
+    @PostMapping("/stock")
+    public String createStock(@ModelAttribute StockRequest stock, Model model) {
+        stockService.createStock(stock);
+        return "redirect:/stock";
     }
 
     @GetMapping("/stock{id}")
@@ -61,18 +67,8 @@ public class StockController {
         model.addAttribute("method", "POST");
         return "flower-detail";
     }
-//
-//    @PostMapping("/stock")
-//    public String createStock(@ModelAttribute StockRequest stock) {
-//        stockService.addStock(stock);
-//        return "redirect:/stock";
+//    @GetMapping("/stock")
+//    public String getStockPage(Model model) {
+//        return "stock";
 //    }
-//
-//    @PutMapping("/stock/{id}")
-//    public String updateStock(@ModelAttribute FlowerRequest flower, @PathVariable int id) {
-//        flower.setFID(id);
-//        flowerService.updateFlower(flower);
-//        return "redirect:/flower";
-//    }
-
 }

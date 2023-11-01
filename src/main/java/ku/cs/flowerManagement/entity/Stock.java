@@ -15,15 +15,15 @@ import java.util.UUID;
 public class Stock {
 
     @Id
-//    @GeneratedValue
-    private int SID; //รหัส Stock lot
+    @GeneratedValue
+    private int SID; // This field will be auto-incremented รหัส Stock lot
 
     private int total; //คงเหลือ
     private Date time; //วันที่
     private int quantity; //จำนวนดอกไม้
-//    private UUID id;
-    @Enumerated(EnumType.STRING)
-    private StockStatus stockStatus;
+    //    private UUID id;
+//    @Enumerated(EnumType.STRING)
+//    private StockStatus stockStatus;
 
     @ManyToOne
     @JoinColumn(name = "FID")

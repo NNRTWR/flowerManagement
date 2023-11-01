@@ -25,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -51,11 +52,6 @@ public class InvoiceController {
 
 
 
-        @RequestMapping("/invoice")
-        public ModelAndView invoiceView(Map<String,Object> model) {
-            model.put("stocks",stockService.getStockList());
-            return new ModelAndView("invoice/invoicePage");
-        }
 
 
     @GetMapping("/invoice")
@@ -65,7 +61,7 @@ public class InvoiceController {
         model.addAttribute("invoice", new InvoiceRequest());
         model.addAttribute("invoices", orderService.getOrders());
         model.addAttribute("options", orderService.getOrders());
-        model.addAttribute("stock",new Stock());
+        model.addAttribute("stock",null);
 //        model.addAttribute("stocks", stockService.getStockList());
 //        System.out.println(stockService.getStockList());
 
@@ -96,11 +92,13 @@ public class InvoiceController {
 
     @PostMapping("/invoiceConfirm")
     public String stockConfirm(Model model ,@RequestParam("FID") int FID , @RequestParam("OID") int OID) {
-        Stock stockData = stockService.getStockByFID(FID);
+        int stockData = stockService.calculateStock(FID);
+        List<Stock> stockLists = stockService.getStockByFID(FID);
         model.addAttribute("invoices", orderService.getOrders());
         model.addAttribute("invoice", orderService.getOrderById(OID));
         model.addAttribute("options", orderService.getOrders());
         model.addAttribute("stock",stockData);
+        model.addAttribute("stockList",stockLists);
 
         // ใช้ FlowerService getAllFlowers
 //        model.addAttribute("options", flowerService.getFlowers());
@@ -109,8 +107,8 @@ public class InvoiceController {
 
 
     @PostMapping("/invoiceCompleteButton")
-    public String stockComplete(Model model , @RequestParam("OID") int OID , @RequestParam("SID") int SID , @RequestParam("amount") String amount , @RequestParam("orderQuantity") int orderQuantity){
-            invoiceService.InvoiceComplete(OID , SID , Double.parseDouble(amount) , orderQuantity);
+    public String stockComplete(Model model , @RequestParam("OID") int OID ,@RequestParam("SIDList") List<Integer> SIDList, @RequestParam("amount") String amount , @RequestParam("orderQuantity") int orderQuantity , @RequestParam("FID") int FID){
+        invoiceService.InvoiceComplete(OID , SIDList , Double.parseDouble(amount) , orderQuantity ,FID);
         return "redirect:/allocate";
     }
 
@@ -122,7 +120,7 @@ public class InvoiceController {
         model.addAttribute("invoice", new InvoiceRequest());
         model.addAttribute("invoices", invoiceService.getInvoices());
         model.addAttribute("options", orderService.getOrders());
- //       System.out.println("Order List: "+orderService.getOrderList());
+        //       System.out.println("Order List: "+orderService.getOrderList());
         model.addAttribute("confirmInvoice",invoiceService.getInvoiceById(id));
         model.addAttribute("stock");
         return "invoice";
@@ -135,8 +133,11 @@ public class InvoiceController {
 //    }
 
 
+    @GetMapping("/charge-money")
+    public String getChargeMoneyPage(Model model) {
+        return "charge-money";
+    }
 }
-
 
 
 //import ku.cs.flowerManagement.model.CancelOrderRequest;

@@ -25,10 +25,10 @@
             <tr>
               <th>SID</th>
               <th>total</th>
-              <th>quantity</th>
-              <th>time</th>
-              <th>stockStatus</th>
-              <th>FID</th>
+              <!--              <th>quantity</th>-->
+              <!--              <th>time</th>-->
+              <!--              <th>stockStatus</th>-->
+              <th>FName</th>
             </tr>
             </thead>
             <tbody id="orderTable">
@@ -36,22 +36,126 @@
             <tr th:each="stock : ${stocks}">
               <td th:text="${stock.SID}"></td>
               <td th:text="${stock.total}"></td>
-              <td th:text="${stock.quantity}"></td>
-<!--              <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.getPrice(), 1, 'COMMA', 2, 'POINT')}"> </td>-->
-              <td th:text="${stock.time}"></td>
-              <td th:text="${stock.stockStatus}"></td>
-              <td th:text="${stock.flower.FID}"></td>
+              <!--              <td th:text="${stock.quantity}"></td>-->
+              <!--              &lt;!&ndash;              <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.getPrice(), 1, 'COMMA', 2, 'POINT')}"> </td>&ndash;&gt;-->
+              <!--              <td th:text="${stock.time}"></td>-->
+              <!--              <td th:text="${stock.stockStatus}"></td>-->
+              <td th:text="${stock.flower.FName}"></td>
             </tr>
             <!-- Add more rows as needed -->
             </tbody>
           </table>
         </div>
       </div>
-      <div>
-        <a th:href="@{/stock}" class="btn btn-primary">Add Stock</a>
+      <!--      <div>-->
+      <!--        <a th:href="@{/stock}" class="btn btn-primary">Add Stock</a>-->
+      <!--      </div>-->
+      <div class="order-form">
+        <h6> Add Stock </h6>
+        <form  th:action="@{/stock}" method="POST" th:object="${stock}">
+          <div class="mb-3">
+            <label for="inputType">เลือกชนิดดอกไม้</label>
+            <!--                                <input id="inputType" type="text" class="form-control"-->
+            <!--                                       name="FID">-->
+            <select class="form-control" id="inputType" name="FID" th:field="*{FID}" required>
+              <option value="0">select option</option>
+              <option th:each="option : ${options}" th:value="${option.getFID()}" th:text="${option.getFName()}"></option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="inputAmount">จำนวนดอกไม้</label>
+            <input id="inputAmount" type="number" class="form-control"
+                   name="amount" th:field="*{Quantity}" required>
+          </div>
+          <button id="submit-button" class="main-button" type="submit" >ยืนยัน</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+
+<script>
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const sidValue = document.getElementById('inputSID').value;
+        const url = "/stock/" + sidValue;
+
+        fetch(url, {
+<!--            method: 'PUT',-->
+            body: new FormData(this)
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = "/stock?id=" + sidValue;;  // Redirect after success
+            } else {
+                // Handle error
+            }
+        });
+    });
+</script>
 </body>
 </html>
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Flower</title>-->
+<!--  <link th:rel="stylesheet" th:href="@{static}">-->
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">-->
+<!--  <link th:rel="stylesheet" th:href="@{static}">-->
+<!--  <script th:src="@{/js/bootstrap.min.js}"></script>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container-fluid">-->
+<!--  <div class="row flex-nowrap">-->
+<!--    &lt;!&ndash;        side bar&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div th:replace="~{fragments/sidebar :: sidebar}"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;        Main content&ndash;&gt;-->
+<!--    <div class = "col">-->
+<!--      &lt;!&ndash;        search bar&ndash;&gt;-->
+<!--      &lt;!&ndash;            <div th:replace="~{fragments/searchbar :: searchbar}"></div>&ndash;&gt;-->
+<!--      <div class="row mt-4">-->
+<!--        <div class="col-md-7">-->
+<!--          <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--              <th>SID</th>-->
+<!--              <th>total</th>-->
+<!--              <th>quantity</th>-->
+<!--              <th>time</th>-->
+<!--              <th>stockStatus</th>-->
+<!--              <th>FID</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody id="orderTable">-->
+<!--            &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
+<!--            <tr th:each="stock : ${stocks}">-->
+<!--              <td th:text="${stock.SID}"></td>-->
+<!--              <td th:text="${stock.total}"></td>-->
+<!--              <td th:text="${stock.quantity}"></td>-->
+<!--&lt;!&ndash;              <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.getPrice(), 1, 'COMMA', 2, 'POINT')}"> </td>&ndash;&gt;-->
+<!--              <td th:text="${stock.time}"></td>-->
+<!--&lt;!&ndash;              <td th:text="${stock.stockStatus}"></td>&ndash;&gt;-->
+<!--              <td th:text="${stock.flower.FID}"></td>-->
+<!--            </tr>-->
+<!--            &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <a th:href="@{/stock}" class="btn btn-primary">Add Stock</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

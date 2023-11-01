@@ -50,15 +50,16 @@
         <p>ประเภทการสั่ง: <span id="orderMethod" th:text="${invoice.order_method}"></span></p>
         <p>ชนิดดอกไม้: <span id="flowerType" th:text="${invoice.FName}"></span></p>
         <p>จำนวนดอกไม้: <span id="quantity" th:text="${invoice.orderQuantity}"></span></p>
-        <p>จำนวนคงเหลือ: <span id="remain" th:text="${stock.total}"></span></p>
+        <span th:if="${stock != null}"><p>จำนวนคงเหลือ: <span id="remain"  th:text="${stock}"></span></p></span>
         <p>สถานะของออเดอร์: <span id="status" th:text="${invoice.status}"></span></p>
         <p>ราคาสุทธิ: <span id="price" th:text="${invoice.price}"></span></p>
     </div>
 
     <input type="hidden" name="OID" th:value="${invoice.OID}" />
-    <input type="hidden" name="SID" th:value="${stock.SID}" />
+    <input type="hidden" th:each="sid : ${stockList}" th:name="'SIDList'" th:value="${sid.SID}" />
     <input type="hidden" name="amount" th:value="${invoice.price}" />
     <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />
+    <input type="hidden" name="FID" th:value="${invoice.FID}" />
     <button id="completeButton" disabled >ยืนยัน</button>
 </form>
 
@@ -102,3 +103,174 @@
 </script>
 </body>
 </html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Flower Management Web Application</title>-->
+<!--    <link th:rel="stylesheet" th:href="@{static}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>รายการออเดอร์</h1>-->
+
+
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Order No</th>-->
+<!--        <th>Flower Type</th>-->
+<!--        <th>Amount</th>-->
+<!--        <th>Plant Status</th>-->
+<!--        <th>Order Method</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody id="invoiceTable">-->
+<!--    &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
+<!--    <tr th:each="invoice : ${invoices}">-->
+<!--        <td th:text="${invoice.OID}"></td>-->
+<!--        <td th:text="${invoice.FName}"></td>-->
+<!--        <td th:text="${invoice.orderQuantity}"></td>-->
+<!--        <td th:text="${invoice.plant_status}"></td>-->
+<!--        <td th:text="${invoice.order_method}"></td>-->
+<!--        &lt;!&ndash;                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">&ndash;&gt;-->
+<!--        &lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--    </tr>-->
+<!--    &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--<form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">-->
+<!--    <label for="order_id">เลือกหมายเลขออเดอร์:</label>-->
+<!--    <select id="order_id" name="order_id">-->
+<!--        <option value="0" data-fid="0">select option</option>-->
+<!--        <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>-->
+<!--    </select>-->
+<!--    <button type="submit" id="confirmButton">สรุป</button>-->
+<!--</form>-->
+
+<!--&lt;!&ndash;<form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" >&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div id="summary" class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h4>สรุปรายการ</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>หมายเลขออเดอร์: <span id="orderNumber" th:text="${invoice.OID}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ประเภทการสั่ง: <span id="orderMethod" th:text="${invoice.order_method}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ชนิดดอกไม้: <span id="flowerType" th:text="${invoice.FName}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>จำนวนดอกไม้: <span id="quantity" th:text="${invoice.orderQuantity}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <span th:if="${stock != null}"><p>จำนวนคงเหลือ: <span id="remain" th:text="${stock}"></span></p></span>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>สถานะของออเดอร์: <span id="status" th:text="${invoice.status}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ราคาสุทธิ: <span id="price" th:text="${invoice.price}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                    <label class="form-control-label" for="order_id">หมายเลข Order : </label> D00001 <br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                    <label class="form-control-label" for="order_id">ประเภทการสั่ง : </label> ปลีก<br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                    <label class="form-control-label" for="order_id">ชนิดดอกไม้ : </label> กุหลาบ<br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                    <label class="form-control-label" for="order_id">จำนวนดอกไม้ : </label> 20 ดอก<br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                    <label class="form-control-label" for="order_id">ราคาสุทธิ : ฿2,500</label> บาท&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" name="OID" th:value="${invoice.OID}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash;                <input type="hidden" name="SID" th:value="${stock.SID}" />&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash;                <input type="hidden" name="amount" th:value="${invoice.price}" />&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" name="FID" th:value="${invoice.FID}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="modal-footer">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิกรายการ</button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="submit" class="btn btn-primary" id="completeButton" disabled>ยืนยันรายการ</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+
+<!--<form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" >-->
+<!--    <div id="summary" class="form-group">-->
+<!--        <h4>สรุปรายการ</h4>-->
+<!--        <p>หมายเลขออเดอร์: <span id="orderNumber" th:text="${invoice.OID}"></span></p>-->
+<!--        <p>ประเภทการสั่ง: <span id="orderMethod" th:text="${invoice.order_method}"></span></p>-->
+<!--        <p>ชนิดดอกไม้: <span id="flowerType" th:text="${invoice.FName}"></span></p>-->
+<!--        <p>จำนวนดอกไม้: <span id="quantity" th:text="${invoice.orderQuantity}"></span></p>-->
+<!--        <span th:if="${stock != null}"><p>จำนวนคงเหลือ: <span id="remain" th:text="${stock}"></span></p></span>-->
+<!--        <p>สถานะของออเดอร์: <span id="status" th:text="${invoice.status}"></span></p>-->
+<!--        <p>ราคาสุทธิ: <span id="price" th:text="${invoice.price}"></span></p>-->
+<!--        &lt;!&ndash;                    <label class="form-control-label" for="order_id">หมายเลข Order : </label> D00001 <br>&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <label class="form-control-label" for="order_id">ประเภทการสั่ง : </label> ปลีก<br>&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <label class="form-control-label" for="order_id">ชนิดดอกไม้ : </label> กุหลาบ<br>&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <label class="form-control-label" for="order_id">จำนวนดอกไม้ : </label> 20 ดอก<br>&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <label class="form-control-label" for="order_id">ราคาสุทธิ : ฿2,500</label> บาท&ndash;&gt;-->
+<!--    </div>-->
+<!--    <input type="hidden" name="OID" th:value="${invoice.OID}" />-->
+<!--    &lt;!&ndash;                <input type="hidden" name="SID" th:value="${stock.SID}" />&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="hidden" name="amount" th:value="${invoice.price}" />&ndash;&gt;-->
+<!--    <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />-->
+<!--    <input type="hidden" name="FID" th:value="${invoice.FID}" />-->
+<!--    <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิกรายการ</button>-->
+<!--        <button type="submit" class="btn btn-primary" id="completeButton" disabled>ยืนยันรายการ</button>-->
+<!--    </div>-->
+<!--</form>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;    <div id="summary" >&ndash;&gt;-->
+<!--&lt;!&ndash;        <h2>สรุปรายการ</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>หมายเลขออเดอร์: <span id="orderNumber" th:text="${invoice.OID}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ประเภทการสั่ง: <span id="orderMethod" th:text="${invoice.order_method}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ชนิดดอกไม้: <span id="flowerType" th:text="${invoice.FName}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>จำนวนดอกไม้: <span id="quantity" th:text="${invoice.orderQuantity}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>จำนวนคงเหลือ: <span id="remain" th:text="${stock.total}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>สถานะของออเดอร์: <span id="status" th:text="${invoice.status}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p>ราคาสุทธิ: <span id="price" th:text="${invoice.price}"></span></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <input type="hidden" name="OID" th:value="${invoice.OID}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" name="SID" th:value="${stock.SID}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" name="amount" th:value="${invoice.price}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <button id="completeButton" disabled >ยืนยัน</button>&ndash;&gt;-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    document.getElementById("invoiceForm").addEventListener("submit", function (event) {-->
+<!--        event.preventDefault(); // Prevent the default form submission-->
+<!--        let selectedOrderId = document.getElementById("order_id").value;-->
+<!--        let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');-->
+<!--        let selectedFID = selectedOption.getAttribute("data-fid");-->
+<!--        let selectedOID = selectedOption.value;-->
+
+<!--        // Create hidden input fields for FID and OID-->
+<!--        let fidInput = document.createElement("input");-->
+<!--        fidInput.type = "hidden";-->
+<!--        fidInput.name = "FID"; // This should match the parameter name in your controller method-->
+<!--        fidInput.value = selectedFID;-->
+
+<!--        let oidInput = document.createElement("input");-->
+<!--        oidInput.type = "hidden";-->
+<!--        oidInput.name = "OID"; // This should match the parameter name in your controller method-->
+<!--        oidInput.value = selectedOID;-->
+
+<!--        // Append the hidden input fields to the form-->
+<!--        let form = document.getElementById("invoiceForm");-->
+<!--        form.appendChild(fidInput);-->
+<!--        form.appendChild(oidInput);-->
+
+<!--        // Submit the form-->
+<!--        form.submit();-->
+
+<!--    });-->
+
+<!--    let status = document.getElementById("status").textContent.trim(); // Get the status text-->
+<!--    let completeButton = document.getElementById("completeButton");-->
+
+<!--    if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {-->
+<!--        completeButton.disabled = true;-->
+<!--    } else {-->
+<!--        completeButton.disabled = false;-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

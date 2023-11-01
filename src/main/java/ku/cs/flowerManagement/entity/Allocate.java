@@ -17,8 +17,8 @@ public class Allocate {
     private UUID id;
 
     private double amount; //จำนวนการตัดสต็อค
-
-    @OneToOne
+    private int stockChanged;
+    @ManyToOne
     @JoinColumn(name = "OID")
     private OrderFlower OID; //รหัส Order
 

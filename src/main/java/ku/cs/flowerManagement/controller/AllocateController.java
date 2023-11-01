@@ -28,3 +28,4 @@ public class AllocateController {
         return "allocate-list"; // Return the name of your Thymeleaf template (e.g., "allocate.html")
     }
 }
+

@@ -27,7 +27,7 @@ public class AllocateService {
     private StockRepository stockRepository;
 
 
-    public void createAllocate(int OID , int SID , double amount){
+    public void createAllocate(int OID ,  Integer SID , double amount, int stockChanged){
         Allocate allocate = new Allocate();
         Optional<OrderFlower> orderFlower = orderRepository.findById(OID);
         Optional<Stock> stock = stockRepository.findById(SID);
@@ -35,6 +35,7 @@ public class AllocateService {
             allocate.setOID(orderFlower.get());
             allocate.setSID(stock.get());
             allocate.setAmount(amount);
+            allocate.setStockChanged(stockChanged);
         }
         allocateRepository.save(allocate);
     }
@@ -48,10 +49,10 @@ public class AllocateService {
             if (Objects.nonNull(orderFlower)) {
                 if (dataFlower.containsKey(orderFlower.getFlower().getFName())) {
                     Double amount = dataFlower.get(orderFlower.getFlower().getFName());
-                    amount += orderFlower.getPrice();
+                    amount += allocate.getAmount();
                     dataFlower.put(orderFlower.getFlower().getFName(), amount);
                 } else {
-                    dataFlower.put(orderFlower.getFlower().getFName(), orderFlower.getPrice());
+                    dataFlower.put(orderFlower.getFlower().getFName(), allocate.getAmount());
                 }
             }
         }

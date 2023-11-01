@@ -1,6 +1,5 @@
 package ku.cs.flowerManagement.controller;
 
-import ku.cs.flowerManagement.model.CancelOrderRequest;
 import ku.cs.flowerManagement.model.OrderFlowerRequest;
 import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.OrderService;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class OrderController {
+
 
     @Autowired
     private OrderService orderService;
@@ -62,5 +62,9 @@ public class OrderController {
         return "order";
     }
 
-
+    @GetMapping("/queue")
+    public String getQueuePage(Model model) {
+        System.out.println("Inside getQueuePage method");
+        return "queue";
+    }
 }

@@ -30,4 +30,3 @@ public class OrderFlower {
 
     // Constructors, getters, and setters
 }
-

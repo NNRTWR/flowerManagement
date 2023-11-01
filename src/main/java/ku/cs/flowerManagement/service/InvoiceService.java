@@ -80,9 +80,9 @@ public class InvoiceService {
 
 
     public void createInvoice(InvoiceRequest invoiceRequest,
-                                OrderFlowerRequest orderFlowerRequest,
-                                FlowerRepository flowerRepository,
-                                Model model) {
+                              OrderFlowerRequest orderFlowerRequest,
+                              FlowerRepository flowerRepository,
+                              Model model) {
         Invoice invoice = modelMapper.map(invoiceRepository, Invoice.class);
         OrderFlower orderFlower = orderRepository.findById(orderFlowerRequest.getOID()).orElse(null);
         // OrderFlower orderFlower = modelMapper.map(orderFlowerRequest, OrderFlower.class);
@@ -90,7 +90,7 @@ public class InvoiceService {
         System.out.println("Flower: "+flower);
         System.out.println("Order flower: " + orderFlower);
         if (invoice == null) return ;
-            invoice.setFlower(flower);
+        invoice.setFlower(flower);
         assert orderFlower != null;
         invoice.setOrder_method(orderFlower.getOrder_method());
         invoice.setQuantity(orderFlower.getQuantity());
@@ -127,10 +127,10 @@ public class InvoiceService {
         invoiceRepository.save(invoice);
     }
 
-    public void InvoiceComplete(int OID , int SID , double amount , int total) {
+    public void InvoiceComplete(int OID ,  List<Integer> SID , double amount , int total , int FID) {
         orderService.confirmOrderById(Integer.parseInt(String.valueOf(OID)));
-        stockService.updateStock(SID , total);
-        allocateService.createAllocate(OID , SID , amount);
+        stockService.updateStock(total , FID , OID);
+//        allocateService.createAllocate(OID , SID , amount);
     }
 
 }
