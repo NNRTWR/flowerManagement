@@ -1,6 +1,7 @@
 package ku.cs.flowerManagement.controller;
 
 import ku.cs.flowerManagement.adapter.DateTimeComparator;
+import ku.cs.flowerManagement.adapter.GardenOrderTimeComparator;
 import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
@@ -94,7 +95,8 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     public String showOrder(@PathVariable int PID, @RequestParam(defaultValue = "0") int page, Model model) {
         int pageSize = 3; // Number of items per page
         Page<GardenerOrder> gardenerOrdersPage = gardenerOrderService.getAllGardenerOrderPage(page, pageSize);
-        List<GardenerOrder> gardenerOrders = gardenerOrdersPage.getContent();
+        GardenOrderTimeComparator gardenOrderTimeComparator = new GardenOrderTimeComparator();
+        List<GardenerOrder> gardenerOrders = gardenerOrderService.getAllPendingGardenerOrder(gardenOrderTimeComparator);
         model.addAttribute("orders", gardenerOrders);
         model.addAttribute("PID", PID);
         model.addAttribute("currentPage", page);
