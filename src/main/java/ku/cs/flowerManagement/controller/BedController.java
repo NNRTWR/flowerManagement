@@ -37,7 +37,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @Autowired
     private OrderItemService orderItemService;
     @Autowired
-    private CommonService commonService;
+    private CommonService commonService = new CommonService();
 
     public UUID currentG;
 
@@ -62,6 +62,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     //dead-harvest-detail
     @GetMapping("/{PID}")
     public String detailOfPlantOrder(@PathVariable int PID,Model model){
+        model.addAttribute("commonService",commonService);
         PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
         System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
         model.addAttribute("plantOrder", plantOrder);
@@ -69,7 +70,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     }
 
     @PostMapping("/{PID}")
-    public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest, @RequestParam(name = "deadButton", required = false) String deadButton, @RequestParam(name = "harvestButton", required = false) String harvestButton,Model model){
+    public String editedPlantOrder(@ModelAttribute PlantOrderRequest plantOrderRequest, @RequestParam(name = "deadButton", required = false) String deadButton, @RequestParam(name = "harvestButton", required = false) String harvestButton,Model model, @RequestParam(name = "resetButton",required = false) String resetButton){
         if (deadButton != null) {
             // The "แจ้งดอกไม้ตาย" button was clicked
             plantOrderService.plantWasDied(plantOrderRequest);
@@ -78,6 +79,13 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
             System.out.println("clicked harvest");
             plantOrderService.harvest(plantOrderRequest);
         }
+
+        if ("true".equals(resetButton)) {
+            System.out.println("อยู่ที่ editedPlantOrder");
+            plantOrderService.resetPlant(plantOrderRequest);
+            return "redirect:/beds/order/{PID}"; //reset แล้ว ให้ไปปลูกใหม่ได้
+        }
+
         //return bed-view ต่อจะแตกเพราะ PID ใน URL มันจะมี "?" อยู่ท้ายแล้วก็แก้ไม่เป็นด้วย
         return "redirect:/beds";
     }
