@@ -108,7 +108,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @PostMapping("/order/{PID}")
     public String choseOrder(@ModelAttribute gRequest plantOrder,Model model){
         plantOrderService.createPlantOrder(plantOrder, dateTimeComparator);
-        return "redirect:/beds/{PID}";
+        return "redirect:/beds";
     }
 
 
