@@ -193,9 +193,9 @@ PlantOrderService {
                 return FlowerStatus.SPROUT;
             else if (growing >= period)
                 return FlowerStatus.GROWING;
-            else if (fullyGrown + (harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
+            else if (fullyGrown + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
                 return FlowerStatus.FULLY_GROWN;
-            else if (harvest + (harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
+            else if (harvest + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
                 return FlowerStatus.HARVEST;
             else
                 return FlowerStatus.DEAD;
@@ -265,6 +265,7 @@ PlantOrderService {
         } else {
             record = plantOrderRepository.findByPID(request.getPID());
         }
+        record.setFlowerStatus(FlowerStatus.SEED);
         record.setGardener_order(order); // รอบการปลูกนี้มาจาก plantOrder อันนี้
         record.setQuantity(order.getQuantity()); //ตอนนี้ปลูกดอกไม้ตาม order แบบเป๊ะๆอยู๋
         record.setFlower(order.getFlower()); //แปลงนี้ปลูกดอกนี้นะ
@@ -376,8 +377,9 @@ PlantOrderService {
 //    }
 
     public void harvest(PlantOrderRequest plantOrderRequest){
-        PlantOrder record = getPlantOrderButNoHarvestedByPID(plantOrderRequest.getPID());
-        if(record.getFlowerStatus() == FlowerStatus.FULLY_GROWN) {
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++dadas");
+        PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
+        if(record.getFlowerStatus() == FlowerStatus.HARVEST) {
             //managing stock
             Stock stock = new Stock();
             LocalDateTime localDateTime = LocalDateTime.now();
@@ -387,16 +389,16 @@ PlantOrderService {
             stock.setPlantOrder(record);
             System.out.println("hey");
             stockRepository.save(stock);
-
+            record.setHarvestable(record.getHarvestable() - 1);
             //still harvestable
-            if (record.getHarvestable() > 1) {
+            if (record.getHarvestable() >= 1) {
                 record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
-            } else if (record.getHarvestable() == 1) {//died set stock to zero show as empty field (ถ้าเป็นการเก็บเกี่ยวรอบสุดท้าย)
+            } else if (record.getHarvestable() == 0) {//died set stock to zero show as empty field (ถ้าเป็นการเก็บเกี่ยวรอบสุดท้าย)
                 record.setFlowerStatus(FlowerStatus.HARVESTED);
                 record.getGardener_order().setStatus(OrderStatus.COMPLETED);
             }
 
-            record.setHarvestable(record.getHarvestable() - 1);
+
 
             if (record.getListStock() == null) { //ยังไม่เคยเก็บเกี่ยวเลย
                 record.setListStock(new ArrayList<>());
