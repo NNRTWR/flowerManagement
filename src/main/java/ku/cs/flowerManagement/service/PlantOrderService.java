@@ -195,7 +195,7 @@ PlantOrderService {
                 return FlowerStatus.GROWING;
             else if (fullyGrown + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period && flower.getFullyGrownPeriod() != 0)
                 return FlowerStatus.FULLY_GROWN;
-            else if (harvest + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
+            else if (harvest + ( harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
                 return FlowerStatus.HARVEST;
             else
                 return FlowerStatus.DEAD;
@@ -333,7 +333,7 @@ PlantOrderService {
             int remain = record.getTotal() - plantOrderRequest.getDeadPlant();
             if(remain > 0)
                 record.setTotal(record.getTotal() - plantOrderRequest.getDeadPlant());
-            else if(remain < 0) {
+            else if(remain <= 0) {
                 record.setTotal(0); //จะใช้เวลากด reset แปลง จะให้มันเป็น -1 >>> ใช้เป็นเงื่อนไขเวลากดไปที่แปลง ถ้าเป็น -1 จะไปปลูก แต่ถ้าไม่ใช้จะแสดงข้อมูลมันอยู่
                 record.setFlowerStatus(FlowerStatus.DEAD);
                 record.getGardener_order().setStatus(OrderStatus.FAIL);
@@ -343,6 +343,14 @@ PlantOrderService {
             plantOrderRepository.save(record);
         }
     }
+
+    public void resetPlant(PlantOrderRequest request){
+        PlantOrder plantOrder =  plantOrderRepository.findByPID(request.getPID());
+        plantOrder.setTotal(-1);
+        plantOrderRepository.save(plantOrder);
+        System.out.println(plantOrder.getTimePlant() + " " + plantOrder.getTotal());
+    }
+
         //harvest
 //    public void harvest(PlantOrderRequest plantOrderRequest){
 //        PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
@@ -384,8 +392,8 @@ PlantOrderService {
             Stock stock = new Stock();
             LocalDateTime localDateTime = LocalDateTime.now();
             stock.setTime(localDateTime);
-            stock.setQuantity(record.getTotal()); //ไม่นับอันที่ตายแล้วนับเฉพาะอันที่เก็บมา
-            stock.setTotal(record.getTotal());
+            stock.setQuantity(record.getTotal()*record.getFlower().getQuantity());
+            stock.setTotal(record.getTotal()*record.getFlower().getQuantity());
             stock.setPlantOrder(record);
             System.out.println("hey");
             stockRepository.save(stock);

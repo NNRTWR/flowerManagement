@@ -79,6 +79,7 @@ public class OrderService {
         System.out.println("Price///////////////////// : "+flower.getPrice() );
         System.out.println("Quantity///////////////////: " + orderFlowerRequest.getOrderQuantity());
         orderFlower.setFlower(flower);
+        orderFlower.setQuantity(orderFlowerRequest.getOrderQuantity());
         orderFlower.setPrice(flower.getPrice() * orderFlowerRequest.getOrderQuantity());
         orderFlower.setStatus(OrderStatus.PENDING);
         // orderFlower.setPlant_status(FlowerStatus.SEED);

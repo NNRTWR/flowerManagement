@@ -27,9 +27,6 @@ public class Stock {
     private PlantOrder plantOrder;
     
 //    private UUID id;
-    @Enumerated(EnumType.STRING)
-    private StockStatus stockStatus;
-
     @ManyToOne
     @JoinColumn(name = "FID")
     @JsonIgnore

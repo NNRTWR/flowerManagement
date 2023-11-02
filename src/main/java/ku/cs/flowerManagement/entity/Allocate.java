@@ -12,6 +12,7 @@ import java.util.UUID;
 @Table(name = "Allocate")
 public class Allocate {
 
+    
     @Id
     @GeneratedValue
     private UUID id;
