@@ -71,7 +71,8 @@
 
                             <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้
                             </th>
-                            <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนดอกไม้ที่ต้องการ</th>
+                            <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนดอกไม้</th>
+                            <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนต้นที่ปลูก</th>
                             <th class="font-semibold text-lg uppercase px-6 py-4">สถานะ</th>
                         </tr>
                     </thead>
@@ -79,6 +80,7 @@
                       <tr th:each="orderItem : ${orderItems}">
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${commonService.getPatternTime(orderItem.date)}"></td>
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
+                        <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.quantity * orderItem.flower.quantity}"></td>
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.status}"></td>
                       </tr>
