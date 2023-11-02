@@ -9,14 +9,13 @@
 </head>
 <body>
 <div layout:fragment ="content">
-    <h1 class="text-2xl text-center font-bold">ข้อมูลดอกไม้ในระบบ</h1>
+    <h1 class="text-3xl text-center font-bold">ข้อมูลดอกไม้ในระบบ</h1>
     <div class="flex items-center justify-between mb-4 mt-6">
         <div class="flex items-center">
             <h1 class="text-xl ml-10 ">จำนวนดอกไม้ทั้งหมด</h1>
             <span class="text-xl ml-10" th:text="${totalFlowers}"></span>
             <span class="text-xl ml-10">ชนิด</span>
         </div>
-        
         <div class="flex space-x-2 items-center">
             <button class="btn btn-success text-lg mr-8" onclick="my_modal_3.showModal()">เพิ่มข้อมูลดอกไม้</button>
             <dialog id="my_modal_3" class="modal">
@@ -28,20 +27,20 @@
                   <form th:action="@{/flower}" method="POST" class="grid grid-cols-2 gap-4 px-6 ">
                     <div class="flex flex-col items-center">
                     <div class="mt-3 mb-3 text-sm">
-                        <label for="inputName">Name</label>
+                        <label for="inputName">ชื่อดอกไม้</label>
                         <input id="inputName" type="input" class="form-control rounded-xl pr-9 py-2   text-gray-500 pl-7 
                         bg-gray-100  border-gray-600 border-2"
                                name="FName">
                     </div>
                     <div class="mt-3 mb-3 text-sm">
-                        <label for="inputHow_to_plant">How to plant</label>
+                        <label for="inputHow_to_plant">วิธีการปลูก</label>
                         <textarea id="inputHow_to_plant" type="input" class="form-control rounded-xl pr-5 py-8   text-gray-500 pl-7 
                         bg-gray-100  border-gray-600 border-2"
                                name="how_to_plant"> </textarea>
                     </div>
 
                     <div class="mt-3 mb-3 text-sm">
-                        <label for="inputHow_to_take_care">How to plant</label>
+                        <label for="inputHow_to_take_care">วิธีการดูแล</label>
                         <textarea id="inputHow_to_take_care" type="input" class="form-control rounded-xl pr-5 py-8   text-gray-500 pl-7 
                         bg-gray-100  border-gray-600 border-2"
                                name="how_to_take_care"> </textarea>
@@ -51,49 +50,49 @@
                     
                 
                     <div class="mb-3">
-                        <label for="inputseedPeriod">seed Period</label>
+                        <label for="inputseedPeriod">ระยะเวลาเป็นเมล็ด</label>
                         <input id="inputseedPeriod" type="input" class="form-control"
                                name="seedPeriod">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputsproutPeriod">sproutPeriod</label>
+                        <label for="inputsproutPeriod">ระยะเวลาเป็นต้นกล้า</label>
                         <input id="inputsproutPeriod" type="input" class="form-control"
                                name="sproutPeriod">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputgrowingPeriod">growingPeriod</label>
+                        <label for="inputgrowingPeriod">ระยะเวลาเป็นต้นอ่อน</label>
                         <input id="inputgrowingPeriod" type="input" class="form-control"
                                name="growingPeriod">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputfullyGrownPeriod">fullyGrownPeriod</label>
+                        <label for="inputfullyGrownPeriod">ระยะเวลาโตเต็มที่</label>
                         <input id="inputfullyGrownPeriod" type="input" class="form-control"
                                name="fullyGrownPeriod">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputharvestPeriod">harvestPeriod</label>
+                        <label for="inputharvestPeriod">ระยะเวลาออกดอก</label>
                         <input id="inputharvestPeriod" type="input" class="form-control"
                                name="harvestPeriod">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputHow_to_harvest">How to harvest</label>
+                        <label for="inputHow_to_harvest">จำนวนครั้งที่เก็บเกี่ยวได้</label>
                         <input id="inputHow_to_harvest" type="input" class="form-control"
                                name="how_to_harvest">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputPrice">Price</label>
+                        <label for="inputPrice">ราคา</label>
                         <input id="inputPrice" type="input" class="form-control"
                                name="price">
                     </div>
                 
                     <div class="mb-3">
-                        <label for="inputQuantity">Quantity</label>
+                        <label for="inputQuantity">จำนวนดอกไม้ต่อ1ต้น</label>
                         <input id="inputQuantity" type="input" class="form-control"
                                name="quantity">
                     </div>
