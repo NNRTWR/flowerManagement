@@ -9,7 +9,7 @@ import ku.cs.flowerManagement.model.OrderItemRequest;
 import ku.cs.flowerManagement.service.CommonService;
 import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.GardenerOrderService;
-import ku.cs.flowerManagement.service.OrderItemService;
+import ku.cs.flowerManagement.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;

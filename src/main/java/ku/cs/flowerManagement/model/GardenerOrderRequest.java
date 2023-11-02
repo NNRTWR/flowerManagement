@@ -8,6 +8,6 @@ import java.util.UUID;
 
 @Data
 public class GardenerOrderRequest {
-    private UUID flowerID;
+    private int flowerID;
     private int quantity;
 }

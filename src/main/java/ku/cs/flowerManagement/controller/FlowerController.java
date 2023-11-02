@@ -45,9 +45,9 @@ public class FlowerController {
     
 
     @GetMapping("/flower{id}")
-    public String showFlowerDetailPage(Model model, @PathVariable UUID id) {
+    public String showFlowerDetailPage(Model model, @PathVariable Integer fid) {
 //        model.addAttribute("flower", flowerService.getFlowerById(id));
-        model.addAttribute("flower",flowerService.getOneFlower(id));
+        model.addAttribute("flower",flowerService.getOneFlower(fid));
         model.addAttribute("method", "PUT");
         return "flower-detail";
     }

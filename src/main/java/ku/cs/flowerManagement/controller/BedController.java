@@ -35,7 +35,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     private DateTimeComparator dateTimeComparator;
 
     @Autowired
-    private OrderItemService orderItemService;
+    private OrderService orderItemService;
     @Autowired
     private CommonService commonService;
 

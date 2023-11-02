@@ -16,12 +16,11 @@ import java.util.UUID;
 public class OrderItem {
     @Id
     @GeneratedValue
-    private UUID id;
-
     private int OID; //รหัส Order //ใช้ method เพิ่มเลขเอา
 
     @ManyToOne
-    private Flower flower; //สั่งซื้อดอกไม้อะไร
+    @JoinColumn(name = "FID")
+    private Flower flower;
 
     private int quantity; //จำนวนดอกไม้
 
@@ -33,8 +32,8 @@ public class OrderItem {
     @CreationTimestamp
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "order") // JPA join ให้
+    @OneToMany(mappedBy = "OID") // JPA join ให้
     private List<Allocate> listAllocate;
-
+    // Constructors, getters, and setters
 }
 

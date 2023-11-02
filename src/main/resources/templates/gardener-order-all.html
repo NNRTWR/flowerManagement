@@ -30,7 +30,7 @@
                     <label for="inputFlowerID">Name</label>
                     <select class="form-control" id="inputFlowerID" name="flowerID">
                       <option th:each="flower : ${flowers}"
-                              th:value="${flower.id}" th:text="${flower.FName}">
+                              th:value="${flower.FID}" th:text="${flower.FName}">
                       </option>
                     </select>
                   </div>

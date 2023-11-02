@@ -55,7 +55,7 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
     public void addOrder(GardenerOrderRequest gardenerOrder){ //สร้าง order ส่งไปให้ฝ่ายปลูก
 //        GardenerOrder record = modelMapper.map(gardenerOrder, GardenerOrder.class);
         GardenerOrder record = new GardenerOrder();
-        record.setFlower(flowerRepository.findById(gardenerOrder.getFlowerID()).get());
+        record.setFlower(flowerRepository.findByFID(gardenerOrder.getFlowerID()));
         record.setQuantity(gardenerOrder.getQuantity());
         record.setStatus(OrderStatus.PENDING);
         gardenerOrderRepository.save(record);

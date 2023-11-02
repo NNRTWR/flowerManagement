@@ -45,7 +45,7 @@ public class FlowerService {
 //        return  modelMapper.map(flowerRepository.findById(id).orElse(null), FlowerRequest.class);
 //    }
 
-    public Flower getOneFlower(UUID id){ //แสดง flower ที่เลือก
+    public Flower getOneFlower(int id){ //แสดง flower ที่เลือก
         return flowerRepository.findById(id).get();
     }
     // Create Flower
@@ -64,22 +64,27 @@ public class FlowerService {
 
 
     // Update Flower
-//    public FlowerRequest updateFlower(FlowerRequest flowerRequest) {
-////        System.out.println(flowerRequest.getFID());
-//        Flower flower1 =flowerRepository.findById(flowerRequest.getFID()).orElse(null);
-//        if (flower1 == null) return null;
-//        flower1.setFName(flowerRequest.getFName());
-//        flower1.setPrice(flowerRequest.getPrice());
-//        flower1.setTime(flowerRequest.getTime());
-//        flower1.setHow_to_plant(flowerRequest.getHow_to_plant());
-//        flower1.setHow_to_harvest(flowerRequest.getHow_to_harvest());
-//        flower1.setHow_to_take_care(flowerRequest.getHow_to_take_care());
-//        flowerRepository.save(flower1);
-////        System.out.println("Flower1");
-////        System.out.println(flower1.getFID());
-//        return modelMapper.map(flower1, FlowerRequest.class);
-//    }
+    public FlowerRequest updateFlower(FlowerRequest flowerRequest) {
+        //        System.out.println(flowerRequest.getFID());
+                Flower flower1 =flowerRepository.findById(flowerRequest.getFID()).orElse(null);
+                if (flower1 == null) return null;
+                flower1.setFName(flowerRequest.getFName());
+                flower1.setPrice(flowerRequest.getPrice());
+                flower1.setSeedPeriod(flowerRequest.getSeedPeriod());
+                flower1.setSproutPeriod(flowerRequest.getSproutPeriod());
+                flower1.setGrowingPeriod(flowerRequest.getGrowingPeriod());
+                flower1.setFullyGrownPeriod(flowerRequest.getFullyGrownPeriod());
+                flower1.setHarvestPeriod(flowerRequest.getHarvestPeriod());
+                flower1.setSeedPeriod(flowerRequest.getSeedPeriod());
+                flower1.setHow_to_plant(flowerRequest.getHow_to_plant());
+                flower1.setHow_to_harvest(flowerRequest.getHow_to_harvest());
+                flower1.setHow_to_take_care(flowerRequest.getHow_to_take_care());
+                flowerRepository.save(flower1);
+        //        System.out.println("Flower1");
+        //        System.out.println(flower1.getFID());
+                return modelMapper.map(flower1, FlowerRequest.class);
+            }
+    }
 
 
 
-}

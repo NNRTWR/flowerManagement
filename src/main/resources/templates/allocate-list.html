@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{static}">
+    <title>Allocate-list</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Flower Name</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="allocateModel : ${allocateRequest.allocateModels}">
+        <td th:text="${allocateModel.fName}"></td>
+        <td th:text="${allocateModel.total}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

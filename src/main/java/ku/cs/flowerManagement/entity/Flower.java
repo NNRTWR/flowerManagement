@@ -10,12 +10,13 @@ import java.util.UUID;
 
 @Data
 @Entity
+@Table(name = "Flower")
 public class Flower {
 
 //    private UUID id;
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int FID; //รหัสของดอกไม้ //ใช้ method เพิ่มเลขเอา
+     //รหัสของดอกไม้ //ใช้ method เพิ่มเลขเอา
 //    private String FName; //ชื่อดอกไม้
 //    private String how_to_plant; //วิธีการปลูก
 //    private String how_to_take_care; //วิธีการดูแล
@@ -28,10 +29,9 @@ public class Flower {
 //    @OneToMany(mappedBy = "flower")
 //    private List<OrderItem> orders = new ArrayList<>();
 
-
     @Id
     @GeneratedValue
-    private UUID id;
+    private int FID;
 
     private String FName; //ชื่อดอกไม้
     private String how_to_plant; //วิธีการปลูก
@@ -49,4 +49,7 @@ public class Flower {
 //    private String pic; //รูปภาพของดอกไม้ //ต้องมีด้วยรึ ไว้ก่อน
 
     private int quantity; //จำนวนดอกไม้
+    @OneToMany(mappedBy = "flower")
+    private List<OrderItem> orders = new ArrayList<>();   
+
 }

@@ -193,7 +193,7 @@ PlantOrderService {
                 return FlowerStatus.SPROUT;
             else if (growing >= period)
                 return FlowerStatus.GROWING;
-            else if (fullyGrown + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
+            else if (fullyGrown + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period && flower.getFullyGrownPeriod() != 0)
                 return FlowerStatus.FULLY_GROWN;
             else if (harvest + ((long) harvested * (flower.getFullyGrownPeriod() + flower.getHarvestPeriod())) >= period)
                 return FlowerStatus.HARVEST;

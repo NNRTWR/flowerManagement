@@ -54,6 +54,11 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
 
 
+                        .requestMatchers(new AntPathRequestMatcher("/invoice/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/invoiceConfirm/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/invoiceCompleteButton/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/stock/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/allocate/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

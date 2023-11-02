@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface OrderRepository extends JpaRepository<OrderItem, UUID> {
+public interface OrderRepository extends JpaRepository<OrderItem, Integer> {
     List<OrderItem> findByStatus(OrderStatus status); //หา order ด้วย status
     OrderItem findByOID(int OID);
+
 
 }

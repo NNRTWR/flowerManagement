@@ -9,6 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import java.util.UUID;
 
-public interface FlowerRepository extends JpaRepository<Flower, UUID> {
+public interface FlowerRepository extends JpaRepository<Flower, Integer> {
     Flower findByFID(int FID); //หาด้วยรหัสดอกไม้
 }
