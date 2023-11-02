@@ -51,20 +51,24 @@
                 </div>
               </dialog>
 
-        </span>
-
+            </span>
+           
         <div class="flex rounded-xl">
-            <div class="rounded-xl items-center">
-                <div>
-                </div>
-            </div>
+        <div class="flex">
+                <img th:src="'/image/1-pot.svg'" class="w-5/6 h-5/6 object-scale-down" alt="Pot Image">
+        </div>
+            
         <div class="container bg-sky-300 mt-5 rounded-xl">
 
-        <h1>ชนิดดอกไม้</h1>
+        <h1>ชื่อดอกไม้</h1>
         <td th:text="${plantOrder.flower.FName}"></td>
+        <h1>รหัสPID</h1>
         <td th:text="${plantOrder.PID}"></td>
+        <h1>เวลาที่ปลูก</h1>
         <td th:text="${plantOrder.timePlant}"></td>
+        <h1>จำนวนที่ปลูก</h1>
         <td th:text="${plantOrder.quantity}"></td>
+        <h1>จำนวนคงเหลือ</h1>
         <td th:text="${plantOrder.total}"></td>
 
                     <!-- ย่อย -->
@@ -74,7 +78,7 @@
         </div>
     </div>
 
-<h1 class="display-6">Bed ที่ปลูกแล้ว</h1>
+<!-- <h1 class="display-6">Bed ที่ปลูกแล้ว</h1>
 
         <table  class="table table-bordered table-striped table-hover" >
             <thead class="thead-dark">
@@ -101,7 +105,7 @@
             </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </body>
 </html>
 
