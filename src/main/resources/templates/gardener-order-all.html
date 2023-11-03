@@ -25,7 +25,7 @@
                 focus:ring-gray-200 focus:outline-none">
                     <h3>เพิ่มออเดอร์</h3>
                 </div>
-                <form th:action="@{/garden/orders}" method="POST">
+                <form th:action="@{'/' + ${role} + '/orders'}" method="POST">
                   <div class="mt-3 mx-6">
                     <label for="inputFlowerID" class="text-lg">เลือกดอกไม้</label>
                     <select class="form-control rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7 

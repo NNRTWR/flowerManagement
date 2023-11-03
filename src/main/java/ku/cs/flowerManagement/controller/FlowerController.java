@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
-@RequestMapping("/flower")
+@RequestMapping("/{role}/flower")
 @Controller
 public class FlowerController {
 
@@ -28,7 +28,7 @@ public class FlowerController {
     //     return "flower";
     // }
 
-    public String showFlowerPage(Model model, @RequestParam(defaultValue = "0") int page) {
+    public String showFlowerPage(@PathVariable("role") String role,Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 4;
         Page<Flower> flowerPage = flowerService.getFlowers(page, pageSize);   //โชว์แถบเลื่อนได้ น้ำตาจะไหลทำได้ซักที
         
@@ -45,7 +45,7 @@ public class FlowerController {
     
 
     @GetMapping("/flower{id}")
-    public String showFlowerDetailPage(Model model, @PathVariable Integer fid) {
+    public String showFlowerDetailPage(@PathVariable("role") String role,Model model, @PathVariable Integer fid) {
 //        model.addAttribute("flower", flowerService.getFlowerById(id));
         model.addAttribute("flower",flowerService.getOneFlower(fid));
         model.addAttribute("method", "PUT");
@@ -67,9 +67,9 @@ public class FlowerController {
 //    }
 
     @PostMapping //("/flower/create")
-    public String createFlower(@ModelAttribute FlowerRequest flower) {
+    public String createFlower(@PathVariable("role") String role,@ModelAttribute FlowerRequest flower) {
         flowerService.addFlower(flower);
-        return "redirect:/flower";
+        return "redirect:/{role}/flower";
     }
 
 //    @PutMapping("/flower/{id}")

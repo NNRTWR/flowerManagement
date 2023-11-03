@@ -35,7 +35,7 @@ public class SignupService {
         //record.setRole("USER");
         record.setRole("SELLER");
         // record.setRole("GARDENER");
-        //record.setRole("OWNER");
+        // record.setRole("OWNER");
 
 
         String hashedPassword = passwordEncoder.encode(user.getPassword()); //springframework security ทำให้
