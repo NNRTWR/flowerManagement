@@ -39,7 +39,7 @@
                         <td th:text="${order.quantity}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td th:text="${order.status}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td class="px-6 py-4 truncate whitespace-normal">
-                            <form th:action="@{'/beds/order/' + ${PID}}" method="POST">
+                            <form th:action="@{'/gardener/beds/order/' + ${PID}}" method="POST">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 <input type="hidden" th:name="gardener_order_ID" th:value="${order.id}" />
                                 <button type="submit" class="btn btn-success font-bold text-xl" >ปลูก</button>
@@ -53,17 +53,17 @@
             <div class="pagination mt-12 flex justify-center">
                 <ul class="pagination flex space-x-2 items-center">
                     <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
-                        <a th:if="${currentPage > 0}" th:href="@{/beds/order/{PID}(PID=${PID}, page=${currentPage - 1})}" class="btn btn-neutral">Previous</a>
+                        <a th:if="${currentPage > 0}" th:href="@{/gardener/beds/order/{PID}(PID=${PID}, page=${currentPage - 1})}" class="btn btn-neutral">Previous</a>
                         <span th:unless="${currentPage > 0}" class="btn disabled btn-neutral">Previous</span>
                     </li>
                     <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageNumber} ? 'active' : ''" class="join-item">
                         <a th:if="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}"
-                           th:href="@{/beds/order/{PID}(PID=${PID}, page=${pageNumber})}"
+                           th:href="@{/gardener/beds/order/{PID}(PID=${PID}, page=${pageNumber})}"
                            th:text="${pageNumber + 1}" class="btn btn-neutral"></a>
                         <span th:unless="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}" class="btn disabled btn-neutral">..</span>
                     </li>
                     <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
-                        <a th:if="${currentPage < totalPages - 1}" th:href="@{/beds/order/{PID}(PID=${PID}, page=${currentPage + 1})}" class="btn btn btn-neutral">Next</a>
+                        <a th:if="${currentPage < totalPages - 1}" th:href="@{/gardener/beds/order/{PID}(PID=${PID}, page=${currentPage + 1})}" class="btn  btn-neutral">Next</a>
                         <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-neutral">Next</span>
                     </li>
                 </ul>
