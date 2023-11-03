@@ -59,21 +59,89 @@
         </div>
             
         <div class="container bg-sky-300 mt-5 rounded-xl">
+<!--            แบบยังไม่แก้-->
+<!--            <div class="flex flex-col items-center ">-->
+<!--        <h1>ชื่อดอกไม้</h1>-->
+<!--        <td class="text-center" th:text="${plantOrder.flower.FName}"></td>-->
+<!--        <h1>รหัส PID</h1>-->
+<!--        <td class="text-center" th:text="${plantOrder.PID}"></td>-->
+<!--        <h1>เวลาที่ปลูก</h1>-->
+<!--        <td class="text-center" th:text="${plantOrder.timePlant}"></td>-->
+<!--        <h1>สถานะดอกไม้</h1>-->
+<!--        <td class="text-center" th:text="${plantOrder.flowerStatus}"></td>-->
+<!--        <h1>จำนวนที่ปลูก</h1>-->
+<!--        <td class="text-center" th:text="${plantOrder.quantity}"></td>-->
+<!--        <h1>จำนวนคงเหลือ</h1>-->
+<!--        <td class="text-center" th:text="${plantOrder.total}"></td>-->
+<!--            </div>-->
 
-        <h1>ชื่อดอกไม้</h1>
-        <td th:text="${plantOrder.flower.FName}"></td>
-        <h1>รหัสPID</h1>
-        <td th:text="${plantOrder.PID}"></td>
-        <h1>เวลาที่ปลูก</h1>
-        <td th:text="${plantOrder.timePlant}"></td>
-        <h1>สถานะดอกไม้</h1>
-        <td th:text="${plantOrder.flowerStatus}"></td>
+<!--            แก้แบบที่1 ธรรมดาๆ-->
+<!--            <div class="flex flex-col ml-3">-->
+<!--                <div class="mt-3 mb-3">-->
+<!--                    <h2>ชื่อดอกไม้</h2>-->
+<!--                    <td class="text-center" th:text="${plantOrder.flower.FName}"></td>-->
+<!--                </div>-->
+<!--                <div class="mt-3 mb-3">-->
+<!--                    <h2>รหัส PID</h2>-->
+<!--                    <td class="text-center" th:text="${plantOrder.PID}"></td>-->
+<!--                </div>-->
+<!--                <div class="mt-3 mb-3">-->
+<!--                    <h3>เวลาที่ปลูก</h3>-->
+<!--                    <td class="text-center" th:text="${plantOrder.timePlant}"></td>-->
+<!--                </div>-->
+<!--                <div class="mt-3 mb-3">-->
+<!--                    <h4>สถานะดอกไม้</h4>-->
+<!--                    <td class="text-center" th:text="${plantOrder.flowerStatus}"></td>-->
+<!--                </div>-->
+<!--                <div class="mt-3 mb-3">-->
+<!--                    <h5>จำนวนที่ปลูก</h5>-->
+<!--                    <td class="text-center" th:text="${plantOrder.quantity}"></td>-->
+<!--                </div>-->
+<!--                <div class="mt-3 mb-3">-->
+<!--                    <h6>จำนวนคงเหลือ</h6>-->
+<!--                    <td class="text-center" th:text="${plantOrder.total}"></td>-->
+<!--                </div>-->
+<!--            </div>-->
 
-        <h1>จำนวนที่ปลูก</h1>
-        <td th:text="${plantOrder.quantity}"></td>
-        <h1>จำนวนคงเหลือ</h1>
-        <td th:text="${plantOrder.total}"></td>
-       
+<!--            แก้แบบที่2 -->
+            <div class="flex flex-col ml-2 mr-2">
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">ชื่อดอกไม้</div>
+                    <div class="divider divider-horizontal">:</div>
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <td class="text-center" th:text="${plantOrder.flower.FName}"></td></div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">รหัส PID</div>
+                    <div class="divider divider-horizontal">:</div>
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <td class="text-center" th:text="${plantOrder.PID}"></td></div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">เวลาที่ปลูก</div>
+                    <div class="divider divider-horizontal">:</div>
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <td class="text-center" th:text="${plantOrder.timePlant}"></td></div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">สถานะดอกไม้</div>
+                    <div class="divider divider-horizontal">:</div>
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <td class="text-center" th:text="${plantOrder.flowerStatus}"></td></div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">จำนวนที่ปลูก</div>
+                    <div class="divider divider-horizontal">:</div>
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <td class="text-center" th:text="${plantOrder.quantity}"></td></div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">จำนวนคงเหลือ</div>
+                    <div class="divider divider-horizontal">:</div>
+                    <div class="grid h-10 flex-grow card bg-base-300 rounded-box place-items-center">
+                        <td class="text-center" th:text="${plantOrder.total}"></td></div>
+                </div>
+            </div>
                     <!-- ย่อย -->
 
 <!--                </div>-->

@@ -20,23 +20,25 @@
           <div class="flex space-x-2 items-center">
             <button class="btn btn-success text-lg mr-8" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
             <dialog id="my_modal_1" class="modal fixed right-0">
-              <div class="modal-box ml-60 h-3/4 w-4/5 mt-6">
+              <div class="modal-box ml-60 h-3/4 w-4/5 mt-6 bg-gray-100">
                 <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
                 focus:ring-gray-200 focus:outline-none">
                     <h3>เพิ่มออเดอร์</h3>
                 </div>
                 <form th:action="@{/garden/orders}" method="POST">
                   <div>
-                    <label for="inputFlowerID">Name</label>
-                    <select class="form-control" id="inputFlowerID" name="flowerID">
+                    <label for="inputFlowerID">เลือกชนิดดอกไม้</label>
+                    <select class="form-control rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
+                        bg-gray-100  border-gray-600 border-2" id="inputFlowerID" name="flowerID">
                       <option th:each="flower : ${flowers}"
                               th:value="${flower.FID}" th:text="${flower.FName}">
                       </option>
                     </select>
                   </div>
                   <div>
-                    <label for="inputQuantity">Quantity</label>
-                    <input id="inputQuantity" type="input" class="form-control"
+                    <label for="inputQuantity">จำนวนดอกไม้</label>
+                    <input id="inputQuantity" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        bg-gray-100  border-gray-600 border-2"
                            name="quantity">
                   </div>
                   <div class="flex justify-center mt-10">
