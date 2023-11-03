@@ -9,39 +9,38 @@
 </head>
 <body>
 <div layout:fragment ="content">
-  <h1 class="text-2xl text-center font-bold">All garden order</h1>
+  <h1 class="text-3xl text-center font-bold">รายการดอกไม้ที่ส่งปลูก</h1>
   <div class="flex items-center justify-between mb-4 mt-6">
         <div class="flex items-center">
-            <h1 class="text-xl ml-10">จำนวนออเดอร์ทั้งหมด</h1>
-            <!-- <span class="text-2xl ml-10" th:text="${totalFlowers}"></span>  ดูใน flowerเอาได้ว่าทำยังไง-->
+            <h1 class="text-xl ml-10">จำนวนรายการทั้งหมด</h1>
+            <span class="text-2xl ml-10" th:text="${total}"></span>  
             <span class="text-xl ml-10">รายการ</span>
         </div>
         
           <div class="flex space-x-2 items-center">
             <button class="btn btn-success text-lg mr-8" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
             <dialog id="my_modal_1" class="modal fixed right-0">
-              <div class="modal-box ml-60 h-3/4 w-4/5 mt-6 bg-gray-100">
+              <div class="modal-box ml-60 h-1/2 mt-6  bg-gray-100">
                 <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
                 focus:ring-gray-200 focus:outline-none">
                     <h3>เพิ่มออเดอร์</h3>
                 </div>
                 <form th:action="@{/garden/orders}" method="POST">
-                  <div>
-                    <label for="inputFlowerID">เลือกชนิดดอกไม้</label>
-                    <select class="form-control rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
+                  <div class="mt-3 mx-6">
+                    <label for="inputFlowerID" class="text-lg">เลือกดอกไม้</label>
+                    <select class="form-control rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7 
                         bg-gray-100  border-gray-600 border-2" id="inputFlowerID" name="flowerID">
                       <option th:each="flower : ${flowers}"
                               th:value="${flower.FID}" th:text="${flower.FName}">
                       </option>
                     </select>
                   </div>
-                  <div>
-                    <label for="inputQuantity">จำนวนดอกไม้</label>
-                    <input id="inputQuantity" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
-                        bg-gray-100  border-gray-600 border-2"
-                           name="quantity">
+                  <div class="mt-2 mx-6">
+                    <label for="inputQuantity" class="text-lg">จำนวนดอกไม้</label>
+                    <input id="inputQuantity" type="number" class="form-control rounded-xl bg-gray-100 pr-8 py-2  shadow-lg  text-gray-500 pl-7 border-gray-600 border-2 "
+                            name="quantity" min="0"  required>
                   </div>
-                  <div class="flex justify-center mt-10">
+                  <div class="flex justify-center mt-5">
                     <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
                     <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
                   </div>
@@ -62,12 +61,12 @@
                             <th class="font-semibold text-lg uppercase px-6 py-4">
                                 <div class="flex items-center justify-center">
                                 <span>วันที่สั่ง</span>
-                                <span class="ml-3">
+                                <!-- <span class="ml-3">
                                     <svg class="w-4 h-4" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.55921 0.287451C7.86808 -0.0958171 8.40096 -0.0958167 8.70982 0.287451L12.9295 5.52367C13.3857 6.08979 13.031 7 12.3542 7H3.91488C3.23806 7 2.88336 6.08979 3.33957 5.52367L7.55921 0.287451Z" fill="currentColor"/>
                                         <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
                                     </svg>
-                                </span>
+                                </span> -->
                                 </div>
                             </th>
 

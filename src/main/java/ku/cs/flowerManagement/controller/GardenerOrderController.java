@@ -51,6 +51,7 @@ public class GardenerOrderController {
         model.addAttribute("commonService",commonService);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", gardenOrderPage.getTotalPages());
+        model.addAttribute("total", gardenerOrderService.getTotalGardenOrderCount());
         return "gardener-order-all";
     }
 

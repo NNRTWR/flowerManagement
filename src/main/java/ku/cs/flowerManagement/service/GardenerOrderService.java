@@ -43,11 +43,17 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
         return gardenerOrderRepository.findAll(pageable);
     }
 
+
     //ตอนนี้ยังใช้ order เดียวกับตอนบันทึกอยู่ //แก้อยู่
     public List<GardenerOrder> getAllPendingGardenerOrder(Comparator comparator){ //เอา order ที่ต้องปลูกทั้งหมดออกมา
         List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.PENDING);
         orders.sort(comparator);
         return orders;
+    }
+
+    public int getTotalGardenOrderCount() {
+        List<GardenerOrder> orders = gardenerOrderRepository.findAll();
+        return orders.size();
     }
 
 
