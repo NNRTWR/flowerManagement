@@ -32,9 +32,8 @@ public class SignupService {
 
     public void createUser(SignupRequest user) {
         Member record = modelMapper.map(user, Member.class); // Member = target class >>> map SignupRequest เป็น Member
-        //record.setRole("USER");
-        // record.setRole("SELLER");
-        record.setRole("GARDENER");
+        record.setRole("SELLER");
+        // record.setRole("GARDENER");
         // record.setRole("OWNER");
 
 
