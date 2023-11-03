@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import ku.cs.flowerManagement.common.FlowerStatus;
 import ku.cs.flowerManagement.common.OrderStatus;
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.Invoice;
 import ku.cs.flowerManagement.entity.OrderItem;
 import ku.cs.flowerManagement.model.OrderItemRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
@@ -13,6 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,8 +59,15 @@ public class OrderService {
 
         return orderFlowerRequests;
     }
+    public Page<OrderItem> getOrderPage(int page, int size) {   //สำหรับ pagination
+        Pageable pageable = PageRequest.of(page, size);
+        return orderRepository.findAll(pageable);
+    }
 
-
+    public int getTotalOrderCount() {
+        List<OrderItem> orders = orderRepository.findAll();
+        return orders.size();
+    }
 
 
     // Get order By Id

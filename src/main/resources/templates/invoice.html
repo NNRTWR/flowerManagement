@@ -13,7 +13,7 @@
 
     <div class="flex items-center">
         <h1 class="text-xl ml-6 ">จำนวนออเดอร์ทั้งหมด</h1>
-        <span class="text-xl ml-10" th:text="${totalFlowers}"></span>
+        <span class="text-xl ml-10" th:text="${totalOrders}"></span>
         <span class="text-xl ml-10">รายการ</span>
     </div>
     <div class="grid grid-cols-2 grid-rows-1 gap-40">
@@ -108,11 +108,12 @@
                     <div class="bg-orange-300 mt-4 p-4 rounded-xl">
                         <p class="my-1">หมายเลขออเดอร์ : <span id="orderNumber" th:text="${invoice.OID}" class="ml-10"></span></p>
                         <p class="my-1">ประเภทการสั่ง : <span id="orderMethod" th:text="${invoice.order_method}" class="ml-10"></span></p>
-                        <p class="my-1">ชนิดดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>
+                        <p class="my-1">ชื่อดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้ : <span id="quantity" th:text="${invoice.orderQuantity}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock.total}" class="ml-10"></span></p> 
                         <p class="my-1">สถานะของออเดอร์ : <span id="status" th:text="${invoice.status}" class="ml-10"></span></p>
-                        <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span></p>
+                        <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>
+                        <span>บาท</span></p>
                     </div>
                 </div>
             
@@ -132,7 +133,7 @@
     document.getElementById("invoiceForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent the default form submission
         let selectedOrderId = document.getElementById("order_id").value;
-        console.log("Selected Order ID:", selectedOrderId);
+        // console.log("Selected Order ID:", selectedOrderId);
         let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
         let selectedFID = selectedOption.getAttribute("data-fid");
         let selectedOID = selectedOption.value;
