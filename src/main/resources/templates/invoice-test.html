@@ -1,389 +1,103 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <title>Order</title>-->
-<!--  <link th:rel="stylesheet" th:href="@{static}">-->
-<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">-->
-<!--  <link th:rel="stylesheet" th:href="@{static}">-->
-<!--  <script th:src="@{/js/bootstrap.min.js}"></script>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div class="container-fluid">-->
-<!--  <div class="row flex-nowrap">-->
-<!--    &lt;!&ndash;        side bar&ndash;&gt;-->
-<!--    &lt;!&ndash;        <div th:replace="~{fragments/sidebar :: sidebar}"></div>&ndash;&gt;-->
-<!--    &lt;!&ndash;        Main content&ndash;&gt;-->
-<!--    <div class = "col">-->
-<!--      &lt;!&ndash;        search bar&ndash;&gt;-->
-<!--      &lt;!&ndash;            <div th:replace="~{fragments/searchbar :: searchbar}"></div>&ndash;&gt;-->
-<!--      <div class="row mt-4">-->
-<!--        <div class="col-md-7">-->
-<!--          <table class="table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--              <th>Order No</th>-->
-<!--              <th>Flower Type</th>-->
-<!--              <th>Amount</th>-->
-<!--              <th>Plant Status</th>-->
-<!--              <th>Order Method</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody id="orderTable">-->
-<!--            &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
-<!--            <tr th:each="order : ${orders}">-->
-<!--              <td th:text="${order.OID}"></td>-->
-<!--              <td th:text="${order.FName}"></td>-->
-<!--              <td th:text="${order.orderQuantity}"></td>-->
-<!--              <td th:text="${order.plant_status}"></td>-->
-<!--              <td th:text="${order.order_method}"></td>-->
-<!--              &lt;!&ndash;                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">&ndash;&gt;-->
-<!--              &lt;!&ndash;                            </td>&ndash;&gt;-->
-<!--            </tr>-->
-<!--            &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
-<!--            </tbody>-->
-<!--          </table>-->
-<!--        </div>-->
-
-
-<!--          <div class="invoice-form">-->
-<!--            <h6> รายการ Order </h6>-->
-<!--            <form id="invoiceForm" th:action="@{/invoice}" th:method="PUT">-->
-<!--              <div class="mb-3" th:if="${confirmOrder.getOID()}">-->
-<!--                <label for="inputOID">เลือกหมายเลข Order</label>-->
-<!--                <input id="inputOID" type="number" class="form-control" name="OID"/>-->
-<!--              </div>-->
-<!--              <div class="mb-3" >-->
-<!--                <p>สรุปรายการ</p>-->
-<!--                <div>-->
-<!--&lt;!&ndash;                  <p>หมายเลข order: <span th:text="${confirmOrder.getOID()}"></span></p>&ndash;&gt;-->
-<!--                  <p>ชนิดดอกใม้ : <span th:text="${confirmOrder.getFName()}"></span></p>-->
-<!--                  <p>จำนวนดอกใม้ <span th:text="${confirmOrder.getOrderQuantity()}"></span> ดอก </p>-->
-<!--                  &lt;!&ndash;                                    <p>วิธีการสั่ง : <span th:text="${canceledOrder.}"></span></p>&ndash;&gt;-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <button id="submit-update-button" class="main-button" type="submit" >ยืนยัน</button>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<script>-->
-<!--    document.getElementById('invoiceForm').addEventListener('submit', function(e) {-->
-<!--        e.preventDefault();-->
-
-<!--        const oidValue = document.getElementById('inputOID').value;-->
-<!--        const url = "/invoice/" + oidValue;-->
-
-<!--        fetch(url, {-->
-<!--            method: 'PUT',-->
-<!--            body: new FormData(this)-->
-<!--        }).then(response => {-->
-<!--            if (response.ok) {-->
-<!--                window.location.href = "/invoice?id=" + oidValue;;  // Redirect after success-->
-<!--            } else {-->
-<!--                // Handle error-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Flower Management Web Application</title>
-  <link th:rel="stylesheet" th:href="@{static}">
-  <!-- <link th:rel="stylesheet" th:href=""> -->
-  <!-- <script th:src="@{/js/bootstrap.min.js}"></script> -->
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{static}">
 </head>
+<body>
 <h1>รายการออเดอร์</h1>
 
 
 <table class="table">
-  <thead>
-  <tr>
-    <th>Order No</th>
-    <th>Flower Type</th>
-    <th>Amount</th>
-    <th>Plant Status</th>
-    <th>Order Method</th>
-  </tr>
-  </thead>
-  <tbody id="invoiceTable">
-  <!-- Sample rows for demonstration -->
-  <tr th:each="invoice : ${invoices}">
-    <td th:text="${invoice.OID}"></td>
-    <td th:text="${invoice.FName}"></td>
-    <td th:text="${invoice.orderQuantity}"></td>
-    <td th:text="${invoice.plant_status}"></td>
-    <td th:text="${invoice.order_method}"></td>
-    <!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">-->
-    <!--                            </td>-->
-  </tr>
-  <!-- Add more rows as needed -->
-  </tbody>
+    <thead>
+    <tr>
+        <th>Order No</th>
+        <th>Flower Type</th>
+        <th>Amount</th>
+        <th>Order Method</th>
+    </tr>
+    </thead>
+    <tbody id="invoiceTable">
+    <!-- Sample rows for demonstration -->
+    <tr th:each="invoice : ${invoices}">
+        <td th:text="${invoice.OID}"></td>
+        <td th:text="${invoice.FName}"></td>
+        <td th:text="${invoice.orderQuantity}"></td>
+        <td th:text="${invoice.plant_status}"></td>
+        <td th:text="${invoice.order_method}"></td>
+        <!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">-->
+        <!--                            </td>-->
+    </tr>
+    <!-- Add more rows as needed -->
+    </tbody>
 </table>
 
-
-<!--<table class="table">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th>Order No</th>-->
-<!--    <th>Flower Type</th>-->
-<!--    <th>Amount</th>-->
-<!--    <th>Plant Status</th>-->
-<!--    <th>Order Method</th>-->
-<!--&lt;!&ndash;    <th>total</th>&ndash;&gt;-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody id="invoiceTable">-->
-<!--  &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
-
-
-<!--  <tr th:each="order : ${orders}">-->
-<!--    <td th:text="${order.OID}"></td>-->
-<!--    <td th:text="${order.FName}"></td>-->
-<!--    <td th:text="${order.orderQuantity}"></td>-->
-<!--    <td th:text="${order.plant_status}"></td>-->
-<!--    <td th:text="${order.order_method}"></td>-->
-
-
-<!--&lt;!&ndash;  <tr th:each="invoice : ${invoices}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${invoice.OID}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${invoice.FName}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${invoice.quantity}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${invoice.status}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td th:text="${invoice.order_method}"></td>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <td th:text="${invoice.total}"></td>&ndash;&gt;-->
-
-
-<!--    &lt;!&ndash;                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">&ndash;&gt;-->
-<!--    &lt;!&ndash;                            </td>&ndash;&gt;-->
-<!--  </tr>-->
-<!--  &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
-<!--  </tbody>-->
-<!--</table>-->
-
-<label for="order_id">เลือกหมายเลขออเดอร์:</label>
-<!--<select class="form-control" id="order_id" name="OID" th:field="*{OID}" required>-->
-<!--  <option value="0">select option</option>-->
-<!--  <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}"></option>-->
-<!--</select>-->
-
-  <select id="order_id" name="order_id">
-    <option value="0">select option</option>
-
-    <option th:each="option : ${options}" th:value="${option}" th:text="${option.getOID()}"></option>
-
-    <!--    <option value="order1">1</option>-->
-<!--    <option value="order2">2</option>-->
-  <!-- เพิ่มออเดอร์เพิ่มเติมตรงนี้ -->
-    <button id="confirmButton" >สรุป</button>
-  </select>
-
-
-<form id="invoiceForm" action="@{/invoice}" method="POST" object="${invoice}">
-  <div id="summary" >
-    <h2>สรุปรายการ</h2>
-    <p>หมายเลขออเดอร์: <span id="orderNumber"> </span></p>
-    <p>ประเภทการสั่ง: <span id="orderMethod"></span></p>
-    <p>ชนิดดอกไม้: <span id="flowerType"></span></p>
-    <p>จำนวนดอกไม้: <span id="quantity"></span></p>
-    <p>จำนวนคงเหลือ:  <span id="remain"> </span></p>
-    <p>สถานะของออเดอร์: <span id="status"></span></p>
-    <p>ราคาสุทธิ: <span id="price"></span></p>
-  </div>
-  <button id="completeButton" >ยืนยัน</button>
+<form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">
+    <label for="order_id">เลือกหมายเลขออเดอร์:</label>
+    <select id="order_id" name="order_id">
+        <option value="0" data-fid="0">select option</option>
+        <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
+    </select>
+    <button type="submit" id="confirmButton">สรุป</button>
 </form>
 
+<form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" >
+    <div id="summary" >
+        <h2>สรุปรายการ</h2>
+        <p>หมายเลขออเดอร์: <span id="orderNumber" th:text="${invoice.OID}"></span></p>
+        <p>ประเภทการสั่ง: <span id="orderMethod" th:text="${invoice.order_method}"></span></p>
+        <p>ชนิดดอกไม้: <span id="flowerType" th:text="${invoice.FName}"></span></p>
+        <p>จำนวนดอกไม้: <span id="quantity" th:text="${invoice.orderQuantity}"></span></p>
+        <p>จำนวนคงเหลือ: <span id="remain" th:text="${stock.total}"></span></p> 
+        <p>สถานะของออเดอร์: <span id="status" th:text="${invoice.status}"></span></p>
+        <p>ราคาสุทธิ: <span id="price" th:text="${invoice.price}"></span></p>
+    </div>
 
-<!--<div class="invoice-form">-->
-<!--  <h6> สรุปรายการ </h6>-->
-<!--  <form id="invoiceForm" th:action="@{/invoice}" th:method="PUT">-->
-<!--    <div class="mb-3">-->
-<!--      <label for="inputOID">เลือกหมายเลข Order</label>-->
-<!--      <input id="inputOID" type="number" class="form-control" name="OID"/>-->
-<!--    </div>-->
-<!--    <div class="mb-3" th:if="${confirmInvoice.getOID()}">-->
-<!--      <p>สรุปรายการ</p>-->
-<!--      <div>-->
-<!--        <p>หมายเลข order: <span th:text="${confirmInvoice.getOID()}"></span></p>-->
-<!--        <p>ชนิดดอกใม้ : <span th:text="${confirmInvoice.get}"></span></p>-->
-<!--        &lt;!&ndash;                                    <p>วิธีการสั่ง : <span th:text="${canceledOrder.}"></span></p>&ndash;&gt;-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <button id="submit-update-button" class="main-button" type="submit" >ยืนยัน</button>-->
-<!--  </form>-->
-<!--</div>-->
-</html>
+    <input type="hidden" name="OID" th:value="${invoice.OID}" />
+    <input type="hidden" name="SID" th:value="${stock.SID}" />
+    <input type="hidden" name="amount" th:value="${invoice.price}" />
+    <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />
+    <button id="completeButton" disabled >ยืนยัน</button>
+</form>
 
 <script>
+    document.getElementById("invoiceForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        let selectedOrderId = document.getElementById("order_id").value;
+        let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
+        let selectedFID = selectedOption.getAttribute("data-fid");
+        let selectedOID = selectedOption.value;
 
+        // Create hidden input fields for FID and OID
+        let fidInput = document.createElement("input");
+        fidInput.type = "hidden";
+        fidInput.name = "FID"; // This should match the parameter name in your controller method
+        fidInput.value = selectedFID;
 
+        let oidInput = document.createElement("input");
+        oidInput.type = "hidden";
+        oidInput.name = "OID"; // This should match the parameter name in your controller method
+        oidInput.value = selectedOID;
 
-// ซ่อนปุ่มยืนยัน
-  document.getElementById('completeButton').style.visibility = "hidden";
-// อาเรย์เก็บ order
-  const arr = {};
-// อาเรย์เก็บ stock
-  var remain = "[[${stocks}]]";
-  console.log(remain);
-  const remainArr = {};
+        // Append the hidden input fields to the form
+        let form = document.getElementById("invoiceForm");
+        form.appendChild(fidInput);
+        form.appendChild(oidInput);
 
+        // Submit the form
+        form.submit();
 
+    });
 
+    let status = document.getElementById("status").textContent.trim(); // Get the status text
+    let completeButton = document.getElementById("completeButton");
 
-<!--  const stocks = remain-->
-<!--    .replace(/Stock\(/g, '{')-->
-<!--    .replace(/(\w+)=/g, '"$1":')-->
-<!--    .replace(/\),/g, '},')-->
-<!--    .replace(/\)/g, '}');-->
-
-  var pattern = /(\w+)=(null|\w+)(?=[,)]\s*)/g;
-
-
-  // Extract and store the properties using the regex
-  remain.replace(pattern, function (match, key, value) {
-      remainArr[key] = value === 'null' ? null : value;
-      return ''; // Remove the matched substring from the string
-  });
-
-  console.log(remainArr);
-
-
-
-// options
-  const orders = document.getElementById('order_id');
-
-
-  document.getElementById('confirmButton').addEventListener('click', function(e) {
-    e.preventDefault();
-
-
-    var selected = orders.value;
-    console.log("stock" , remain)
-    console.log(selected)
-    if (selected != 0) {
-      document.getElementById('completeButton').style.visibility = "visible";
-      var matches = selected.match(/=([^,]+)/g);
-      var result = matches.map(match => match.replace("=", ""));
-      arr["FID"] = result[0];
-      arr["OID"] = result[1];
-      arr["Fname"] = result[2];
-      arr["Price"] = result[3];
-      arr["OrderQuantity"] = result[4];
-      arr["Status"] = result[5];
-      arr["OrderMethod"] = result[6];
-      arr["PlantStatus"] = result[7];
-      console.log(arr["PlantStatus"])
-      console.log(typeof arr["PlantStatus"])
-
-      if (arr["PlantStatus"] && typeof arr["PlantStatus"] === "string") {
-        arr["PlantStatus"] = arr["PlantStatus"].replace(/\)/g, "");
-      }
-
-        console.log(arr);
-
-        var orderNumber =  document.getElementById('orderNumber');
-        var orderMethod =  document.getElementById('orderMethod');
-        var flowerType =  document.getElementById('flowerType');
-        var quantity =  document.getElementById('quantity');
-        var status =  document.getElementById('status');
-        var price =  document.getElementById('price');
-
-        orderNumber.innerHTML = arr['OID'];
-        orderMethod.innerHTML = arr['OrderMethod'];
-        flowerType.innerHTML = arr['Fname'];
-        quantity.innerHTML = arr['OrderQuantity'];
-        status.innerHTML = arr['Status'];
-        price.innerHTML = arr['Price'] ;
-
-
-      } else {
-
-        alert("No data to show");
-        document.getElementById('completeButton').style.visibility = "hidden";
-
-      }
-
-  });
-
-  document.getElementById('completeButton').addEventListener('click', function(e) {
-    e.preventDefault();
-
-    const allocate = {
-      amount : arr['OrderQuantity']
-
-
+    if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
+        completeButton.disabled = true;
+    } else {
+        completeButton.disabled = false;
     }
-
-//    console.log(arr);
-    console.log(remainArr['total']);
-
-    let id;
-
-    for (let i = 0; i<remainArr.length; i++) {
-      if (remainArr[i]['FID'] == arr['FID']  ){
-        id = i;
-        break;
-      }
-    }
-
-    if (arr['OrderQuantity'] <= remainArr[id]['total']) {
-     remainArr[id]['total'] -= arr['OrderQuantity'];
-     console.log(remainArr);
-
-
-
-    }
-
-
-
-  });
-
-<!--      document.getElementById('invoiceForm').addEventListener('submit', function(e) {-->
-<!--        e.preventDefault();-->
-
-<!--        const ivValue = document.getElementById('inputOID').value;-->
-<!--        const url = "/invoice/" + ivValue;-->
-
-<!--        fetch(url, {-->
-<!--            method: 'PUT',-->
-<!--            body: new FormData(this)-->
-<!--        }).then(response => {-->
-<!--            if (response.ok) {-->
-<!--                window.location.href = "/invoice?id=" + ivValue;;  // Redirect after success-->
-<!--            } else {-->
-<!--                // Handle error-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
 </script>
+</body>
+</html>
