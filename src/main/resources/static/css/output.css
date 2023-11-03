@@ -872,57 +872,6 @@ html{
   content: var(--tw-content);
 }
 
-.card{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--rounded-box, 1rem);
-}
-
-.card:focus{
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.card figure{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card.image-full{
-  display: grid;
-}
-
-.card.image-full:before{
-  position: relative;
-  content: "";
-  z-index: 10;
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--n) / var(--tw-bg-opacity));
-  opacity: 0.75;
-  border-radius: var(--rounded-box, 1rem);
-}
-
-.card.image-full:before,
-    .card.image-full > *{
-  grid-column-start: 1;
-  grid-row-start: 1;
-}
-
-.card.image-full > figure img{
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.card.image-full > .card-body{
-  position: relative;
-  z-index: 20;
-  --tw-text-opacity: 1;
-  color: hsl(var(--nc) / var(--tw-text-opacity));
-}
-
 .carousel{
   display: inline-flex;
   overflow-x: scroll;
@@ -996,25 +945,6 @@ html{
   visibility: visible;
   min-height: -moz-fit-content;
   min-height: fit-content;
-}
-
-.divider{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-self: stretch;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  height: 1rem;
-  white-space: nowrap;
-}
-
-.divider:before,
-  .divider:after{
-  content: "";
-  flex-grow: 1;
-  height: 0.125rem;
-  width: 100%;
 }
 
 .dropdown{
@@ -1935,44 +1865,6 @@ html{
   }
 }
 
-.card :where(figure:first-child){
-  overflow: hidden;
-  border-start-start-radius: inherit;
-  border-start-end-radius: inherit;
-  border-end-start-radius: unset;
-  border-end-end-radius: unset;
-}
-
-.card :where(figure:last-child){
-  overflow: hidden;
-  border-start-start-radius: unset;
-  border-start-end-radius: unset;
-  border-end-start-radius: inherit;
-  border-end-end-radius: inherit;
-}
-
-.card:focus-visible{
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-
-.card.bordered{
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--b2) / var(--tw-border-opacity));
-}
-
-.card.compact .card-body{
-  padding: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.card.image-full :where(figure){
-  overflow: hidden;
-  border-radius: inherit;
-}
-
 .carousel::-webkit-scrollbar{
   display: none;
 }
@@ -2083,20 +1975,6 @@ details.collapse summary::-webkit-details-marker{
 .collapse-plus:not(.collapse-close) > input[type="checkbox"]:checked ~ .collapse-title:after,
 .collapse-plus:not(.collapse-close) > input[type="radio"]:checked ~ .collapse-title:after{
   content: "−";
-}
-
-.divider:before{
-  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.1;
-}
-
-.divider:after{
-  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.1;
-}
-
-.divider:not(:empty){
-  gap: 1rem;
 }
 
 .dropdown.dropdown-open .dropdown-content,
@@ -2630,10 +2508,6 @@ details.collapse summary::-webkit-details-marker{
   opacity: 0.3;
   --togglehandleborder: 0 0 0 3px hsl(var(--bc)) inset,
       var(--handleoffsetcalculator) 0 0 3px hsl(var(--bc)) inset;
-}
-
-.rounded-box{
-  border-radius: var(--rounded-box, 1rem);
 }
 
 .btm-nav-xs > *:where(.active){
@@ -3244,6 +3118,14 @@ details.collapse summary::-webkit-details-marker{
   margin-top: 2rem;
 }
 
+.mb-14{
+  margin-bottom: 3.5rem;
+}
+
+.mb-1{
+  margin-bottom: 0.25rem;
+}
+
 .block{
   display: block;
 }
@@ -3405,10 +3287,6 @@ details.collapse summary::-webkit-details-marker{
   flex-wrap: nowrap;
 }
 
-.place-items-center{
-  place-items: center;
-}
-
 .items-center{
   align-items: center;
 }
@@ -3527,11 +3405,6 @@ details.collapse summary::-webkit-details-marker{
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
-.bg-base-300{
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--b3) / var(--tw-bg-opacity));
-}
-
 .bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -3628,6 +3501,10 @@ details.collapse summary::-webkit-details-marker{
 
 .p-8{
   padding: 2rem;
+}
+
+.p-5{
+  padding: 1.25rem;
 }
 
 .px-10{
