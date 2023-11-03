@@ -3386,14 +3386,23 @@ details.collapse summary::-webkit-details-marker{
   margin-bottom: 1.25rem;
 }
 
+.my-8{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .my-auto{
   margin-top: auto;
   margin-bottom: auto;
 }
 
-.my-3{
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+.mx-24{
+  margin-left: 6rem;
+  margin-right: 6rem;
+}
+
+.mb-10{
+  margin-bottom: 2.5rem;
 }
 
 .mb-2{
@@ -3422,6 +3431,10 @@ details.collapse summary::-webkit-details-marker{
 
 .ml-10{
   margin-left: 2.5rem;
+}
+
+.ml-12{
+  margin-left: 3rem;
 }
 
 .ml-14{
@@ -3520,6 +3533,10 @@ details.collapse summary::-webkit-details-marker{
   margin-top: 2rem;
 }
 
+.mt-1{
+  margin-top: 0.25rem;
+}
+
 .block{
   display: block;
 }
@@ -3550,6 +3567,10 @@ details.collapse summary::-webkit-details-marker{
 
 .h-3\/4{
   height: 75%;
+}
+
+.h-36{
+  height: 9rem;
 }
 
 .h-4{
@@ -3584,8 +3605,8 @@ details.collapse summary::-webkit-details-marker{
   height: 100vh;
 }
 
-.h-72{
-  height: 18rem;
+.h-6{
+  height: 1.5rem;
 }
 
 .max-h-80{
@@ -3602,6 +3623,10 @@ details.collapse summary::-webkit-details-marker{
 
 .w-11\/12{
   width: 91.666667%;
+}
+
+.w-36{
+  width: 9rem;
 }
 
 .w-4{
@@ -3628,6 +3653,10 @@ details.collapse summary::-webkit-details-marker{
   width: 100%;
 }
 
+.w-6{
+  width: 1.5rem;
+}
+
 .min-w-full{
   min-width: 100%;
 }
@@ -3643,6 +3672,10 @@ details.collapse summary::-webkit-details-marker{
 
 .flex-1{
   flex: 1 1 0%;
+}
+
+.flex-shrink-0{
+  flex-shrink: 0;
 }
 
 .table-fixed{
@@ -3868,10 +3901,6 @@ details.collapse summary::-webkit-details-marker{
 .bg-zinc-800{
   --tw-bg-opacity: 1;
   background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
-.bg-opacity-70{
-  --tw-bg-opacity: 0.7;
 }
 
 .stroke-current{
@@ -4159,14 +4188,13 @@ details.collapse summary::-webkit-details-marker{
   transition-duration: 300ms;
 }
 
+.duration-75{
+  transition-duration: 75ms;
+}
+
 .hover\:bg-green-600:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-red-600:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 
 .focus\:outline-none:focus{
@@ -4196,6 +4224,11 @@ details.collapse summary::-webkit-details-marker{
   --tw-ring-color: rgb(220 252 231 / var(--tw-ring-opacity));
 }
 
+.group:hover .group-hover\:text-gray-900{
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
 @media (prefers-color-scheme: dark){
   .dark\:text-gray-200{
     --tw-text-opacity: 1;
@@ -4205,6 +4238,11 @@ details.collapse summary::-webkit-details-marker{
   .dark\:text-gray-400{
     --tw-text-opacity: 1;
     color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+
+  .group:hover .dark\:group-hover\:text-white{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
 
