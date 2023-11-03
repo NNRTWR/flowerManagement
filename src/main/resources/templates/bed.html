@@ -61,7 +61,7 @@
 
                     <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/beds/order/{PID}(PID=${i})} :  @{/beds/{PID}(PID=${i})}">
     <!--                                <input type="hidden" name="PID" th:value="${1}" />-->
-                        <button type="submit" class="btn btn-info text-white font-bold rounded-lg text-center text-xl py-2 mt-3" th:text="'แปลงที่ ' + ${i}">
+                        <button type="submit" class="btn btn-info text-white font-bold rounded-lg text-center text-base mt-3" th:text="'แปลงที่ ' + ${i}">
                         </button>
                     </form>
 
@@ -79,7 +79,7 @@
             <div class="w-full flex justify-center mt-2">
                 <div class="max-h-80 overflow w-full">
                 <table id="overview-table" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg">
+overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg shadow-lg">
                 <thead class="bg-gray-900">
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">เลขแปลงดอกไม้</th>
@@ -103,7 +103,7 @@ overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-wo
                 </table>
                 
                 <table id="sub-table" style="display: none;" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg">
+overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg shadow-lg">
                 <thead class="bg-gray-900">
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>

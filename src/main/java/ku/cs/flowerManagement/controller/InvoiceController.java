@@ -51,21 +51,23 @@ public class InvoiceController {
 
 
 
-        @RequestMapping("/invoice")
-        public ModelAndView invoiceView(Map<String,Object> model) {
-            model.put("stocks",stockService.getStockList());
-            return new ModelAndView("invoice/invoicePage");
-        }
+    @RequestMapping("/invoice")
+    public ModelAndView invoiceView(Map<String,Object> model) {
+        model.put("stocks",stockService.getStockList());
+        return new ModelAndView("invoice/invoicePage");
+    }
 
 
     @GetMapping("/invoice")
     public String showInvoicePage(Model model, @RequestParam(name = "id", defaultValue = "0" ) int id) throws JsonProcessingException, IllegalAccessException {
 //        JSONArray options = new JSONArray(orderService.getOrders());
 //        String options = new Gson().toJson(orderService.getOrders());
+        
         model.addAttribute("invoice", new InvoiceRequest());
         model.addAttribute("invoices", orderService.getOrders());
         model.addAttribute("options", orderService.getOrders());
         model.addAttribute("stock",new Stock());
+        model.addAttribute("totalOrders", orderService.getTotalOrderCount());
 //        model.addAttribute("stocks", stockService.getStockList());
 //        System.out.println(stockService.getStockList());
 
@@ -97,6 +99,7 @@ public class InvoiceController {
     @PostMapping("/invoiceConfirm")
     public String stockConfirm(Model model ,@RequestParam("FID") int FID , @RequestParam("OID") int OID) {
         Stock stockData = stockService.getStockByFID(FID);
+        
         model.addAttribute("invoices", orderService.getOrders());
         model.addAttribute("invoice", orderService.getOrderById(OID));
         model.addAttribute("options", orderService.getOrders());

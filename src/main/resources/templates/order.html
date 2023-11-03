@@ -10,130 +10,67 @@
 <body>
 <div layout:fragment ="content">
     <h1 class="text-3xl text-center font-bold">ออเดอร์</h1>
-    <div class="flex items-center justify-between mb-4 mt-6">
-        <div class="flex items-center">
-            <h1 class="text-xl ml-10 ">จำนวนออเดอร์ทั้งหมด</h1>
-            <span class="text-xl ml-10" th:text="${totalFlowers}"></span>
-            <span class="text-xl ml-10">รายการ</span>
-        </div>
-        <div class="flex space-x-2 items-center">
-            <button class="btn btn-success text-lg mr-8" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
-            <dialog id="my_modal_1" class="modal fixed right-0">
-                <div class="modal-box ml-60 h-3/4 w-4/5 mt-6 bg-gray-100">
-                  <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
-                  focus:ring-gray-200 focus:outline-none">
-                      <h3>เพิ่มออเดอร์</h3>
-                  </div>
-                  <form  th:action="@{/order}" method="POST" th:object="${order}">
-                      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                      <div class="mb-3 mt-6 mx-6 text-lg">
-                          <label for="inputType" class="my-5">เลือกชนิดดอกใม้</label>
-                          <!--                                <input id="inputType" type="text" class="form-control"-->
-                          <!--                                       name="FID">-->
-                          <select class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7 bg-gray-100" id="inputType" name="FID" th:field="*{FID}" required>
-                              <option value="0">กรุณาเลือกชนิดดอกไม้</option>
-                              <option th:each="option : ${options}" th:value="${option.getFID()}" th:text="${option.getFName()}"></option>
-                          </select>
-                      </div>
-                      <div class="mb-3">
-                        <label for="inputAmount">จำนวนดอกไม้</label>
-                        <input id="inputAmount" type="number" class="form-control"
-                               name="amount" th:field="*{orderQuantity}" required>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <!--        side bar-->
+    <!--        <div th:replace="~{fragments/sidebar :: sidebar}"></div>-->
+            <!--        Main content-->
+            <div class = "col">
+                <!--        search bar-->
+    <!--            <div th:replace="~{fragments/searchbar :: searchbar}"></div>-->
+                <div class="row mt-4">
+                    <div class="col-md-7">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Order No</th>
+                                <th>Flower Name</th>
+                                <th>Amount</th>
+                                <th>Order Method</th>
+                            </tr>
+                            </thead>
+                            <tbody id="orderTable">
+                            <!-- Sample rows for demonstration -->
+                            <tr th:each="order : ${orders}">
+                                <td th:text="${order.OID}"></td>
+                                <td th:text="${order.FName}"></td>
+                                <td th:text="${order.quantity}"></td>
+                                <!-- <td th:text="${order.plant_status}"></td> -->
+                                <td th:text="${order.order_method}"></td>
+                                <!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">-->
+                                <!--                            </td>-->
+                            </tr>
+                            <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="mb-3">
-                        <label for="inputOrderMethod">วิธีการสั่งซื้อ</label>
-                        <!--                                <input id="inputType" type="text" class="form-control"-->
-                        <!--                                       name="FID">-->
-                        <select class="form-control" id="inputOrderMethod" name="order_method" th:field="*{order_method}" required>
-                            <option value="0">select option</option>
-                            <option value="RETAIL" >ปลีก</option>
-                            <option value="ORDER" >ออร์เดอร์</option>
-                        </select>
-                    </div>
-                    <div class="flex justify-center mt-10">
-                        <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
-                        <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                    <!-- Order Form (Right) -->
+                    
+    
+                        <div class="order-form">
+                            <h6> ยกเลิก Order </h6>
+                            <form id="orderForm" th:action="@{/order}" th:method="PUT">
+                                <div class="mb-3">
+                                    <label for="inputOID">เลือกหมายเลข Order</label>
+                                    <input id="inputOID" type="number" class="form-control" name="OID"/>
+                                </div>
+                                <div class="mb-3" th:if="${canceledOrder.getOID()}">
+                                    <p>สรุปรายการ</p>
+                                    <div>
+                                        <p>หมายเลข order: <span th:text="${canceledOrder.getOID()}"></span></p>
+                                        <p>ชนิดดอกใม้ : <span th:text="${canceledOrder.getFName()}"></span></p>
+                                        <p>จำนวนดอกใม้ <span th:text="${canceledOrder.getOrderQuantity()}"></span> ดอก </p>
+                                    </div>
+                                </div>
+                                <button id="submit-update-button" class="main-button" type="submit" >ยืนยัน</button>
+                            </form>
                         </div>
-                </form>
+                    </div>
                 </div>
-            </dialog> 
-        </div>
-    </div>
-    <div class="max-w-[85rem] sm:px-6 lg:px-8 lg:py-4 mx-auto">
-        <div class="flex flex-col">
-          <div class="-m-1.5 overflow-x-auto">
-            <div class="p-1.5 min-w-full inline-block align-middle">
-              <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">
-                  <table class="table-fixed  divide-y divide-gray-300 
-                  overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-xl break-words bg-white" id="flower-table">
-                      <thead class="bg-gray-900">
-                          <tr class="text-white text-center">
-                              <th class="font-semibold text-lg uppercase px-6 py-4">
-                                  <div class="flex items-center">
-                                  <span>รหัสดอกไม้</span>
-                                  <span class="ml-3">
-                                      <svg class="w-4 h-4" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M7.55921 0.287451C7.86808 -0.0958171 8.40096 -0.0958167 8.70982 0.287451L12.9295 5.52367C13.3857 6.08979 13.031 7 12.3542 7H3.91488C3.23806 7 2.88336 6.08979 3.33957 5.52367L7.55921 0.287451Z" fill="currentColor"/>
-                                          <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
-                                      </svg>
-                                  </span>
-                                  <div>
-                              </th>
-                              <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้</th>
-                              <th class="font-semibold text-lg uppercase px-6 py-4">จำนวนเก็บเกี่ยว
-                              </th>
-                              <th class="font-semibold text-lg  uppercase px-6 py-4">ระยะเวลาการปลูก</th>
-                              <th class="font-semibold text-lg uppercase px-6 py-4">ราคา</th>
-                              <th class="font-semibold text-lg uppercase px-6 py-4"></th>
-                          </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
-                          <tr th:each="flower : ${flowers}" class="whitespace-normal">
-                              <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
-                              <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
-                              <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
-                              <td th:text="${flower.seedPeriod + flower.sproutPeriod + flower.growingPeriod + flower.fullyGrownPeriod + flower.harvestPeriod}"class="px-6 py-4 truncate whitespace-normal"></td>
-                              <td class="px-6 py-4 text-center truncate whitespace-normal">
-                                  <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600 
-                              font-semibold rounded-2xl text-xl p-3"></span>
-                              </td>
-                              <td class="px-6 py-4 text-center font-extrabold" th:href="@{/flower/{id}(id=${flower.FID})}"> 
-                                  <a class="btn btn-info text-xl text-gray-100">Detail</a> 
-                              </td>
-                          
-                          </tr>
-                      
-                      </tbody>
-                  
-                  </table>    
-                  
-              <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 shadow-lg">
-                <div>
-                  <p class="text-sm text-gray-600 dark:text-gray-400">
-                    <span class="font-semibold text-gray-800 dark:text-gray-200"></span>   <!--ไม่น่าจะทำ-->
-                  </p>
-                </div>
-                <div class="join">
-                    <ul class="pagination flex space-x-2 items-center">
-                        <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
-                            <a th:if="${currentPage > 0}" th:href="@{'/flower?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
-                            <span th:unless="${currentPage > 0}" class="btn disabled btn-secondary">Previous</span>
-                        </li>
-                        <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
-                            <a th:if="${currentPage < totalPages - 1}" th:href="@{'/flower?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
-                            <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-secondary">Next</span>
-                        </li>
-                    </ul>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     
     
-    
-</div>
       
        
 
@@ -157,65 +94,7 @@
 
 
 
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <!--        side bar-->
-<!--        <div th:replace="~{fragments/sidebar :: sidebar}"></div>-->
-        <!--        Main content-->
-        <div class = "col">
-            <!--        search bar-->
-<!--            <div th:replace="~{fragments/searchbar :: searchbar}"></div>-->
-            <div class="row mt-4">
-                <div class="col-md-7">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Order No</th>
-                            <th>Flower Name</th>
-                            <th>Amount</th>
-                            <th>Order Method</th>
-                        </tr>
-                        </thead>
-                        <tbody id="orderTable">
-                        <!-- Sample rows for demonstration -->
-                        <tr th:each="order : ${orders}">
-                            <td th:text="${order.OID}"></td>
-                            <td th:text="${order.FName}"></td>
-                            <td th:text="${order.quantity}"></td>
-                            <!-- <td th:text="${order.plant_status}"></td> -->
-                            <td th:text="${order.order_method}"></td>
-                            <!--                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">-->
-                            <!--                            </td>-->
-                        </tr>
-                        <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Order Form (Right) -->
-                
 
-                    <div class="order-form">
-                        <h6> ยกเลิก Order </h6>
-                        <form id="orderForm" th:action="@{/order}" th:method="PUT">
-                            <div class="mb-3">
-                                <label for="inputOID">เลือกหมายเลข Order</label>
-                                <input id="inputOID" type="number" class="form-control" name="OID"/>
-                            </div>
-                            <div class="mb-3" th:if="${canceledOrder.getOID()}">
-                                <p>สรุปรายการ</p>
-                                <div>
-                                    <p>หมายเลข order: <span th:text="${canceledOrder.getOID()}"></span></p>
-                                    <p>ชนิดดอกใม้ : <span th:text="${canceledOrder.getFName()}"></span></p>
-                                    <p>จำนวนดอกใม้ <span th:text="${canceledOrder.getOrderQuantity()}"></span> ดอก </p>
-                                </div>
-                            </div>
-                            <button id="submit-update-button" class="main-button" type="submit" >ยืนยัน</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 <script>
     document.getElementById('orderForm').addEventListener('submit', function(e) {
         e.preventDefault();

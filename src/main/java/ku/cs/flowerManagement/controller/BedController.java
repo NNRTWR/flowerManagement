@@ -66,6 +66,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
         System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
         model.addAttribute("plantOrder", plantOrder);
+        model.addAttribute("total", plantOrder.getTotal());
         return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 
