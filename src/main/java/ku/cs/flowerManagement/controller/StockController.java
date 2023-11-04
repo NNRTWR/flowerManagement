@@ -45,14 +45,23 @@ public class StockController {
         model.addAttribute("stocks", stockService.getStockList());
         // ใช้ FlowerService getAllFlowers
 //        model.addAttribute("options", flowerService.getFlowers());
+        model.addAttribute("options", flowerService.getFlowers());
         return "stock";
     }
+
+
 
     @GetMapping("/stock{id}")
     public String showStockDetailPage(Model model, @PathVariable int id) {
         model.addAttribute("stock", stockService.getFlowerById(id));
         model.addAttribute("method", "PUT");
         return "stock-detail";
+    }
+
+    @PostMapping("/stock")
+    public String createStock(@ModelAttribute StockRequest stock, Model model) {
+        stockService.createStock(stock);
+        return "redirect:/stock";
     }
 
     @GetMapping("/stock/create")

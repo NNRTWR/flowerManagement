@@ -11,6 +11,57 @@
 <div layout:fragment ="content">
     <h1 class="text-3xl text-center font-bold mb-5">คิดเงิน</h1>
 
+
+    <div class="flex items-center">
+        <h1 class="text-xl ml-6 ">จำนวนออเดอร์ทั้งหมด</h1>
+        <span class="text-xl ml-10" th:text="${totalOrders}"></span>
+        <span class="text-xl ml-10">รายการ</span>
+    </div>
+    <div class="grid grid-cols-2 grid-rows-1 gap-40">
+        <div class>
+            <div class="min-w-max mx-auto">
+                <div class="flex flex-col">
+                    <div class=" col-span-7">
+                        <div class="p-1.5 min-w-full inline-block align-middle">
+<!--                            <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">-->
+<!--                                <table class="table-fixed  divide-y divide-gray-300-->
+<!--                          overflow-y-auto mx-auto min-w-full min-h-full text-base break-words bg-white" id="flower-table">-->
+<!--                                    <thead class="bg-gray-900">-->
+<!--                                    <tr class="text-white text-center">-->
+<!--                                        <th class="font-semibold text-base uppercase px-6 py-4">-->
+<!--                                            <div class="flex items-center">-->
+<!--                                                <span>NO.</span>-->
+<!--                                                <span class="ml-3">-->
+<!--                                              <svg class="w-4 h-4" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                                  <path d="M7.55921 0.287451C7.86808 -0.0958171 8.40096 -0.0958167 8.70982 0.287451L12.9295 5.52367C13.3857 6.08979 13.031 7 12.3542 7H3.91488C3.23806 7 2.88336 6.08979 3.33957 5.52367L7.55921 0.287451Z" fill="currentColor"/>-->
+<!--                                                  <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>-->
+<!--                                              </svg>-->
+<!--                                          </span>-->
+<!--                                                </div>-->
+<!--                                        </th>-->
+
+<!--                                        <th class="font-semibold text-base uppercase px-6 py-4">ชื่อดอกไม้-->
+<!--                                        </th>-->
+<!--                                        <th class="font-semibold text-base  uppercase px-6 py-4">จำนวน</th>-->
+<!--                                        <th class="font-semibold text-base uppercase px-6 py-4">ราคา</th>-->
+<!--                                        <th class="font-semibold text-base uppercase px-6 py-4">วิธีการสั่งซื้อ</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">-->
+<!--                                    <tr th:each="invoice : ${invoices}" class="whitespace-normal">-->
+<!--                                        <td th:text="${invoice.OID}" class="px-6 py-4 truncate whitespace-normal"></td>-->
+<!--                                        <td th:text="${invoice.FName}"class="px-6 py-4 truncate whitespace-normal"></td>-->
+<!--                                        <td th:text="${invoice.orderQuantity}" class="px-6 py-4 truncate whitespace-normal"></td>-->
+<!--                                        <td class="px-6 py-4 text-center truncate whitespace-normal">-->
+<!--                                        <span th:text="${#numbers.formatDecimal(invoice.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-sky-400-->
+<!--                                    font-semibold rounded-2xl text-xl p-2.5"></span>-->
+<!--                                        </td>-->
+<!--                                        <td class="px-6 py-4 truncate whitespace-normal">-->
+<!--                                            <span th:if="${invoice.order_method == T(ku.cs.flowerManagement.common.OrderMethods).ORDER}">ส่ง</span>-->
+<!--                                            <span th:if="${invoice.order_method == T(ku.cs.flowerManagement.common.OrderMethods).RETAIL}">ปลีก</span>-->
+<!--                                        </td>-->
+
+
     <div class="flex items-center">
         <h1 class="text-xl ml-6 ">จำนวนออเดอร์ทั้งหมด</h1>
         <span class="text-xl ml-10" th:text="${totalOrders}"></span>
@@ -36,7 +87,7 @@
                                                   <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
                                               </svg>
                                           </span>
-                                          <div>
+                                          </div>
                                       </th>
                                      
                                       <th class="font-semibold text-base uppercase px-6 py-4">ชื่อดอกไม้
@@ -85,21 +136,83 @@
               </div>
             </div>
         </div>
+<!--        <div class="bg-white rounded-lg shadow-lg">-->
+<!--           -->
+<!--            <form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">-->
+<!--                <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring -->
+<!--                focus:ring-gray-200 focus:outline-none">-->
+<!--                    <h3>สรุปรายการออเดอร์</h3>-->
+<!--                </div>-->
+<!--                <div class="mt-6">-->
+<!--                <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>-->
+<!--                <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7-->
+<!--                bg-gray-100 ">-->
+<!--                    <option value="0" data-fid="0">select option</option>-->
+<!--                    <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>-->
+<!--                </select>-->
+<!--                <button type="submit" id="confirmButton" class="btn btn-success ml-2">สรุป</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            <form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" class="mb-3 mt-14 mx-6 text-base">-->
+<!--                <div id="summary" >-->
+<!--                    <h2 class="text-xl font-bold">สรุปรายการ</h2>-->
+<!--                    <div class="bg-orange-300 mt-4 p-4 rounded-xl">-->
+<!--                        <p class="my-1">หมายเลขออเดอร์ : <span id="orderNumber" th:text="${invoice.OID}" class="ml-10"></span></p>-->
+<!--                        <p class="my-1">ประเภทการสั่ง : <span id="orderMethod" th:text="${invoice.order_method}" class="ml-10"></span></p>-->
+<!--                        <p class="my-1">ชื่อดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>-->
+<!--                        <p class="my-1">จำนวนดอกไม้ : <span id="quantity" th:text="${invoice.orderQuantity}" class="ml-10"></span></p>-->
+<!--                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock.total}" class="ml-10"></span></p> -->
+<!--                        <p class="my-1">สถานะของออเดอร์ : <span id="status" th:text="${invoice.status}" class="ml-10"></span></p>-->
+<!--                        <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>-->
+<!--                        <span>บาท</span></p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            -->
+<!--                <input type="hidden" name="OID" th:value="${invoice.OID}" />-->
+<!--                <input type="hidden" name="SID" th:value="${stock.SID}" />-->
+<!--                <input type="hidden" name="amount" th:value="${invoice.price}" />-->
+<!--                <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />-->
+
+
+
+
+<!--                                    </tr>-->
+
+<!--                                    </tbody>-->
+
+<!--                                </table>-->
+
+<!--                                <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 shadow-lg">-->
+<!--                                    <div>-->
+<!--                                        <p class="text-sm text-gray-600 dark:text-gray-400">-->
+<!--                                            <span class="font-semibold text-gray-800 dark:text-gray-200"></span>   &lt;!&ndash;ไม่น่าจะทำ&ndash;&gt;-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                    <div class="join">-->
+<!--                                        &lt;!&ndash; สำหรับpagination&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="bg-white rounded-lg shadow-lg">
-           
+
             <form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">
-                <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring
                 focus:ring-gray-200 focus:outline-none">
                     <h3>สรุปรายการออเดอร์</h3>
                 </div>
                 <div class="mt-6">
-                <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>
-                <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
+                    <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>
+                    <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
                 bg-gray-100 ">
-                    <option value="0" data-fid="0">select option</option>
-                    <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
-                </select>
-                <button type="submit" id="confirmButton" class="btn btn-success ml-2">สรุป</button>
+                        <option value="0" data-fid="0">select option</option>
+                        <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
+                    </select>
+                    <button type="submit" id="confirmButton" class="btn btn-success ml-2">สรุป</button>
                 </div>
             </form>
             <form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" class="mb-3 mt-14 mx-6 text-base">
@@ -110,26 +223,32 @@
                         <p class="my-1">ประเภทการสั่ง : <span id="orderMethod" th:text="${invoice.order_method}" class="ml-10"></span></p>
                         <p class="my-1">ชื่อดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้ : <span id="quantity" th:text="${invoice.orderQuantity}" class="ml-10"></span></p>
-                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock.total}" class="ml-10"></span></p> 
+                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock}" class="ml-10"></span></p>
                         <p class="my-1">สถานะของออเดอร์ : <span id="status" th:text="${invoice.status}" class="ml-10"></span></p>
                         <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>
-                        <span>บาท</span></p>
+                            <span>บาท</span></p>
                     </div>
                 </div>
-            
+
                 <input type="hidden" name="OID" th:value="${invoice.OID}" />
-                <input type="hidden" name="SID" th:value="${stock.SID}" />
-                <input type="hidden" name="amount" th:value="${invoice.price}" />
+                <!--    <input type="hidden" name="amount" th:value="${invoice.price}" />-->
                 <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />
+                <input type="hidden" name="FID" th:value="${invoice.FID}" />
+
+<!--                <input type="hidden" name="OID" th:value="${invoice.OID}" />-->
+<!--                <input type="hidden" name="SID" th:value="${stock.SID}" />-->
+<!--                &lt;!&ndash;                <input type="hidden" name="amount" th:value="${invoice.price}" />&ndash;&gt;-->
+<!--                <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />-->
+
 
                 <button id="completeButton" disabled class="btn btn-success text-bold text-xl px-10 ml-36 mt-5" >ยืนยัน</button>
             </form>
         </div>
     </div>
 
-   
 
-<script>
+
+    <script>
     document.getElementById("invoiceForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent the default form submission
         let selectedOrderId = document.getElementById("order_id").value;
@@ -168,5 +287,120 @@
         completeButton.disabled = false;
     }
 </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Flower Management Web Application</title>-->
+<!--    <link th:rel="stylesheet" th:href="@{static}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>รายการออเดอร์</h1>-->
+
+
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Order No</th>-->
+<!--        <th>Flower Type</th>-->
+<!--        <th>Amount</th>-->
+<!--        <th>Order Method</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody id="invoiceTable">-->
+<!--    &lt;!&ndash; Sample rows for demonstration &ndash;&gt;-->
+<!--    <tr th:each="invoice : ${invoices}">-->
+<!--        <td th:text="${invoice.OID}"></td>-->
+<!--        <td th:text="${invoice.FName}"></td>-->
+<!--        <td th:text="${invoice.orderQuantity}"></td>-->
+<!--        <td th:text="${invoice.plant_status}"></td>-->
+<!--        <td th:text="${invoice.order_method}"></td>-->
+<!--        &lt;!&ndash;                            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}">&ndash;&gt;-->
+<!--        &lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--    </tr>-->
+<!--    &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--<form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">-->
+<!--    <label for="order_id">เลือกหมายเลขออเดอร์:</label>-->
+<!--    <select id="order_id" name="order_id">-->
+<!--        <option value="0" data-fid="0">select option</option>-->
+<!--        <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>-->
+<!--    </select>-->
+<!--    <button type="submit" id="confirmButton">สรุป</button>-->
+<!--</form>-->
+
+<!--<form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" >-->
+<!--    <div id="summary" >-->
+<!--        <h2>สรุปรายการ</h2>-->
+<!--        <p>หมายเลขออเดอร์: <span id="orderNumber" th:text="${invoice.OID}"></span></p>-->
+<!--        <p>ประเภทการสั่ง: <span id="orderMethod" th:text="${invoice.order_method}"></span></p>-->
+<!--        <p>ชนิดดอกไม้: <span id="flowerType" th:text="${invoice.FName}"></span></p>-->
+<!--        <p>จำนวนดอกไม้: <span id="quantity" th:text="${invoice.orderQuantity}"></span></p>-->
+<!--        <p>จำนวนคงเหลือ: <span id="remain" th:text="${stock}"></span></p>-->
+<!--        <p>สถานะของออเดอร์: <span id="status" th:text="${invoice.status}"></span></p>-->
+<!--        <p>ราคาสุทธิ: <span id="price" th:text="${invoice.price}"></span></p>-->
+<!--    </div>-->
+
+<!--    <input type="hidden" name="OID" th:value="${invoice.OID}" />-->
+<!--&lt;!&ndash;    <input type="hidden" name="amount" th:value="${invoice.price}" />&ndash;&gt;-->
+<!--    <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />-->
+<!--    <input type="hidden" name="FID" th:value="${invoice.FID}" />-->
+<!--    <button id="completeButton" disabled >ยืนยัน</button>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    document.getElementById("invoiceForm").addEventListener("submit", function (event) {-->
+<!--        event.preventDefault(); // Prevent the default form submission-->
+<!--        let selectedOrderId = document.getElementById("order_id").value;-->
+<!--        let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');-->
+<!--        let selectedFID = selectedOption.getAttribute("data-fid");-->
+<!--        let selectedOID = selectedOption.value;-->
+
+<!--        // Create hidden input fields for FID and OID-->
+<!--        let fidInput = document.createElement("input");-->
+<!--        fidInput.type = "hidden";-->
+<!--        fidInput.name = "FID"; // This should match the parameter name in your controller method-->
+<!--        fidInput.value = selectedFID;-->
+
+<!--        let oidInput = document.createElement("input");-->
+<!--        oidInput.type = "hidden";-->
+<!--        oidInput.name = "OID"; // This should match the parameter name in your controller method-->
+<!--        oidInput.value = selectedOID;-->
+
+<!--        // Append the hidden input fields to the form-->
+<!--        let form = document.getElementById("invoiceForm");-->
+<!--        form.appendChild(fidInput);-->
+<!--        form.appendChild(oidInput);-->
+
+<!--        // Submit the form-->
+<!--        form.submit();-->
+
+<!--    });-->
+
+<!--    let status = document.getElementById("status").textContent.trim(); // Get the status text-->
+<!--    let completeButton = document.getElementById("completeButton");-->
+
+<!--    if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {-->
+<!--        completeButton.disabled = true;-->
+<!--    } else {-->
+<!--        completeButton.disabled = false;-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+

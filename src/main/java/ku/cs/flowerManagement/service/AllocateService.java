@@ -27,41 +27,47 @@ public class AllocateService {
     private StockRepository stockRepository;
 
 
-    public void createAllocate(int OID , int SID , double amount){
+    public void createAllocate(int OID ,  Integer SID , double amount, int stockChanged){
         Allocate allocate = new Allocate();
-        Optional<OrderItem> orderItem = orderRepository.findById(OID);
+        Optional<OrderItem> orderFlower = orderRepository.findById(OID);
         Optional<Stock> stock = stockRepository.findById(SID);
-        if(orderItem.isPresent() || stock.isPresent()){
-            allocate.setOID(orderItem.get());
+        if(orderFlower.isPresent() || stock.isPresent()){
+            allocate.setOID(orderFlower.get());
             allocate.setSID(stock.get());
             allocate.setAmount(amount);
+            allocate.setStockChanged(stockChanged);
         }
         allocateRepository.save(allocate);
     }
 
     public AllocateRequest findAllAllocate(){
-        Map<String, Double> dataFlower = new HashMap<>();
+        Map<String, AllocateModel> dataFlower = new HashMap<>();
         List<Allocate> allocates = allocateRepository.findAll();
 
         for (Allocate allocate : allocates) {
-            OrderItem orderItem = allocate.getOID();
-            if (Objects.nonNull(orderItem)) {
-                if (dataFlower.containsKey(orderItem.getFlower().getFName())) {
-                    Double amount = dataFlower.get(orderItem.getFlower().getFName());
-                    amount += orderItem.getPrice();
-                    dataFlower.put(orderItem.getFlower().getFName(), amount);
+            OrderItem orderFlower = allocate.getOID();
+            if (Objects.nonNull(orderFlower)) {
+                AllocateModel allocateModel = new AllocateModel();
+                if (dataFlower.containsKey(orderFlower.getFlower().getFName())) {
+                    Double amount = dataFlower.get(orderFlower.getFlower().getFName()).getTotal();
+                    int allocateData = dataFlower.get(orderFlower.getFlower().getFName()).getStockFlower();
+                    amount += allocate.getAmount();
+                    allocateData += allocate.getStockChanged();
+                    allocateModel.setStockFlower(allocateData);
+                    allocateModel.setTotal(amount);
+                    allocateModel.setFName(orderFlower.getFlower().getFName());
                 } else {
-                    dataFlower.put(orderItem.getFlower().getFName(),orderItem.getPrice());
+                    allocateModel.setFName(orderFlower.getFlower().getFName());
+                    allocateModel.setTotal(allocate.getAmount());
+                    allocateModel.setStockFlower(allocate.getStockChanged());
                 }
+                dataFlower.put(orderFlower.getFlower().getFName(), allocateModel);
             }
         }
 
         List<AllocateModel> allocateModels = new ArrayList<>();
-        for (Map.Entry<String, Double> entry : dataFlower.entrySet()) {
-            AllocateModel allocateModel = new AllocateModel();
-            allocateModel.setFName(entry.getKey());
-            allocateModel.setTotal(entry.getValue());
-            allocateModels.add(allocateModel);
+        for (Map.Entry<String, AllocateModel> entry : dataFlower.entrySet()) {
+            allocateModels.add(entry.getValue());
         }
 
 

@@ -41,4 +41,17 @@ public class PlantOrder {
 
     private int harvestable; //can harvest n times n-1 everytime
 
+    @Override
+    public String toString() {
+        return "PlantOrder{" +
+                "id=" + id +
+                ", PID=" + PID +
+                ", quantity=" + quantity +
+                ", total=" + total +
+                ", timePlant=" + timePlant +
+                ", flowerStatus=" + flowerStatus +
+                ", harvestable=" + harvestable +
+                '}';
+    }
+
 }

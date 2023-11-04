@@ -12,14 +12,17 @@
     <tr>
         <th>Flower Name</th>
         <th>Total</th>
+        <th>FlowerStock</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="allocateModel : ${allocateRequest.allocateModels}">
         <td th:text="${allocateModel.fName}"></td>
         <td th:text="${allocateModel.total}"></td>
+        <td th:text="${allocateModel.stockFlower}"></td>
     </tr>
     </tbody>
 </table>
+<h1>ยอดรวม <span th:text="${total}"></span></h1>
 </body>
 </html>
