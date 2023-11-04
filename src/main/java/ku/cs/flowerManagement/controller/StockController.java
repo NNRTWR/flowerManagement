@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 @Controller
+@RequestMapping("/{role}/stock")
 public class StockController {
 
     @Autowired
@@ -39,7 +40,7 @@ public class StockController {
 
 //    @RequestMapping
 
-    @GetMapping("/stock")
+    @GetMapping
     public String showFlowerPage(Model model) {
         model.addAttribute("stock", new StockRequest());
         model.addAttribute("stocks", stockService.getStockList());
@@ -49,8 +50,6 @@ public class StockController {
         model.addAttribute("options", flowerService.getFlowers());
         return "stock";
     }
-
-
 
     @GetMapping("/stock{id}")
     public String showStockDetailPage(Model model, @PathVariable int id) {

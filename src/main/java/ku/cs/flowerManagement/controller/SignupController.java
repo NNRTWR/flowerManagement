@@ -20,6 +20,7 @@ public class SignupController {
 
     @GetMapping("/signup")
     public String getSignupPage() {
+        
         return "signup"; // return ชื่อ template >>> จะได้หน้า signup ออกมา
     }
 

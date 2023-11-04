@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Objects;
 
 @Controller
+@RequestMapping("/{role}/allocate")
 public class AllocateController {
 
     @Autowired
@@ -19,14 +22,11 @@ public class AllocateController {
     public AllocateController(AllocateService allocateService) {
         this.allocateService = allocateService;
     }
-
-    @GetMapping("/allocate")
-    public String showAllocateData(Model model) {
-        // Call the service to get the AllocateRequest
+    @GetMapping
+    public String showAllocateData(@PathVariable("role") String role,Model model) {
         int total = 0;
         AllocateRequest allocateRequest = allocateService.findAllAllocate();
 
-        // Add the AllocateRequest to the model for the Thymeleaf template
         model.addAttribute("allocateRequest", allocateRequest);
         if(Objects.nonNull(allocateRequest)){
             for(AllocateModel allocateModel : allocateRequest.getAllocateModels()){
@@ -34,6 +34,6 @@ public class AllocateController {
             }
         }
         model.addAttribute("total",total);
-        return "allocate-list"; // Return the name of your Thymeleaf template (e.g., "allocate.html")
+        return "allocate-list"; 
     }
 }

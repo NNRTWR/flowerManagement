@@ -15,7 +15,7 @@
     <div class=" bg-zinc-800 text-gray-100 flex h-screen fixed z-10 font-body" th:fragment="ownerSidebar">
             <ul class="menu menu-lg flex-1 flex my-8 w-64">
                 <div class="mb-10">
-                    <a th:href="@{/}"> 
+                    <a th:href="@{/owner/allocate}"> 
                     <img th:src="'/image/logo.svg'" class="w-36 h-36 object-scale-down ml-12" ></img>
                     
                     <div class="flex-1">
@@ -26,7 +26,7 @@
                 
                 <div class="container py-2">
                     
-                    <li><a class="items-center">
+                    <li><a th:href="@{/owner/allocate}">
                         <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 							fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 							<path
@@ -45,7 +45,7 @@
 						</svg>
                         ข้อมูลดอกไม้
                     </a></li>
-                    <li><a th:href="@{/flower}">
+                    <li><a th:href="@{/owner/stock}">
                         <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
 							fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 							<path

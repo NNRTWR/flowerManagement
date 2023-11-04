@@ -38,6 +38,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                       .requestMatchers(new AntPathRequestMatcher("/allocate/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).hasAnyAuthority("GARDENER","SELLER")
                        .requestMatchers(new AntPathRequestMatcher("/orders/**")).hasAnyAuthority("GARDENER")
 
@@ -77,7 +78,9 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                                     response.sendRedirect("/gardener/beds");
                                 } else if (authority.getAuthority().equals("SELLER")) {
                                     response.sendRedirect("/seller/orders");
-                                } 
+                                } else{
+                                    response.sendRedirect("/allocate");
+                                }
                             }
                         })
                         .permitAll()

@@ -30,7 +30,7 @@
                   <div class="mt-3 mx-6">
                     <label for="inputFlowerID" class="text-lg">เลือกดอกไม้</label>
                     <select class="form-control rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7 
-                        bg-gray-100  border-gray-600 border-2" id="inputFlowerID" name="flowerID">
+                        bg-gray-100  border-gray-600 border-2" id="inputFlowerID" name="flowerID" required>
                       <option th:each="flower : ${flowers}"
                               th:value="${flower.FID}" th:text="${flower.FName}">
                       </option>

@@ -90,7 +90,7 @@
                 <div class="mt-6">
                     <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>
                     <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
-                bg-gray-100 ">
+                bg-gray-100" required>
                         <option value="0" data-fid="0">select option</option>
                         <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
                     </select>
@@ -106,7 +106,7 @@
                         <p class="my-1">ประเภทการสั่ง : <span id="orderMethod" th:text="${invoice.order_method}" class="ml-10"></span></p>
                         <p class="my-1">ชื่อดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้ : <span id="quantity" th:text="${invoice.orderQuantity}" class="ml-10"></span></p>
-                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock}" class="ml-10"></span></p>
+                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock.total}" class="ml-10"></span></p>
                         <p class="my-1">สถานะของออเดอร์ : <span id="status" th:text="${invoice.status}" class="ml-10"></span></p>
                         <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>
                             <span>บาท</span></p>
@@ -121,37 +121,46 @@
         </div>
     </div>
     <script>
-    document.getElementById("invoiceForm").addEventListener("submit", function (event) {
-        event.preventDefault(); 
-        let selectedOrderId = document.getElementById("order_id").value;
-        let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
-        let selectedFID = selectedOption.getAttribute("data-fid");
-        let selectedOID = selectedOption.value;
+        
+        document.getElementById("confirmButton").addEventListener("click", function(event) {
+            var selectedOption = document.getElementById("order_id").value;
+            if (selectedOption === "0") {
+                event.preventDefault(); 
+            }
+        });
 
-        let fidInput = document.createElement("input");
-        fidInput.type = "hidden";
-        fidInput.name = "FID"; 
-        fidInput.value = selectedFID;
+        document.getElementById("invoiceForm").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+            let selectedOrderId = document.getElementById("order_id").value;
+            let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
+            let selectedFID = selectedOption.getAttribute("data-fid");
+            let selectedOID = selectedOption.value;
 
-        let oidInput = document.createElement("input");
-        oidInput.type = "hidden";
-        oidInput.name = "OID"; 
-        oidInput.value = selectedOID;
+            let fidInput = document.createElement("input");
+            fidInput.type = "hidden";
+            fidInput.name = "FID"; 
+            fidInput.value = selectedFID;
 
-        let form = document.getElementById("invoiceForm");
-        form.appendChild(fidInput);
-        form.appendChild(oidInput);
-        form.submit();
-    });
+            let oidInput = document.createElement("input");
+            oidInput.type = "hidden";
+            oidInput.name = "OID"; 
+            oidInput.value = selectedOID;
 
-    let status = document.getElementById("status").textContent.trim(); 
-    let completeButton = document.getElementById("completeButton");
+            let form = document.getElementById("invoiceForm");
+            form.appendChild(fidInput);
+            form.appendChild(oidInput);
+            form.submit();
+        });
 
-    if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
-        completeButton.disabled = true;
-    } else {
-        completeButton.disabled = false;
-    }
+        let status = document.getElementById("status").textContent.trim(); 
+        let completeButton = document.getElementById("completeButton");
+
+        
+        if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
+            completeButton.disabled = true;
+        } else {
+            completeButton.disabled = false;
+        }
     </script>
     <!-- </div>    
     </div>     

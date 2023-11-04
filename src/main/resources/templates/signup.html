@@ -9,6 +9,38 @@
 </head>
 <body>
 <div layout:fragment ="content">
+    
+
+    <form action="#" th:action="@{/signup}" method="POST">
+
+
+        <div id="success-msg" class="alert alert-success"
+             th:if="${signupSuccess}">
+            Successfully signed up! Please <a th:href="@{/login}">login</a>.
+        </div>
+        <div id="error-msg" class="alert alert-danger"
+             th:if="${signupError}">
+            <span th:text="${signupError}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputName">Name</label>
+            <input id="inputName" type="input" class="form-control"
+                   name="name">
+        </div>
+        <div class="mb-3">
+            <label for="inputUsername">Username</label>
+            <input id="inputUsername" type="input" class="form-control"
+                   name="username">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword">Password</label>
+            <input id="inputPassword" type="password" class="form-control"
+                   name="password">
+        </div>
+        <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+    </div>
     <h1 class="text-3xl text-center font-bold">รายชื่อพนักงาน</h1>
   <div class="flex items-center justify-between mb-4 mt-6">
         <div class="flex items-center">
@@ -71,37 +103,6 @@
 <div class="container w-50 p-3">
     <h1 class="display-5">Sign Up</h1>
 
-
-    <form action="#" th:action="@{/signup}" method="POST">
-
-
-        <div id="success-msg" class="alert alert-success"
-             th:if="${signupSuccess}">
-            Successfully signed up! Please <a th:href="@{/login}">login</a>.
-        </div>
-        <div id="error-msg" class="alert alert-danger"
-             th:if="${signupError}">
-            <span th:text="${signupError}"></span>
-        </div>
-
-        <div class="mb-3">
-            <label for="inputName">Name</label>
-            <input id="inputName" type="input" class="form-control"
-                   name="name">
-        </div>
-        <div class="mb-3">
-            <label for="inputUsername">Username</label>
-            <input id="inputUsername" type="input" class="form-control"
-                   name="username">
-        </div>
-        <div class="mb-3">
-            <label for="inputPassword">Password</label>
-            <input id="inputPassword" type="password" class="form-control"
-                   name="password">
-        </div>
-        <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
-    </div>
 </div>
 
 </body>
