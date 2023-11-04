@@ -38,7 +38,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
-                       .requestMatchers(new AntPathRequestMatcher("/beds/**")).hasAnyAuthority("GARDENER")
+                       .requestMatchers(new AntPathRequestMatcher("/beds/**")).hasAnyAuthority("GARDENER","SELLER")
                        .requestMatchers(new AntPathRequestMatcher("/orders/**")).hasAnyAuthority("GARDENER")
 
 
@@ -52,7 +52,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                        .requestMatchers(
                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
                         .requestMatchers(
-                               new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
+                               new AntPathRequestMatcher("/gardener/**")).hasAnyAuthority("GARDENER","SELLER")
                         .requestMatchers(
                                new AntPathRequestMatcher("/owner/**")).hasAuthority("OWNER")
 

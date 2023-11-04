@@ -3118,14 +3118,6 @@ details.collapse summary::-webkit-details-marker{
   margin-top: 2rem;
 }
 
-.mb-14{
-  margin-bottom: 3.5rem;
-}
-
-.mb-1{
-  margin-bottom: 0.25rem;
-}
-
 .block{
   display: block;
 }
@@ -3497,10 +3489,6 @@ details.collapse summary::-webkit-details-marker{
 
 .p-4{
   padding: 1rem;
-}
-
-.p-8{
-  padding: 2rem;
 }
 
 .p-5{
