@@ -11,36 +11,38 @@
     <div layout:fragment="content">
         <h1 class="text-3xl text-center font-bold mb-5" th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
         <span class="flex justify-end">
-
-
-            <form  th:action="@{/beds/{PID}}" method="POST" th:object="${order}">
-                <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
-                <button class="btn btn-success text-lg mr-10" type="submit" name="harvestButton">เก็บเกี่ยว</button>
+            <form  th:action="@{/gardener/beds/{PID}}" method="POST" th:object="${order}">
+                <div th:unless="${plantOrder.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD}">
+                    <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
+                    <button class="btn btn-success text-lg mr-6" type="submit" name="harvestButton">เก็บเกี่ยว</button>
+                </div>
+                <div th:if="${plantOrder.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD}">
+                    <button class="btn btn-success text-lg mr-6" type="submit" name="harvestButton" disabled>เก็บเกี่ยว</button>
+                </div>
             </form>
-
-
-            <button class="btn btn-error text-lg" onclick="my_modal_1.showModal()">แจ้งดอกไม้ตาย</button>
-
-
-            <form th:action="@{/beds/{PID}(PID=${PID})}" method="POST" th:object="${order}">
+            <div th:unless="${plantOrder.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD}">
+                <button class="btn btn-error text-lg" onclick="my_modal_1.showModal()">แจ้งดอกไม้ตาย</button>
+            </div>
+            <div th:if="${plantOrder.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD}">
+                <button class="btn btn-error text-lg" onclick="my_modal_1.showModal()" disabled>แจ้งดอกไม้ตาย</button>
+            </div>
+            <form th:action="@{/gardener/beds/{PID}(PID=${PID})}" method="POST" th:object="${order}">
                 <input type="hidden" name="PID" th:value="${PID}" />
-                <button id="resetButton" class="btn btn-success text-lg mr-10" type="hidden" name="resetButton"
+                <button id="resetButton" class="btn btn-warning text-lg ml-6" type="hidden" name="resetButton"
                         th:if="${plantOrder.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD}" th:value="true">เริ่มต้นแปลงใหม่</button>
             </form>
-
-
             <dialog id="my_modal_1" class="modal fixed right-0">
-                <div class="modal-box ml-60 h-1/2  mt-6">
+                <div class="modal-box ml-60 h-1/2 mt-6 bg-gray-100">
                   <div class="flex justify-between items-center bg-red-500 text-white text-xl px-5 py-4 rounded-lg focus:ring
                   focus:ring-gray-200 focus:outline-none">
                       <h3>แจ้งดอกไม้ตาย</h3>
                   </div>
-                  <form  th:action="@{/beds/{PID}}" method="POST" th:object="${order}">
+                  <form  th:action="@{/gardener/beds/{PID}}" method="POST" th:object="${order}">
                       <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
                     <div class="mb-3 mt-6 mx-6 text-lg">
                         <label for="inputAmount">กรอกจำนวนดอกไม้ที่ตาย</label>
-                        <input id="inputAmount" type="number" class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7 border-2 "
-                            name="deadPlant"  required>
+                        <input id="inputAmount" type="number" class="form-control rounded-xl bg-gray-100 pr-8 py-2 my-5 shadow-lg  text-gray-500 pl-7 border-2 "
+                            name="deadPlant" min="0" th:max="${total}" required>
                     </div>
                           <!--                                       name="FID">-->
                       <div class="mb-3 mx-6 mt-16">
@@ -51,156 +53,65 @@
                 </div>
               </dialog>
 
-        </span>
-
+            </span>
+           
         <div class="flex rounded-xl">
-            <div class="rounded-xl items-center">
-                <div>
+        <div class="flex">
+            <img th:src="'/image/' + ${plantOrder.flowerStatus + '.svg'}" class="w-11/12 h-5/6 object-scale-down" alt="Pot Image">
+        </div>
+            
+        <div class="container bg-sky-300 mt-5 rounded-xl mb-20 shadow-lg p-5">
+            <div class="text-2xl text-center">รายละเอียดข้อมูล</div>
+            
+            <div class="flex flex-col mt-3 mx-20">
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">ชื่อดอกไม้</div>
+                    <div class="ml-36 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${plantOrder.flower.FName}"></div>
+                    </div>
                 </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">รหัสออเดอร์ที่ส่งปลูก</div>
+                    <div class="ml-14 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${plantOrder.PID}"></div>
+                    </div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">จำนวนครั้งเก็บเกี่ยวคงเหลือ</div>
+                    <div class="ml-2 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${plantOrder.harvestable}"></div>
+                    </div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">เวลาที่ปลูก</div>
+                    <div class="ml-36 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${commonService.getPatternTime(plantOrder.timePlant)}"></div>
+                    </div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">สถานะดอกไม้</div>
+                    <div class="ml-32 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${plantOrder.flowerStatus}"></div>
+                    </div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">จำนวนที่ปลูก</div>
+                    <div class="ml-32 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${plantOrder.quantity}"></div>
+                    </div>
+                </div>
+                <div class="flex w-full mt-3 mb-3">
+                    <div class="text-xl py-1">จำนวนคงเหลือ</div>
+                    <div class="ml-28 text-xl bg-white px-7 py-1 rounded-lg">
+                        <div th:text="${plantOrder.total}"></div>
+                    </div>
+                </div>
+            
+              
+                
             </div>
-        <div class="container bg-sky-300 mt-5 rounded-xl">
-
-        <h1>ชนิดดอกไม้</h1>
-        <td th:text="${plantOrder.flower.FName}"></td>
-        <td th:text="${plantOrder.PID}"></td>
-        <td th:text="${plantOrder.timePlant}"></td>
-        <td th:text="${plantOrder.quantity}"></td>
-        <td th:text="${plantOrder.total}"></td>
-
-                    <!-- ย่อย -->
-
-<!--                </div>-->
-<!--            </div>-->
         </div>
     </div>
 
-<h1 class="display-6">Bed ที่ปลูกแล้ว</h1>
-
-        <table  class="table table-bordered table-striped table-hover" >
-            <thead class="thead-dark">
-            <tr class="table-dark">
-                <th>เลขที่แปลง</th>
-                <th>วันที่ปลูก</th>
-                <th>จำนวนที่ปลูก</th>
-                <th>จำนวนคงเหลือ</th>
-                <th>ชื่อดอกไม้</th>
-                <th>ราคา</th>
-                <th>สถานะของดอกไม้ในแปลง</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr>
-                <td th:text="${plantOrder.PID}"></td>
-                <td th:text="${commonService.getPatternTime(plantOrder.getTimePlant)}"></td>
-                <td th:text="${plantOrder.quantity}"></td>
-                <td th:text="${plantOrder.total}"></td>
-                <td th:text="${plantOrder.flower.FName}"></td>
-                <td style="text-align: right" th:text="${#numbers.formatDecimal(plantOrder.flower.price, 0, 'COMMA', 2, 'POINT')}"></td>
-                <td th:text="${plantOrder.flowerStatus}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
 </body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
-<!--      layout:decorate="~{layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Flower Management Web Application</title>-->
-<!--    <link th:rel="stylesheet" th:href="@{/css/output.css}">-->
-<!--    &lt;!&ndash; <link th:rel="stylesheet" th:href=""> &ndash;&gt;-->
-<!--</head>-->
-<!--<body>-->
-<!--<div layout:fragment="content">-->
-<!--    <h1 class="text-3xl text-center font-bold mb-5" th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>-->
-<!--    <span class="flex justify-end">-->
-
-
-<!--            <form  th:action="@{/beds/{PID}}" method="POST" th:object="${order}">-->
-<!--                <input type="hidden" name="PID" th:value="${PID}" />&lt;!&ndash; เอาออกแตก &ndash;&gt;-->
-<!--            <button class="btn btn-success text-lg mr-10" type="submit" name="harvestButton">เก็บเกี่ยว</button>-->
-<!--            </form>-->
-
-<!--            <button class="btn btn-error text-lg" onclick="my_modal_1.showModal()">แจ้งดอกไม้ตาย</button>-->
-
-<!--            <form th:action="@{/beds/{PID}(PID=${PID})}" method="POST" th:object="${order}">-->
-<!--                <input type="hidden" name="PID" th:value="${PID}" />-->
-<!--                <button id="resetButton" class="btn btn-success text-lg mr-10" type="hidden" name="resetButton"-->
-<!--                        th:if="${plantOrder.flowerStatus == T(ku.cs.flowerManagement.common.FlowerStatus).DEAD}" th:value="true">เริ่มต้นแปลงใหม่</button>-->
-<!--            </form>-->
-
-
-
-<!--            <dialog id="my_modal_1" class="modal fixed right-0">-->
-<!--                <div class="modal-box ml-60 h-1/2  mt-6">-->
-<!--                  <div class="flex justify-between items-center bg-red-500 text-white text-xl px-5 py-4 rounded-lg focus:ring-->
-<!--                  focus:ring-gray-200 focus:outline-none">-->
-<!--                      <h3>แจ้งดอกไม้ตาย</h3>-->
-<!--                  </div>-->
-<!--                  <form  th:action="@{/beds/{PID}}" method="POST" th:object="${order}">-->
-<!--                      <input type="hidden" name="PID" th:value="${PID}" />&lt;!&ndash; เอาออกแตก &ndash;&gt;-->
-<!--                    <div class="mb-3 mt-6 mx-6 text-lg">-->
-<!--                        <label for="inputAmount">กรอกจำนวนดอกไม้ที่ตาย</label>-->
-<!--                        <input id="inputAmount" type="number" class="form-control rounded-xl pr-8 py-2 my-5 shadow-lg text-gray-500 pl-7 border-2 "-->
-<!--                               name="deadPlant"  required>-->
-<!--                    </div>-->
-<!--                      &lt;!&ndash;                                       name="FID">&ndash;&gt;-->
-<!--                      <div class="mb-3 mx-6 mt-16">-->
-<!--                          <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" name="deadButton">ยืนยัน</button>-->
-<!--                          <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_1.close()">ยกเลิก</button> &lt;!&ndash;ใช้tyoe button ไม่ให่ส่งข้อมูลไป&ndash;&gt;-->
-<!--                      </div>-->
-
-<!--                  </form>-->
-<!--                </div>-->
-<!--              </dialog>-->
-
-
-<!--        </span>-->
-<!--    <div class="flex rounded-xl">-->
-<!--        <div class="rounded-xl items-center">-->
-<!--            <div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="container bg-sky-300 mt-5 rounded-xl">-->
-<!--            &lt;!&ndash;            <h1>ชนิดดอกไม้</h1>&ndash;&gt;-->
-
-<!--            &lt;!&ndash;    &ndash;&gt;-->
-<!--            &lt;!&ndash;                    &lt;!&ndash; ย่อย &ndash;&gt;&ndash;&gt;-->
-<!--            &lt;!&ndash;                  &ndash;&gt;-->
-<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <h1 class="display-6">Bed ที่ปลูกแล้ว</h1>-->
-
-<!--    <table  class="table table-bordered table-striped table-hover" >-->
-<!--        <thead class="thead-dark">-->
-<!--        <tr class="table-dark">-->
-<!--            <th>เลขที่แปลง</th>-->
-<!--            <th>วันที่ปลูก</th>-->
-<!--            <th>จำนวนที่ปลูก</th>-->
-<!--            <th>จำนวนคงเหลือ</th>-->
-<!--            <th>ชื่อดอกไม้</th>-->
-<!--            <th>ราคา</th>-->
-<!--            <th>สถานะของดอกไม้ในแปลง</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--            <td th:text="${plantOrder.PID}"></td>-->
-<!--            <td th:text="${commonService.getPatternTime(plantOrder.getTimePlant)}"></td>-->
-<!--            <td th:text="${plantOrder.quantity}"></td>-->
-<!--            <td th:text="${plantOrder.total}"></td>-->
-<!--            <td th:text="${plantOrder.flower.FName}"></td>-->
-<!--            <td style="text-align: right" th:text="${#numbers.formatDecimal(plantOrder.flower.price, 0, 'COMMA', 2, 'POINT')}"></td>-->
-<!--            <td th:text="${plantOrder.flowerStatus}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->

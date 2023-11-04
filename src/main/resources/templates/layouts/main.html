@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Flower Management Web Application</title>
@@ -9,7 +11,9 @@
 
 <body class="bg-gray-100 text-black flex ">
     <!-- Sidebar -->
-    <div th:replace="~{fragments/gardenerSidebar::gardenerSidebar}" class=""></div>
+    <div th:replace="~{fragments/gardenerSidebar::gardenerSidebar}" sec:authorize="isAuthenticated() and hasAuthority('GARDENER')"></div>
+    <div th:replace="~{fragments/ownerSidebar::ownerSidebar}"sec:authorize="isAuthenticated() and hasAuthority('OWNER')"></div>
+    <div th:replace="~{fragments/sellerSidebar::sellerSidebar}"sec:authorize="isAuthenticated() and hasAuthority('SELLER')"></div>
     <div th:replace="~{fragments/header::header}"></div>
     <main id="content-layout" class=" bg-gray-100 min-h-screen w-full">
         <div layout:fragment="content" class="font-body text-black pt-24 px-24"></div>

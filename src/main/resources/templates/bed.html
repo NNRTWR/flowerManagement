@@ -23,7 +23,7 @@
                         <img th:src="'/image/' + ${listPID.get(i).getFlowerStatus() + '.svg'}" class="w-40 h-40 object-scale-down" alt="Pot Image">
                     </div>
 
-                    <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/beds/order/{PID}(PID=${i})} :  @{/beds/{PID}(PID=${i})}">
+                    <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/gardener/beds/order/{PID}(PID=${i})} :  @{/gardener/beds/{PID}(PID=${i})}">
     <!--                                <input type="hidden" name="PID" th:value="${1}" />-->
                         <button type="submit" class="btn btn-info text-white font-bold rounded-lg text-center text-base mt-3" th:text="'แปลงที่ ' + ${i}">
                         </button>
@@ -42,7 +42,7 @@
                         <img th:src="'/image/' + ${listPID.get(i).getFlowerStatus() + '.svg'}" class="w-40 h-40 object-scale-down" alt="Pot Image">
                     </div>
 
-                    <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/beds/order/{PID}(PID=${i})} :  @{/beds/{PID}(PID=${i})}">
+                    <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/gardener/beds/order/{PID}(PID=${i})} :  @{/gardener/beds/{PID}(PID=${i})}">
     <!--                                <input type="hidden" name="PID" th:value="${1}" />-->
                         <button type="submit" class="btn btn-info text-white font-bold rounded-lg text-center text-base mt-3" th:text="'แปลงที่ ' + ${i}">
                         </button>
@@ -59,9 +59,9 @@
                         <img th:src="'/image/' + ${listPID.get(i).getFlowerStatus() + '.svg'}" class="w-40 h-40 object-scale-down" alt="Pot Image">
                     </div>
 
-                    <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/beds/order/{PID}(PID=${i})} :  @{/beds/{PID}(PID=${i})}">
+                    <form th:action="${listPID.get(i) == null  || listPID.get(i).getFlowerStatus() == T(ku.cs.flowerManagement.common.FlowerStatus).HARVESTED || listPID.get(i).getTotal() == -1} ? @{/gardener/beds/order/{PID}(PID=${i})} :  @{/gardener/beds/{PID}(PID=${i})}">
     <!--                                <input type="hidden" name="PID" th:value="${1}" />-->
-                        <button type="submit" class="btn btn-info text-white font-bold rounded-lg text-center text-xl py-2 mt-3" th:text="'แปลงที่ ' + ${i}">
+                        <button  type="submit" class="btn btn-info text-white font-bold rounded-lg text-center text-base mt-3" th:text="'แปลงที่ ' + ${i}">
                         </button>
                     </form>
 
@@ -74,12 +74,12 @@
                 <button id="overview-button" class="btn btn-warning text-lg join-item active" onclick="showOverviewTable()">ภาพรวม</button>
             </span>
             <span class="">
-                <a th:href="@{/garden/orders}"class="btn btn-success text-lg" >ดูออเดอร์ที่ต้องปลูก</a>
+                <a th:href="@{/gardener/orders}"class="btn btn-success text-lg" >ดูออเดอร์ที่ต้องปลูก</a>
             </span>
             <div class="w-full flex justify-center mt-2">
                 <div class="max-h-80 overflow w-full">
                 <table id="overview-table" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg">
+overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg shadow-lg">
                 <thead class="bg-gray-900">
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">เลขแปลงดอกไม้</th>
@@ -103,7 +103,7 @@ overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-wo
                 </table>
                 
                 <table id="sub-table" style="display: none;" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg">
+overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-words bg-white mb-4 rounded-lg shadow-lg">
                 <thead class="bg-gray-900">
                     <tr class="text-white text-center">
                         <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
@@ -125,80 +125,6 @@ overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-sm break-wo
                 </table>
         </div>
     </div>
-    
-    
-        <!-- <div class="divider"></div> 
-        <div class="grid card bg-base-300 rounded-box place-items-center">
-            <h1>All Gardener Order</h1>
-  <table  class="table table-bordered table-striped table-hover">
-      <thead class="thead-dark">
-      <tr class="table-dark">
-          <th>วันที่สั่ง order</th>
-          <th>ชื่อดอกไม้</th>
-          <th>จำนวนดอกไม้ที่ต้องการ</th>
-          <th>สถานะ</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr th:each="order : ${orders}">
-          <td th:text="${order.date}"></td>
-          <td th:text="${order.flower.FName}"></td>
-          <td th:text="${order.quantity}"></td>
-          <td th:text="${order.status}"></td>
-      </tr>
-      </tbody>
-  </table> 
-
-        </div>
-      </div> -->
-
-
-
-
-<!-- 
-<table>
-    <thead>
-    <tr>
-        <th>Flower Name</th>
-        <th>Number of Gardens</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="statistic : ${Statistics}">
-        <td th:text="${statistic.flower.FName}">Flower Name</td>
-        <td th:text="${#lists.size(statistic.plantOrder)}">Number of Gardens</td>
-    </tr>
-    </tbody>
-</table>
-
-
-<table class="table table-bordered table-striped table-hover">
-    <thead>
-    <tr>
-        <th>Garden Number</th>
-        <th>Status</th>
-        <th>Flower Name</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each="plantOrder : ${plantOrders}">
-        <td th:text="${plantOrder.PID}"></td>
-        <td th:text="${plantOrder.flowerStatus}"></td>
-        <td>
-            <span th:if="${plantOrder.flower != null}" th:text="${plantOrder.flower.FName}"></span>
-            <span th:unless="${plantOrder.flower != null}">N/A</span>
-        </td>
-    </tr>
-    </tbody>
-</table> -->
-
-
-  
-<!--=======-->
-</div>
-</div>
 </div>
 </body>
 </html>

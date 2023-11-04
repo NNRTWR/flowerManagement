@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 
-
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class OrderController {
     @Autowired
     private FlowerService flowerService;
 
-    @GetMapping ("/order")
+    @GetMapping 
     private String showOrderPage( @RequestParam(defaultValue = "0") int page, 
     @RequestParam(name = "id", defaultValue = "0") int id, Model model) {
         // สำหรับคลิ๊กหน้า
@@ -42,7 +42,7 @@ public class OrderController {
         return "order";
     }
 
-    @PostMapping("/order")
+    @PostMapping
     public String createOrder(@ModelAttribute OrderItemRequest orderFlower, Model model) {
         System.out.println(orderFlower.getFlowerPrice());
         orderFlower.setFlowerPrice(orderFlower.getFlowerPrice() * orderFlower.getFlowerPrice());

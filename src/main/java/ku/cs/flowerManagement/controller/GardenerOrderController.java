@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/garden/orders")
+@RequestMapping("/{role}/orders")
 public class GardenerOrderController {
     @Autowired
     private GardenerOrderService gardenerOrderService;
@@ -41,9 +41,7 @@ public class GardenerOrderController {
 
 
     @GetMapping
-    // public String getAllOrder(@PathVariable String role, Model model)
-    
-    public String getAllOrder( Model model, @RequestParam(defaultValue = "0") int page){
+    public String getAllOrder(@PathVariable("role") String role, Model model, @RequestParam(defaultValue = "0") int page){
         int pageSize = 4;
         Page<GardenerOrder> gardenOrderPage = gardenerOrderService.getAllGardenerOrderPage(page, pageSize);
         model.addAttribute("orderItems",  gardenOrderPage.getContent());
@@ -51,6 +49,7 @@ public class GardenerOrderController {
         model.addAttribute("commonService",commonService);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", gardenOrderPage.getTotalPages());
+        model.addAttribute("total", gardenerOrderService.getTotalGardenOrderCount());
         return "gardener-order-all";
     }
 
@@ -61,10 +60,10 @@ public class GardenerOrderController {
     // }
 
     @PostMapping //("/add")
-    public String addOrder(@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
+    public String addOrder(@PathVariable("role") String role,@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
         gardenerOrderService.addOrder(gardenerOrder);
         
         model.addAttribute("orderItems", gardenerOrderService.getAllGardenerOrder(dateTimeComparator));
-        return "redirect:/garden/orders";
+        return "redirect:/{role}/orders";
     }
 }

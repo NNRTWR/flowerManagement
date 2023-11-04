@@ -31,30 +31,29 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/assets/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/static/assets/**")).permitAll()
+
+
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
+                       .requestMatchers(new AntPathRequestMatcher("/flower/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                       .requestMatchers(new AntPathRequestMatcher("/beds/**")).hasAnyAuthority("GARDENER")
+                       .requestMatchers(new AntPathRequestMatcher("/orders/**")).hasAnyAuthority("GARDENER")
+
+
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/test/**")).permitAll()
 
-//                        .requestMatchers(
-//                                new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/seller/**")).permitAll()
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/garden/**")).permitAll()
-                                // .hasAuthority("GARDENER")
-                        // .requestMatchers(
-                        //         new AntPathRequestMatcher("/GARDENER/orders/form")).hasRole("GARDENER")
-                        
 
-                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()
+                       .requestMatchers(
+                               new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
+                        .requestMatchers(
+                               new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
+                       
+
                         .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/beds/**")).permitAll()
-
+                      
 
                         .requestMatchers(new AntPathRequestMatcher("/invoice/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/invoiceConfirm/**")).permitAll()

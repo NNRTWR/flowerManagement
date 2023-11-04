@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/beds")
+@RequestMapping("/gardener/beds")
 public class BedController { //ปลูกดอกไม้แต่ละแปลง
     @Autowired
     private FlowerService flowerService;
@@ -66,6 +66,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         PlantOrder plantOrder = plantOrderService.getPlantOrderButNoHarvestedByPID(PID);
         System.out.println("แปลงที่ " + plantOrder.getPID() + " สถานะ " + plantOrder.getFlowerStatus() + "  " + plantOrder.getTotal());
         model.addAttribute("plantOrder", plantOrder);
+        model.addAttribute("total", plantOrder.getTotal());
         return "bed-view"; //ไปดูข้อมูลรึเปล่า
     }
 
@@ -83,11 +84,11 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         if ("true".equals(resetButton)) {
             System.out.println("อยู่ที่ editedPlantOrder");
             plantOrderService.resetPlant(plantOrderRequest);
-            return "redirect:/beds/order/{PID}"; //reset แล้ว ให้ไปปลูกใหม่ได้
+            return "redirect:/gardener/beds/order/{PID}"; //reset แล้ว ให้ไปปลูกใหม่ได้
         }
 
         //return bed-view ต่อจะแตกเพราะ PID ใน URL มันจะมี "?" อยู่ท้ายแล้วก็แก้ไม่เป็นด้วย
-        return "redirect:/beds";
+        return "redirect:/gardener/beds";
     }
 
     //planting zone
@@ -117,7 +118,7 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @PostMapping("/order/{PID}")
     public String choseOrder(@ModelAttribute gRequest plantOrder,Model model){
         plantOrderService.createPlantOrder(plantOrder, dateTimeComparator);
-        return "redirect:/beds";
+        return "redirect:/gardener/beds";
     }
 
 

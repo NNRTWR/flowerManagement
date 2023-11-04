@@ -8,7 +8,7 @@
     <!-- <link th:rel="stylesheet" th:href=""> -->
 </head>
 <body>
-    <div layout:fragment="content">
+<div layout:fragment="content">
         <h1 class="text-3xl text-center font-bold mb-5" th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
 
         <div class="flex rounded-xl mt-8">
@@ -18,11 +18,11 @@
                 </div>
             </div>     
         <div class="container bg-sky-300 mt-5 rounded-xl">
-            <div class="max-h-80 overflow w-full mt-8">
-                
+            <div class="max-h-80 overflow w-full mt-8 rounded-lg">
+                <h1 class="text-xl text-center mb-3 font-bold"> เลือกออเดอร์ที่ต้องการปลูก</h1>
                 <table id="overview-table" class="table-fixedbg-white divide-y divide-gray-300 
-overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-white mb-4 rounded-lg">
-                <thead class="bg-gray-900">
+                overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-white mb-6 rounded-lg">
+                <thead class="bg-gray-900 rounded-lg">
                     <tr class="text-white text-center text-lg">
                         <th class="font-semibold text-base uppercase px-6 py-4">วันที่สั่ง</th>
                         <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
@@ -39,7 +39,7 @@ overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-wh
                         <td th:text="${order.quantity}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td th:text="${order.status}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td class="px-6 py-4 truncate whitespace-normal">
-                            <form th:action="@{'/beds/order/' + ${PID}}" method="POST">
+                            <form th:action="@{'/gardener/beds/order/' + ${PID}}" method="POST">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 <input type="hidden" th:name="gardener_order_ID" th:value="${order.id}" />
                                 <button type="submit" class="btn btn-success font-bold text-xl" >ปลูก</button>
@@ -53,17 +53,17 @@ overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-wh
             <div class="pagination mt-12 flex justify-center">
                 <ul class="pagination flex space-x-2 items-center">
                     <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
-                        <a th:if="${currentPage > 0}" th:href="@{/beds/order/{PID}(PID=${PID}, page=${currentPage - 1})}" class="btn btn-neutral">Previous</a>
+                        <a th:if="${currentPage > 0}" th:href="@{/gardener/beds/order/{PID}(PID=${PID}, page=${currentPage - 1})}" class="btn btn-neutral">Previous</a>
                         <span th:unless="${currentPage > 0}" class="btn disabled btn-neutral">Previous</span>
                     </li>
                     <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageNumber} ? 'active' : ''" class="join-item">
                         <a th:if="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}"
-                           th:href="@{/beds/order/{PID}(PID=${PID}, page=${pageNumber})}"
+                           th:href="@{/gardener/beds/order/{PID}(PID=${PID}, page=${pageNumber})}"
                            th:text="${pageNumber + 1}" class="btn btn-neutral"></a>
                         <span th:unless="${pageNumber == 0 or pageNumber == totalPages - 1 or (currentPage - pageNumber >= -2 and currentPage - pageNumber <= 2)}" class="btn disabled btn-neutral">..</span>
                     </li>
                     <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
-                        <a th:if="${currentPage < totalPages - 1}" th:href="@{/beds/order/{PID}(PID=${PID}, page=${currentPage + 1})}" class="btn btn btn-neutral">Next</a>
+                        <a th:if="${currentPage < totalPages - 1}" th:href="@{/gardener/beds/order/{PID}(PID=${PID}, page=${currentPage + 1})}" class="btn  btn-neutral">Next</a>
                         <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-neutral">Next</span>
                     </li>
                 </ul>
@@ -76,217 +76,6 @@ overflow-y-auto mx-auto w-11/12 h-80 md:w-5/6 lg:w-2/3 text-lg break-words bg-wh
                 </div>
             </div>
         </div>
-    </div>
-
-    <h1 th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>
-    <h1>All Gardener Order</h1>
-    <table  class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-        <tr class="table-dark">
-            <th>วันที่สั่ง order</th>
-            <th>ชื่อดอกไม้</th>
-            <th>จำนวนดอกไม้ที่ต้องการ</th>
-            <!--            <th>จำนวนคงเหลือ</th>-->
-            <th>สถานะ</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="order : ${orders}">
-            <td th:text="${commonService.getPatternTime(order.date)}"></td>
-            <td th:text="${order.flower.FName}"></td>
-            <td th:text="${order.quantity}"></td>
-            <!--            <td th:text="${orderItem.total}"></td>-->
-            <td th:text="${order.status}"></td>
-
-            <td style="text-align: center">
-                <form action="#" th:action="@{/beds/order/{PID}(PID=${PID})}" method="POST">
-                    <input type="hidden" name="PID" th:value="${PID}" /><!-- เอาออกแตก -->
-<!--                <form action="#" th:action="@{/beds/{PID}(PID=${PID})}">-->
-                    <button type="submit" th:value="${order.id}" name="gardener_order_ID">เลือก</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-
-
+</div>
 </body>
 </html>
-
-<!--แบบที่ 3 เจ๊ง-->
-<!--<form th:each="flower : ${flowers}" th:action="@{/beds/plant/{PID}(PID=${PID})}" method="POST">-->
-<!--    <label><input type="checkbox" name="flowerID" value="flower.id" th:text="${flower.FName}"></label>-->
-<!--    <label><input type="checkbox" name="plant_order_ID" value="order.id" th:text="${order.flower.FName}"></label>-->
-<!--    <button type="submit">Submit</button>-->
-<!--</form>-->
-
-
-<!--แบบที่ 1-->
-<!--    <h1 th:text="${'แปลงที่ ' + PID}">แปลงที่</h1>-->
-<!--    <h1 class="display-6">All Flower</h1>-->
-
-<!--    <table  class="table table-bordered table-striped table-hover">-->
-<!--        <thead class="thead-dark">-->
-<!--        <tr class="table-dark">-->
-<!--            <th>ชื่อดอกไม้</th>-->
-<!--            <th>วิธีปลูก</th>-->
-<!--            <th>วิธีดูแล</th>-->
-<!--            <th>ระยะเวลาของเมล็ด</th>-->
-<!--            <th>ระยะเวลาของต้นอ่อน</th>-->
-<!--            <th>ระยะเวลาของต้นกำลังโต</th>-->
-<!--            <th>ระยะเวลาของต้นโตเต็มที่</th>-->
-<!--            <th>ระยะเวลาของการเก็บเกี่ยว</th>-->
-<!--            <th>รูปแบบการเก็บ</th>-->
-<!--            <th>ราคา</th>-->
-<!--            <th>จำนวนดอก</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-
-<!--        <tbody>-->
-<!--        <tr th:each="flower : ${flowers}">-->
-<!--            <td th:text="${flower.FName}"></td>-->
-<!--            <td th:text="${flower.how_to_plant}"></td>-->
-<!--            <td th:text="${flower.how_to_take_care}"></td>-->
-<!--            <td th:text="${flower.seedPeriod}"></td>-->
-<!--            <td th:text="${flower.growingPeriod}"></td>-->
-<!--            <td th:text="${flower.fullyGrownPeriod}"></td>-->
-<!--            <td th:text="${flower.harvestPeriod}"></td>-->
-<!--            <td th:text="${flower.how_to_harvest}"></td>-->
-<!--            <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}"></td>-->
-<!--            <td th:text="${flower.quantity}"></td>-->
-
-<!--            <td style="text-align: center">-->
-<!--                <input type="hidden" name="flowerID" th:value="${flower.id}" />-->
-<!--&lt;!&ndash;                <form>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button type="submit" th:value="${flower.id}" name="flowerID">เลือก</button> &lt;!&ndash; กดเลือกดอกไม้ที่จะปลูก &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                </form>&ndash;&gt;-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-
-
-<!--    <h1>All Gardener Order</h1>-->
-<!--    <table  class="table table-bordered table-striped table-hover">-->
-<!--        <thead class="thead-dark">-->
-<!--        <tr class="table-dark">-->
-<!--            <th>วันที่สั่ง order</th>-->
-<!--            <th>ชื่อดอกไม้</th>-->
-<!--            <th>จำนวนดอกไม้ที่ต้องการ</th>-->
-<!--            &lt;!&ndash;            <th>จำนวนคงเหลือ</th>&ndash;&gt;-->
-<!--            <th>สถานะ</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-
-<!--        <tbody>-->
-<!--        <tr th:each="order : ${orders}">-->
-<!--            <td th:text="${order.date}"></td>-->
-<!--            <td th:text="${order.flower.FName}"></td>-->
-<!--            <td th:text="${order.quantity}"></td>-->
-<!--            &lt;!&ndash;            <td th:text="${orderItem.total}"></td>&ndash;&gt;-->
-<!--            <td th:text="${order.status}"></td>-->
-
-<!--            <td style="text-align: center">-->
-<!--                <input type="hidden" name="plant_order_ID" th:value="${order.id}" />-->
-<!--&lt;!&ndash;                <form>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button type="submit" th:value="${order.id}" name="plant_order_ID">เลือก</button> &lt;!&ndash; กดเลือกดอกไม้ที่จะปลูก &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                </form>&ndash;&gt;-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-
-<!--    <form th:action="@{/beds/plant/{PID}(PID=${PID})}" method="POST">-->
-<!--        <button id="submit-button" type="submit" class="btn btn-primary">Submit Order</button>-->
-<!--    </form>-->
-
-
-
-<!--<script>-->
-<!--    var selectedFlowerId = null;-->
-<!--    var selectedOrderId = null;-->
-
-<!--    function selectFlower(flowerId) {-->
-<!--        selectedFlowerId = flowerId;-->
-
-<!--    }-->
-
-<!--    function selectOrder(orderId) {-->
-<!--        selectedOrderId = orderId;-->
-<!--    }-->
-
-<!--    function submitSelectedFlowerAndOrder() {-->
-<!--            document.getElementById("selectedFlowerId").value = selectedFlowerId;-->
-<!--            document.getElementById("selectedOrderId").value = selectedOrderId;-->
-<!--            document.querySelector("form").submit();-->
-<!--    }-->
-<!--</script>-->
-
-
-
-<!--&lt;!&ndash;แบบที่ 2 กดไม่ลง&ndash;&gt;-->
-<!--    <table class="table table-bordered table-striped table-hover">-->
-<!--        <thead class="thead-dark">-->
-<!--        <tr class="table-dark">-->
-<!--            <th>ชื่อดอกไม้</th>-->
-<!--            <th>วิธีปลูก</th>-->
-<!--            <th>วิธีดูแล</th>-->
-<!--            <th>ระยะเวลาของเมล็ด</th>-->
-<!--            <th>ระยะเวลาของต้นอ่อน</th>-->
-<!--            <th>ระยะเวลาของต้นกำลังโต</th>-->
-<!--            <th>ระยะเวลาของต้นโตเต็มที่</th>-->
-<!--            <th>ระยะเวลาของการเก็บเกี่ยว</th>-->
-<!--            <th>รูปแบบการเก็บ</th>-->
-<!--            <th>ราคา</th>-->
-<!--            <th>จำนวนดอก</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="flower : ${flowers}">-->
-<!--            <td th:text="${flower.FName}"></td>-->
-<!--            <td th:text="${flower.how_to_plant}"></td>-->
-<!--            <td th:text="${flower.how_to_take_care}"></td>-->
-<!--            <td th:text="${flower.seedPeriod}"></td>-->
-<!--            <td th:text="${flower.growingPeriod}"></td>-->
-<!--            <td th:text="${flower.fullyGrownPeriod}"></td>-->
-<!--            <td th:text="${flower.harvestPeriod}"></td>-->
-<!--            <td th:text="${flower.how_to_harvest}"></td>-->
-<!--            <td style="text-align: right" th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}"></td>-->
-<!--            <td th:text="${flower.quantity}"></td>-->
-<!--            <td>-->
-<!--                <button type="button" class="btn btn-primary" onclick="selectFlower(${flower.id})">เลือก</button>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-
-<!--    <h1>All Gardener Order</h1>-->
-<!--    <table class="table table-bordered table-striped table-hover">-->
-<!--        <thead class="thead-dark">-->
-<!--        <tr class="table-dark">-->
-<!--            <th>วันที่สั่ง order</th>-->
-<!--            <th>ชื่อดอกไม้</th>-->
-<!--            <th>จำนวนดอกไม้ที่ต้องการ</th>-->
-<!--            <th>สถานะ</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="order : ${orders}">-->
-<!--            <td th:text="${order.date}"></td>-->
-<!--            <td th:text="${order.flower.FName}"></td>-->
-<!--            <td th:text="${order.quantity}"></td>-->
-<!--            <td th:text="${order.status}"></td>-->
-<!--            <td>-->
-<!--                <button type="button" class="btn btn-primary" onclick="selectOrder(${order.id})">เลือก</button>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-
-<!--    <form id="form" th:action="@{/beds/plant}" method="POST">-->
-<!--&lt;!&ndash;        <input type="hidden" id="selectedFlowerId" name="selectedFlowerId" />&ndash;&gt;-->
-<!--&lt;!&ndash;        <input type="hidden" id="selectedOrderId" name="selectedOrderId" />&ndash;&gt;-->
-<!--        <button type="button" id="submit-button" class="btn btn-primary" onclick="submitSelectedFlowerAndOrder()">Submit Order</button>-->
-<!--    </form>-->
