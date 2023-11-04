@@ -68,7 +68,11 @@ public class FlowerController {
 
     @PostMapping //("/flower/create")
     public String createFlower(@PathVariable("role") String role,@ModelAttribute FlowerRequest flower) {
-        flowerService.addFlower(flower);
+//        if(flower.getSeedPeriod() < 1 || flower.getSproutPeriod() < 1 || flower.getGrowingPeriod() < 1 || flower.getFullyGrownPeriod() < 1 || flower.getHarvestPeriod() < 1 )
+//            return "redirect:/{role}/flower";
+//        else {
+            flowerService.addFlower(flower);
+//        }
         return "redirect:/{role}/flower";
     }
 

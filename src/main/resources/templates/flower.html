@@ -18,7 +18,7 @@
         </div>
         <div class="flex space-x-2 items-center">
             
-            <button class="btn btn-success text-lg mr-8" onclick="my_modal_3.showModal()"  sec:authorize="isAuthenticated() and hasAuthority('OWNER')">เพิ่มข้อมูลดอกไม้</button>
+            <button  class="btn btn-success text-lg mr-8" onclick="my_modal_3.showModal()"  sec:authorize="isAuthenticated() and hasAuthority('OWNER')">เพิ่มข้อมูลดอกไม้</button>
             <dialog id="my_modal_3" class="modal">
                 <div class="modal-box ml-60 mt-6 min-w-max bg-slate-100">
                   <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
@@ -52,67 +52,70 @@
                       <div class="flex flex-col">
                     <div class="mt-3 mb-3 text-sm">
                         <label for="inputseedPeriod">ระยะเวลาเป็นเมล็ด</label>
-                        <input id="inputseedPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputseedPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="seedPeriod">
+                               name="seedPeriod" min="1">
                     </div>
                 
                     <div class="mt-3 mb-3 text-sm">
                         <label for="inputsproutPeriod">ระยะเวลาเป็นต้นกล้า</label>
-                        <input id="inputsproutPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputsproutPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="sproutPeriod">
+                               name="sproutPeriod" min="1">
                     </div>
                 
                     <div class="mb-3">
                         <label for="inputgrowingPeriod">ระยะเวลาเป็นต้นอ่อน</label>
-                        <input id="inputgrowingPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputgrowingPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="growingPeriod">
+                               name="growingPeriod" min="1">
                     </div>
                 
                     <div class="mb-3">
                         <label for="inputfullyGrownPeriod">ระยะเวลาโตเต็มที่</label>
-                        <input id="inputfullyGrownPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputfullyGrownPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="fullyGrownPeriod">
+                               name="fullyGrownPeriod" min="1">
                     </div>
                 
                     <div class="mb-3">
                         <label for="inputharvestPeriod">ระยะเวลาออกดอก</label>
-                        <input id="inputharvestPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputharvestPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="harvestPeriod">
+                               name="harvestPeriod" min="1">
                     </div>
                       </div>
                     <div class="mb-3">
                         <label for="inputHow_to_harvest">จำนวนครั้งที่เก็บเกี่ยวได้</label>
-                        <input id="inputHow_to_harvest" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputHow_to_harvest" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="how_to_harvest">
+                               name="how_to_harvest" min="1">
                     </div>
                 
                     <div class="mb-3">
                         <label for="inputPrice">ราคา</label>
-                        <input id="inputPrice" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputPrice" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="price">
+                               name="price" min="1" step="0.01">
                     </div>
                 
                     <div class="mb-3">
                         <label for="inputQuantity">จำนวนดอกไม้ต่อ 1 ต้น</label>
-                        <input id="inputQuantity" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <input id="inputQuantity" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="quantity">
+                               name="quantity" min="1">
                     </div>
                       <div class="flex justify-center mt-10">
                           <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
                           <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_3.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
                       </div>
                   </form>
+                </div>
               </dialog>  
         </div>
     </div>
+
+
     <div class="max-w-[85rem] sm:px-6 lg:px-8 lg:py-4 mx-auto">
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
@@ -131,7 +134,7 @@
                                         <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
                                     </svg>
                                 </span> -->
-                                <div>
+                                </div>
                             </th>
                             <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้</th>
                             <th class="font-semibold text-lg uppercase px-6 py-4">จำนวนเก็บเกี่ยว
@@ -185,6 +188,7 @@
       </div>
     </div>
     
+</div>
 </div>
 </body>
 </html>
