@@ -389,12 +389,14 @@ PlantOrderService {
         PlantOrder record = plantOrderRepository.findByPID(plantOrderRequest.getPID());
         if(record.getFlowerStatus() == FlowerStatus.HARVEST) {
             //managing stock
+            Flower flower = record.getFlower();
             Stock stock = new Stock();
             LocalDateTime localDateTime = LocalDateTime.now();
             stock.setTime(localDateTime);
             stock.setQuantity(record.getTotal()*record.getFlower().getQuantity());
             stock.setTotal(record.getTotal()*record.getFlower().getQuantity());
             stock.setPlantOrder(record);
+            stock.setFlower(flower);
             System.out.println("hey");
             stockRepository.save(stock);
             record.setHarvestable(record.getHarvestable() - 1);
