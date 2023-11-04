@@ -17,47 +17,25 @@
     <table class="table-fixedbg-white divide-y divide-gray-300 
     overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-lg break-words bg-white" id="flower-table">
         <thead class="bg-gray-900">
-            <tr class="text-white text-center">
-                <th class="font-semibold text-lg uppercase px-6 py-6">ชนิดดอกไม้</th>
-                <th class="font-semibold text-lg uppercase px-6 py-6">จำนวนดอกไม้ที่เก็บเกี่ยวได้ (ดอก)</th>
-                <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">จำนวนดอกไม้ที่ตาย (ดอก)</th>
-                <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">จำนวนดอกไม้ที่ขายได้ (ดอก)</th>
-                <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">ยอดเงินที่ได้ (บาท)</th>
-            </tr>
+        <tr class="text-white text-center">
+            <th class="font-semibold text-lg uppercase px-6 py-6">ชนิดดอกไม้</th>
+            <th class="font-semibold text-lg uppercase px-6 py-6">จำนวนดอกไม้ที่เก็บเกี่ยวได้ (ดอก)</th>
+            <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">จำนวนดอกไม้ที่ตาย (ดอก)</th>
+            <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">จำนวนดอกไม้ที่ขายได้ (ดอก)</th>
+            <th class="font-semibold text-lg uppercase px-6 py-6 whitespace-normal">ยอดเงินที่ได้ (บาท)</th>
+        </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 text-center px-6 py-8 text-xl">
-            <!-- อันนี้ตย. หน้าดอกไม้-->
-            <!-- <tr th:each="flower : ${flowers}" class="whitespace-normal">
-                <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
-                <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
-                <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
-                <td class="px-6 py-4 truncate whitespace-normal"></td>
-                <td class="px-6 py-4 text-center truncate whitespace-normal">
-                    <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600 
-                font-semibold rounded-full text-xl p-3"></span>
-                </td>
-                <td class="px-6 py-4 text-center font-extrabold" th:href="@{/flower/{id}(id=${flower.FID})}"> 
-                    <a class="btn  bg-sky-400 text-xl text-gray-100">Detail</a> 
-                </td>
-        
-            </tr> -->
-            <tr class="whitespace-normal">
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-            </tr>
-            <tr class="whitespace-normal">
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-                <td class="px-6 py-6 truncate whitespace-normal">เทส</td>
-            </tr>
-            
+        <tr th:each="flower : ${sales}" class="whitespace-normal">
+            <td th:text="${flower.getFlowerName()}" class="px-6 py-6 truncate whitespace-normal">เทส</td>
+            <td th:text="${flower.getHarvestAmount()}" class="px-6 py-6 truncate whitespace-normal">เทส</td>
+            <td th:text="${flower.getDeadAmount()}" class="px-6 py-6 truncate whitespace-normal">เทส</td>
+            <td th:text="${flower.getSalesAmount()}" class="px-6 py-6 truncate whitespace-normal">เทส</td>
+            <td th:text="${flower.getBalanceAmount()}" class="px-6 py-6 truncate whitespace-normal">เทส</td>
+        </tr>
+
         </tbody>
-        
+
     </table>
 
     <!-- หน้าเลื่อนถ้าทำทันจะทำ ไม่ทันไม่ทำ -->
@@ -84,7 +62,7 @@
             </li>
         </ul>
     </div> -->
-    
+
 </div>
 </body>
 </html>

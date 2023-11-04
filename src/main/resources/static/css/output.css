@@ -3045,12 +3045,12 @@ details.collapse summary::-webkit-details-marker{
   margin-left: 9rem;
 }
 
-.ml-5{
-  margin-left: 1.25rem;
+.ml-44{
+  margin-left: 11rem;
 }
 
-.ml-52{
-  margin-left: 13rem;
+.ml-5{
+  margin-left: 1.25rem;
 }
 
 .ml-6{
@@ -3119,14 +3119,6 @@ details.collapse summary::-webkit-details-marker{
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.ml-4{
-  margin-left: 1rem;
-}
-
-.ml-44{
-  margin-left: 11rem;
 }
 
 .block{

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
-@RequestMapping("/{role}/flower")
+@RequestMapping("/owner/flower")
 @Controller
 public class FlowerController {
 
@@ -23,32 +23,37 @@ public class FlowerController {
     //     model.addAttribute("flower", new FlowerRequest());
     //     model.addAttribute("flowers", flowerService.getFlowers());
     //     // ใช้ FlowerService getAllFlowers
-    //     int totalFlowers = flowerService.getTotalFlowerCount(); 
-    //     model.addAttribute("totalFlowers", totalFlowers); 
+    //     int totalFlowers = flowerService.getTotalFlowerCount();
+    //     model.addAttribute("totalFlowers", totalFlowers);
     //     return "flower";
     // }
 
-    public String showFlowerPage(@PathVariable("role") String role,Model model, @RequestParam(defaultValue = "0") int page) {
+    public String showFlowerPage(Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 4;
         Page<Flower> flowerPage = flowerService.getFlowers(page, pageSize);   //โชว์แถบเลื่อนได้ น้ำตาจะไหลทำได้ซักที
-        
-        int totalFlowers = flowerService.getTotalFlowerCount(); 
+
+        int totalFlowers = flowerService.getTotalFlowerCount();
         model.addAttribute("flower", new FlowerRequest());
         model.addAttribute("flowers", flowerPage.getContent());
         model.addAttribute("currentPage", flowerPage.getNumber());
         model.addAttribute("totalPages", flowerPage.getTotalPages());
         model.addAttribute("totalFlowers", totalFlowers);
-        
+        model.addAttribute("role","owner");
+
         return "flower";
     }
-    
-    
 
-    @GetMapping("/flower{id}")
-    public String showFlowerDetailPage(@PathVariable("role") String role,Model model, @PathVariable Integer fid) {
+
+
+    @GetMapping("/{id}")
+    public String showFlowerDetailPage(Model model, @PathVariable("id") Integer fid, @RequestParam(name = "edit",defaultValue = "0") int edit) {
 //        model.addAttribute("flower", flowerService.getFlowerById(id));
+        String role = "owner";
         model.addAttribute("flower",flowerService.getOneFlower(fid));
         model.addAttribute("method", "PUT");
+        model.addAttribute("url","/"+role+"/flower");
+        model.addAttribute("current_url","/"+role+"/flower/"+fid);
+        model.addAttribute("edit",edit);
         return "flower-detail";
     }
 
@@ -66,20 +71,18 @@ public class FlowerController {
 //        return "redirect:/flower";
 //    }
 
-    @PostMapping //("/flower/create")
-    public String createFlower(@PathVariable("role") String role,@ModelAttribute FlowerRequest flower) {
-//        if(flower.getSeedPeriod() < 1 || flower.getSproutPeriod() < 1 || flower.getGrowingPeriod() < 1 || flower.getFullyGrownPeriod() < 1 || flower.getHarvestPeriod() < 1 )
-//            return "redirect:/{role}/flower";
-//        else {
-            flowerService.addFlower(flower);
-//        }
-        return "redirect:/{role}/flower";
+    @PostMapping ()//("/flower/create")
+    public String createFlower(@ModelAttribute FlowerRequest flower ) {
+        flowerService.addFlower(flower);
+        String url = "/"+"owner"+"/flower";
+        return "redirect:"+url;
     }
 
-//    @PutMapping("/flower/{id}")
-//    public String updateFlower(@ModelAttribute FlowerRequest flower, @PathVariable int id) {
-//        flower.setFID(id);
-//        flowerService.updateFlower(flower);
-//        return "redirect:/flower";
-//    }
+    @PutMapping("/{id}")
+    public String updateFlower(@ModelAttribute FlowerRequest flower,@PathVariable("id") int id) {
+        flower.setFID(id);
+        flowerService.updateFlower(flower);
+        String url = "/"+"owner"+"/flower";
+        return "redirect:"+url;
+    }
 }

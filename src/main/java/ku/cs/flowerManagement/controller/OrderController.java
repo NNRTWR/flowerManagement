@@ -23,9 +23,9 @@ public class OrderController {
     @Autowired
     private FlowerService flowerService;
 
-    @GetMapping 
-    private String showOrderPage( @RequestParam(defaultValue = "0") int page, 
-    @RequestParam(name = "id", defaultValue = "0") int id, Model model) {
+    @GetMapping
+    private String showOrderPage( @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(name = "id", defaultValue = "0") int id, Model model) {
         // สำหรับคลิ๊กหน้า
         //เหมือนด้านบน
         model.addAttribute("order", new OrderItemRequest());
@@ -50,7 +50,7 @@ public class OrderController {
         return "redirect:/order";
     }
 
-    @PutMapping("/order/{id}")
+    @PutMapping("/{id}")
     public String cancelOrder(@PathVariable int id, Model model){
         orderService.cancelOrderById(id);
         model.addAttribute("order", new OrderItemRequest());
