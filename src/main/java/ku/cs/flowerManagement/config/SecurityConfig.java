@@ -29,6 +29,8 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/assets/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/static/assets/**")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/detail")).permitAll()

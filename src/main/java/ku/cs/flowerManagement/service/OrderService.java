@@ -2,10 +2,12 @@ package ku.cs.flowerManagement.service;
 
 import com.google.gson.Gson;
 import jakarta.persistence.EntityNotFoundException;
-import ku.cs.flowerManagement.common.FlowerStatus;
 import ku.cs.flowerManagement.common.OrderStatus;
+
 import ku.cs.flowerManagement.entity.Flower;
+
 import ku.cs.flowerManagement.entity.OrderItem;
+
 import ku.cs.flowerManagement.model.OrderItemRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.OrderRepository;
@@ -79,10 +81,10 @@ public class OrderService {
         System.out.println("Price///////////////////// : "+flower.getPrice() );
         System.out.println("Quantity///////////////////: " + orderFlowerRequest.getOrderQuantity());
         orderFlower.setFlower(flower);
-        orderFlower.setQuantity(orderFlowerRequest.getOrderQuantity());
         orderFlower.setPrice(flower.getPrice() * orderFlowerRequest.getOrderQuantity());
         orderFlower.setStatus(OrderStatus.PENDING);
-        // orderFlower.setPlant_status(FlowerStatus.SEED);
+        orderFlower.setQuantity(orderFlowerRequest.getOrderQuantity());
+//        orderFlower.setPlant_status(PlantStatus.SEEDING);
         orderFlower.setOrder_method(orderFlowerRequest.getOrder_method());
         orderRepository.save(orderFlower);
     }

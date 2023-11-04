@@ -32,4 +32,15 @@ public class GardenerOrder {
 
     @OneToOne(mappedBy = "gardener_order")
     private PlantOrder plantOrder;
+
+    @Override
+    public String toString() {
+        return "GardenerOrder{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", status=" + status +
+                "date=" + date +
+                // Exclude related entities here...
+                '}';
+    }
 }

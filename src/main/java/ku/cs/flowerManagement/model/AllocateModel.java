@@ -6,5 +6,6 @@ import lombok.Data;
 public class AllocateModel {
     private String fName;
     private double total;
+    private int stockFlower;
 
 }

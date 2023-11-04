@@ -50,6 +50,16 @@ public class Flower {
 
     private int quantity; //จำนวนดอกไม้
     @OneToMany(mappedBy = "flower")
-    private List<OrderItem> orders = new ArrayList<>();   
+    private List<OrderItem> orders = new ArrayList<>();
 
+
+    @Override
+    public String toString() {
+        return "Flower{" +
+                "FID=" + FID +
+                ", FName='" + FName + '\'' +
+                ", how_to_plant='" + how_to_plant + '\'' +
+                // Add other fields here
+                '}';
+    }
 }
