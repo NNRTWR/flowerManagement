@@ -52,14 +52,14 @@ public class InvoiceController {
 
 
 
-    @RequestMapping("/invoice")
+    @RequestMapping("/seller/invoice")
     public ModelAndView invoiceView(Map<String,Object> model) {
         model.put("stocks",stockService.getStockList());
         return new ModelAndView("invoice/invoicePage");
     }
 
 
-    @GetMapping("/invoice")
+    @GetMapping("/seller/invoice")
     public String showInvoicePage(Model model, @RequestParam(name = "id", defaultValue = "0" ) int id) throws JsonProcessingException, IllegalAccessException {
 //        JSONArray options = new JSONArray(orderService.getOrders());
 //        String options = new Gson().toJson(orderService.getOrders());
@@ -89,16 +89,16 @@ public class InvoiceController {
         return "invoice";
     }
 
-    @PostMapping("/invoice")
+    @PostMapping("/seller/invoice")
     public String createInvoice(@ModelAttribute InvoiceRequest invoice,
                                 Model model) {
         System.out.println("Invoice จ้า : "+invoice);
         invoice.setFlowerPrice(invoice.getFlowerPrice() * invoice.getOrderQuantity());
         invoiceService.createInvoice(invoice);
-        return "redirect:/invoice";
+        return "redirect:/seller/invoice";
     }
 
-    @PostMapping("/invoiceConfirm")
+    @PostMapping("/seller/invoiceConfirm")
     public String stockConfirm(Model model ,@RequestParam("FID") int FID , @RequestParam("OID") int OID) {
         int stockData = stockService.calculateStock(FID);
         List<Stock> stockLists = stockService.getStockByFID(FID);
@@ -115,15 +115,15 @@ public class InvoiceController {
     }
 
 
-    @PostMapping("/invoiceCompleteButton")
+    @PostMapping("/seller/invoiceCompleteButton")
     public String stockComplete(Model model , @RequestParam("OID") int OID  , @RequestParam("orderQuantity") int orderQuantity , @RequestParam("FID") int FID){
         invoiceService.InvoiceComplete(OID  , orderQuantity ,FID);
-        return "redirect:/allocate";
+        return "redirect:/seller/allocate";
     }
 
 
 
-    @PutMapping("/invoice/{id}")
+    @PutMapping("/seller/invoice/{id}")
     public String confirmInvoice(@PathVariable int id, Model model) throws JsonProcessingException, IllegalAccessException {
         orderService.cancelOrderById(id);
         model.addAttribute("invoice", new InvoiceRequest());

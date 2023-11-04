@@ -21,7 +21,7 @@
                 <div class="flex flex-col">
                   <div class=" col-span-7">
                     <div class="p-1.5 min-w-full inline-block align-middle">
-                      <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">
+                      <div class=" border-gray-200 rounded-xl overflow-hidden bg-white overflow-y-auto">
                           <table class="table-fixed  divide-y divide-gray-300 
                           overflow-y-auto mx-auto min-w-full min-h-full text-base break-words bg-white" id="flower-table">
                               <thead class="bg-gray-900">
@@ -81,8 +81,7 @@
         </div>
         <div class="bg-white rounded-lg shadow-lg">
 
-            <form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">
-                <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <form id="invoiceForm" th:action="@{/seller/invoiceConfirm}" method="POST">
                 <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring
                 focus:ring-gray-200 focus:outline-none">
                     <h3>สรุปรายการออเดอร์</h3>
@@ -90,15 +89,14 @@
                 <div class="mt-6">
                     <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>
                     <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
-                bg-gray-100" required>
+                bg-gray-100 ">
                         <option value="0" data-fid="0">select option</option>
                         <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
                     </select>
                     <button type="submit" id="confirmButton" class="btn btn-success ml-2">สรุป</button>
                 </div>
             </form>
-            <form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" class="mb-3 mt-14 mx-6 text-base">
-                <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <form id="invoiceFormSubmit" th:action="@{/seller/invoiceCompleteButton}" method="POST" class="mb-3 mt-14 mx-6 text-base">
                 <div id="summary" >
                     <h2 class="text-xl font-bold">สรุปรายการ</h2>
                     <div class="bg-orange-300 mt-4 p-4 rounded-xl">
@@ -121,55 +119,53 @@
         </div>
     </div>
     <script>
-        
-        document.getElementById("confirmButton").addEventListener("click", function(event) {
-            var selectedOption = document.getElementById("order_id").value;
-            if (selectedOption === "0") {
-                event.preventDefault(); 
-            }
-        });
-
-        document.getElementById("invoiceForm").addEventListener("submit", function (event) {
+    document.getElementById("confirmButton").addEventListener("click", function(event) {
+        var selectedOption = document.getElementById("order_id").value;
+        if (selectedOption === "0") {
             event.preventDefault(); 
-            let selectedOrderId = document.getElementById("order_id").value;
-            let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
-            let selectedFID = selectedOption.getAttribute("data-fid");
-            let selectedOID = selectedOption.value;
-
-            let fidInput = document.createElement("input");
-            fidInput.type = "hidden";
-            fidInput.name = "FID"; 
-            fidInput.value = selectedFID;
-
-            let oidInput = document.createElement("input");
-            oidInput.type = "hidden";
-            oidInput.name = "OID"; 
-            oidInput.value = selectedOID;
-
-            let form = document.getElementById("invoiceForm");
-            form.appendChild(fidInput);
-            form.appendChild(oidInput);
-            form.submit();
-        });
-
-        let status = document.getElementById("status").textContent.trim(); 
-        let completeButton = document.getElementById("completeButton");
-
-        
-        if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
-            completeButton.disabled = true;
-        } else {
-            completeButton.disabled = false;
         }
+    });
+    document.getElementById("invoiceForm").addEventListener("submit", function (event) {
+        event.preventDefault(); 
+        let selectedOrderId = document.getElementById("order_id").value;
+        let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
+        let selectedFID = selectedOption.getAttribute("data-fid");
+        let selectedOID = selectedOption.value;
+
+        let fidInput = document.createElement("input");
+        fidInput.type = "hidden";
+        fidInput.name = "FID"; 
+        fidInput.value = selectedFID;
+
+        let oidInput = document.createElement("input");
+        oidInput.type = "hidden";
+        oidInput.name = "OID"; 
+        oidInput.value = selectedOID;
+
+        let form = document.getElementById("invoiceForm");
+        form.appendChild(fidInput);
+        form.appendChild(oidInput);
+        form.submit();
+    });
+
+    let status = document.getElementById("status").textContent.trim(); 
+    let completeButton = document.getElementById("completeButton");
+
+    if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
+        completeButton.disabled = true;
+    } else {
+        completeButton.disabled = false;
+    }
     </script>
-    <!-- </div>    
-    </div>     
+    
+                    </div>    
+                </div>     
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
-    </div>  ไม่เข้าใจทำไมถึงใส่แบบนี้ เอาไว้กันบัค -->
 </div>
 </div>
+
 </body>
 </html>
 

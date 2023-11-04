@@ -28,7 +28,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+        
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
@@ -59,11 +59,11 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 
                         .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
                       
-                        .requestMatchers(new AntPathRequestMatcher("/invoice/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/invoiceConfirm/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/invoiceCompleteButton/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/stock/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/allocate/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/invoice/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                        .requestMatchers(new AntPathRequestMatcher("/invoiceConfirm/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                        .requestMatchers(new AntPathRequestMatcher("/invoiceCompleteButton/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                        .requestMatchers(new AntPathRequestMatcher("/stock/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                        .requestMatchers(new AntPathRequestMatcher("/allocate/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
