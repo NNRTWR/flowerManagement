@@ -57,13 +57,8 @@
                                     <td class="px-6 py-4 truncate whitespace-normal">
                                         <span th:if="${invoice.order_method == T(ku.cs.flowerManagement.common.OrderMethods).ORDER}">ส่ง</span>
                                         <span th:if="${invoice.order_method == T(ku.cs.flowerManagement.common.OrderMethods).RETAIL}">ปลีก</span>
-                                    </td>
-                                    
-                                    
-                                      
-                                  
+                                    </td>    
                                   </tr>
-                              
                               </tbody>
                           
                           </table>    
@@ -87,6 +82,7 @@
         <div class="bg-white rounded-lg shadow-lg">
 
             <form id="invoiceForm" th:action="@{/invoiceConfirm}" method="POST">
+                <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring
                 focus:ring-gray-200 focus:outline-none">
                     <h3>สรุปรายการออเดอร์</h3>
@@ -102,6 +98,7 @@
                 </div>
             </form>
             <form id="invoiceFormSubmit" th:action="@{/invoiceCompleteButton}" method="POST" class="mb-3 mt-14 mx-6 text-base">
+                <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div id="summary" >
                     <h2 class="text-xl font-bold">สรุปรายการ</h2>
                     <div class="bg-orange-300 mt-4 p-4 rounded-xl">
@@ -117,54 +114,37 @@
                 </div>
 
                 <input type="hidden" name="OID" th:value="${invoice.OID}" />
-                <!--    <input type="hidden" name="amount" th:value="${invoice.price}" />-->
                 <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />
                 <input type="hidden" name="FID" th:value="${invoice.FID}" />
-
-<!--                <input type="hidden" name="OID" th:value="${invoice.OID}" />-->
-<!--                <input type="hidden" name="SID" th:value="${stock.SID}" />-->
-<!--                &lt;!&ndash;                <input type="hidden" name="amount" th:value="${invoice.price}" />&ndash;&gt;-->
-<!--                <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />-->
-
-
                 <button id="completeButton" disabled class="btn btn-success text-bold text-xl px-10 ml-36 mt-5" >ยืนยัน</button>
             </form>
         </div>
     </div>
-
-
-
     <script>
     document.getElementById("invoiceForm").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); 
         let selectedOrderId = document.getElementById("order_id").value;
-        // console.log("Selected Order ID:", selectedOrderId);
         let selectedOption = document.querySelector('option[value="' + selectedOrderId + '"]');
         let selectedFID = selectedOption.getAttribute("data-fid");
         let selectedOID = selectedOption.value;
 
-        // Create hidden input fields for FID and OID
         let fidInput = document.createElement("input");
         fidInput.type = "hidden";
-        fidInput.name = "FID"; // This should match the parameter name in your controller method
+        fidInput.name = "FID"; 
         fidInput.value = selectedFID;
 
         let oidInput = document.createElement("input");
         oidInput.type = "hidden";
-        oidInput.name = "OID"; // This should match the parameter name in your controller method
+        oidInput.name = "OID"; 
         oidInput.value = selectedOID;
 
-        // Append the hidden input fields to the form
         let form = document.getElementById("invoiceForm");
         form.appendChild(fidInput);
         form.appendChild(oidInput);
-
-        // Submit the form
         form.submit();
-
     });
 
-    let status = document.getElementById("status").textContent.trim(); // Get the status text
+    let status = document.getElementById("status").textContent.trim(); 
     let completeButton = document.getElementById("completeButton");
 
     if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
@@ -172,15 +152,15 @@
     } else {
         completeButton.disabled = false;
     }
-</script>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </script>
+    <!-- </div>    
+    </div>     
     </div>
+    </div>
+    </div>
+    </div>  ไม่เข้าใจทำไมถึงใส่แบบนี้ เอาไว้กันบัค -->
 </div>
-
+</div>
 </body>
 </html>
 

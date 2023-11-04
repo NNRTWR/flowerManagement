@@ -66,6 +66,7 @@
                         <h3>ยกเลิกออเดอร์</h3>
                     </div>
                     <form id="orderForm" th:action="@{/order}" th:method="PUT">
+                        <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <div class="order-form">
                             <h6> ยกเลิก Order </h6>
                             <form id="orderForm" th:action="@{/order}" th:method="PUT">

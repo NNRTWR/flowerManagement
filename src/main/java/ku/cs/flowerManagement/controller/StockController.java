@@ -43,6 +43,7 @@ public class StockController {
     public String showFlowerPage(Model model) {
         model.addAttribute("stock", new StockRequest());
         model.addAttribute("stocks", stockService.getStockList());
+        // model.addAttribute("total", stockService.getStockList());
         // ใช้ FlowerService getAllFlowers
 //        model.addAttribute("options", flowerService.getFlowers());
         model.addAttribute("options", flowerService.getFlowers());

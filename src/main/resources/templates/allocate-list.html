@@ -1,28 +1,77 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Flower Management Web Application</title>
-    <link th:rel="stylesheet" th:href="@{static}">
-    <title>Allocate-list</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>Flower Name</th>
-        <th>Total</th>
-        <th>FlowerStock</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="allocateModel : ${allocateRequest.allocateModels}">
-        <td th:text="${allocateModel.fName}"></td>
-        <td th:text="${allocateModel.total}"></td>
-        <td th:text="${allocateModel.stockFlower}"></td>
-    </tr>
-    </tbody>
-</table>
-<h1>ยอดรวม <span th:text="${total}"></span></h1>
+<div layout:fragment ="content">
+  <h1 class="text-3xl text-center font-bold">ยอดขายดอกไม้</h1>
+  <div class="flex items-center justify-between mb-4 mt-6">
+        <div class="flex items-center">
+            <h1 class="text-xl ml-10">จำนวนดอกไม้ทั้งหมด</h1>
+            <span class="text-2xl ml-10" th:text="${total}"></span>  
+            <span class="text-xl ml-10">รายการ</span>
+        </div>
+  </div>
+  <div class="max-w-[85rem] sm:px-6 lg:px-8 lg:py-4 mx-auto">
+    <div class="flex flex-col">
+      <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+          <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">
+              <table class="table-fixed divide-y divide-gray-300 
+              overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-xl break-words bg-white" id="flower-table">
+                  <thead class="bg-gray-900">
+                      <tr class="text-white text-center">
+                          <th class="font-semibold text-lg uppercase px-6 py-6">ชื่อดอกไม้</th>
+                          <th class="font-semibold text-lg  uppercase px-6 py-6">จำนวนที่ขายได้</th>
+                          <th class="font-semibold text-lg  uppercase px-6 py-6">ยอดเงิน</th>
+                      </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
+                    <tr th:each="allocateModel : ${allocateRequest.allocateModels}">
+                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.fName}"></td>
+                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.stockFlower}"></td>
+                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.total}"></td>
+                    </tr>
+                  </tbody>
+              </table>   
+          </div>  
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 shadow-lg">
+            <div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                <span class="font-semibold text-gray-800 dark:text-gray-200"></span>   <!--ไม่น่าจะทำ-->
+              </p>
+            </div>
+            <div class="join">
+                <!-- <ul class="pagination flex space-x-2 items-center">
+                    <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
+                        <a th:if="${currentPage > 0}" th:href="@{'/garden/orders?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
+                        <span th:unless="${currentPage > 0}" class="btn disabled btn-secondary">Previous</span>
+                    </li>
+                    <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
+                        <a th:if="${currentPage < totalPages - 1}" th:href="@{'/garden/orders?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
+                        <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-secondary">Next</span>
+                    </li>
+                </ul> -->
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
