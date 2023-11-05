@@ -17,5 +17,8 @@ public interface GardenerOrderRepository extends JpaRepository<GardenerOrder, UU
     List<GardenerOrder> findByStatus(OrderStatus status); //หา order ด้วย status
     Page<GardenerOrder> findByStatus(OrderStatus status, Pageable pageable);
     List<GardenerOrder> findAllByStatus(OrderStatus orderStatus);
+    Page<GardenerOrder> findAllByStatus(OrderStatus status, Pageable pageable);
+    
+    
     //หาด้วย flower
 }

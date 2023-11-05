@@ -89,7 +89,7 @@
                 <div class="mt-6">
                     <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>
                     <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
-                bg-gray-100 ">
+                bg-gray-100">
                         <option value="0" data-fid="0">select option</option>
                         <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
                     </select>
@@ -112,6 +112,8 @@
                 </div>
 
                 <input type="hidden" name="OID" th:value="${invoice.OID}" />
+                <!-- <input type="hidden" th:each="sid : ${stockList}" th:name="'SIDList'" th:value="${sid.SID}" />
+                <input type="hidden" name="amount" th:value="${invoice.price}" /> -->
                 <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />
                 <input type="hidden" name="FID" th:value="${invoice.FID}" />
                 <button id="completeButton" disabled class="btn btn-success text-bold text-xl px-10 ml-36 mt-5" >ยืนยัน</button>
@@ -119,12 +121,12 @@
         </div>
     </div>
     <script>
-    document.getElementById("confirmButton").addEventListener("click", function(event) {
-        var selectedOption = document.getElementById("order_id").value;
-        if (selectedOption === "0") {
-            event.preventDefault(); 
-        }
-    });
+    // document.getElementById("confirmButton").addEventListener("click", function(event) {
+    //     var selectedOption = document.getElementById("order_id").value;
+    //     if (selectedOption === "0") {
+    //         event.preventDefault(); 
+    //     }
+    // });
     document.getElementById("invoiceForm").addEventListener("submit", function (event) {
         event.preventDefault(); 
         let selectedOrderId = document.getElementById("order_id").value;
@@ -156,6 +158,7 @@
     } else {
         completeButton.disabled = false;
     }
+
     </script>
     
                     </div>    

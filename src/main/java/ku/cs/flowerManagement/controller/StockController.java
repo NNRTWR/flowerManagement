@@ -47,6 +47,7 @@ public class StockController {
         int pageSize = 4;
         Page<Stock> stockPage =  stockService.getAllStockPage(page, pageSize);
 
+
         model.addAttribute("stock", new StockRequest());
         model.addAttribute("stocks", stockPage.getContent());
         model.addAttribute("currentPage", stockPage.getNumber());
@@ -55,6 +56,8 @@ public class StockController {
         // ใช้ FlowerService getAllFlowers
 //        model.addAttribute("options", flowerService.getFlowers());
         model.addAttribute("options", flowerService.getFlowers());
+
+        model.addAttribute("stockCount", stockService.getTotalStockCount());
         return "stock";
     }
 

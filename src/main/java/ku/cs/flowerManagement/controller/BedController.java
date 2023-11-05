@@ -10,9 +10,12 @@ import ku.cs.flowerManagement.model.gRequest;
 import ku.cs.flowerManagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -103,10 +106,11 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
     @GetMapping("/order/{PID}")
     public String showOrder(@PathVariable int PID, @RequestParam(defaultValue = "0") int page, Model model) {
         int pageSize = 3; // Number of items per page
-        Page<GardenerOrder> gardenerOrdersPage = gardenerOrderService.getAllGardenerOrderPage(page, pageSize);
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<GardenerOrder> gardenerOrdersPage = gardenerOrderService.getAllGardenerOrderPendingPage(pageable);
         GardenOrderTimeComparator gardenOrderTimeComparator = new GardenOrderTimeComparator();
         List<GardenerOrder> gardenerOrders = gardenerOrderService.getAllPendingGardenerOrder(gardenOrderTimeComparator);
-        model.addAttribute("orders", gardenerOrders);
+        model.addAttribute("orders", gardenerOrdersPage.getContent());
         model.addAttribute("PID", PID);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", gardenerOrdersPage.getTotalPages());

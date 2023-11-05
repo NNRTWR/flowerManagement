@@ -58,6 +58,10 @@ public class StockService {
         Pageable pageable = PageRequest.of(page, size);
         return stockRepository.findAll(pageable);
     }
+    public int getTotalStockCount() {
+        List<Stock> stocks = stockRepository.findAll();
+        return stocks.size();
+    }
 
     public FlowerRequest getFlowerById(int id) {
         return  modelMapper.map(flowerRepository.findById(id).orElse(null), FlowerRequest.class);
@@ -113,6 +117,7 @@ public class StockService {
         Stock stock = modelMapper.map(stockRequest, Stock.class);
         Flower flower = flowerRepository.findById(stockRequest.getFID()).orElse(null);
         if(flower == null) return;
+        
         stock.setFlower(flower);
         stock.setQuantity(stockRequest.getQuantity());
         stock.setTime(LocalDateTime.now());

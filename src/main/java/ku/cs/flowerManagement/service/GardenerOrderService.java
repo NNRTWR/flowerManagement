@@ -43,6 +43,10 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
         return gardenerOrderRepository.findAll(pageable);
     }
 
+    public Page<GardenerOrder> getAllGardenerOrderPendingPage(Pageable pageable) {   //สำหรับ pagination
+        return gardenerOrderRepository.findAllByStatus(OrderStatus.PENDING, pageable);
+    }
+
 
     //ตอนนี้ยังใช้ order เดียวกับตอนบันทึกอยู่ //แก้อยู่
     public List<GardenerOrder> getAllPendingGardenerOrder(Comparator comparator){ //เอา order ที่ต้องปลูกทั้งหมดออกมา

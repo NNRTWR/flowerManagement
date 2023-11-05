@@ -13,7 +13,7 @@
   <div class="flex items-center justify-between mb-4 mt-6">
         <div class="flex items-center">
             <h1 class="text-xl ml-10">จำนวนสต็อคทั้งหมด</h1>
-            <span class="text-2xl ml-10" th:text="${total}"></span>  
+            <span class="text-2xl ml-10" th:text="${stockCount}"></span>  
             <span class="text-xl ml-10">รายการ</span>
         </div>
   </div>
@@ -34,8 +34,8 @@
                   <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
                     <tr th:each="stock : ${stocks}">
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.SID}"></td>
-                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.total}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.flower.FName}"></td>
+                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.total}"></td>
                     </tr>
                   </tbody>
               </table>   
@@ -49,11 +49,11 @@
             <div class="join">
               <ul class="pagination flex space-x-2 items-center">
                 <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
-                    <a th:if="${currentPage > 0}" th:href="@{'/' + ${role} + '/flower?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
+                    <a th:if="${currentPage > 0}" th:href="@{'/' + ${role} + '/stock?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
                     <span th:unless="${currentPage > 0}" class="btn disabled btn-secondary">Previous</span>
                 </li>
                 <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
-                    <a th:if="${currentPage < totalPages - 1}" th:href="@{'/' + ${role} + '/flower?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
+                    <a th:if="${currentPage < totalPages - 1}" th:href="@{'/' + ${role} + '/stock?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
                     <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-secondary">Next</span>
                 </li>
             </ul>
