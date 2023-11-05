@@ -51,6 +51,7 @@ public class FlowerController {
         model.addAttribute("flower",flowerService.getOneFlower(fid));
         model.addAttribute("method", "PUT");
         model.addAttribute("edit",edit);
+        model.addAttribute("current_url","/"+role+"/flower/"+fid);
         return "flower-detail";
     }
 

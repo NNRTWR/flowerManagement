@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 
-@RequestMapping("/order")
+@RequestMapping("/seller/order")
 public class OrderController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class OrderController {
         System.out.println(orderFlower.getFlowerPrice());
         orderFlower.setFlowerPrice(orderFlower.getFlowerPrice() * orderFlower.getFlowerPrice());
         orderService.createOrder(orderFlower);
-        return "redirect:/order";
+        return "redirect:/seller/order";
     }
 
     @PutMapping("/{id}")

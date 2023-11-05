@@ -15,7 +15,7 @@ public class OwnerViewSalesController {
     @GetMapping("/view/owner")
     public String showSalesData(Model model) {
 
-        model.addAttribute("sales", ownerViewSalesService);
+        model.addAttribute("sales", ownerViewSalesService.getAllSales());
         return "view-owner";
     }
 

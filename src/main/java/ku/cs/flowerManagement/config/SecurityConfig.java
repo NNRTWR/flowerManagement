@@ -51,7 +51,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 
 
                        .requestMatchers(
-                               new AntPathRequestMatcher("/seller/**")).hasAuthority("SELLER")
+                               new AntPathRequestMatcher("/seller/**")).hasAnyAuthority("SELLER" , "OWNER")
                         .requestMatchers(
                                new AntPathRequestMatcher("/gardener/**")).hasAnyAuthority("GARDENER","SELLER")
                         .requestMatchers(
