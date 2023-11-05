@@ -2,6 +2,7 @@ package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.entity.Allocate;
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.OrderItem;
 import ku.cs.flowerManagement.entity.Stock;
 import ku.cs.flowerManagement.model.AllocateModel;
@@ -11,6 +12,10 @@ import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.OrderRepository;
 import ku.cs.flowerManagement.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -39,6 +44,7 @@ public class AllocateService {
         }
         allocateRepository.save(allocate);
     }
+
 
     public AllocateRequest findAllAllocate(){
         Map<String, AllocateModel> dataFlower = new HashMap<>();
@@ -76,5 +82,10 @@ public class AllocateService {
 
         return allocateRequest;
     }
+
+    public Page<Allocate> getAllAllocate(int page, int size) {
+        return allocateRepository.findAll(PageRequest.of(page, size));
+    }
+    
 
 }
