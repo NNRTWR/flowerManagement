@@ -48,6 +48,7 @@
                       bg-gray-100  border-gray-600 border-2" id="inputRole" name="role" required>
                       <option value="SELLER" >ฝั่งขาย</option>
                       <option value="GARDENER" >ฝั่งสวน</option>
+                      <option value="OWNER" >เจ้าของ</option>
                   </select>
                 </div>
                 <div class="flex justify-center mt-5">
@@ -82,6 +83,7 @@
                       <td class="px-6 py-4 truncate whitespace-normal">
                         <span th:if="${member.role == 'GARDENER'}">ฝั่งสวน</span>
                         <span th:if="${member.role == 'SELLER'}">ฝั่งขาย</span>
+                       
                       </td>
                       <td class="px-6 py-4 text-center truncate whitespace-normal">
                         <button class="text-white bg-red-600 

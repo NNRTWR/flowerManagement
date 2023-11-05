@@ -35,7 +35,8 @@
                     <tr th:each="allocateModel : ${allocateRequest.allocateModels}">
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.fName}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.stockFlower}"></td>
-                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.total}"></td>
+
+                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${#numbers.formatDecimal(allocateModel.total, 0, 'COMMA', 2, 'POINT')}"></td>
                     </tr>
                   </tbody>
               </table>   

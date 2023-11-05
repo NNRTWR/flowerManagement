@@ -79,7 +79,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                                 } else if (authority.getAuthority().equals("SELLER")) {
                                     response.sendRedirect("/seller/orders");
                                 } else{
-                                    response.sendRedirect("/allocate");
+                                    response.sendRedirect("/owner/allocate");
                                 }
                             }
                         })
