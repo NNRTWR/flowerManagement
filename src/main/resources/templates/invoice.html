@@ -104,7 +104,7 @@
                         <p class="my-1">ประเภทการสั่ง : <span id="orderMethod" th:text="${invoice.order_method}" class="ml-10"></span></p>
                         <p class="my-1">ชื่อดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้ : <span id="quantity" th:text="${invoice.orderQuantity}" class="ml-10"></span></p>
-                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock.total}" class="ml-10"></span></p>
+                        <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock}" class="ml-10"></span></p>
                         <p class="my-1">สถานะของออเดอร์ : <span id="status" th:text="${invoice.status}" class="ml-10"></span></p>
                         <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>
                             <span>บาท</span></p>
