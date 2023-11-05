@@ -10,150 +10,219 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>เพิ่มดอกไม้</h1>
-<!--<form th:if="${flower.flower.getId()}" th:action="@{'/flower/' + ${flower.getId()}}" th:method="PUT" th:object="${flower}" >-->
-<!--    <form th:if="${flower.flower.getId()}" th:action="@{'/flower/' + ${flower.getId()}}" th:method="PUT" th:object="${flower}" >-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputFNAME">FNAME (ชื่อดอกไม้)</label>-->
-<!--        <input id="inputFNAME" type="text" class="form-control" th:field="*{FName}"-->
-<!--               name="FName">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputPrice">Price</label>-->
-<!--        <input id="inputPrice" type="number" class="form-control" th:field="*{price}"-->
-<!--               name="Price">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputHowToPlant">How to plant</label>-->
-<!--        <textarea id="inputHowToPlant" type="text" class="form-control" th:field="*{how_to_plant}"-->
-<!--                  name="how_to_plant"> </textarea>-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputHowToTakeCare">Take care</label>-->
-<!--        <textarea id="inputHowToTakeCare" type="text" class="form-control" th:field="*{how_to_take_care}"-->
-<!--                  name="how_to_take_care"> </textarea>-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputseedPeriod">seedPeriod</label>-->
-<!--        <input id="inputseedPeriod" type="number" class="form-control" th:field="*{seedPeriod}"-->
-<!--               name="seedPeriod">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputsproutPeriod">sproutPeriod</label>-->
-<!--        <input id="inputsproutPeriod" type="number" class="form-control" th:field="*{sproutPeriod}"-->
-<!--               name="seedPeriod">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputHowToHarvest">Harvest</label>-->
-<!--        <input id="inputHowToHarvest" type="number" class="form-control" th:field="*{how_to_harvest}"-->
-<!--               name="how_to_harvest">-->
-<!--    </div>-->
-<!--    <button th:text="${flower.getFID()} ? 'Update' : 'Save'" id="submit-button" type="submit" ></button>-->
-<!--</form>-->
+    <h1>เพิ่มดอกไม้</h1>
+    <!--<form th:if="${flower.flower.getId()}" th:action="@{'/flower/' + ${flower.getId()}}" th:method="PUT" th:object="${flower}" >-->
+    <!--    <form th:if="${flower.flower.getId()}" th:action="@{'/flower/' + ${flower.getId()}}" th:method="PUT" th:object="${flower}" >-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputFNAME">FNAME (ชื่อดอกไม้)</label>-->
+    <!--        <input id="inputFNAME" type="text" class="form-control" th:field="*{FName}"-->
+    <!--               name="FName">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputPrice">Price</label>-->
+    <!--        <input id="inputPrice" type="number" class="form-control" th:field="*{price}"-->
+    <!--               name="Price">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputHowToPlant">How to plant</label>-->
+    <!--        <textarea id="inputHowToPlant" type="text" class="form-control" th:field="*{how_to_plant}"-->
+    <!--                  name="how_to_plant"> </textarea>-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputHowToTakeCare">Take care</label>-->
+    <!--        <textarea id="inputHowToTakeCare" type="text" class="form-control" th:field="*{how_to_take_care}"-->
+    <!--                  name="how_to_take_care"> </textarea>-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputseedPeriod">seedPeriod</label>-->
+    <!--        <input id="inputseedPeriod" type="number" class="form-control" th:field="*{seedPeriod}"-->
+    <!--               name="seedPeriod">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputsproutPeriod">sproutPeriod</label>-->
+    <!--        <input id="inputsproutPeriod" type="number" class="form-control" th:field="*{sproutPeriod}"-->
+    <!--               name="seedPeriod">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputHowToHarvest">Harvest</label>-->
+    <!--        <input id="inputHowToHarvest" type="number" class="form-control" th:field="*{how_to_harvest}"-->
+    <!--               name="how_to_harvest">-->
+    <!--    </div>-->
+    <!--    <button th:text="${flower.getFID()} ? 'Update' : 'Save'" id="submit-button" type="submit" ></button>-->
+    <!--</form>-->
+    <form th:if="${edit != 0}" th:action="@{${current_url}}" th:object="${flower}" th:method="PUT">
+        <div class="mb-3">
+            <label for="inputName">Name</label>
+            <input id="inputName" type="text" class="form-control"
+                   name="FName" th:field="*{FName}">
+        </div>
 
-<form action="#" th:action="@{/flower/create}" method="POST">
-    <div class="mb-3">
-        <label for="inputName">Name</label>
-        <input id="inputName" type="input" class="form-control"
-               name="FName">
-    </div>
+        <div class="mb-3">
+            <label for="inputHow_to_plant">How to plant</label>
+            <input id="inputHow_to_plant" type="text" class="form-control"
+                   name="how_to_plant" th:field="*{how_to_plant}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputHow_to_plant">How to plant</label>
-        <input id="inputHow_to_plant" type="input" class="form-control"
-               name="how_to_plant">
-    </div>
+        <div class="mb-3">
+            <label for="inputHow_to_take_care">How to take care</label>
+            <input id="inputHow_to_take_care" type="text" class="form-control"
+                   name="how_to_take_care" th:field="*{how_to_take_care}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputHow_to_take_care">How to take care</label>
-        <input id="inputHow_to_take_care" type="input" class="form-control"
-               name="how_to_take_care">
-    </div>
+        <div class="mb-3">
+            <label for="inputseedPeriod">seed Period</label>
+            <input id="inputseedPeriod" type="number" class="form-control"
+                   name="seedPeriod" th:field="*{seedPeriod}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputseedPeriod">seed Period</label>
-        <input id="inputseedPeriod" type="input" class="form-control"
-               name="seedPeriod">
-    </div>
+        <div class="mb-3">
+            <label for="inputsproutPeriod">sproutPeriod</label>
+            <input id="inputsproutPeriod" type="number" class="form-control"
+                   name="sproutPeriod" th:field="*{sproutPeriod}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputsproutPeriod">sproutPeriod</label>
-        <input id="inputsproutPeriod" type="input" class="form-control"
-               name="sproutPeriod">
-    </div>
+        <div class="mb-3">
+            <label for="inputgrowingPeriod">growingPeriod</label>
+            <input id="inputgrowingPeriod" type="number" class="form-control"
+                   name="growingPeriod" th:field="*{growingPeriod}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputgrowingPeriod">growingPeriod</label>
-        <input id="inputgrowingPeriod" type="input" class="form-control"
-               name="growingPeriod">
-    </div>
+        <div class="mb-3">
+            <label for="inputfullyGrownPeriod">fullyGrownPeriod</label>
+            <input id="inputfullyGrownPeriod" type="number" class="form-control"
+                   name="fullyGrownPeriod" th:field="*{fullyGrownPeriod}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputfullyGrownPeriod">fullyGrownPeriod</label>
-        <input id="inputfullyGrownPeriod" type="input" class="form-control"
-               name="fullyGrownPeriod">
-    </div>
+        <div class="mb-3">
+            <label for="inputharvestPeriod">harvestPeriod</label>
+            <input id="inputharvestPeriod" type="number" class="form-control"
+                   name="harvestPeriod" th:field="*{harvestPeriod}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputharvestPeriod">harvestPeriod</label>
-        <input id="inputharvestPeriod" type="input" class="form-control"
-               name="harvestPeriod">
-    </div>
+        <div class="mb-3">
+            <label for="inputHow_to_harvest">How to harvest</label>
+            <input id="inputHow_to_harvest" type="number" class="form-control"
+                   name="how_to_harvest" th:field="*{how_to_harvest}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputHow_to_harvest">How to harvest</label>
-        <input id="inputHow_to_harvest" type="input" class="form-control"
-               name="how_to_harvest">
-    </div>
+        <div class="mb-3">
+            <label for="inputPrice">Price</label>
+            <input id="inputPrice" type="number" class="form-control"
+                   name="price" th:field="*{price}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputPrice">Price</label>
-        <input id="inputPrice" type="input" class="form-control"
-               name="price">
-    </div>
+        <div class="mb-3">
+            <label for="inputQuantity">Quantity</label>
+            <input id="inputQuantity" type="number" class="form-control"
+                   name="quantity" th:field="*{quantity}">
+        </div>
 
-    <div class="mb-3">
-        <label for="inputQuantity">Quantity</label>
-        <input id="inputQuantity" type="input" class="form-control"
-               name="quantity">
-    </div>
+        <button id="submit-button" type="submit" class="btn btn-primary">บันทึก</button>
+        <a id="canceled-button" type="submit" class="btn btn-secondary" th:href="@{${current_url} + '?edit=0'}" >ยกเลิก</a>
+    </form>
+    <form th:unless="${edit}" th:object="${flower}">
+        <div class="mb-3">
+            <label for="inputName">Name</label>
+            <input disabled type="text" class="form-control"
+                   name="FName" th:field="*{FName}">
+        </div>
 
-    <button id="submit-button" type="submit" class="btn btn-primary">Add Flower</button>
-</form>
+        <div class="mb-3">
+            <label for="inputHow_to_plant">How to plant</label>
+            <input disabled  type="text" class="form-control"
+                   name="how_to_plant" th:field="*{how_to_plant}">
+        </div>
 
-<!--<h1>แก้ไขข้อมูลดอกไม้</h1>-->
-<!--<form th:unless="${flower.getFID()}" th:action="@{/flower}" th:method="POST" th:object="${flower}">-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputFNAME2">FNAME (ชื่อดอกไม้)</label>-->
-<!--        <input id="inputFNAME2" type="text" class="form-control" th:field="*{FName}"-->
-<!--               name="FName">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputPrice2">Price</label>-->
-<!--        <input id="inputPrice2" type="number" class="form-control" th:field="*{price}"-->
-<!--               name="Price">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputHowToPlant2">How to plant</label>-->
-<!--        <textarea id="inputHowToPlant2" type="text" class="form-control" th:field="*{how_to_plant}"-->
-<!--                  name="how_to_plant"> </textarea>-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputHowToTakeCare2">Take care</label>-->
-<!--        <textarea id="inputHowToTakeCare2" type="text" class="form-control" th:field="*{how_to_take_care}"-->
-<!--                  name="how_to_take_care"> </textarea>-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputTime2">Time</label>-->
-<!--        <input id="inputTime2" type="number" class="form-control" th:field="*{time}"-->
-<!--               name="Time">-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label for="inputHowToHarvest2">Harvest</label>-->
-<!--        <input id="inputHowToHarvest2" type="number" class="form-control" th:field="*{how_to_harvest}"-->
-<!--               name="how_to_harvest">-->
-<!--    </div>-->
-<!--    <button th:text="${flower.getFID()} ? 'Update' : 'Save'" id="submit-button2" type="submit" ></button>-->
-<!--</form>-->
+        <div class="mb-3">
+            <label for="inputHow_to_take_care">How to take care</label>
+            <input disabled  type="text" class="form-control"
+                   name="how_to_take_care" th:field="*{how_to_take_care}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputseedPeriod">seed Period</label>
+            <input disabled type="number" class="form-control"
+                   name="seedPeriod" th:field="*{seedPeriod}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputsproutPeriod">sproutPeriod</label>
+            <input disabled  type="number" class="form-control"
+                   name="sproutPeriod" th:field="*{sproutPeriod}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputgrowingPeriod">growingPeriod</label>
+            <input disabled  type="number" class="form-control"
+                   name="growingPeriod" th:field="*{growingPeriod}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputfullyGrownPeriod">fullyGrownPeriod</label>
+            <input disabled  type="number" class="form-control"
+                   name="fullyGrownPeriod" th:field="*{fullyGrownPeriod}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputharvestPeriod">harvestPeriod</label>
+            <input disabled  type="number" class="form-control"
+                   name="harvestPeriod" th:field="*{harvestPeriod}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputHow_to_harvest">How to harvest</label>
+            <input disabled  type="number" class="form-control"
+                   name="how_to_harvest" th:field="*{how_to_harvest}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputPrice">Price</label>
+            <input disabled  type="number" class="form-control"
+                   name="price" th:field="*{price}">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputQuantity">Quantity</label>
+            <input disabled  type="number" class="form-control"
+                   name="quantity" th:field="*{quantity}">
+        </div>
+
+        <a id="edit-button" type="button" class="btn btn-primary" th:href="@{${current_url} + '?edit=1'}">แก้ไข</a>
+    </form>
+
+    <!--<h1>แก้ไขข้อมูลดอกไม้</h1>-->
+    <!--<form th:unless="${flower.getFID()}" th:action="@{/flower}" th:method="POST" th:object="${flower}">-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputFNAME2">FNAME (ชื่อดอกไม้)</label>-->
+    <!--        <input id="inputFNAME2" type="text" class="form-control" th:field="*{FName}"-->
+    <!--               name="FName">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputPrice2">Price</label>-->
+    <!--        <input id="inputPrice2" type="number" class="form-control" th:field="*{price}"-->
+    <!--               name="Price">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputHowToPlant2">How to plant</label>-->
+    <!--        <textarea id="inputHowToPlant2" type="text" class="form-control" th:field="*{how_to_plant}"-->
+    <!--                  name="how_to_plant"> </textarea>-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputHowToTakeCare2">Take care</label>-->
+    <!--        <textarea id="inputHowToTakeCare2" type="text" class="form-control" th:field="*{how_to_take_care}"-->
+    <!--                  name="how_to_take_care"> </textarea>-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputTime2">Time</label>-->
+    <!--        <input id="inputTime2" type="number" class="form-control" th:field="*{time}"-->
+    <!--               name="Time">-->
+    <!--    </div>-->
+    <!--    <div class="mb-3">-->
+    <!--        <label for="inputHowToHarvest2">Harvest</label>-->
+    <!--        <input id="inputHowToHarvest2" type="number" class="form-control" th:field="*{how_to_harvest}"-->
+    <!--               name="how_to_harvest">-->
+    <!--    </div>-->
+    <!--    <button th:text="${flower.getFID()} ? 'Update' : 'Save'" id="submit-button2" type="submit" ></button>-->
+    <!--</form>-->
 </body>
 </html>

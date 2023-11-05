@@ -17,175 +17,174 @@
             <span class="text-xl ml-10">ชนิด</span>
         </div>
         <div class="flex space-x-2 items-center">
-            
-            <button  class="btn btn-success text-lg mr-8" onclick="my_modal_3.showModal()"  sec:authorize="isAuthenticated() and hasAuthority('OWNER')">เพิ่มข้อมูลดอกไม้</button>
+
+            <button class="btn btn-success text-lg mr-8" onclick="my_modal_3.showModal()"  sec:authorize="isAuthenticated() and hasAuthority('OWNER')">เพิ่มข้อมูลดอกไม้</button>
             <dialog id="my_modal_3" class="modal">
                 <div class="modal-box ml-60 mt-6 min-w-max bg-slate-100">
-                  <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 
+                    <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring
                   focus:ring-gray-200 focus:outline-none">
-                      <h3>เพิ่มข้อมูลดอกไม้</h3>
-                  </div>
-                  <form th:action="@{'/' + ${role} +'/flower'}" method="POST" class="grid grid-cols-2 gap-4 px-6 ">
-                    <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <div class="flex flex-col items-center">
-                    <div class="mt-3 mb-3 text-sm">
-                        <label for="inputName">ชื่อดอกไม้</label>
-                        <input id="inputName" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
-                        bg-gray-100  border-gray-600 border-2"
-                               name="FName" required>
+                        <h3>เพิ่มข้อมูลดอกไม้</h3>
                     </div>
-                    <div class="mt-3 mb-3 text-sm">
-                        <label for="inputHow_to_plant">วิธีการปลูก</label>
-                        <textarea id="inputHow_to_plant" type="input" class="form-control rounded-xl pr-5 py-8  shadow-lg text-gray-500 pl-7
+                    <form th:action="@{'/' + ${role} +'/flower'}" method="POST" class="grid grid-cols-2 gap-4 px-6 ">
+                        <div class="flex flex-col items-center">
+                            <div class="mt-3 mb-3 text-sm">
+                                <label for="inputName">ชื่อดอกไม้</label>
+                                <input id="inputName" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="how_to_plant" required> </textarea>
-                    </div>
+                                       name="FName">
+                            </div>
+                            <div class="mt-3 mb-3 text-sm">
+                                <label for="inputHow_to_plant">วิธีการปลูก</label>
+                                <textarea id="inputHow_to_plant" type="input" class="form-control rounded-xl pr-5 py-8  shadow-lg text-gray-500 pl-7
+                        bg-gray-100  border-gray-600 border-2"
+                                          name="how_to_plant"> </textarea>
+                            </div>
 
-                    <div class="mt-3 mb-3 text-sm">
-                        <label for="inputHow_to_take_care">วิธีการดูแล</label>
-                        <textarea id="inputHow_to_take_care" type="input" class="form-control rounded-xl pr-5 py-8  shadow-lg text-gray-500 pl-7
+                            <div class="mt-3 mb-3 text-sm">
+                                <label for="inputHow_to_take_care">วิธีการดูแล</label>
+                                <textarea id="inputHow_to_take_care" type="input" class="form-control rounded-xl pr-5 py-8  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="how_to_take_care" required> </textarea>
-                    </div>
-                    </div>
+                                          name="how_to_take_care"> </textarea>
+                            </div>
+                        </div>
 
 
-                      <div class="flex flex-col">
-                    <div class="mt-3 mb-3 text-sm">
-                        <label for="inputseedPeriod">ระยะเวลาเป็นเมล็ด</label>
-                        <input id="inputseedPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                        <div class="flex flex-col">
+                            <div class="mt-3 mb-3 text-sm">
+                                <label for="inputseedPeriod">ระยะเวลาเป็นเมล็ด</label>
+                                <input id="inputseedPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="seedPeriod" min="1"required>
-                    </div>
-                
-                    <div class="mt-3 mb-3 text-sm">
-                        <label for="inputsproutPeriod">ระยะเวลาเป็นต้นกล้า</label>
-                        <input id="inputsproutPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                       name="seedPeriod">
+                            </div>
+
+                            <div class="mt-3 mb-3 text-sm">
+                                <label for="inputsproutPeriod">ระยะเวลาเป็นต้นกล้า</label>
+                                <input id="inputsproutPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="sproutPeriod" min="1" required>
-                    </div>
-                
-                    <div class="mb-3">
-                        <label for="inputgrowingPeriod">ระยะเวลาเป็นต้นอ่อน</label>
-                        <input id="inputgrowingPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                       name="sproutPeriod">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputgrowingPeriod">ระยะเวลาเป็นต้นอ่อน</label>
+                                <input id="inputgrowingPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="growingPeriod" min="1" required>
-                    </div>
-                
-                    <div class="mb-3">
-                        <label for="inputfullyGrownPeriod">ระยะเวลาโตเต็มที่</label>
-                        <input id="inputfullyGrownPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                       name="growingPeriod">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputfullyGrownPeriod">ระยะเวลาโตเต็มที่</label>
+                                <input id="inputfullyGrownPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="fullyGrownPeriod" min="1" required>
-                    </div>
-                
-                    <div class="mb-3">
-                        <label for="inputharvestPeriod">ระยะเวลาออกดอก</label>
-                        <input id="inputharvestPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                       name="fullyGrownPeriod">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputharvestPeriod">ระยะเวลาออกดอก</label>
+                                <input id="inputharvestPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="harvestPeriod" min="1" required>
-                    </div>
-                      </div>
-                    <div class="mb-3">
-                        <label for="inputHow_to_harvest">จำนวนครั้งที่เก็บเกี่ยวได้</label>
-                        <input id="inputHow_to_harvest" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                       name="harvestPeriod">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputHow_to_harvest">จำนวนครั้งที่เก็บเกี่ยวได้</label>
+                            <input id="inputHow_to_harvest" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="how_to_harvest" min="1" required>
-                    </div>
-                
-                    <div class="mb-3">
-                        <label for="inputPrice">ราคา</label>
-                        <input id="inputPrice" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                   name="how_to_harvest">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputPrice">ราคา</label>
+                            <input id="inputPrice" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="price" min="1" step="0.01" required>
-                    </div>
-                
-                    <div class="mb-3">
-                        <label for="inputQuantity">จำนวนดอกไม้ต่อ 1 ต้น</label>
-                        <input id="inputQuantity" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                   name="price">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputQuantity">จำนวนดอกไม้ต่อ 1 ต้น</label>
+                            <input id="inputQuantity" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                               name="quantity" min="1" required>
-                    </div>
-                      <div class="flex justify-center mt-10">
-                          <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
-                          <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_3.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
-                      </div>
-                  </form>
-                </div>
-              </dialog>  
+                                   name="quantity">
+                        </div>
+                        <div class="flex justify-center mt-10">
+                            <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
+                            <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="my_modal_3.close()">ยกเลิก</button> <!--ใช้tyoe button ไม่ให่ส่งข้อมูลไป-->
+                        </div>
+                    </form>
+            </dialog>
         </div>
     </div>
-
-
     <div class="max-w-[85rem] sm:px-6 lg:px-8 lg:py-4 mx-auto">
-      <div class="flex flex-col">
-        <div class="-m-1.5 overflow-x-auto">
-          <div class="p-1.5 min-w-full inline-block align-middle">
-            <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">
-                <table class="table-fixed  divide-y divide-gray-300 
+        <div class="flex flex-col">
+            <div class="-m-1.5 overflow-x-auto">
+                <div class="p-1.5 min-w-full inline-block align-middle">
+                    <div class=" border-gray-200 rounded-xl overflow-hidden bg-white">
+                        <table class="table-fixed  divide-y divide-gray-300
                 overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-xl break-words bg-white" id="flower-table">
-                    <thead class="bg-gray-900">
-                        <tr class="text-white text-center">
-                            <th class="font-semibold text-lg uppercase px-6 py-4">
-                                <div class="flex items-center">
-                                <span>รหัสดอกไม้</span>
-                                <!-- <span class="ml-3">
-                                    <svg class="w-4 h-4" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.55921 0.287451C7.86808 -0.0958171 8.40096 -0.0958167 8.70982 0.287451L12.9295 5.52367C13.3857 6.08979 13.031 7 12.3542 7H3.91488C3.23806 7 2.88336 6.08979 3.33957 5.52367L7.55921 0.287451Z" fill="currentColor"/>
-                                        <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
-                                    </svg>
-                                </span> -->
-                                </div>
-                            </th>
-                            <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้</th>
-                            <th class="font-semibold text-lg uppercase px-6 py-4">จำนวนเก็บเกี่ยว</th>
-                            <th class="font-semibold text-lg  uppercase px-6 py-4">ระยะเวลาการปลูก</th>
-                            <th class="font-semibold text-lg uppercase px-6 py-4">ราคา</th>
-                            <th class="font-semibold text-lg uppercase px-6 py-4"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
-                        <tr th:each="flower : ${flowers}" class="whitespace-normal">
-                            <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
-                            <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
-                            <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
-                            <td th:text="${flower.seedPeriod + flower.sproutPeriod + flower.growingPeriod + flower.fullyGrownPeriod + flower.harvestPeriod}"class="px-6 py-4 truncate whitespace-normal"></td>
-                            <td class="px-6 py-4 text-center truncate whitespace-normal">
-                                <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600 
+                            <thead class="bg-gray-900">
+                            <tr class="text-white text-center">
+                                <th class="font-semibold text-lg uppercase px-6 py-4">
+                                    <div class="flex items-center">
+                                        <span>รหัสดอกไม้</span>
+                                        <!-- <span class="ml-3">
+                                            <svg class="w-4 h-4" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M7.55921 0.287451C7.86808 -0.0958171 8.40096 -0.0958167 8.70982 0.287451L12.9295 5.52367C13.3857 6.08979 13.031 7 12.3542 7H3.91488C3.23806 7 2.88336 6.08979 3.33957 5.52367L7.55921 0.287451Z" fill="currentColor"/>
+                                                <path d="M8.70983 15.7125C8.40096 16.0958 7.86808 16.0958 7.55921 15.7125L3.33957 10.4763C2.88336 9.9102 3.23806 9 3.91488 9H12.3542C13.031 9 13.3857 9.9102 12.9295 10.4763L8.70983 15.7125Z" fill="currentColor"/>
+                                            </svg>
+                                        </span> -->
+                                        <div>
+                                </th>
+                                <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้</th>
+                                <th class="font-semibold text-lg uppercase px-6 py-4">จำนวนเก็บเกี่ยว
+                                </th>
+                                <th class="font-semibold text-lg  uppercase px-6 py-4">ระยะเวลาการปลูก</th>
+                                <th class="font-semibold text-lg uppercase px-6 py-4">ราคา</th>
+                                <th class="font-semibold text-lg uppercase px-6 py-4"></th>
+                            </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
+                            <tr th:each="flower : ${flowers}" class="whitespace-normal">
+                                <td th:text="${flower.FID}" class="px-6 py-4 truncate whitespace-normal"></td>
+                                <td th:text="${flower.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
+                                <td th:text="${flower.how_to_harvest}" class="px-6 py-4 truncate whitespace-normal"></td>
+                                <td th:text="${flower.seedPeriod + flower.sproutPeriod + flower.growingPeriod + flower.fullyGrownPeriod + flower.harvestPeriod}"class="px-6 py-4 truncate whitespace-normal"></td>
+                                <td class="px-6 py-4 text-center truncate whitespace-normal">
+                                <span th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 2, 'POINT')}" class="text-white bg-red-600
                             font-semibold rounded-2xl text-xl p-3"></span>
-                            </td>
-                            <td class="px-6 py-4 text-center font-extrabold" th:href="@{/flower/{id}(id=${flower.FID})}"> 
-                                <a class="btn btn-info text-xl text-gray-100">Detail</a> 
-                            </td>
-                        
-                        </tr>
-                    </tbody>
-                </table>    
-                
-            <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 shadow-lg">
-                <div>
-                  <p class="text-sm text-gray-600 dark:text-gray-400">
-                    <span class="font-semibold text-gray-800 dark:text-gray-200"></span>   
-                  </p>
-                </div>
-                <div class="join">
-                    <ul class="pagination flex space-x-2 items-center">
-                        <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
-                            <a th:if="${currentPage > 0}" th:href="@{'/' + ${role} +'/flower?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
-                            <span th:unless="${currentPage > 0}" class="btn disabled btn-secondary">Previous</span>
-                        </li>
-                        <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
-                            <a th:if="${currentPage < totalPages - 1}" th:href="@{'/' + ${role} +'/flower?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
-                            <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-secondary">Next</span>
-                        </li>
-                    </ul>
+                                </td>
+                                <td class="px-6 py-4 text-center font-extrabold" >
+                                    <a th:href="@{'/'+${role}+'/flower/' + ${flower.getFID()}}" class="btn btn-info text-xl text-gray-100">Detail</a>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 shadow-lg">
+                            <div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    <span class="font-semibold text-gray-800 dark:text-gray-200"></span>
+                                </p>
+                            </div>
+                            <div class="join">
+                                <ul class="pagination flex space-x-2 items-center">
+                                    <li th:class="${currentPage > 0} ? 'active' : 'disabled'" class="join-item">
+                                        <a th:if="${currentPage > 0}" th:href="@{'/' + ${role} + '/flower?page=' + ${currentPage - 1} }" class="btn btn-secondary">Previous</a>
+                                        <span th:unless="${currentPage > 0}" class="btn disabled btn-secondary">Previous</span>
+                                    </li>
+                                    <li th:class="${currentPage < totalPages - 1} ? 'active' : 'disabled'" class="join-item">
+                                        <a th:if="${currentPage < totalPages - 1}" th:href="@{'/' + ${role} + '/flower?page=' + ${currentPage + 1} }" class="btn btn-secondary">Next</a>
+                                        <span th:unless="${currentPage < totalPages - 1}" class="btn disabled btn-secondary">Next</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div> 
-</div>
-</div>
+
+    </div>
 </body>
 </html>

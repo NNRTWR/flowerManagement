@@ -1,5 +1,6 @@
 package ku.cs.flowerManagement.controller;
 
+import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.Stock;
 import ku.cs.flowerManagement.model.FlowerRequest;
 import ku.cs.flowerManagement.model.StockRequest;
@@ -10,6 +11,7 @@ import ku.cs.flowerManagement.service.OrderService;
 import ku.cs.flowerManagement.service.StockService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +43,14 @@ public class StockController {
 //    @RequestMapping
 
     @GetMapping
-    public String showFlowerPage(Model model) {
+    public String showFlowerPage(Model model,@RequestParam(defaultValue = "0") int page) {
+        int pageSize = 4;
+        Page<Stock> stockPage =  stockService.getAllStockPage(page, pageSize);
+
         model.addAttribute("stock", new StockRequest());
-        model.addAttribute("stocks", stockService.getStockList());
+        model.addAttribute("stocks", stockPage.getContent());
+        model.addAttribute("currentPage", stockPage.getNumber());
+        model.addAttribute("totalPages", stockPage.getTotalPages());
         // model.addAttribute("total", stockService.getStockList());
         // ใช้ FlowerService getAllFlowers
 //        model.addAttribute("options", flowerService.getFlowers());

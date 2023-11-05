@@ -2,6 +2,7 @@ package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.common.StockStatus;
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.Stock;
 import ku.cs.flowerManagement.model.FlowerRequest;
 import ku.cs.flowerManagement.model.StockRequest;
@@ -9,6 +10,9 @@ import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.StockRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -48,6 +52,11 @@ public class StockService {
         }
         System.out.println(List.of(stockList));
         return stockList;
+    }
+
+    public Page<Stock> getAllStockPage(int page, int size) {   //สำหรับ pagination
+        Pageable pageable = PageRequest.of(page, size);
+        return stockRepository.findAll(pageable);
     }
 
     public FlowerRequest getFlowerById(int id) {

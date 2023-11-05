@@ -23,7 +23,7 @@
                     <div class="p-1.5 min-w-full inline-block align-middle">
                       <div class=" border-gray-200 rounded-xl overflow-hidden bg-white overflow-y-auto">
                           <table class="table-fixed  divide-y divide-gray-300 
-                          overflow-y-auto mx-auto min-w-full min-h-full text-base break-words bg-white" id="flower-table">
+                          overflow-y-auto mx-auto  min-h-full text-base break-words bg-white" id="flower-table">
                               <thead class="bg-gray-900">
                                   <tr class="text-white text-center">
                                       <th class="font-semibold text-base uppercase px-6 py-4">
@@ -45,7 +45,7 @@
                                       <th class="font-semibold text-base uppercase px-6 py-4">วิธีการสั่งซื้อ</th>
                                   </tr>
                               </thead>
-                              <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
+                              <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg" id="invoiceTable">
                                   <tr th:each="invoice : ${invoices}" class="whitespace-normal">
                                       <td th:text="${invoice.OID}" class="px-6 py-4 truncate whitespace-normal"></td>
                                       <td th:text="${invoice.FName}"class="px-6 py-4 truncate whitespace-normal"></td>
