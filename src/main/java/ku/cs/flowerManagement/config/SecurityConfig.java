@@ -31,6 +31,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
         
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/static/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).hasAuthority("OWNER")
                         .requestMatchers(new AntPathRequestMatcher("/user")).hasAuthority("OWNER")
                                 .requestMatchers(new AntPathRequestMatcher("/assets/**")).permitAll()
@@ -65,6 +66,7 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                         .requestMatchers(new AntPathRequestMatcher("/invoiceCompleteButton/**")).hasAuthority("SELLER")
                         .requestMatchers(new AntPathRequestMatcher("/stock/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
                         .requestMatchers(new AntPathRequestMatcher("/allocate/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                        
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

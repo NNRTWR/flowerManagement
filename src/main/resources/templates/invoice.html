@@ -88,8 +88,7 @@
                 <div class="mt-6">
                     <label for="order_id" class="mb-3 mt-10 mx-6 text-base">เลือกหมายเลขออเดอร์:</label>
                     <select id="order_id" name="order_id" class="rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
-                bg-gray-100">
-                        <option value="0" data-fid="0">select option</option>
+                bg-gray-100" required>
                         <option th:each="option : ${options}" th:value="${option.getOID()}" th:text="${option.getOID()}" th:attr="data-fid=${option.getFID()}"></option>
                     </select>
                     <button type="submit" id="confirmButton" class="btn btn-success ml-2">สรุป</button>
