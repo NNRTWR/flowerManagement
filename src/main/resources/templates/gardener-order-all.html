@@ -97,7 +97,12 @@
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.flower.FName}"></td>
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.quantity * orderItem.flower.quantity}"></td>
                         <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.quantity}"></td>
-                        <td class="px-6 py-4 truncate whitespace-normal" th:text="${orderItem.status}"></td>
+                        <td class="px-6 py-4 truncate whitespace-normal">
+                          <span th:if="${orderItem.status == T(ku.cs.flowerManagement.common.OrderStatus).COMPLETED}">เสร็จสิ้น</span>
+                          <span th:if="${orderItem.status == T(ku.cs.flowerManagement.common.OrderStatus).IN_PROCESS}">กำลังดำเนินการ</span>
+                          <span th:if="${orderItem.status == T(ku.cs.flowerManagement.common.OrderStatus).PENDING}">รอดำเนินการ</span>
+                          <span th:if="${orderItem.status == T(ku.cs.flowerManagement.common.OrderStatus).FAIL}">ไม่สำเร็จ</span>
+                        </td>
                       </tr>
                     </tbody>
                 </table>    

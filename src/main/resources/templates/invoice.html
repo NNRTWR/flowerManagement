@@ -99,11 +99,17 @@
                     <h2 class="text-xl font-bold">สรุปรายการ</h2>
                     <div class="bg-orange-300 mt-4 p-4 rounded-xl">
                         <p class="my-1">หมายเลขออเดอร์ : <span id="orderNumber" th:text="${invoice.OID}" class="ml-10"></span></p>
-                        <p class="my-1">ประเภทการสั่ง : <span id="orderMethod" th:text="${invoice.order_method}" class="ml-10"></span></p>
+                        <p class="my-1">ประเภทการสั่ง : 
+                            <span th:if="${invoice.order_method == T(ku.cs.flowerManagement.common.OrderMethods).ORDER}">ส่ง</span>
+                            <span th:if="${invoice.order_method == T(ku.cs.flowerManagement.common.OrderMethods).RETAIL}">ปลีก</span>
+                        </p>
                         <p class="my-1">ชื่อดอกไม้ : <span id="flowerType" th:text="${invoice.FName}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้ : <span id="quantity" th:text="${invoice.orderQuantity}" class="ml-10"></span></p>
                         <p class="my-1">จำนวนดอกไม้คงเหลือ : <span id="remain" th:text="${stock}" class="ml-10"></span></p>
-                        <p class="my-1">สถานะของออเดอร์ : <span id="status" th:text="${invoice.status}" class="ml-10"></span></p>
+                        <p class="my-1">สถานะของออเดอร์ : 
+                            <span th:if="${invoice.status == T(ku.cs.flowerManagement.common.OrderStatus).PENDING}" class="ml-10">ดำเนินการ</span>
+                        
+                        </p>
                         <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>
                             <span>บาท</span></p>
                     </div>

@@ -52,59 +52,59 @@
 
                         <div class="flex flex-col">
                             <div class="mt-3 mb-3 text-sm">
-                                <label for="inputseedPeriod">ระยะเวลาเป็นเมล็ด</label>
-                                <input id="inputseedPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                <label for="inputseedPeriod">ช่วงเวลาเมล็ด (วัน)</label>
+                                <input id="inputseedPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                       name="seedPeriod" required>
+                                       name="seedPeriod" min="1" required>
                             </div>
 
                             <div class="mt-3 mb-3 text-sm">
-                                <label for="inputsproutPeriod">ระยะเวลาเป็นต้นกล้า</label>
-                                <input id="inputsproutPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                <label for="inputsproutPeriod">ช่วงเวลาต้นอ่อน (วัน)</label>
+                                <input id="inputsproutPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                       name="sproutPeriod" required>
+                                       name="sproutPeriod" min="1" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="inputgrowingPeriod">ระยะเวลาเป็นต้นอ่อน</label>
-                                <input id="inputgrowingPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                <label for="inputgrowingPeriod">ช่วงเวลากำลังโต (วัน)</label>
+                                <input id="inputgrowingPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                       name="growingPeriod" required>
+                                       name="growingPeriod" min="1" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="inputfullyGrownPeriod">ระยะเวลาโตเต็มที่</label>
-                                <input id="inputfullyGrownPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                <label for="inputfullyGrownPeriod">ช่วงเวลาโตเต็มที่ (วัน)</label>
+                                <input id="inputfullyGrownPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                       name="fullyGrownPeriod" required>
+                                       name="fullyGrownPeriod" min="1" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="inputharvestPeriod">ระยะเวลาออกดอก</label>
-                                <input id="inputharvestPeriod" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                                <label for="inputharvestPeriod">ช่วงเวลาพร้อมเก็บเกี่ยว (วัน)</label>
+                                <input id="inputharvestPeriod" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                       name="harvestPeriod" required>
+                                       name="harvestPeriod" min="1" required>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="inputHow_to_harvest">จำนวนครั้งที่เก็บเกี่ยวได้</label>
-                            <input id="inputHow_to_harvest" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                            <label for="inputHow_to_harvest">จำนวนครั้งที่สามารถเก็บเกี่ยวได้</label>
+                            <input id="inputHow_to_harvest" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                   name="how_to_harvest" required>
+                                   name="how_to_harvest" min="1" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="inputPrice">ราคา</label>
                             <input id="inputPrice" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                   name="price" required>
+                                   name="price" min="1" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="inputQuantity">จำนวนดอกไม้ต่อ 1 ต้น</label>
-                            <input id="inputQuantity" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
+                            <input id="inputQuantity" type="number" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
                         bg-gray-100  border-gray-600 border-2"
-                                   name="quantity" required>
+                                   name="quantity" min="1" required>
                         </div>
                         <div class="flex justify-center mt-10">
                             <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit" >ยืนยัน</button>
