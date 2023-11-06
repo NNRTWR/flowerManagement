@@ -20,13 +20,13 @@ public class SignupController {
     private SignupService signupService;
 
 
-    @GetMapping("/signup")
+    @GetMapping("/owner/member")
     public String getSignupPage(@ModelAttribute SignupRequest user, Model model) {
         model.addAttribute("members",signupService.getAllUser()); 
         return "signup"; 
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/owner/member")
     public String signupUser(@ModelAttribute SignupRequest user, Model model,@RequestParam("role") String role) { 
 
         if (signupService.isUsernameAvailable(user.getUsername())) { //username นี้ใช้ได้มั้ย
@@ -35,7 +35,7 @@ public class SignupController {
         } else {
             model.addAttribute("signupError", "Username not available");
         }
-        return "redirect:/signup";
+        return "redirect:/owner/member";
     }
 }
 

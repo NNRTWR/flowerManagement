@@ -1,6 +1,8 @@
 package ku.cs.flowerManagement.controller;
 
+import ku.cs.flowerManagement.entity.Allocate;
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.OrderItem;
 import ku.cs.flowerManagement.model.FlowerRequest;
 import ku.cs.flowerManagement.model.OrderItemRequest;
@@ -26,11 +28,19 @@ public class OrderController {
     @GetMapping
     private String showOrderPage( @RequestParam(defaultValue = "0") int page,
                                   @RequestParam(name = "id", defaultValue = "0") int id, Model model) {
-        // สำหรับคลิ๊กหน้า
-        //เหมือนด้านบน
+        
+        int pageSize = 4;
+        Page<OrderItem> orderPage = orderService.getOrderPage(page, pageSize);                        
         model.addAttribute("order", new OrderItemRequest());
-        model.addAttribute("orders" , orderService.getOrders());
+        
         model.addAttribute("options", flowerService.getFlowers());
+        // model.addAttribute("currentPage", page);
+        // model.addAttribute("orders" , orderPage.getContent());
+        // model.addAttribute("totalPages", orderPage.getTotalPages());
+        model.addAttribute("orders" , orderService.getOrders());
+        model.addAttribute("total", orderService.getTotalOrderCount());
+
+        
 
         if (id != 0) {
             model.addAttribute("canceledOrder", orderService.getOrderById(id));

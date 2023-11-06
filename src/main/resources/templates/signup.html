@@ -25,7 +25,7 @@
               focus:ring-gray-200 focus:outline-none">
                   <h3>เพิ่มพนักงาน</h3>
               </div>
-              <form th:action="@{/signup}" method="POST">
+              <form th:action="@{/owner/member}" method="POST">
                 <input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="mt-3 mx-6">
                   <label for="inputName" class="text-lg">ชื่อพนักงาน</label>

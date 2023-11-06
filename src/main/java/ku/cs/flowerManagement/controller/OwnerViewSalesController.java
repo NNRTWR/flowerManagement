@@ -12,7 +12,7 @@ public class OwnerViewSalesController {
     @Autowired
     private OwnerViewSalesService ownerViewSalesService;
 
-    @GetMapping("/view/owner")
+    @GetMapping("/owner/view")
     public String showSalesData(Model model) {
 
         model.addAttribute("sales", ownerViewSalesService.getAllSales());

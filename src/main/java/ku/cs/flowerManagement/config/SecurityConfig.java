@@ -31,7 +31,8 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
         
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/signup")).hasAuthority("OWNER")
+                        .requestMatchers(new AntPathRequestMatcher("/user")).hasAuthority("OWNER")
                                 .requestMatchers(new AntPathRequestMatcher("/assets/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/static/assets/**")).permitAll()
 
@@ -39,8 +40,8 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).permitAll()
                        .requestMatchers(new AntPathRequestMatcher("/flower/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
                        .requestMatchers(new AntPathRequestMatcher("/allocate/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
-                       .requestMatchers(new AntPathRequestMatcher("/beds/**")).hasAnyAuthority("GARDENER","SELLER")
-                       .requestMatchers(new AntPathRequestMatcher("/orders/**")).hasAnyAuthority("GARDENER")
+                       .requestMatchers(new AntPathRequestMatcher("/beds/**")).hasAuthority("GARDENER")
+                       .requestMatchers(new AntPathRequestMatcher("/orders/**")).hasAuthority("GARDENER")
 
 
 //                        .requestMatchers(new AntPathRequestMatcher("/flower/create")).permitAll()
@@ -53,15 +54,15 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                        .requestMatchers(
                                new AntPathRequestMatcher("/seller/**")).hasAnyAuthority("SELLER" , "OWNER")
                         .requestMatchers(
-                               new AntPathRequestMatcher("/gardener/**")).hasAnyAuthority("GARDENER","SELLER")
+                               new AntPathRequestMatcher("/gardener/**")).hasAuthority("GARDENER")
                         .requestMatchers(
                                new AntPathRequestMatcher("/owner/**")).hasAuthority("OWNER")
 
                         .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
                       
-                        .requestMatchers(new AntPathRequestMatcher("/invoice/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
-                        .requestMatchers(new AntPathRequestMatcher("/invoiceConfirm/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
-                        .requestMatchers(new AntPathRequestMatcher("/invoiceCompleteButton/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
+                        .requestMatchers(new AntPathRequestMatcher("/invoice/**")).hasAuthority("SELLER")
+                        .requestMatchers(new AntPathRequestMatcher("/invoiceConfirm/**")).hasAuthority("SELLER")
+                        .requestMatchers(new AntPathRequestMatcher("/invoiceCompleteButton/**")).hasAuthority("SELLER")
                         .requestMatchers(new AntPathRequestMatcher("/stock/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
                         .requestMatchers(new AntPathRequestMatcher("/allocate/**")).hasAnyAuthority("SELLER", "OWNER", "GARDENER")
                         .anyRequest().authenticated()

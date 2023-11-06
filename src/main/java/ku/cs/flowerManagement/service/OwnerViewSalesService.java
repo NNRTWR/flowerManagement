@@ -24,9 +24,6 @@ public class OwnerViewSalesService {
     @Autowired
     private FlowerRepository flowerRepository;
 
-    //Group by Flower then Group by Flowers from Stock then Group by Flowers from Order
-    // where Status = FAIL then Group by Flowers  from Order Where Status = COMPLETE
-    // and Group by Flowers Price Where Status = COMPLETE
     public List<OwnerViewSalesResponse> getAllSales(){
         List<Flower> flowerList = flowerRepository.findAll();
         List<OwnerViewSalesResponse> responses = new ArrayList<>();

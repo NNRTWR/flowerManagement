@@ -38,7 +38,7 @@ public class FlowerController {
         model.addAttribute("currentPage", flowerPage.getNumber());
         model.addAttribute("totalPages", flowerPage.getTotalPages());
         model.addAttribute("totalFlowers", totalFlowers);
-        model.addAttribute("role","owner");
+        
 
         return "flower";
     }

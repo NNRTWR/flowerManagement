@@ -53,6 +53,19 @@ public class SignupService {
         repository.save(record);
     }
 
+    public void createIntUser(SignupRequest user) {
+        Member record = modelMapper.map(user, Member.class); 
+        // record.setRole("SELLER");
+        // record.setRole("GARDENER");
+        // record.setRole("OWNER");
+        //record.setRole("OWNER");
+
+        String hashedPassword = passwordEncoder.encode(user.getPassword()); //springframework security ทำให้
+        record.setPassword(hashedPassword);
+
+
+        repository.save(record);
+    }
 
     public Member getUser(String username) {
         return repository.findByUsername(username);

@@ -22,3 +22,6 @@ npm run dev
 
 ## User (ถ้าไม่ได้ใช้ h2)
 
+- OWNER : (id = owner  pass = owner123)
+- SELLER : (id = seller  pass = seller123)
+- GARDENER : (id = gardener  pass = gardener123)
