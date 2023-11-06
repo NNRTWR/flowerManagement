@@ -41,25 +41,40 @@ public class GardenerOrderController {
 
 
     @GetMapping
-    public String getAllOrder(@PathVariable("role") String role, Model model, @RequestParam(defaultValue = "0") int page){
+    public String getAllOrder(@PathVariable("role") String role, Model model, @RequestParam(defaultValue = "0") int page,
+    @RequestParam(name = "sort", defaultValue = "PENDING") String sort){
         int pageSize = 4;
-        Page<GardenerOrder> gardenOrderPage = gardenerOrderService.getAllGardenerOrderPage(page, pageSize);
-        model.addAttribute("orderItems",  gardenOrderPage.getContent());
+        List<GardenerOrder> sortedOrders;
+        if ("PENDING".equals(sort)) {
+            sortedOrders = gardenerOrderService.getAllPendingGardenerOrderForSort(); 
+        } 
+        else if ("IN_PROCESS".equals(sort)) {
+            sortedOrders = gardenerOrderService.getAllInprocessGardenerOrder(); 
+        } 
+        else if ("FAIL".equals(sort)) {
+            sortedOrders = gardenerOrderService.getAllFailGardenerOrder(); 
+        } 
+        else if ("COMPLETED".equals(sort)) {
+            sortedOrders = gardenerOrderService.getAllFailGardenerOrder(); 
+        } 
+        else {
+            Page<GardenerOrder> gardenOrderPage = gardenerOrderService.getAllGardenerOrderPage(page, pageSize);
+            sortedOrders = gardenOrderPage.getContent();
+        }
+
+       
+        model.addAttribute("orderItems", sortedOrders);
         model.addAttribute("flowers", flowerService.getAllFlower()); // ย้ายมา
         model.addAttribute("commonService",commonService);
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", gardenOrderPage.getTotalPages());
-        model.addAttribute("total", gardenerOrderService.getTotalGardenOrderCount());
+        model.addAttribute("totalPages", (int) Math.ceil((double) sortedOrders.size() / pageSize));
+        model.addAttribute("total", sortedOrders.size());
+        
         return "gardener-order-all";
     }
 
-    // @GetMapping("/form")
-    // public String getOrderForm(Model model){
-    //     model.addAttribute("flowers", flowerService.getAllFlower());
-    //     return "redirect:/gardener/orders/";
-    // }
 
-    @PostMapping //("/add")
+    @PostMapping 
     public String addOrder(@PathVariable("role") String role,@ModelAttribute GardenerOrderRequest gardenerOrder, Model model){
         gardenerOrderService.addOrder(gardenerOrder);
         

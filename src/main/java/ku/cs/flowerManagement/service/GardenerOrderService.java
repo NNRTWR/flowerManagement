@@ -49,9 +49,29 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
 
 
     //ตอนนี้ยังใช้ order เดียวกับตอนบันทึกอยู่ //แก้อยู่
-    public List<GardenerOrder> getAllPendingGardenerOrder(Comparator comparator){ //เอา order ที่ต้องปลูกทั้งหมดออกมา
+    public List<GardenerOrder> getAllPendingGardenerOrderForSort(){ //เอา order ที่ต้องปลูกทั้งหมดออกมา
+        List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.PENDING);
+    
+        return orders;
+    }
+    public List<GardenerOrder> getAllPendingGardenerOrder(Comparator comparator){ 
         List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.PENDING);
         orders.sort(comparator);
+        return orders;
+    }
+    public List<GardenerOrder> getAllInprocessGardenerOrder(){ 
+        List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.IN_PROCESS);
+        return orders;
+    }
+
+     public List<GardenerOrder> getAllFailGardenerOrder(){ 
+        List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.FAIL);
+       
+        return orders;
+    }
+     public List<GardenerOrder> getAllCompleteGardenerOrder(){ 
+        List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.COMPLETED);
+       
         return orders;
     }
 

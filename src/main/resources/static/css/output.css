@@ -1340,14 +1340,6 @@ html{
   border-radius: var(--rounded-btn, 0.5rem);
 }
 
-.alert-success{
-  border-color: hsl(var(--su) / 0.2);
-  --tw-text-opacity: 1;
-  color: hsl(var(--suc) / var(--tw-text-opacity));
-  --alert-bg: hsl(var(--su));
-  --alert-bg-mix: hsl(var(--b1));
-}
-
 .btm-nav > *:where(.active){
   border-top-width: 2px;
   --tw-bg-opacity: 1;
@@ -2306,10 +2298,6 @@ html{
   margin-bottom: 0px;
 }
 
-.mb-1{
-  margin-bottom: 0.25rem;
-}
-
 .mb-10{
   margin-bottom: 2.5rem;
 }
@@ -2350,6 +2338,10 @@ html{
   margin-left: 3.5rem;
 }
 
+.ml-16{
+  margin-left: 4rem;
+}
+
 .ml-2{
   margin-left: 0.5rem;
 }
@@ -2374,6 +2366,10 @@ html{
   margin-left: 9rem;
 }
 
+.ml-4{
+  margin-left: 1rem;
+}
+
 .ml-44{
   margin-left: 11rem;
 }
@@ -2390,12 +2386,24 @@ html{
   margin-left: 15rem;
 }
 
+.ml-80{
+  margin-left: 20rem;
+}
+
 .ml-auto{
   margin-left: auto;
 }
 
 .mr-10{
   margin-right: 2.5rem;
+}
+
+.mr-14{
+  margin-right: 3.5rem;
+}
+
+.mr-2{
+  margin-right: 0.5rem;
 }
 
 .mr-5{
@@ -2462,20 +2470,12 @@ html{
   margin-top: 2.25rem;
 }
 
-.ml-8{
-  margin-left: 2rem;
+.mr-20{
+  margin-right: 5rem;
 }
 
-.ml-80{
-  margin-left: 20rem;
-}
-
-.ml-1{
-  margin-left: 0.25rem;
-}
-
-.ml-16{
-  margin-left: 4rem;
+.mr-11{
+  margin-right: 2.75rem;
 }
 
 .inline-block{
@@ -2500,10 +2500,6 @@ html{
 
 .h-1\/2{
   height: 50%;
-}
-
-.h-3\/4{
-  height: 75%;
 }
 
 .h-36{
@@ -2761,6 +2757,11 @@ html{
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
+.border-gray-800{
+  --tw-border-opacity: 1;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity));
+}
+
 .bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -2949,6 +2950,10 @@ html{
 
 .pl-4{
   padding-left: 1rem;
+}
+
+.pl-5{
+  padding-left: 1.25rem;
 }
 
 .pl-7{
@@ -3161,11 +3166,6 @@ html{
   .dark\:text-gray-400{
     --tw-text-opacity: 1;
     color: rgb(156 163 175 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-white{
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 
   .group:hover .dark\:group-hover\:text-white{

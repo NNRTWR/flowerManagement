@@ -65,8 +65,8 @@ public class InvoiceController {
 //        String options = new Gson().toJson(orderService.getOrders());
         
         model.addAttribute("invoice", new InvoiceRequest());
-        model.addAttribute("invoices", orderService.getOrders());
-        model.addAttribute("options", orderService.getOrders());
+        model.addAttribute("invoices", orderService.getPendingOrders());
+        model.addAttribute("options", orderService.getPendingOrders());
         model.addAttribute("stock",null);
         model.addAttribute("stock",new Stock());
         model.addAttribute("totalOrders", orderService.getTotalOrderCount());
@@ -104,9 +104,9 @@ public class InvoiceController {
         List<Stock> stockLists = stockService.getStockByFID(FID);
 //        Stock stockData = stockService.getStockByFID(FID);
 
-        model.addAttribute("invoices", orderService.getOrders());
+        model.addAttribute("invoices", orderService.getPendingOrders());
         model.addAttribute("invoice", orderService.getOrderById(OID));
-        model.addAttribute("options", orderService.getOrders());
+        model.addAttribute("options", orderService.getPendingOrders());
         model.addAttribute("stock",stockData);
         model.addAttribute("stockList",stockLists);
         // ใช้ FlowerService getAllFlowers

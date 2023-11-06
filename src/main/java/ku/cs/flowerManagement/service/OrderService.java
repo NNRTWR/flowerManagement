@@ -99,6 +99,43 @@ public class OrderService {
         orderRepository.save(orderFlower);
     }
 
+    public List<OrderItemRequest> getPendingOrders() {
+        List<OrderItem> orders = orderRepository.findByStatus(OrderStatus.PENDING);
+        List<OrderItemRequest> orderFlowerRequests = new ArrayList<>();
+        for (OrderItem ord : orders) {
+            OrderItemRequest orderFlowerRequest = modelMapper.map(ord, OrderItemRequest.class);
+            orderFlowerRequest.setFName(ord.getFlower().getFName());
+            orderFlowerRequest.setFID(ord.getFlower().getFID());
+            orderFlowerRequest.setFlowerPrice(ord.getPrice());
+            orderFlowerRequests.add(orderFlowerRequest);
+        }
+        return orderFlowerRequests;
+    }
+    public List<OrderItemRequest> getCancelOrders() {
+        List<OrderItem> orders = orderRepository.findByStatus(OrderStatus.CANCELED);
+        List<OrderItemRequest> orderFlowerRequests = new ArrayList<>();
+        for (OrderItem ord : orders) {
+            OrderItemRequest orderFlowerRequest = modelMapper.map(ord, OrderItemRequest.class);
+            orderFlowerRequest.setFName(ord.getFlower().getFName());
+            orderFlowerRequest.setFID(ord.getFlower().getFID());
+            orderFlowerRequest.setFlowerPrice(ord.getPrice());
+            orderFlowerRequests.add(orderFlowerRequest);
+        }
+        return orderFlowerRequests;
+    }
+    public List<OrderItemRequest> getCompleteOrders() {
+        List<OrderItem> orders = orderRepository.findByStatus(OrderStatus.CANCELED);
+        List<OrderItemRequest> orderFlowerRequests = new ArrayList<>();
+        for (OrderItem ord : orders) {
+            OrderItemRequest orderFlowerRequest = modelMapper.map(ord, OrderItemRequest.class);
+            orderFlowerRequest.setFName(ord.getFlower().getFName());
+            orderFlowerRequest.setFID(ord.getFlower().getFID());
+            orderFlowerRequest.setFlowerPrice(ord.getPrice());
+            orderFlowerRequests.add(orderFlowerRequest);
+        }
+        return orderFlowerRequests;
+    }
+
     // Complete order
     public void completeOrderById(int id) {
         OrderItem orderFlower = orderRepository.findById(id).orElse(null);

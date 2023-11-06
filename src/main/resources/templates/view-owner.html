@@ -28,7 +28,7 @@
                       <tr class="text-white text-center">
                           <th class="font-semibold text-lg uppercase px-6 py-4">ชื่อดอกไม้</th>
                           <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนที่เก็บเกี่ยวได้ (ดอก)</th>
-                          <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนที่ตาย (ดอก)</th>
+                          <!-- <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนที่ตาย (ดอก)</th> -->
                           <th class="font-semibold text-lg  uppercase px-6 py-4">จำนวนที่ขายได้ (ดอก)</th>
                           <th class="font-semibold text-lg  uppercase px-6 py-4">ยอดเงิน</th>
                       </tr>
@@ -37,9 +37,9 @@
                     <tr th:each="flower : ${sales}">
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${flower.getFlowerName()}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${flower.getHarvestAmount()}"></td>
-                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${flower.getDeadAmount()}"></td>
+                      <!-- <td class="px-6 py-4 truncate whitespace-normal" th:text="${flower.getDeadAmount()}"></td> -->
                       <td class="px-6 py-4 truncate whitespace-normal" 
-                      th:text="${#numbers.formatDecimal(flower.getSalesAmount(), 0, 'COMMA', 2, 'POINT')}"></td>
+                      th:text="${flower.getSalesAmount()}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" 
                       th:text="${#numbers.formatDecimal(flower.getBalanceAmount(), 0, 'COMMA', 2, 'POINT')}"></td>
                     </tr>

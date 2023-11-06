@@ -26,6 +26,7 @@
               overflow-y-auto mx-auto min-w-full min-h-full md:w-5/6 lg:w-2/3 text-xl break-words bg-white" id="flower-table">
                   <thead class="bg-gray-900">
                       <tr class="text-white text-center">
+                        <th class="font-semibold text-lg uppercase px-6 py-6">วันที่</th>
                           <th class="font-semibold text-lg uppercase px-6 py-6">รหัสสต็อค</th>
                           <th class="font-semibold text-lg  uppercase px-6 py-6">ชื่อดอกไม้</th>
                           <th class="font-semibold text-lg  uppercase px-6 py-6">จำนวนคงเหลือ</th>
@@ -33,6 +34,7 @@
                   </thead>
                   <tbody class="divide-y divide-gray-200 text-center px-6 py-4 text-lg">
                     <tr th:each="stock : ${stocks}">
+                      <td class="px-6 py-4 truncate whitespace-normal" th:text="${commonService.getPatternTime(stock.time)}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.SID}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.flower.FName}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${stock.total}"></td>

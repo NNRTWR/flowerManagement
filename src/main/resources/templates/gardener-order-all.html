@@ -18,7 +18,20 @@
         </div>
         
           <div class="flex space-x-2 items-center">
-            <button class="btn btn-success text-lg mr-8" onclick="my_modal_1.showModal()">เพิ่มออเดอร์</button>
+            <div class="flex items-center ml-4 ">
+              <form method="get" th:action="@{'/' + ${role} + '/orders'}" class="flex items-center">
+                  <label for="sortOrder" class="text-base mr-2"></label>
+                  <select id="sortOrder" name="sort" class="form-control rounded-xl pr-5 py-2 shadow-lg text-gray-500 pl-5 bg-white border-gray-800">
+                      <option value="PENDING">รอดำเนินการ</option>
+                      <option value="IN_PROCESS">กำลังดำเนินการ</option>
+                      <option value="COMPLETED">สำเร็จ</option>
+                      <option value="FAIL">ไม่สำเร็จ</option>
+                      <option value="">ทั้งหมด</option>
+                  </select>
+                  <button type="submit" class="btn btn-info ml-2">ตกลง</button>
+              </form>
+          </div>
+            <button class="btn btn-success text-lg mr-10" onclick="my_modal_1.showModal()"sec:authorize="isAuthenticated() and hasAuthority('SELLER')">เพิ่มออเดอร์</button>
             <dialog id="my_modal_1" class="modal fixed right-0">
               <div class="modal-box ml-60 h-1/2 mt-6  bg-gray-100">
                 <div class="flex justify-between items-center bg-green-500 text-white text-xl px-5 py-4 rounded-lg focus:ring 

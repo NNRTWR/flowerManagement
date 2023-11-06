@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 @Controller
 
 @RequestMapping("/seller/order")
@@ -27,20 +27,33 @@ public class OrderController {
 
     @GetMapping
     private String showOrderPage( @RequestParam(defaultValue = "0") int page,
-                                  @RequestParam(name = "id", defaultValue = "0") int id, Model model) {
+                                  @RequestParam(name = "id", defaultValue = "0") int id,
+                                  @RequestParam(name = "sort", defaultValue = "PENDING") String sort,Model model) {
         
         int pageSize = 4;
         Page<OrderItem> orderPage = orderService.getOrderPage(page, pageSize);                        
         model.addAttribute("order", new OrderItemRequest());
         
         model.addAttribute("options", flowerService.getFlowers());
+        
         // model.addAttribute("currentPage", page);
         // model.addAttribute("orders" , orderPage.getContent());
         // model.addAttribute("totalPages", orderPage.getTotalPages());
-        model.addAttribute("orders" , orderService.getOrders());
-        model.addAttribute("total", orderService.getTotalOrderCount());
 
-        
+        List<OrderItemRequest> sortedOrders = null;
+
+        if ("PENDING".equals(sort)) {
+            sortedOrders = orderService.getPendingOrders();
+        } else if ("COMPLETED".equals(sort)) {
+            sortedOrders = orderService.getCompleteOrders();
+        } else if ("CANCELED".equals(sort)) {
+            sortedOrders = orderService.getCancelOrders();
+        } else {
+            sortedOrders = orderService.getOrders();
+        }
+
+        model.addAttribute("orders", sortedOrders);
+        model.addAttribute("total", orderService.getTotalOrderCount());
 
         if (id != 0) {
             model.addAttribute("canceledOrder", orderService.getOrderById(id));

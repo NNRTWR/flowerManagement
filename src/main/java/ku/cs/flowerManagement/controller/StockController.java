@@ -5,6 +5,7 @@ import ku.cs.flowerManagement.entity.Stock;
 import ku.cs.flowerManagement.model.FlowerRequest;
 import ku.cs.flowerManagement.model.StockRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
+import ku.cs.flowerManagement.service.CommonService;
 import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.InvoiceService;
 import ku.cs.flowerManagement.service.OrderService;
@@ -37,6 +38,8 @@ public class StockController {
 
     @Autowired
     private StockService stockService;
+    @Autowired
+    private CommonService commonService;
 
 
 
@@ -58,6 +61,7 @@ public class StockController {
         model.addAttribute("options", flowerService.getFlowers());
 
         model.addAttribute("stockCount", stockService.getTotalStockCount());
+        model.addAttribute("commonService",commonService);
         return "stock";
     }
 
