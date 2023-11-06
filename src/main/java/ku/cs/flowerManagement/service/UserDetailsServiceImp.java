@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -41,6 +43,16 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(), user.getPassword(), authorities);
+    }
+
+
+    public Member hasThisMember(UUID id) {
+        Optional<Member> optionalMember = userRepository.findById(id);
+        if (optionalMember.isPresent()) {
+            return optionalMember.get();
+        } else {
+            return null;
+        }
     }
 
     

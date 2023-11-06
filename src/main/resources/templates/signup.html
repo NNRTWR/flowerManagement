@@ -85,10 +85,18 @@
                         <span th:if="${member.role == 'SELLER'}">ฝั่งขาย</span>
                        
                       </td>
-                      <td class="px-6 py-4 text-center truncate whitespace-normal">
-                        <button class="text-white bg-red-600 
-                    font-semibold rounded-2xl text-xl p-3 px-6">แก้ไข</button>
-                      </td>
+<!--                      <td class="px-6 py-4 text-center truncate whitespace-normal">-->
+<!--                        <button class="text-white bg-red-600 -->
+<!--                    font-semibold rounded-2xl text-xl p-3 px-6">แก้ไข</button>-->
+<!--                      </td>-->
+
+                        <td class="px-6 py-4 text-center truncate whitespace-normal">
+                            <form th:action="@{'/owner/member/update/' + ${member.id}}" method="GET">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <button type="submit" class="btn btn-success font-bold text-xl">แก้ไขข้อมูล</button>
+                            </form>
+                        </td>
+
                     </tr>
                   </tbody>
               </table>   

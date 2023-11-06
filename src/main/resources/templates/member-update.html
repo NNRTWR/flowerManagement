@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Management Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+<body>
+<div layout:fragment ="content">
+
+    <h1 class="text-3xl text-center font-bold">แก้ไขข้อมูลพนักงาน</h1>
+    <div class="flex items-center justify-between mb-4 mt-6">
+        <div class="flex space-x-2 items-center">
+                    <form th:action="@{'/owner/member/update/' + ${member.id}}" method="POST">
+
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <div class="mt-3 mx-6">
+                            <label for="inputName" class="text-lg">ชื่อพนักงาน</label>
+                            <input id="inputName" type="input" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7 border-gray-600 border-2" name="name" th:value="${member.name}" required>
+                        </div>
+                        <div class="mt-3 mx-6">
+                            <label for="inputUsername" class="text-lg">username</label>
+                            <input id="inputUsername" type="input" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7 border-gray-600 border-2" name="username" th:value="${member.username}" required>
+                        </div>
+                        <div class="mt-3 mx-6">
+                            <label for="inputPassword" class="text-lg">รหัสผ่าน</label>
+                            <input id="inputPassword" type="password" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7 border-gray-600 border-2" name="password" required>
+                        </div>
+                        <div class="mt-3 mx-6">
+                            <label for="inputRole" class="text-lg">เลือกหน้าที่</label>
+                            <select class="form-control rounded-xl pr-9 py-2 shadow-lg text-gray-500 pl-7
+                      bg-gray-100  border-gray-600 border-2" id="inputRole" name="role" required>
+                                <option value="SELLER" >ฝั่งขาย</option>
+                                <option value="GARDENER" >ฝั่งสวน</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-center mt-5">
+                            <button id="submit-button" class="btn btn-success text-bold text-xl px-10" type="submit">ยืนยัน</button>
+                            <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="window.location.href='/owner/member';">ยกเลิก</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -8,6 +8,7 @@ import ku.cs.flowerManagement.repository.MemberRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,17 @@ public class SignupService {
 
 
         repository.save(record);
+    }
+
+    public void updateUser(UUID member_ID, SignupRequest user, String role){
+        Member member = repository.findById(member_ID).get();
+        member.setName(user.getName());
+        member.setUsername(user.getUsername());
+        member.setPassword(user.getPassword());
+
+        member.setRole(role);
+
+        repository.save(member);
     }
 
     public Member getUser(String username) {
