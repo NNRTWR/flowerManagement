@@ -1,13 +1,11 @@
-## How to run tailwind css (ถ้าไม่ใช้ ให้รันปกติ)
+## How to install
 
-โหลด node.js https://nodejs.org/en  version 18.18.2
-รันครั้งแรกหรือpullงาน
 ```sh
-npm run build
+docker-compose build
 ```
-หลังจากนี้รันอันนี้ได้เลย
+
  ```sh
-npm run dev 
+docker-compose up -d
 ```
 **ต้องโหลด node.js ก่อนนะ ยังไม่ได้ทำใส่ docker**
 **รันnpm ด้วย ถ้าจะดูผล**
@@ -25,3 +23,5 @@ npm run dev
 - OWNER : (id = owner  pass = owner123)
 - SELLER : (id = seller  pass = seller123)
 - GARDENER : (id = gardener  pass = gardener123)
+
+

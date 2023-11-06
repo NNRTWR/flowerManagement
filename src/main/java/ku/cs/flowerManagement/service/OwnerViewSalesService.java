@@ -2,11 +2,15 @@ package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.common.OrderStatus;
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.model.OwnerViewSalesResponse;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.OrderRepository;
 import ku.cs.flowerManagement.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,5 +42,6 @@ public class OwnerViewSalesService {
         });
         return responses;
     }
+
 
 }

@@ -1,10 +1,12 @@
 package ku.cs.flowerManagement.controller;
 
+import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.Member;
 import ku.cs.flowerManagement.model.SignupRequest;
 import ku.cs.flowerManagement.service.SignupService;
 import ku.cs.flowerManagement.service.UserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +26,13 @@ public class SignupController {
 
 
     @GetMapping
-    public String getSignupPage(@ModelAttribute SignupRequest user, Model model) {
-        model.addAttribute("members",signupService.getAllUser()); 
+    public String getSignupPage(@ModelAttribute SignupRequest user, Model model , @RequestParam(defaultValue = "0") int page) {
+        int pageSize = 4;
+        Page<Member> memberPage = signupService.getMemberPage(page, pageSize);
+        model.addAttribute("members", memberPage.getContent()); 
+        model.addAttribute("currentPage", memberPage.getNumber());
+        model.addAttribute("totalPages", memberPage.getTotalPages());
+        model.addAttribute("total",signupService.getTotalMemberCount() - 1);  //ลบ owner ตัวเองออก
         return "signup"; 
     }
 
