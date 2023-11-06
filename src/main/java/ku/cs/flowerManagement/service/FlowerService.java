@@ -40,16 +40,19 @@ public class FlowerService {
     }
 
 
-    // Get Flower By Id
-//    public FlowerRequest getFlowerById(int id) {
-//        return  modelMapper.map(flowerRepository.findById(id).orElse(null), FlowerRequest.class);
-//    }
-
     public Flower getOneFlower(int id){ //แสดง flower ที่เลือก
         return flowerRepository.findById(id).get();
     }
+
+    
+
+
     // Create Flower
     public FlowerRequest addFlower(FlowerRequest flowerRequest) {
+        Flower existingFlower = flowerRepository.findByFName(flowerRequest.getFName());
+        if (existingFlower != null) {
+            throw new RuntimeException("ชื่อดอกไม้ห้ามซ้ำ");
+        }
         Flower flower = modelMapper.map(flowerRequest, Flower.class);
         numFlower++ ; //ปลูกสำเร็จก็จะมาเพิ่มจำนวนดอกไม้ในระบบ
         flower.setFID(numFlower);
@@ -61,8 +64,6 @@ public class FlowerService {
         return flowers.size();
     }
     
-
-
     // Update Flower
     public FlowerRequest updateFlower(FlowerRequest flowerRequest) {
         //        System.out.println(flowerRequest.getFID());

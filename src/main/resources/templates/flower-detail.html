@@ -13,6 +13,7 @@
     <h1 class="text-2xl text-center font-bold">ข้อมูลดอกไม้</h1>
         <div class="container bg-sky-300 mt-5 rounded-xl mb-20 shadow-lg p-5 text-lg">
         <form th:if="${edit != 0}" th:action="@{${current_url}}" th:object="${flower}" th:method="PUT">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="grid grid-cols-2 grid-rows-2 gap-10">   
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputName">ชื่อดอกไม้</label>
@@ -85,6 +86,7 @@
             </div>
         </form>
         <form th:unless="${edit}" th:object="${flower}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="grid grid-cols-2 grid-rows-2 gap-10">
                 <div class="mr-6 mt-3 mx-6">
                     <label for="inputName">ชื่อดอกไม้</label>

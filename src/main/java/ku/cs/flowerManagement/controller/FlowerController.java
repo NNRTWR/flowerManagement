@@ -55,23 +55,14 @@ public class FlowerController {
         return "flower-detail";
     }
 
-//     @GetMapping("/flower/create")
-//     public String showFlowerDetailPageCreate(Model model) {
-//         model.addAttribute("flowers",flowerService.getAllFlower());
-// //        model.addAttribute("flower", new FlowerRequest());
-// //        model.addAttribute("method", "POST");
-//         return "flower-detail";
-//     }
-
-//    @PostMapping("/flower")
-//    public String createFlower(@ModelAttribute FlowerRequest flower) {
-//        flowerService.addFlower(flower);
-//        return "redirect:/flower";
-//    }
-
     @PostMapping
-    public String createFlower(@PathVariable("role") String role,@ModelAttribute FlowerRequest flower ) {
-        flowerService.addFlower(flower);
+    public String createFlower(@PathVariable("role") String role,@ModelAttribute FlowerRequest flower, Model model ) {
+        try {
+            flowerService.addFlower(flower);
+        } catch (RuntimeException e) {
+            model.addAttribute("error", "ห้ามชื่อดอกไม้ซ้ำ");  //ไม่ขึ้นแก้ไมไ่ด้ แต่สร้างซ้ำไมไ่ด้แน่ๆ
+            
+        }
         return "redirect:/{role}/flower";
     }
 

@@ -17,7 +17,6 @@
             <span class="text-xl ml-10">ชนิด</span>
         </div>
         <div class="flex space-x-2 items-center">
-
             <button class="btn btn-success text-lg mr-8" onclick="my_modal_3.showModal()"  sec:authorize="isAuthenticated() and hasAuthority('OWNER')">เพิ่มข้อมูลดอกไม้</button>
             <dialog id="my_modal_3" class="modal">
                 <div class="modal-box ml-60 mt-6 min-w-max bg-slate-100">
@@ -26,7 +25,9 @@
                         <h3>เพิ่มข้อมูลดอกไม้</h3>
                     </div>
                     <form th:action="@{'/' + ${role} +'/flower'}" method="POST" class="grid grid-cols-2 gap-4 px-6 ">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                         <div class="flex flex-col items-center">
+                            
                             <div class="mt-3 mb-3 text-sm">
                                 <label for="inputName">ชื่อดอกไม้</label>
                                 <input id="inputName" type="input" class="form-control rounded-xl pr-9 py-2  shadow-lg text-gray-500 pl-7
