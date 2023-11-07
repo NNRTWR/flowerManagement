@@ -64,29 +64,16 @@ PlantOrderService {
         PlantOrder plantOrder;
 
         //แปลงนี้เคยมีการปลูกมาก่อนรึเปล่า
-        if(listPlantOrder == null ){ //ถ้าแปลงนี้ไม่เคยมีการปลูกมาก่อน
-            System.out.println("แปลงนี้ไม่เคยมีการปลูกมาก่อน");
+        if(listPlantOrder == null ){
         }
         else {
-            System.out.println("แปลงนี้เคยมีการปลูกมาก่อน");
-            plantOrder = findPlantNoHarvested(listPlantOrder); //หาว่ามีรอบการปลูกที่ยังไม่เก็บเกี่ยวมั้ย
+            plantOrder = findPlantNoHarvested(listPlantOrder);
             if(plantOrder == null)
                 return null;
             else
                 return plantOrder;
         }
         return null;
-//
-//        //มี stock รึเปล่า ถ้าไม่มี = แปลงว่าง
-//        if (listPlantOrder.isEmpty()){ //ไม่เคยมีการปลูกที่แปลงนีมาก่อน หรือ รอบการปลูกพวกนั้นเก็บเกี่ยวหมดแล้ว = แปลงนี้ปลูกได้
-//            System.out.println("รอบการปลูกพวกนั้นเก็บเกี่ยวหมดแล้ว");
-//            return null;
-//        }
-//        else {
-//            System.out.println("รอบการปลูกพวกนั้นยังไม่ได้เก็บเกี่ยว");
-//            setFlowerOrderStatus(listPlantOrder); //ไปเรียก set สถานะของดอกไม้ในแปลงก่อน
-//            return plantOrder;
-//        }
     }
 
 
@@ -159,11 +146,10 @@ PlantOrderService {
     
 
 
-    //ต้องแก้เพราะ เก็บได้หลายครั้งก็มี
     public FlowerStatus getFlowerStatus(PlantOrder plantOrder){ //หา status ของดอกไม้ในแปลงนั้น
         System.out.println("แปลงที่ " + plantOrder.getPID());
         if(plantOrder.getFlowerStatus() != FlowerStatus.DEAD && plantOrder.getFlowerStatus() != FlowerStatus.HARVESTED){
-            long period = ChronoUnit.DAYS.between(plantOrder.getTimePlant(), LocalDateTime.now()) + 1; //ระยะเวลาตั้งแต่ปลูกจนวันที่ปัจจุบัน = ปลูกมาได้กี่วันแล้ว นับวันที่ปลูกเป็นวันที่ 1
+            long period = ChronoUnit.DAYS.between(plantOrder.getTimePlant(), LocalDateTime.now()) + 1; //ระยะเวลาตั้งแต่ปลูกจนวันที่ปัจจุบัน
 
             System.out.println("period คือ "+ period);
 
@@ -219,33 +205,6 @@ PlantOrderService {
 
         return  listPID;
     }
-
-
-    //ไม่ได้ใช้ เป็น ปลูกของเก่าที่เอา Request มาทั้งก้อนแล้วค่อยมาแตกใน method นี้
-//    public boolean createPlantOrder(PlantOrderRequest plantOrder, DateTimeComparator dateTimeComparator){ //ปลูกตาม order ที่ได้รับจากฝ่ายอื่น
-////        PlantOrder record = modelMapper.map(plantOrder, PlantOrder.class); //map จาก PlantOrderRequest เป็น PlantOrder
-////        GardenerOrder order = modelMapper.map(gardenerOrder,GardenerOrder.class);
-//
-//        PlantOrder record = new PlantOrder();
-//        GardenerOrder order = gardenerOrderRepository.findById(plantOrder.getPlant_order_ID()).get();
-//        Flower flower = flowerRepository.findById(plantOrder.getFlowerID()).get(); //หาดอกไม้ที่ปลูก
-//
-//        if(!checkPlantOrder(order,flower)){ //check แล้วพบว่าดอกไม่ที่ปลูกกับ order ไม่ตรงกัน
-//            return false;
-//        }
-//
-//        record.setGardener_order(order); // รอบการปลูกนี้มาจาก plantOrder อันนี้
-//        record.setQuantity(order.getQuantity()); //ตอนนี้ปลูกดอกไม้ตาม order แบบเป๊ะๆอยู๋
-//
-//        record.setFlower(flower); //แปลงนี้ปลูกดอกนี้นะ
-//        record.setPID(currentPID); //ปลูกที่แปลงไหน
-//        record.setTimePlant(LocalDateTime.now()); //วันเวลาที่ปลูก
-////        System.out.println("ก่อน plantOrderRepository.save(record) ที่ createPlantOrder");
-//        plantOrderRepository.save(record);
-////        System.out.println("หลัง plantOrderRepository.save(record) ที่ createPlantOrder");
-//        gardenerOrderService.setIn_ProcessOrder(order);
-//        return true;
-//    }
 
 
 

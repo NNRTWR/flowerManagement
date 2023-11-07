@@ -2,7 +2,11 @@ package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.adapter.PlantComparator;
 import ku.cs.flowerManagement.common.FlowerStatus;
+import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.PlantOrder;
+import ku.cs.flowerManagement.entity.Stock;
+import ku.cs.flowerManagement.model.PlantOrderRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
 import ku.cs.flowerManagement.repository.GardenerOrderRepository;
 import ku.cs.flowerManagement.repository.PlantOrderRepository;
@@ -61,6 +65,20 @@ public class PlantOrderServiceTest {
 
         assertNull(result); //แปลงที่2ยังไม่ได้ปลูกอะไร
     }
+
+    @Test  //ติดที่ ChronoUnit รันไม่ได้
+    public void testGetAllPlantOrder() {
+        // สร้างรายการ PlantOrder จำลองที่คาดหวัง
+        List<PlantOrder> mockPlantOrderList = createSamplePlantOrders();
+
+        // เมื่อ plantOrderRepository.findAll() ถูกเรียก
+        when(plantOrderRepository.findAll()).thenReturn(mockPlantOrderList);
+
+        List<PlantOrder> result = plantOrderService.getAllPlantOrder();
+        // ตรวจสอบผลลัพธ์ที่คาดหวัง
+        assertEquals(mockPlantOrderList, result);
+    }
+
 
     @Test //ทดสอบการเอาแปลงเลขที่ PID ที่เก็บเกี่ยวออกมา >>> กรณีมีแปลงที่ปลูกแล้ว และยังไม่ได้เก็บเกี่ยว
     public void testGetPlantOrderButNoHarvestedByPIDForHaveNoHarvested(){
@@ -132,8 +150,6 @@ public class PlantOrderServiceTest {
         //แปลงที่เก็บเกี่ยวแล้ว
         PlantOrder harvestedPlantOrder = mock(PlantOrder.class);
         when(harvestedPlantOrder.getFlowerStatus()).thenReturn(FlowerStatus.HARVESTED);
-
-        // แปลงที่ยังไม่เก็บเกี่ยว
         PlantOrder nonHarvestedPlantOrder = mock(PlantOrder.class);
         when(nonHarvestedPlantOrder.getFlowerStatus()).thenReturn(FlowerStatus.HARVESTED);
 
@@ -144,7 +160,7 @@ public class PlantOrderServiceTest {
 
         PlantOrder result = plantOrderService.findPlantNoHarvested(plantOrders);
 
-        assertNull(result); // result คือ ไม่มีแปลงไหนที่ยังไม่เก็บเกี่ยว
+        assertNull(result);
     }
 
 
@@ -203,8 +219,62 @@ public class PlantOrderServiceTest {
 
         assertEquals(15, result.size());
 
-//        verify(mockPlantOrderRepository).findAll();
+        verify(mockPlantOrderRepository).findAll();
     }
+
+    @Test
+    public void testHarvest() {
+        int PID = 12;
+        int harvestable = 1; // จำนวนการเก็บเกี่ยวที่เหลือ
+
+        PlantOrder mockPlantOrder = createMockPlantOrder(PID, harvestable);
+
+        when(plantOrderRepository.findByPID(PID)).thenReturn(mockPlantOrder);
+        when(stockRepository.save(any(Stock.class))).thenReturn(new Stock());
+
+        PlantOrderRequest plantOrderRequest = createPlantOrderRequest(PID);
+        plantOrderService.harvest(plantOrderRequest);
+
+        assertEquals(FlowerStatus.HARVESTED, mockPlantOrder.getFlowerStatus());
+        verify(stockRepository, times(1)).save(any(Stock.class));
+    }
+
+    @Test
+    public void testMultipleHarvest() {
+        int PID = 12;
+        int harvestable = 2; // จำนวนการเก็บเกี่ยวที่เหลือ
+
+        PlantOrder mockPlantOrder = createMockPlantOrder(PID, harvestable);
+
+        when(plantOrderRepository.findByPID(PID)).thenReturn(mockPlantOrder);
+        when(stockRepository.save(any(Stock.class))).thenReturn(new Stock());
+
+        PlantOrderRequest plantOrderRequest = createPlantOrderRequest(PID);
+        plantOrderService.harvest(plantOrderRequest);
+
+        assertEquals(FlowerStatus.FULLY_GROWN, mockPlantOrder.getFlowerStatus());
+        verify(stockRepository, times(1)).save(any(Stock.class));
+    }
+
+    @Test
+    public void testResetPlant() {
+        int PID = 3;
+
+        PlantOrder mockPlantOrder = new PlantOrder();
+
+        when(plantOrderRepository.findByPID(PID)).thenReturn(mockPlantOrder);
+
+        PlantOrderRequest request = new PlantOrderRequest();
+        request.setPID(PID);
+
+        PlantOrderRequest plantOrderRequest = createPlantOrderRequest(PID);
+        plantOrderService.resetPlant(plantOrderRequest);
+
+        // ตรวจสอบว่า total ถูกตั้งค่าเป็น -1 มั้ย และ plantOrderRepository.save() ถูกเรียกรึเปล่า
+        assertEquals(-1, mockPlantOrder.getTotal());
+        verify(plantOrderRepository, times(1)).save(mockPlantOrder);
+    }
+
 
     private List<PlantOrder> createSamplePlantOrders() {
         PlantOrder plantOrder1 = new PlantOrder();
@@ -224,5 +294,27 @@ public class PlantOrderServiceTest {
         return plantOrders;
     }
 
+    private PlantOrder createMockPlantOrder(int PID, int harvestable) {
+        Flower flower = new Flower();
+        flower.setQuantity(15);
+
+        GardenerOrder gardenerOrder = new GardenerOrder();
+
+        PlantOrder plantOrder = new PlantOrder();
+        plantOrder.setPID(PID);
+        plantOrder.setFlower(flower);
+        plantOrder.setQuantity(40);
+        plantOrder.setFlowerStatus(FlowerStatus.HARVEST);
+        plantOrder.setHarvestable(harvestable);
+        plantOrder.setGardener_order(gardenerOrder);
+
+        return plantOrder;
+    }
+
+    private PlantOrderRequest createPlantOrderRequest(int PID) {
+        PlantOrderRequest request = new PlantOrderRequest();
+        request.setPID(PID);
+        return request;
+    }
 
 }
