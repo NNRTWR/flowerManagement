@@ -83,53 +83,12 @@ public class InvoiceService {
     }
 
 
-//    public void createInvoice(InvoiceRequest invoiceRequest,
-//                              OrderFlowerRequest orderFlowerRequest,
-//                              FlowerRepository flowerRepository,
-//                              Model model) {
-//        Invoice invoice = modelMapper.map(invoiceRepository, Invoice.class);
-//        OrderFlower orderFlower = orderRepository.findById(orderFlowerRequest.getOID()).orElse(null);
-//        // OrderFlower orderFlower = modelMapper.map(orderFlowerRequest, OrderFlower.class);
-//        Flower flower = flowerRepository.findById(orderFlowerRequest.getFID()).orElse(null);
-//        System.out.println("Flower: "+flower);
-//        System.out.println("Order flower: " + orderFlower);
-//        if (invoice == null) return ;
-//        invoice.setFlower(flower);
-//        assert orderFlower != null;
-//        invoice.setOrder_method(orderFlower.getOrder_method());
-//        invoice.setQuantity(orderFlower.getQuantity());
-//        invoice.setStatus(Status.COMPLETED);
-//        // orderFlower.setStatus(Status.COMPLETED);
-//        invoice.setTotal(orderFlower.getPrice()*orderFlower.getQuantity());
-//        invoice.setOID(orderFlower);
-//
-////        if(flower == null) return;
-////        orderFlower.setFlower(flower);
-////        orderFlower.setPrice(orderFlowerRequest.getFlowerPrice()*orderFlowerRequest.getOrderQuantity());
-////        orderFlower.setStatus(Status.PENDING);
-////        orderFlower.setPlant_status(PlantStatus.SEEDING);
-////        orderFlower.setOrder_method(orderFlowerRequest.getOrder_method());
-////        orderRepository.save(orderFlower);
-//        System.out.println("Invoice ค่าาาาาา :"+invoice);
-//        invoiceRepository.save(invoice);
-//
-//    }
-
     public void createInvoice(InvoiceRequest invoiceRequest) {
         Invoice invoice = modelMapper.map(invoiceRepository, Invoice.class);
         System.out.println("Invoice"+invoice);
 
     }
 
-//    public void confirmInvoiceById(int id) {
-//        Invoice invoice = invoiceRepository.findById(id).orElse(null);
-//        if (invoice == null) {
-//            System.out.println("Order not found.");
-//            return;
-//        }
-//        invoice.setStatus(Status.COMPLETED);
-//        invoiceRepository.save(invoice);
-//    }
 
     public void InvoiceComplete(int OID , int total , int FID) {
         orderService.confirmOrderById(Integer.parseInt(String.valueOf(OID)));

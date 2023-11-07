@@ -28,8 +28,6 @@ public class AuthController {
             new SecurityContextLogoutHandler()
                     .logout(request, response, auth);
         }
-        // เมื่อ logout เราสามารถกำหนดให้ไปหน้าใดก็ได้
-        // แต่โดยทั่วไป ควรกลับมาที่หน้า login
-        return "redirect:/login?logout"; //ไปที่ ่path นี้
+        return "redirect:/login?logout"; 
     }
 }

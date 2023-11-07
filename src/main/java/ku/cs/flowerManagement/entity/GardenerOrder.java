@@ -20,7 +20,7 @@ public class GardenerOrder {
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne //
+    @ManyToOne 
     private Flower flower; //สั่งซื้อดอกไม้อะไร
 
     private int quantity; //จำนวนดอกไม้
@@ -40,7 +40,6 @@ public class GardenerOrder {
                 ", quantity=" + quantity +
                 ", status=" + status +
                 "date=" + date +
-                // Exclude related entities here...
                 '}';
     }
 }

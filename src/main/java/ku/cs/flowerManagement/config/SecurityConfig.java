@@ -112,21 +112,3 @@ public class SecurityConfig { //เปิดหน้าไม่ขึ้นม
                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
     }
 }
-
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
-//                        .anyRequest().authenticated()
-//                );
-//        return http.build();
-//    }
-//}
