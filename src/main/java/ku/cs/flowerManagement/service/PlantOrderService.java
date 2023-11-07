@@ -64,7 +64,7 @@ PlantOrderService {
         PlantOrder plantOrder;
 
         //แปลงนี้เคยมีการปลูกมาก่อนรึเปล่า
-        if(listPlantOrder == null || listPlantOrder.isEmpty() ){ //ถ้าแปลงนี้ไม่เคยมีการปลูกมาก่อน
+        if(listPlantOrder == null ){ //ถ้าแปลงนี้ไม่เคยมีการปลูกมาก่อน
             System.out.println("แปลงนี้ไม่เคยมีการปลูกมาก่อน");
         }
         else {
@@ -138,7 +138,7 @@ PlantOrderService {
         List<PlantOrder> plantOrder = findAllPlantNoHarvested(plantOrders);
 
 
-        if (plantOrder == null || plantOrder.isEmpty()) {
+        if (plantOrder == null) {
             return null;
         }
         else {
@@ -156,6 +156,7 @@ PlantOrderService {
             plantOrderRepository.save(order);
         }
     }
+    
 
 
     //ต้องแก้เพราะ เก็บได้หลายครั้งก็มี

@@ -32,6 +32,9 @@ public class FlowerManagementApplication {
                 	owner.setRole("OWNER");
                 	signupService.createIntUser(owner);
 				}
+				else{
+
+				}
 				SignupRequest seller = new SignupRequest();
 				if(signupService.isUsernameAvailable(seller.getUsername())){
 					seller.setUsername("seller");
@@ -40,6 +43,9 @@ public class FlowerManagementApplication {
 					seller.setRole("SELLER");
 					signupService.createIntUser(seller);
 				}
+				else{
+
+				}
 				SignupRequest gardener = new SignupRequest();
 				if(signupService.isUsernameAvailable(gardener.getUsername())){
 					gardener.setUsername("gardener");
@@ -47,6 +53,9 @@ public class FlowerManagementApplication {
 					gardener.setName("สมชาย ชาวสวน");
 					gardener.setRole("GARDENER");
 					signupService.createIntUser(gardener);
+				}
+				else{
+
 				}
 				
 				
