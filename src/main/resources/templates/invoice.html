@@ -120,7 +120,7 @@
                 <input type="hidden" name="amount" th:value="${invoice.price}" />
                 <input type="hidden" name="orderQuantity" th:value="${invoice.orderQuantity}" />
                 <input type="hidden" name="FID" th:value="${invoice.FID}" />
-                <button id="completeButton" disabled class="btn btn-success text-bold text-xl px-10 ml-36 mt-5" >ยืนยัน</button>
+                <button id="completeButton"  class="btn btn-success text-bold text-xl px-10 ml-36 mt-5" >ยืนยัน</button>
             </form>
         </div>
     </div>
@@ -149,13 +149,9 @@
     });
 
     let status = document.getElementById("status").textContent.trim(); 
-    let completeButton = document.getElementById("completeButton");
+   
 
-    if (status === "CANCELED" || status === "COMPLETED" || parseInt(document.getElementById("quantity").textContent) > parseInt(document.getElementById("remain").textContent) || status==="") {
-        completeButton.disabled = true;
-    } else {
-        completeButton.disabled = false;
-    }
+    
 
     </script>
 </div>    
