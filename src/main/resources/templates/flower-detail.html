@@ -23,7 +23,7 @@
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputseedPeriod">ช่วงเวลาเมล็ด (วัน)</label>
                         <input  type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="seedPeriod" th:field="*{seedPeriod}" required>
+                               name="seedPeriod" min="1" th:field="*{seedPeriod}" required>
                     </div>
     
                     <div class="mr-6 mt-3 mx-6">
@@ -35,31 +35,31 @@
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputgrowingPeriod">ช่วงเวลากำลังโต (วัน)</label>
                         <input   type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="growingPeriod" th:field="*{growingPeriod}" required>
+                               name="growingPeriod" min="1" th:field="*{growingPeriod}" required>
                     </div>
     
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputfullyGrownPeriod">ช่วงเวลาโตเต็มที่ (วัน)</label>
                         <input   type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="fullyGrownPeriod" th:field="*{fullyGrownPeriod}" required>
+                               name="fullyGrownPeriod" min="1" th:field="*{fullyGrownPeriod}" required>
                     </div>
     
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputharvestPeriod">ช่วงเวลาพร้อมเก็บเกี่ยว (วัน)</label>
                         <input   type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="harvestPeriod" th:field="*{harvestPeriod}" required>
+                               name="harvestPeriod" min="1" th:field="*{harvestPeriod}" required>
                     </div>
     
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputHow_to_harvest">จำนวนครั้งที่สามารถเก็บเกี่ยวได้</label>
                         <input   type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="how_to_harvest" th:field="*{how_to_harvest}" required>
+                               name="how_to_harvest" min="1" th:field="*{how_to_harvest}" required>
                     </div>
     
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputPrice">ราคา</label>
                         <input   type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="price" th:field="*{price}" required>
+                               name="price" th:field="*{price}" min="1" required>
                     </div>
                     <div>
                         <div class="mr-6 mt-3 mx-6">
@@ -76,7 +76,7 @@
                     <div class="mr-6 mt-3 mx-6">
                         <label for="inputQuantity">จำนวนดอกไม้ต่อ 1 ต้น</label>
                         <input   type="number" class="form-control bg-white px-7 py-1 rounded-lg mt-3"
-                               name="quantity" th:field="*{quantity}" required>
+                               name="quantity" th:field="*{quantity}" min="1" required>
                     </div>
                    
                 <div class="flex justify-between">

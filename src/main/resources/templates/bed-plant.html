@@ -27,7 +27,7 @@
                         <th class="font-semibold text-base uppercase px-6 py-4">วันที่สั่ง</th>
                         <th class="font-semibold text-base uppercase px-6 py-4">ชนิดดอกไม้</th>
                         <th class="font-semibold text-base uppercase px-6 py-4">จำนวน</th>
-                        <th class="font-semibold text-base uppercase px-6 py-4">สถานะ</th>
+                        <!-- <th class="font-semibold text-base uppercase px-6 py-4">สถานะ</th> -->
                         <th class="font-semibold text-base uppercase px-6 py-4"></th>
                     </tr>
                 </thead>
@@ -37,7 +37,7 @@
                         <td th:text="${commonService.getPatternTime(order.date)}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td th:text="${order.flower.FName}" class="px-6 py-4 truncate whitespace-normal"></td>
                         <td th:text="${order.quantity}" class="px-6 py-4 truncate whitespace-normal"></td>
-                        <td th:text="${order.status}" class="px-6 py-4 truncate whitespace-normal"></td>
+                        <!-- <td th:text="${order.status}" class="px-6 py-4 truncate whitespace-normal"></td> -->
                         <td class="px-6 py-4 truncate whitespace-normal">
                             <form th:action="@{'/gardener/beds/order/' + ${PID}}" method="POST">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

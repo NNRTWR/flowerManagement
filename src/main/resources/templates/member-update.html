@@ -10,8 +10,8 @@
 <div layout:fragment ="content">
 
     <h1 class="text-3xl text-center font-bold">แก้ไขข้อมูลพนักงาน</h1>
-    <div class="flex items-center justify-between mb-4 mt-6">
-        <div class="flex space-x-2 items-center">
+    <div class="flex items-center justify-center mb-4 mt-6">
+        <div class="flex space-x-2 items-center bg-sky-300 rounded-lg shadow-lg p-10 px-11">
                     <form th:action="@{'/owner/member/update/' + ${member.id}}" method="POST">
 
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -21,11 +21,13 @@
                         </div>
                         <div class="mt-3 mx-6">
                             <label for="inputUsername" class="text-lg">username</label>
-                            <input id="inputUsername" type="input" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7 border-gray-600 border-2" name="username" th:value="${member.username}" required>
+                            <input id="inputUsername" type="input" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7 border-gray-600 border-2" 
+                            name="username" th:value="${member.username}" required>
                         </div>
                         <div class="mt-3 mx-6">
                             <label for="inputPassword" class="text-lg">รหัสผ่าน</label>
-                            <input id="inputPassword" type="password" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7 border-gray-600 border-2" name="password" required>
+                            <input id="inputPassword" type="password" class="form-control rounded-xl bg-gray-100 pr-8 py-2 shadow-lg text-gray-500 pl-7
+                             border-gray-600 border-2" th:value="${member.password}" name="password" required>
                         </div>
                         <div class="mt-3 mx-6">
                             <label for="inputRole" class="text-lg">เลือกหน้าที่</label>
@@ -40,6 +42,7 @@
                             <button class="btn btn-error ml-5 text-bold text-xl px-10" type="button" onclick="window.location.href='/owner/member';">ยกเลิก</button>
                         </div>
                     </form>
+                </div>
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ public class OwnerViewSalesController {
         }
         model.addAttribute("sales", sales);
         model.addAttribute("total", total);
+        
         return "view-owner";
     }
 
