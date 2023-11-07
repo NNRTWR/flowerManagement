@@ -46,19 +46,10 @@ PlantOrderService {
 
     public int currentPID;
 
-
-    //เอาข้อมูลการปลูกทั้งหมดในแปลงที่เลือก
-    public List<PlantOrder> getAllPlantOrderByPID(int PID){
-        System.out.println("แปลงที่ " + PID); // เลือกแปลงไหนนะ
-        currentPID = PID;
-        List<PlantOrder> listPlantOrder = plantOrderRepository.findAllByPID(PID); //หาว่าเลขที่่แปลงนี้มีปลูกดอกไม้ยัง
-        if (listPlantOrder.isEmpty())
-            return null;
-        else {
-            setFlowerOrderStatus(listPlantOrder); //ไปเรียก set สถานะของดอกไม้ในแปลงก่อน
-            return listPlantOrder;
-        }
+    public void setPlantOrderRepository(PlantOrderRepository plantOrderRepository) {
+        this.plantOrderRepository = plantOrderRepository;
     }
+
     public List<PlantOrder> getAllPlantOrderPage(int pageNumber, int pageSize) {   //ทำ pagination
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<PlantOrder> plantOrderPage = plantOrderRepository.findAll(pageable);
@@ -73,7 +64,7 @@ PlantOrderService {
         PlantOrder plantOrder;
 
         //แปลงนี้เคยมีการปลูกมาก่อนรึเปล่า
-        if(listPlantOrder == null){ //ถ้าแปลงนี้ไม่เคยมีการปลูกมาก่อน
+        if(listPlantOrder == null || listPlantOrder.isEmpty() ){ //ถ้าแปลงนี้ไม่เคยมีการปลูกมาก่อน
             System.out.println("แปลงนี้ไม่เคยมีการปลูกมาก่อน");
         }
         else {
@@ -147,7 +138,7 @@ PlantOrderService {
         List<PlantOrder> plantOrder = findAllPlantNoHarvested(plantOrders);
 
 
-        if (plantOrder == null) {
+        if (plantOrder == null || plantOrder.isEmpty()) {
             return null;
         }
         else {
@@ -351,38 +342,6 @@ PlantOrderService {
         System.out.println(plantOrder.getTimePlant() + " " + plantOrder.getTotal());
     }
 
-        //harvest
-//    public void harvest(PlantOrderRequest plantOrderRequest){
-//        PlantOrder record = modelMapper.map(plantOrderRequest,PlantOrder.class);
-//        //managing stock
-//        Stock stock;
-//        if(record.getStock()==null){
-//            stock = new Stock();
-//        } else {
-//            stock = record.getStock();
-//        }
-//        LocalDateTime localDateTime = LocalDateTime.now();
-//        stock.setTime(localDateTime);
-//        stock.setQuantity(record.getQuantity());
-//        stock.setTotal(record.getTotal());
-//        stock.setPlantOrder(record);
-//        record.setStock(stock);
-//        //still harvestable
-//        if(record.getHarvestable()>1){
-//            record.setFlowerStatus(FlowerStatus.FULLY_GROWN);
-//
-//            record.setHarvestable(record.getHarvestable() - 1);
-//        }
-//        else {//died set stock to zero show as empty field
-//        record.setFlowerStatus(FlowerStatus.HARVESTED); //เปลี่ยนจาก DEAD เป็น HARVESTED
-//
-//        record.setHarvestable(record.getHarvestable() - 1);
-//        record.setStock(null);
-//        }
-//
-//        plantOrderRepository.save(record);
-//        stockRepository.save(stock);
-//    }
 
     public void harvest(PlantOrderRequest plantOrderRequest){
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++dadas");
