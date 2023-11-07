@@ -18,15 +18,7 @@ public class FlowerController {
     @Autowired
     private FlowerService flowerService;
 
-    @GetMapping //("/flower")
-    // public String showFlowerPage(Model model) {
-    //     model.addAttribute("flower", new FlowerRequest());
-    //     model.addAttribute("flowers", flowerService.getFlowers());
-    //     // ใช้ FlowerService getAllFlowers
-    //     int totalFlowers = flowerService.getTotalFlowerCount();
-    //     model.addAttribute("totalFlowers", totalFlowers);
-    //     return "flower";
-    // }
+    @GetMapping 
 
     public String showFlowerPage(@PathVariable("role") String role, Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 4;
@@ -60,7 +52,7 @@ public class FlowerController {
         try {
             flowerService.addFlower(flower);
         } catch (RuntimeException e) {
-            model.addAttribute("error", "ห้ามชื่อดอกไม้ซ้ำ");  //ไม่ขึ้นแก้ไมไ่ด้ แต่สร้างซ้ำไมไ่ด้แน่ๆ
+            model.addAttribute("error", "ห้ามชื่อดอกไม้ซ้ำ"); 
             
         }
         return "redirect:/{role}/flower";

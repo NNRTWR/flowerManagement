@@ -124,18 +124,4 @@ public class BedController { //ปลูกดอกไม้แต่ละแ�
         plantOrderService.createPlantOrder(plantOrder, dateTimeComparator);
         return "redirect:/gardener/beds";
     }
-
-
-    /*  --------------------in case U wanna plant flower without any order-------------------------
-    @GetMapping("{PID}/create")
-    public String showNonOrderPlant(Model model){
-        model.addAttribute("flowers",flowerService.getAllFlower());
-        return "bed-plant2";
-    }
-    @PostMapping("{PID}/create")
-    public String choseNonOrderPlant(@ModelAttribute PlantOrderRequest plantOrder,Model model){
-        plantOrderService.createPlantOrder(plantOrder.getGardener_order_ID(), plantOrder.getFlowerID(), dateTimeComparator);
-        return "redirect:/beds/{PID}";
-    }
-     */
 }

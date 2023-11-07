@@ -13,22 +13,6 @@ import java.util.UUID;
 @Table(name = "Flower")
 public class Flower {
 
-//    private UUID id;
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-     //รหัสของดอกไม้ //ใช้ method เพิ่มเลขเอา
-//    private String FName; //ชื่อดอกไม้
-//    private String how_to_plant; //วิธีการปลูก
-//    private String how_to_take_care; //วิธีการดูแล
-//    private int time; //ระยะเวลาในการเติบโต (วัน)
-//    private int how_to_harvest; //รูปแบบการเก็บดอกไม้ (เก็บครั้งเดียว=1, เก็บหลายครั้ง=ใส่จำนวนที่สามารถเก็บเกี่ยวได้)
-//    private double price; //ราคาของดอกไม้
-//    private String pic; //รูปภาพของดอกไม้
-//    private int quantity; //จำนวนดอกไม้
-//
-//    @OneToMany(mappedBy = "flower")
-//    private List<OrderItem> orders = new ArrayList<>();
-
     @Id
     @GeneratedValue
     private int FID;
@@ -59,7 +43,6 @@ public class Flower {
                 "FID=" + FID +
                 ", FName='" + FName + '\'' +
                 ", how_to_plant='" + how_to_plant + '\'' +
-                // Add other fields here
                 '}';
     }
 }
