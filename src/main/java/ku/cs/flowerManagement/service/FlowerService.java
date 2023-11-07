@@ -45,7 +45,24 @@ public class FlowerService {
     }
 
     
+    public void addDefaultFlower() {
+        FlowerRequest flower1 = new FlowerRequest();
+        flower1.setFName("มะลิโตเต็มวัย");
+        flower1.setPrice(60);
+        flower1.setSeedPeriod(0);
+        flower1.setSproutPeriod(0);
+        flower1.setGrowingPeriod(0);
+        flower1.setFullyGrownPeriod(0);
+        flower1.setHarvestPeriod(1);
+        flower1.setSeedPeriod(0);
+        flower1.setHow_to_plant("ดินร่วน ไม่อมน้ำ");
+        flower1.setHow_to_harvest(2);
+        flower1.setHow_to_take_care("ห้ามรดน้ำเกิน 2 ครั้งต่อวัน โดนแดดไม่ได้");
+        flower1.setQuantity(30);
 
+      
+        
+    } 
 
     // Create Flower
     public FlowerRequest addFlower(FlowerRequest flowerRequest) {
@@ -80,6 +97,7 @@ public class FlowerService {
                 flower1.setHow_to_plant(flowerRequest.getHow_to_plant());
                 flower1.setHow_to_harvest(flowerRequest.getHow_to_harvest());
                 flower1.setHow_to_take_care(flowerRequest.getHow_to_take_care());
+                
                 flowerRepository.save(flower1);
         //        System.out.println("Flower1");
         //        System.out.println(flower1.getFID());
