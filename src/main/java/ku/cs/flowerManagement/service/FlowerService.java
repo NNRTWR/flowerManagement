@@ -77,6 +77,7 @@ public class FlowerService {
                 flower1.setHow_to_plant(flowerRequest.getHow_to_plant());
                 flower1.setHow_to_harvest(flowerRequest.getHow_to_harvest());
                 flower1.setHow_to_take_care(flowerRequest.getHow_to_take_care());
+                
                 flowerRepository.save(flower1);
         //        System.out.println("Flower1");
         //        System.out.println(flower1.getFID());

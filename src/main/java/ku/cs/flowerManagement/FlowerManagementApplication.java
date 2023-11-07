@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Bean;
 
 import javassist.compiler.ast.Member;
 import ku.cs.flowerManagement.entity.Flower;
+import ku.cs.flowerManagement.model.FlowerRequest;
 import ku.cs.flowerManagement.model.SignupRequest;
 import ku.cs.flowerManagement.repository.FlowerRepository;
+import ku.cs.flowerManagement.service.FlowerService;
 import ku.cs.flowerManagement.service.SignupService;
 
 
@@ -20,9 +22,8 @@ public class FlowerManagementApplication {
 	}
 
 	@Bean
-    public CommandLineRunner createDefaultOwner(SignupService signupService) {
+    public CommandLineRunner createDefaultData(SignupService signupService,FlowerService flowerService) {
         return args -> {
-            
                 SignupRequest owner = new SignupRequest();
 				if(signupService.isUsernameAvailable(owner.getUsername())){
                 	owner.setUsername("owner");
@@ -31,8 +32,6 @@ public class FlowerManagementApplication {
                 	owner.setRole("OWNER");
                 	signupService.createIntUser(owner);
 				}
-            
-			
 				SignupRequest seller = new SignupRequest();
 				if(signupService.isUsernameAvailable(seller.getUsername())){
 					seller.setUsername("seller");
@@ -41,7 +40,6 @@ public class FlowerManagementApplication {
 					seller.setRole("SELLER");
 					signupService.createIntUser(seller);
 				}
-			
 				SignupRequest gardener = new SignupRequest();
 				if(signupService.isUsernameAvailable(gardener.getUsername())){
 					gardener.setUsername("gardener");
@@ -50,7 +48,6 @@ public class FlowerManagementApplication {
 					gardener.setRole("GARDENER");
 					signupService.createIntUser(gardener);
 				}
-
 				
 				
 			
