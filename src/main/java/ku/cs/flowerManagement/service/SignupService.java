@@ -81,10 +81,9 @@ public class SignupService {
         Member member = repository.findById(member_ID).get();
         member.setName(user.getName());
         member.setUsername(user.getUsername());
-        member.setPassword(user.getPassword());
-
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        member.setPassword(hashedPassword);
         member.setRole(role);
-
         repository.save(member);
     }
 
