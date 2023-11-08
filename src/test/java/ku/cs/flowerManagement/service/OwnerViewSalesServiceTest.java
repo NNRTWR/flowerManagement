@@ -1,4 +1,4 @@
-package ku.cs.flowerManagement;
+package ku.cs.flowerManagement.service;
 
 import ku.cs.flowerManagement.common.OrderStatus;
 import ku.cs.flowerManagement.entity.Flower;

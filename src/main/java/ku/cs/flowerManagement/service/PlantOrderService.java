@@ -279,8 +279,6 @@ PlantOrderService {
             }
 
             //alive-dead
-
-            ////////ตรงนี้ copy ไปแก้
             int remain = record.getTotal() - plantOrderRequest.getDeadPlant();
             if(remain > 0)
                 record.setTotal(record.getTotal() - plantOrderRequest.getDeadPlant());

@@ -28,14 +28,10 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
     @Autowired
     private FlowerRepository flowerRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
 
 
     public List<GardenerOrder> getAllGardenerOrder(Comparator comparator){ //เอา order ที่ทั้งหมดออกมา
         List<GardenerOrder> orders = gardenerOrderRepository.findAll();
-//        Collections.sort(orders, comparator ); //ยังไม่ได้แก้ Comparator
         return orders;
     }
     public Page<GardenerOrder> getAllGardenerOrderPage(int page, int size) {   //สำหรับ pagination
@@ -48,7 +44,6 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
     }
 
 
-    //ตอนนี้ยังใช้ order เดียวกับตอนบันทึกอยู่ //แก้อยู่
     public List<GardenerOrder> getAllPendingGardenerOrderForSort(){ //เอา order ที่ต้องปลูกทั้งหมดออกมา
         List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.PENDING);
     
@@ -69,21 +64,9 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
        
         return orders;
     }
-     public List<GardenerOrder> getAllCompleteGardenerOrder(){ 
-        List<GardenerOrder> orders = gardenerOrderRepository.findAllByStatus(OrderStatus.COMPLETED);
-       
-        return orders;
-    }
-
-    public int getTotalGardenOrderCount() {
-        List<GardenerOrder> orders = gardenerOrderRepository.findAll();
-        return orders.size();
-    }
-
 
 
     public void addOrder(GardenerOrderRequest gardenerOrder){ //สร้าง order ส่งไปให้ฝ่ายปลูก
-//        GardenerOrder record = modelMapper.map(gardenerOrder, GardenerOrder.class);
         GardenerOrder record = new GardenerOrder();
         record.setFlower(flowerRepository.findByFID(gardenerOrder.getFlowerID()));
         record.setQuantity(gardenerOrder.getQuantity());
@@ -92,13 +75,8 @@ public class GardenerOrderService { // order ของฝ่ายปลูก
     }
     
     public void setIn_ProcessOrder(GardenerOrder gardenerOrder, PlantOrder plantOrder){ // set status ของ order เป็น in_process = order นี้ปลูกแล้วนะ
-//        System.out.println("ก่อน getOldestOrderStatus ที่ setStatusOrder");
-//        OrderItem orderItem = getOldestOrderStatus(comparator);
         gardenerOrder.setStatus(OrderStatus.IN_PROCESS);
-//        gardenerOrder.setPlantOrder(plantOrder);
-//        System.out.println(orderItem.getStatus());
         gardenerOrderRepository.save(gardenerOrder);
-//        System.out.println("หลัง getOldestOrderStatus ที่ setStatusOrder");
     }
 
 

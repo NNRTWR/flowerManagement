@@ -1,14 +1,12 @@
 package ku.cs.flowerManagement.service;
 
-import ku.cs.flowerManagement.adapter.PlantComparator;
 import ku.cs.flowerManagement.common.FlowerStatus;
+import ku.cs.flowerManagement.common.OrderStatus;
 import ku.cs.flowerManagement.entity.Flower;
 import ku.cs.flowerManagement.entity.GardenerOrder;
 import ku.cs.flowerManagement.entity.PlantOrder;
 import ku.cs.flowerManagement.entity.Stock;
 import ku.cs.flowerManagement.model.PlantOrderRequest;
-import ku.cs.flowerManagement.repository.FlowerRepository;
-import ku.cs.flowerManagement.repository.GardenerOrderRepository;
 import ku.cs.flowerManagement.repository.PlantOrderRepository;
 import ku.cs.flowerManagement.repository.StockRepository;
 import org.junit.Test;
@@ -16,15 +14,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.modelmapper.ModelMapper;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PlantOrderServiceTest {
@@ -35,22 +32,7 @@ public class PlantOrderServiceTest {
     private PlantOrderRepository plantOrderRepository;
 
     @Mock
-    private FlowerRepository flowerRepository;
-
-    @Mock
-    private GardenerOrderService gardenerOrderService;
-
-    @Mock
-    private ModelMapper modelMapper;
-
-    @Mock
-    private GardenerOrderRepository gardenerOrderRepository;
-
-    @Mock
     private StockRepository stockRepository;
-
-    @Mock
-    private PlantComparator plantComparator;
 
 
 
@@ -273,6 +255,59 @@ public class PlantOrderServiceTest {
         // ตรวจสอบว่า total ถูกตั้งค่าเป็น -1 มั้ย และ plantOrderRepository.save() ถูกเรียกรึเปล่า
         assertEquals(-1, mockPlantOrder.getTotal());
         verify(plantOrderRepository, times(1)).save(mockPlantOrder);
+    }
+
+    @Test
+    public void testPlantWasDiedAllFlower(){
+        int PID = 5;
+        PlantOrderRequest mockPlantOrderRequest = new PlantOrderRequest();
+        mockPlantOrderRequest.setPID(PID);
+        mockPlantOrderRequest.setDeadPlant(20);
+
+        GardenerOrder gardenerOrder = new GardenerOrder();
+        gardenerOrder.setStatus(OrderStatus.IN_PROCESS);
+
+        PlantOrder mockPlantOrder = new PlantOrder();
+        mockPlantOrder.setPID(PID);
+        mockPlantOrder.setTotal(20);
+        mockPlantOrder.setFlowerStatus(FlowerStatus.SPROUT);
+        mockPlantOrder.setGardener_order(gardenerOrder);
+
+        when(plantOrderRepository.findAllByPID(PID)).thenReturn(Collections.singletonList(mockPlantOrder));
+
+        plantOrderService.plantWasDied(mockPlantOrderRequest);
+
+        verify(plantOrderRepository).save(mockPlantOrder);
+        assertEquals(0, mockPlantOrder.getTotal());
+        assertEquals(FlowerStatus.DEAD, mockPlantOrder.getFlowerStatus());
+        assertEquals(OrderStatus.FAIL, mockPlantOrder.getGardener_order().getStatus());
+
+    }
+
+    @Test
+    public void testPlantWasDiedSomeFlower(){
+        int PID = 5;
+        PlantOrderRequest mockPlantOrderRequest = new PlantOrderRequest();
+        mockPlantOrderRequest.setPID(PID);
+        mockPlantOrderRequest.setDeadPlant(10);
+
+        GardenerOrder gardenerOrder = new GardenerOrder();
+        gardenerOrder.setStatus(OrderStatus.IN_PROCESS);
+
+        PlantOrder mockPlantOrder = new PlantOrder();
+        mockPlantOrder.setPID(PID);
+        mockPlantOrder.setTotal(20);
+        mockPlantOrder.setFlowerStatus(FlowerStatus.SPROUT);
+        mockPlantOrder.setGardener_order(gardenerOrder);
+
+        when(plantOrderRepository.findAllByPID(PID)).thenReturn(Collections.singletonList(mockPlantOrder));
+
+        plantOrderService.plantWasDied(mockPlantOrderRequest);
+
+        verify(plantOrderRepository).save(mockPlantOrder);
+        assertEquals(10, mockPlantOrder.getTotal());
+        assertEquals(FlowerStatus.SPROUT, mockPlantOrder.getFlowerStatus());
+        assertEquals(OrderStatus.IN_PROCESS, mockPlantOrder.getGardener_order().getStatus());
     }
 
 
