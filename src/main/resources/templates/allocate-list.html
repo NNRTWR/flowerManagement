@@ -13,7 +13,7 @@
   <div class="flex items-center justify-between mb-0 mt-6 ml-10">
     <div class="bg-sky-400 text-white flex p-4 rounded-xl">
       <h1 class="text-xl font-semibold">ยอดรวมทั้งหมด</h1>
-      <span class="text-2xl ml-10 font-bold" th:text="${total}"></span>  
+      <span class="text-2xl ml-10 font-bold" th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}"></span>  
       <span class="text-xl ml-10 font-semibold">บาท</span>
     </div>
   </div>
@@ -35,7 +35,6 @@
                     <tr th:each="allocateModel : ${allocateRequest.allocateModels}">
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.fName}"></td>
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${allocateModel.stockFlower}"></td>
-
                       <td class="px-6 py-4 truncate whitespace-normal" th:text="${#numbers.formatDecimal(allocateModel.total, 0, 'COMMA', 2, 'POINT')}"></td>
                     </tr>
                   </tbody>

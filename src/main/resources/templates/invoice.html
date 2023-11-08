@@ -37,7 +37,7 @@
                                       <th class="font-semibold text-base uppercase px-6 py-4">ชื่อดอกไม้
                                       </th>
                                       <th class="font-semibold text-base  uppercase px-6 py-4">จำนวน</th>
-                                      <th class="font-semibold text-base uppercase px-6 py-4">ราคา</th>
+                                      <th class="font-semibold text-base uppercase px-6 py-4">ราคา (บาท)</th>
                                       <th class="font-semibold text-base uppercase px-6 py-4">วิธีการสั่งซื้อ</th>
                                   </tr>
                               </thead>
@@ -106,7 +106,7 @@
                             <span th:if="${invoice.status == T(ku.cs.flowerManagement.common.OrderStatus).PENDING}" class="ml-10">ดำเนินการ</span>
                         
                         </p>
-                        <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${invoice.price} " class="ml-10"></span>
+                        <p class="my-1">ราคาสุทธิ: <span id="price" th:text="${#numbers.formatDecimal(invoice.price, 0, 'COMMA', 2, 'POINT')}" class="ml-10"></span>
                             <span>บาท</span></p>
                     </div>
                 </div>

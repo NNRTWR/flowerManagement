@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javassist.compiler.ast.Member;
 import ku.cs.flowerManagement.entity.Flower;
@@ -20,47 +21,19 @@ public class FlowerManagementApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FlowerManagementApplication.class, args);
 	}
-
 	@Bean
-    public CommandLineRunner createDefaultData(SignupService signupService,FlowerService flowerService) {
+    public CommandLineRunner loadData(JdbcTemplate jdbcTemplate) {
         return args -> {
-                SignupRequest owner = new SignupRequest();
-				if(signupService.isUsernameAvailable(owner.getUsername())){
-                	owner.setUsername("owner");
-                	owner.setPassword("owner123");
-                	owner.setName("คุณแหม่ม เจ้าของสวน");
-                	owner.setRole("OWNER");
-                	signupService.createIntUser(owner);
-				}
-				else{
-
-				}
-				SignupRequest seller = new SignupRequest();
-				if(signupService.isUsernameAvailable(seller.getUsername())){
-					seller.setUsername("seller");
-					seller.setPassword("seller123");
-					seller.setName("คนขาย นะจ้ะ");
-					seller.setRole("SELLER");
-					signupService.createIntUser(seller);
-				}
-				else{
-
-				}
-				SignupRequest gardener = new SignupRequest();
-				if(signupService.isUsernameAvailable(gardener.getUsername())){
-					gardener.setUsername("gardener");
-					gardener.setPassword("gardener123");
-					gardener.setName("สมชาย ชาวสวน");
-					gardener.setRole("GARDENER");
-					signupService.createIntUser(gardener);
-				}
-				else{
-
-				}
-				
-				
-			
+            int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM member", Integer.class);
+            if(count == 0){
+                jdbcTemplate.execute("INSERT INTO `member` (`id`, `name`, `password`, `role`, `username`) " +
+                        "VALUES " +
+                        "(UNHEX(REPLACE(UUID(), '-', '')), 'สมชาย ชาวสวน', '$2a$12$fXgzsQbCww4gefIfJmDqRuQmwKibAtTFregXfS5KhcyoIs9NDPo6i', 'GARDENER', 'gardener'), " +
+                        "(UNHEX(REPLACE(UUID(), '-', '')), 'คนขาย นะจ้ะ', '$2a$12$OjvSYMO6xfissB7UKEnWE.Dp8g67/b0XEkK9hzIkopDrfzkDXnXn6', 'SELLER', 'seller'), " +
+                        "(UNHEX(REPLACE(UUID(), '-', '')), 'คุณแหม่ม เจ้าของสวน', '$2a$12$h/dg4dWPeFRG8GA9Bbrin.qwpvG9Xxog0pvvd/oBK3wpCPiMLuCSm', 'OWNER', 'owner')");
+            } 
         };
-    }
+	}
+	
 
 }
