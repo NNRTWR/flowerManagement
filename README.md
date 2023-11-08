@@ -1,11 +1,11 @@
 ## How to install 
 ต้องมี docker
 
-1. เมื่อทำการติดตั้งครั้งแรก
+เมื่อทำการติดตั้งครั้งแรก
 ```sh
 docker-compose build
 ```
-1. คำสั่งรัน
+คำสั่งรัน
  ```sh
 docker-compose up 
 ```
@@ -13,11 +13,11 @@ docker-compose up
 
 
 ## id สำหรับการทดสอบ
-- id ทดสอบบัญชีผู้ใช้ owner    : owner              password = owner123
+- id ทดสอบบัญชีเจ้าของ (Owner)   : username = owner,           password = owner123
 
-- id ทดสอบบัญชีผู้ใช้ seller   : seller             password = seller123
+- id ทดสอบบัญชีฝ่ายขาย (Seller)  : username = seller,             password = seller123
 
-- id ทดสอบบัญชีผู้ใช้ gardener : gardener123        password = gardener123
+- id ทดสอบบัญชีฝ่ายสวน (Gardener) : username = gardener,       password = gardener123
 
 
 
@@ -65,7 +65,7 @@ docker-compose up
 ![img_2.png](img_2.png)
 
 ## UI flows
-
+# Link : [Figma](https://www.figma.com/file/zAJLaW8MtYGmWUz63XbX1g/Flower-Management?type=design&node-id=496%3A642&mode=design&t=kmB9c5K6XPVAwD3E-1)
 ![img_3.png](img_3.png)
 
 
